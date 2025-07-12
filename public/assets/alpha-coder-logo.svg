@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <style>
+    .logo-text { fill: #fff; }
+    .code-brackets { fill: #9e4bba; }
+    .logo-bg { fill: #1e1e2f; }
+    @media (prefers-color-scheme: light) {
+      .logo-text { fill: #024537; }
+      .code-brackets { fill: #10b981; }
+      .logo-bg { fill: #ecfdf5; }
+    }
+  </style>
+  <!-- Background Circle -->
+  <circle cx="60" cy="60" r="55" class="logo-bg" />
+  
+  <!-- Code Brackets -->
+  <path d="M45 35 L30 60 L45 85" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" class="code-brackets" fill="none" />
+  <path d="M75 35 L90 60 L75 85" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" class="code-brackets" fill="none" />
+  
+  <!-- Alpha (A) Symbol -->
+  <path d="M60 40 L70 80 M50 80 L60 40 L70 80 M55 65 L65 65" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" class="logo-text" fill="none" />
+</svg>
