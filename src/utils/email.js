@@ -1,5 +1,5 @@
 // EmailJS Configuration
-import emailjs from 'emailjs-com';
+import emailjs from '@emailjs/browser';
 
 export const EMAILJS_CONFIG = {
   SERVICE_ID: 'service_newPP',     

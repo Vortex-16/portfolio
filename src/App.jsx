@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { HelmetProvider, Helmet } from 'react-helmet-async';
 import { ThemeProvider, useTheme } from './hooks/useTheme';
 
 // Components
@@ -40,18 +39,6 @@ const AppContent = () => {
         ? 'bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900' 
         : 'bg-gradient-to-br from-emerald-50 via-emerald-100 to-emerald-200'
     }`}>
-      {/* SEO Meta Tags */}
-      <Helmet>
-        <title>Vikash Gupta - CSE Student & Developer Portfolio</title>
-        <meta name="description" content="Portfolio of Vikash Gupta, a passionate 2nd-year Computer Science & Engineering student specializing in web development and software engineering." />
-        <meta name="keywords" content="Vikash Gupta, CSE student, web developer, React, JavaScript, portfolio, computer science" />
-        <meta name="author" content="Vikash Gupta" />
-        <meta property="og:title" content="Vikash Gupta - CSE Student & Developer Portfolio" />
-        <meta property="og:description" content="Passionate 2nd-year CSE student creating innovative solutions through code." />
-        <meta property="og:type" content="website" />
-        <link rel="icon" type="image/png" href="/fav.png" />
-      </Helmet>
-
       {/* Background Effects */}
       <SimpleBackground isDark={isDark} />
       
@@ -84,11 +71,9 @@ const AppContent = () => {
 
 function App() {
   return (
-    <HelmetProvider>
-      <ThemeProvider>
-        <AppContent />
-      </ThemeProvider>
-    </HelmetProvider>
+    <ThemeProvider>
+      <AppContent />
+    </ThemeProvider>
   );
 }
 

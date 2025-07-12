@@ -13,7 +13,7 @@ export default defineConfig({
         manualChunks: {
           vendor: ['react', 'react-dom'],
           animations: ['framer-motion'],
-          three: ['three', 'postprocessing'],
+          three: ['three'],
         },
       },
     },
