@@ -21,8 +21,6 @@ Dark: 🌌 Midnight Plum gradient
 
 🎞️ Smooth Animations: Using Framer Motion
 
-🌌 3D Particle Background: Powered by Three.js
-
 📡 GitHub Integration: Real-time project fetch via GitHub API
 
 🧩 Modern UI: Dock navigation, animated text, carousels
