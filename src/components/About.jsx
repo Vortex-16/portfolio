@@ -85,7 +85,7 @@ const About = () => {
                 >
                   <div className="w-full h-full rounded-3xl overflow-hidden">
                     <img 
-                      src="/vikash.jpg" 
+                      src="/PofileNew.jpeg" 
                       alt="Vikash Gupta" 
                       className="w-full h-full object-cover"
                     />

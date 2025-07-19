@@ -25,7 +25,7 @@ const Homepage = () => {
         >
           <div className="w-32 h-32 mx-auto rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 dark:from-purple-400 dark:to-purple-600 p-1 shadow-2xl">
             <img 
-              src="/vikash.jpg" 
+              src="/PofileNew.jpeg" 
               alt="Vikash Gupta" 
               className="w-full h-full rounded-full object-cover"
             />
