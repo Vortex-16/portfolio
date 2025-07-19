@@ -5,6 +5,17 @@ import { useTheme } from '../../hooks/useTheme';
 
 const ProjectCard = ({ project, isActive }) => {
   const { isDark } = useTheme();
+  const [imageError, setImageError] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
+  
+  const handleImageError = () => {
+    setImageError(true);
+    console.log(`Failed to load image for ${project.title}: ${project.image}`);
+  };
+
+  const handleImageLoad = () => {
+    setImageLoaded(true);
+  };
   
   return (
     <motion.div
@@ -20,23 +31,32 @@ const ProjectCard = ({ project, isActive }) => {
     >
       {/* Project Image */}
       <div className="relative h-48 bg-gradient-to-br from-emerald-500 to-emerald-700 dark:from-purple-500 dark:to-purple-700">
-        {project.image ? (
+        {!imageError && project.image && (
           <img 
             src={project.image} 
             alt={project.title}
-            className="w-full h-full object-cover"
-            onError={(e) => {
-              e.target.style.display = 'none';
-              e.target.nextSibling.style.display = 'flex';
-            }}
+            className={`w-full h-full object-cover transition-opacity duration-300 ${
+              imageLoaded ? 'opacity-100' : 'opacity-0'
+            }`}
+            onError={handleImageError}
+            onLoad={handleImageLoad}
           />
-        ) : null}
-        <div 
-          className="flex items-center justify-center h-full"
-          style={{ display: project.image ? 'none' : 'flex' }}
-        >
-          <div className="text-6xl text-white/30">📁</div>
-        </div>
+        )}
+        
+        {/* Loading placeholder */}
+        {!imageLoaded && !imageError && project.image && (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-8 h-8 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+          </div>
+        )}
+        
+        {/* Fallback when no image or error */}
+        {(imageError || !project.image) && (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="text-6xl text-white/30">📁</div>
+          </div>
+        )}
+        
         <div className="absolute inset-0 bg-black/20" />
       </div>
 

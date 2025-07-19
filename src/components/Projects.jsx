@@ -47,8 +47,8 @@ const Projects = () => {
   };
 
   return (
-    <section id="projects" className="min-h-screen py-20 relative">
-      <div className="container mx-auto px-6">
+    <section id="projects" className="min-h-screen py-20 relative z-10 mt-20">
+      <div className="container mx-auto px-6 relative z-20">
         <motion.div
           ref={ref}
           variants={containerVariants}

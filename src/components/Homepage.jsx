@@ -13,9 +13,9 @@ const Homepage = () => {
   };
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
+    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden z-20">
       {/* Main Content */}
-      <div className="container mx-auto px-6 z-10 text-center">
+      <div className="container mx-auto px-6 z-30 text-center relative">
         {/* Profile Image */}
         <motion.div
           className="mb-8"
@@ -34,14 +34,14 @@ const Homepage = () => {
 
         {/* Animated Title */}
         <motion.div
-          className="mb-8"
+          className="mb-8 px-4 md:px-8"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.8 }}
         >
           <VariableProximity 
-            text="Hi, I'm Vikash Gupta — CSE Student at St. Thomas College & Developer."
-            className={`text-2xl md:text-4xl lg:text-5xl font-bold leading-tight ${
+            text="Hi, I'm Vikash Gupta — CSE Student at St. Thomas College of Engineering and Technology & Developer."
+            className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold leading-relaxed text-center max-w-7xl mx-auto ${
               isDark ? 'text-white' : 'text-emerald-950'
             }`}
             isDark={isDark}
@@ -64,7 +64,7 @@ const Homepage = () => {
         {/* CTA Button */}
         <motion.button
           onClick={scrollToProjects}
-          className={`group relative px-8 py-4 backdrop-blur-md border font-semibold rounded-2xl transition-all duration-300 shadow-2xl ${
+          className={`group relative z-50 px-8 py-4 backdrop-blur-md border font-semibold rounded-2xl transition-all duration-300 shadow-2xl ${
             isDark 
               ? 'bg-white/10 border-white/20 text-white hover:bg-white/20' 
               : 'bg-emerald-900/80 border-emerald-700/40 text-emerald-50 hover:bg-emerald-800/90'
