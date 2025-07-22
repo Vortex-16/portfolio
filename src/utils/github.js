@@ -31,6 +31,8 @@ const PROJECT_IMAGES = {
   'Python': 'Python.png',
   
   'c': '/STCET.png',
+  'java': '/java.png',
+  'JAVA': '/java.png',
   'algorithm-visualizer': '/KTJ3.png',
   'ktj': '/KTJ3.png',
   'visualizer': '/KTJ3.png',
