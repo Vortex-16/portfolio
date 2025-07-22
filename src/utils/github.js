@@ -1,5 +1,3 @@
-import { title } from "framer-motion/client";
-
 // GitHub API utility functions
 const GITHUB_USERNAME = 'vikashgupta16';
 const GITHUB_API_BASE = 'https://api.github.com';
@@ -12,6 +10,8 @@ const PROJECT_IMAGES = {
   // Main projects
   'portfolio': '/VikashPort.jpeg',
   'Vikashgupta16': '/Portfolio.jpeg',
+  'vikashgupta16': '/Portfolio.jpeg',
+  'vikash-gupta': '/Portfolio.jpeg',
   'portfolio-website': '/AlphaTemplateProjectImage.png',
   'alphachat': '/AlphaChat.png',
   'alpha-chat': '/AlphaChat.png',
@@ -27,7 +27,9 @@ const PROJECT_IMAGES = {
   'maa-janki-hospital': '/MaaJankDrAmrit.png',
   'maa-janki': '/MaaJankDrAmrit.png',
   
-
+  'python': 'Python.png',
+  'Python': 'Python.png',
+  
   'c': '/STCET.png',
   'algorithm-visualizer': '/KTJ3.png',
   'ktj': '/KTJ3.png',

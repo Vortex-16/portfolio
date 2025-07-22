@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import Carousel from './ui/Carousel';
+import SwiperCarousel from './ui/SwiperCarousel';
 import { fetchGitHubProjects } from '../utils/github';
 import { useTheme } from '../hooks/useTheme';
 
@@ -96,7 +96,7 @@ const Projects = () => {
           {/* Projects Carousel */}
           {!loading && projects.length > 0 && (
             <motion.div variants={itemVariants}>
-              <Carousel projects={projects} />
+              <SwiperCarousel projects={projects} />
             </motion.div>
           )}
 
