@@ -1,8 +1,8 @@
 import { motion, useInView } from 'framer-motion';
-import { useRef, useState, useEffect } from 'react';
-import { FaGithub, FaLinkedin, FaInstagram, FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
+import { useRef, useState } from 'react';
+import { FaGithub, FaLinkedin, FaInstagram, FaEnvelope, FaPhone, FaMapMarkerAlt, FaPaperPlane, FaCheckCircle, FaExclamationCircle } from 'react-icons/fa';
 import { useTheme } from '../hooks/useTheme';
-import { initEmailJS, sendEmail } from '../utils/email.js';
+import { sendEmail, validateEmailData } from '../utils/email.js';
 
 const Contact = () => {
   const ref = useRef(null);
@@ -16,11 +16,7 @@ const Contact = () => {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
-  
-  // Initialize EmailJS on component mount
-  useEffect(() => {
-    initEmailJS();
-  }, []);
+  const [submitMessage, setSubmitMessage] = useState('');
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -60,60 +56,43 @@ const Contact = () => {
     }
   };
 
-  const validateForm = () => {
-    const newErrors = {};
-    
-    if (!formData.name.trim()) {
-      newErrors.name = 'Name is required';
-    }
-    
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email';
-    }
-    
-    if (!formData.message.trim()) {
-      newErrors.message = 'Message is required';
-    } else if (formData.message.trim().length < 10) {
-      newErrors.message = 'Message should be at least 10 characters';
-    }
-    
-    return newErrors;
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    const newErrors = validateForm();
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
+    // Validate form data
+    const validation = validateEmailData(formData);
+    if (!validation.isValid) {
+      setErrors(validation.errors);
       return;
     }
     
     setIsSubmitting(true);
     setErrors({});
+    setSubmitStatus(null);
     
     try {
-      // Prepare email template parameters
-      const templateParams = {
-        from_name: formData.name,
-        from_email: formData.email,
-        message: formData.message,
-      };
+      const result = await sendEmail(formData);
       
-      // Send email using EmailJS
-      await sendEmail(templateParams);
-      
-      console.log('Email sent successfully:', templateParams);
+      console.log('Email sent successfully:', result);
       setSubmitStatus('success');
+      setSubmitMessage(result.message || 'Message sent successfully!');
       setFormData({ name: '', email: '', message: '' });
       
-      setTimeout(() => setSubmitStatus(null), 5000);
+      // Clear success message after 8 seconds
+      setTimeout(() => {
+        setSubmitStatus(null);
+        setSubmitMessage('');
+      }, 8000);
     } catch (error) {
       console.error('Error sending email:', error);
       setSubmitStatus('error');
-      setTimeout(() => setSubmitStatus(null), 5000);
+      setSubmitMessage(error.message || 'Failed to send message. Please try again or contact me directly.');
+      
+      // Clear error message after 8 seconds
+      setTimeout(() => {
+        setSubmitStatus(null);
+        setSubmitMessage('');
+      }, 8000);
     } finally {
       setIsSubmitting(false);
     }
@@ -323,21 +302,26 @@ const Contact = () => {
                   <motion.button
                     type="submit"
                     disabled={isSubmitting}
-                    className={`w-full py-4 font-semibold rounded-xl transition-all duration-300 shadow-lg ${
+                    className={`w-full py-4 px-6 font-semibold rounded-xl transition-all duration-300 shadow-lg flex items-center justify-center gap-3 ${
                       isSubmitting 
-                        ? 'bg-gray-500 cursor-not-allowed' 
-                        : 'bg-gradient-to-r from-emerald-500 to-emerald-600 dark:from-purple-500 dark:to-purple-600 hover:from-emerald-600 hover:to-emerald-700 dark:hover:from-purple-600 dark:hover:to-purple-700'
-                    } text-white`}
+                        ? 'bg-gray-500 cursor-not-allowed text-gray-300' 
+                        : `bg-gradient-to-r from-emerald-500 to-emerald-600 dark:from-purple-500 dark:to-purple-600 
+                           hover:from-emerald-600 hover:to-emerald-700 dark:hover:from-purple-600 dark:hover:to-purple-700 
+                           text-white hover:shadow-xl transform hover:-translate-y-1`
+                    }`}
                     whileHover={!isSubmitting ? { scale: 1.02 } : {}}
                     whileTap={!isSubmitting ? { scale: 0.98 } : {}}
                   >
                     {isSubmitting ? (
-                      <span className="flex items-center justify-center gap-2">
+                      <>
                         <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                        Sending...
-                      </span>
+                        <span>Sending Message...</span>
+                      </>
                     ) : (
-                      'Send Message'
+                      <>
+                        <FaPaperPlane className="text-lg" />
+                        <span>Send Message</span>
+                      </>
                     )}
                   </motion.button>
                 </form>
