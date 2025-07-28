@@ -21,8 +21,7 @@ const PROJECT_IMAGES = {
   'alphacoders': '/alpha.png',
   'pragti-path': '/PragtiPath.jpg',
   'pragtipath': '/PragtiPath.jpg',
-  'task-manager': '/CODIGO.png',
-  'todo': '/CODIGO.png',
+  
   'hospital-child-care': '/MaaJankDrAmrit.png',
   'maa-janki-hospital': '/MaaJankDrAmrit.png',
   'maa-janki': '/MaaJankDrAmrit.png',
@@ -36,13 +35,9 @@ const PROJECT_IMAGES = {
   'algorithm-visualizer': '/KTJ3.png',
   'ktj': '/KTJ3.png',
   'visualizer': '/KTJ3.png',
-  // Additional mappings for common project types
-  'blog': '/KTJ.jpeg',
-  'cms': '/KTJ2.jpeg',
-  'social': '/alpha.png',
-  'dashboard': '/AIMS.png',
-  'landing': '/AlphaTemplateProjectImage.png',
-  'template': '/AlphaTemplateProjectImage.png',
+  'ktj3': '/KTJ3.png',
+  'ktj-3': '/KTJ3.png',
+  
 };
 
 /**
