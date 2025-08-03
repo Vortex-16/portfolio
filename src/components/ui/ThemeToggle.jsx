@@ -7,6 +7,7 @@ const ThemeToggle = () => {
   return (
     <motion.button
       onClick={toggleTheme}
+      data-theme-toggle
       className={`fixed top-6 right-6 z-50 p-3 rounded-full backdrop-blur-md border transition-all duration-300 ${
         isDark 
           ? 'bg-white/10 border-white/20 text-white hover:bg-white/20' 
@@ -17,6 +18,7 @@ const ThemeToggle = () => {
       initial={{ opacity: 0, scale: 0 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ delay: 0.5, duration: 0.5 }}
+      aria-label={`Switch to ${isDark ? 'light' : 'dark'} theme`}
     >
       <motion.div
         initial={false}
