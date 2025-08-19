@@ -33,7 +33,7 @@ const About = () => {
 
   const stats = [
     { icon: FaGraduationCap, label: "CSE Student", value: "2024-2028" },
-    { icon: FaCode, label: "Projects", value: "15+" },
+    { icon: FaCode, label: "Projects", value: "25+" },
     { icon: FaRocket, label: "Technologies", value: "8+" },
     { icon: FaHeart, label: "Coffee Cups", value: "∞" },
   ];
@@ -44,9 +44,7 @@ const About = () => {
     "Algorithm Design",
     "Open Source",
     "Competitive Programming",
-    "Mobile Development",
-    "Cloud Computing",
-    "Machine Learning"
+    "Mobile OS Development",
   ];
 
   return (
@@ -212,15 +210,11 @@ const About = () => {
                   }`}>
                     <li className="flex items-center gap-3">
                       <span className="w-2 h-2 bg-emerald-400 dark:bg-purple-400 rounded-full"></span>
-                      Full-stack web development
+                      MERN-stack & NEXT JS
                     </li>
                     <li className="flex items-center gap-3">
                       <span className="w-2 h-2 bg-emerald-400 dark:bg-purple-400 rounded-full"></span>
                       Data Structures & Algorithms
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <span className="w-2 h-2 bg-emerald-400 dark:bg-purple-400 rounded-full"></span>
-                      Machine Learning fundamentals
                     </li>
                     <li className="flex items-center gap-3">
                       <span className="w-2 h-2 bg-emerald-400 dark:bg-purple-400 rounded-full"></span>
@@ -252,7 +246,7 @@ const About = () => {
                     { name: 'JavaScript', level: 85, icon: '🟨' },
                     { name: 'React', level: 80, icon: '⚛️' },
                     { name: 'HTML/CSS', level: 90, icon: '🎨' },
-                    { name: 'Python', level: 75, icon: '🐍' },
+                    { name: 'Python', level: 35, icon: '🐍' },
                     { name: 'Node.js', level: 70, icon: '💚' },
                     { name: 'MongoDB', level: 65, icon: '🍃' },
                   ].map((skill, index) => (

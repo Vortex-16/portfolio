@@ -78,45 +78,108 @@ const getProjectImage = (repoName, description = '', language = '') => {
 };
 
 export const fetchGitHubProjects = async () => {
-  try {
-    const response = await fetch(`${GITHUB_API_BASE}/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=10`);
-    
-    if (!response.ok) {
-      throw new Error('Failed to fetch GitHub projects');
+  // Return your specific custom projects
+  return [
+    {
+      id: 1,
+      title: 'Alpha Chat',
+      description: 'A modern real-time chat application with room support, file sharing, and user presence indicators built with modern web technologies.',
+      github: 'https://github.com/vikashgupta16/alpha-chat',
+      live: 'https://alpha-chats.vercel.app/',
+      technologies: ['React', 'Socket.io', 'Node.js', 'MongoDB'],
+      stars: 2,
+      forks: 8,
+      image: '/AlphaChat.png',
+    },
+    {
+      id: 2,
+      title: 'Alpha Coders',
+      description: 'A comprehensive coding platform for developers with project templates, code snippets, and collaborative features for learning and development.',
+      github: 'https://github.com/vikashgupta16/alpha-coders',
+      live: 'https://alpha-coders.vercel.app/',
+      technologies: ['React', 'Node.js', 'TypeScript', 'Tailwind CSS'],
+      stars: 2,
+      forks: 12,
+      image: '/alpha.png',
+    },
+    {
+      id: 3,
+      title: 'STCET',
+      description: 'St. Thomas College of Engineering and Technology project with comprehensive features for educational management and student portal.',
+      github: 'https://github.com/vikashgupta16/stcet-project',
+      live: 'https://stcet-demo.vercel.app/',
+      technologies: ['React', 'Node.js', 'Express', 'MySQL'],
+      stars: 3,
+      forks: 2,
+      image: '/STCET.png',
+    },
+    {
+      id: 4,
+      title: 'Maa Janki Hospital',
+      description: 'A healthcare management system for hospitals and child care centers, providing features like appointment scheduling, patient management, and more.',
+      github: 'https://github.com/vikashgupta16/Maa-Janki-Hospital-Dr.-Amrit-',
+      live: 'https://maa-janki-hospital-dr-amrit.vercel.app/',
+      technologies: ['React', 'Node.js', 'Express', 'MongoDB'],
+      stars: 0,
+      forks: 0,
+      image: '/MaaJankDrAmrit.png',
+    },
+    {
+      id: 5,
+      title: 'Pragti Path',
+      description: 'An educational platform designed to help students track their learning progress and access quality educational resources with interactive features.',
+      github: 'https://github.com/vikashgupta16/PragatiPath',
+      live: 'https://pragti-path.vercel.app/',
+      technologies: ['React', 'Node.js', 'Express', 'MongoDB'],
+      stars: 0,
+      forks: 0,
+      image: '/PragtiPath.jpg',
+    },
+    {
+      id: 6,
+      title: 'KTJ Assignment 4',
+      description: 'Advanced algorithm visualization and implementation project demonstrating complex data structures and algorithm analysis.',
+      github: 'https://github.com/vikashgupta16/ktj-ass-4',
+      live: 'https://ktj-assignment-4.vercel.app/',
+      technologies: ['JavaScript', 'HTML5', 'CSS3', 'Canvas'],
+      stars: 8,
+      forks: 3,
+      image: '/KTJ3.png',
+    },
+    {
+      id: 7,
+      title: 'Java Projects',
+      description: 'Collection of Java programming projects including OOP concepts, data structures, and enterprise applications with comprehensive examples.',
+      github: 'https://github.com/vikashgupta16/java-projects',
+      live: null,
+      technologies: ['Java', 'Spring Boot', 'Maven', 'JUnit'],
+      stars: 25,
+      forks: 12,
+      image: '/java.png',
+    },
+    {
+      id: 8,
+      title: 'DSA Collection',
+      description: 'Comprehensive Data Structures and Algorithms implementation in multiple programming languages with detailed explanations and examples.',
+      github: 'https://github.com/vikashgupta16/dsa-collection',
+      live: null,
+      technologies: ['C++', 'Java', 'Python', 'JavaScript'],
+      stars: 35,
+      forks: 18,
+      image: '/CODIGO.png',
+    },
+    {
+      id: 9,
+      title: 'Python Projects',
+      description: 'Python programming projects ranging from basic syntax and logic building to advanced data analysis and machine learning implementations.',
+      github: 'https://github.com/vikashgupta16/python-projects',
+      live: null,
+      technologies: ['Python', 'Django', 'Flask', 'NumPy'],
+      stars: 22,
+      forks: 10,
+      image: '/Python.png',
     }
-    
-    const repos = await response.json();
-    
-    // Transform GitHub repo data to our project format
-    const projects = repos
-      .filter(repo => !repo.fork && repo.description) // Filter out forks and repos without description
-      .map(repo => {
-        const projectImage = getProjectImage(repo.name, repo.description, repo.language);
-        console.log(`Project: ${repo.name} -> Image: ${projectImage}`);
-        
-        return {
-          id: repo.id,
-          title: repo.name.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
-          description: repo.description,
-          github: repo.html_url,
-          live: repo.homepage || null,
-          technologies: repo.language ? [repo.language] : [],
-          stars: repo.stargazers_count,
-          forks: repo.forks_count,
-          image: projectImage,
-          created: repo.created_at,
-          updated: repo.updated_at,
-        };
-      })
-      .slice(0, 7); //No of projects
-    
-    return projects;
-  } catch (error) {
-    console.error('Error fetching GitHub projects:', error);
-    
-    // Return fallback projects if API fails
-    return getFallbackProjects();
-  }
+  ];
 };
 
 export const getFallbackProjects = () => {

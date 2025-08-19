@@ -1,12 +1,11 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Autoplay, EffectCoverflow } from 'swiper/modules';
+import { Pagination, Autoplay, EffectCoverflow } from 'swiper/modules';
 import { FaGithub, FaExternalLinkAlt, FaStar, FaCodeBranch } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import { useTheme } from '../../hooks/useTheme';
 
 // Import Swiper styles
 import 'swiper/css';
-import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-coverflow';
 
@@ -22,20 +21,17 @@ const SwiperCarousel = ({ projects = [] }) => {
   }
 
   return (
-    <div className="w-full max-w-7xl mx-auto px-4">
+    <div className="w-full max-w-7xl mx-auto px-4 relative">
       <Swiper
-        modules={[Navigation, Pagination, Autoplay, EffectCoverflow]}
-        spaceBetween={30}
+        modules={[Autoplay, Pagination, EffectCoverflow]}
+        spaceBetween={20}
         slidesPerView={1}
         centeredSlides={true}
+        loop={true}
         autoplay={{
-          delay: 4000,
+          delay: 3000,
           disableOnInteraction: false,
           pauseOnMouseEnter: true,
-        }}
-        navigation={{
-          nextEl: '.swiper-button-next-custom',
-          prevEl: '.swiper-button-prev-custom',
         }}
         pagination={{
           clickable: true,
@@ -44,27 +40,32 @@ const SwiperCarousel = ({ projects = [] }) => {
         }}
         effect="coverflow"
         coverflowEffect={{
-          rotate: 15,
+          rotate: 30,
           stretch: 0,
-          depth: 200,
+          depth: 150,
           modifier: 1,
           slideShadows: true,
         }}
+        speed={800}
         breakpoints={{
           640: {
             slidesPerView: 1,
-            spaceBetween: 20,
+            spaceBetween: 15,
           },
           768: {
             slidesPerView: 2,
-            spaceBetween: 30,
+            spaceBetween: 20,
           },
           1024: {
             slidesPerView: 3,
-            spaceBetween: 40,
+            spaceBetween: 25,
           },
         }}
         className="mySwiper pb-16"
+        style={{ 
+          height: '550px', 
+          width: '100%' 
+        }}
       >
         {projects.map((project, index) => (
           <SwiperSlide key={project.id}>
@@ -179,50 +180,55 @@ const SwiperCarousel = ({ projects = [] }) => {
             </motion.div>
           </SwiperSlide>
         ))}
-
-        {/* Custom Navigation Buttons */}
-        <div className={`swiper-button-prev-custom absolute left-4 top-1/2 z-10 w-12 h-12 rounded-full backdrop-blur-md border flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-110 ${
-          isDark 
-            ? 'bg-white/10 border-white/20 text-white hover:bg-white/20'
-            : 'bg-emerald-900/80 border-emerald-700/40 text-emerald-50 hover:bg-emerald-800/90'
-        }`}>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/>
-          </svg>
-        </div>
-        
-        <div className={`swiper-button-next-custom absolute right-4 top-1/2 z-10 w-12 h-12 rounded-full backdrop-blur-md border flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-110 ${
-          isDark 
-            ? 'bg-white/10 border-white/20 text-white hover:bg-white/20'
-            : 'bg-emerald-900/80 border-emerald-700/40 text-emerald-50 hover:bg-emerald-800/90'
-        }`}>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
-          </svg>
-        </div>
       </Swiper>
 
-      {/* Custom Pagination */}
-      <div className="swiper-pagination-custom mt-8 flex justify-center"></div>
+      {/* Custom Pagination - Centered */}
+      <div className="swiper-pagination-custom flex justify-center items-center mt-8 w-full"></div>
 
       {/* Custom Styles */}
       <style jsx>{`
+        .mySwiper {
+          width: 100%;
+          padding-top: 20px;
+          padding-bottom: 50px;
+          position: relative;
+        }
+        
         .mySwiper .swiper-slide {
-          height: auto;
+          background-position: center;
+          background-size: cover;
+          width: 300px;
+          height: 480px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        
+        .swiper-pagination-custom {
+          position: absolute !important;
+          bottom: 10px !important;
+          left: 50% !important;
+          transform: translateX(-50%) !important;
+          width: auto !important;
+          display: flex !important;
+          justify-content: center !important;
+          align-items: center !important;
         }
         
         .mySwiper .swiper-pagination-bullet {
-          background: rgba(255, 255, 255, 0.5);
-          opacity: 0.7;
-          width: 12px;
-          height: 12px;
-          margin: 0 4px;
+          background: rgba(255, 255, 255, 0.5) !important;
+          opacity: 0.7 !important;
+          width: 10px !important;
+          height: 10px !important;
+          margin: 0 6px !important;
+          transition: all 0.3s ease !important;
+          border-radius: 50% !important;
         }
         
         .mySwiper .swiper-pagination-bullet-active {
-          background: ${isDark ? '#a855f7' : '#059669'};
-          opacity: 1;
-          transform: scale(1.2);
+          background: ${isDark ? '#a855f7' : '#059669'} !important;
+          opacity: 1 !important;
+          transform: scale(1.4) !important;
         }
         
         .line-clamp-1 {
@@ -237,6 +243,20 @@ const SwiperCarousel = ({ projects = [] }) => {
           -webkit-line-clamp: 3;
           -webkit-box-orient: vertical;
           overflow: hidden;
+        }
+        
+        /* Ensure Swiper container has proper dimensions */
+        .swiper {
+          width: 100%;
+          height: 100%;
+          position: relative;
+        }
+        
+        .swiper-wrapper {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
         }
       `}</style>
     </div>
