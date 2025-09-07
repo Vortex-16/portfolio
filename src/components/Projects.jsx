@@ -118,7 +118,7 @@ const Projects = () => {
             variants={itemVariants}
           >
             <motion.a
-              href="https://github.com/vikashgupta16"
+              href="https://github.com/Vortex-16"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 px-6 py-3 bg-white/10 backdrop-blur-md border border-white/20 text-white rounded-full hover:bg-white/20 transition-all duration-300"

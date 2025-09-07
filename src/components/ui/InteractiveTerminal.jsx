@@ -56,14 +56,14 @@ const InteractiveTerminal = ({ onClose }) => {
       '💻 Terminal Emulator - What you\'re using now',
       '🌟 And many more on GitHub...',
       '',
-      'Visit: https://github.com/vikashgupta16',
+      'Visit: https://github.com/Vortex-16',
       ''
     ],
     contact: () => [
       'Contact Information:',
       '━━━━━━━━━━━━━━━━━━━━━',
-      '📧 Email: vikashgupta16@example.com',
-      '🌐 GitHub: https://github.com/vikashgupta16',
+      '📧 Email: Vortex-16@example.com',
+      '🌐 GitHub: https://github.com/Vortex-16',
       '💼 LinkedIn: Coming soon...',
       '📱 Portfolio: You\'re already here!',
       '',

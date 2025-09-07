@@ -102,7 +102,7 @@ const Contact = () => {
     {
       icon: FaGithub,
       label: 'GitHub',
-      href: 'https://github.com/vikashgupta16',
+      href: 'https://github.com/Vortex-16',
       color: 'hover:text-gray-300'
     },
     {
@@ -129,7 +129,7 @@ const Contact = () => {
     {
       icon: FaEnvelope,
       label: 'Email',
-      value: 'vikashgupta16@gmail.com',
+      value: 'Vortex-16@gmail.com',
       href: 'mailto:vikash9c35@gmail.com'
     },
     {

@@ -50,7 +50,7 @@ SEO	React Helmet Async
 📦 Installation
 
 # 1. Clone the repository
-git clone https://github.com/vikashgupta16/portfolio.git
+git clone https://github.com/Vortex-16/portfolio.git
 cd portfolio
 
 # 2. Install dependencies
@@ -230,7 +230,7 @@ Licensed under the MIT License.
 
 Vikash Gupta
 
-GitHub: @vikashgupta16
+GitHub: @Vortex-16
 
 LinkedIn: Vikash Gupta
 
