@@ -13,6 +13,7 @@ import ThemeToggle from './components/ui/ThemeToggle';
 import ResponsiveNavigation from './components/ui/ResponsiveNavigation';
 import InteractiveTerminal from './components/ui/InteractiveTerminal';
 import FloatingActionMenu from './components/ui/FloatingActionMenu';
+import MusicPlayer from './components/ui/MusicPlayer';
 import Homepage from './components/Homepage';
 import Projects from './components/Projects';
 import About from './components/About';
@@ -98,7 +99,10 @@ const AppContent = () => {
       {showTerminal && <InteractiveTerminal onClose={() => setShowTerminal(false)} />}
 
       {/* Floating Action Menu with Games */}
-      <FloatingActionMenu onTerminalToggle={handleTerminalToggle} />
+      {/* <FloatingActionMenu onTerminalToggle={handleTerminalToggle} /> */}
+
+      {/* Music Player */}
+      <MusicPlayer />
     </div>
   );
 };
