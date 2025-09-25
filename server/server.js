@@ -28,7 +28,7 @@ app.use(cors({
 // Rate limiting
 const emailLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 5, // Limit each IP to 5 requests per windowMs
+  max: process.env.NODE_ENV === 'development' ? 20 : 5, // More requests in development
   message: {
     error: 'Too many email requests from this IP, please try again later.'
   },

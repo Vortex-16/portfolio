@@ -17,6 +17,9 @@ const KeyboardShortcuts = () => {
 
   useEffect(() => {
     const handleKeyPress = (e) => {
+      // Add safety checks for e.key and e.target
+      if (!e || !e.key || !e.target) return;
+      
       if (e.key === '?') {
         e.preventDefault();
         setIsVisible(!isVisible);
@@ -30,9 +33,9 @@ const KeyboardShortcuts = () => {
         if (element) {
           element.scrollIntoView({ behavior: 'smooth' });
         }
-      } else if (e.key.toLowerCase() === 't' && !e.ctrlKey && !e.altKey) {
+      } else if (e.key && e.key.toLowerCase() === 't' && !e.ctrlKey && !e.altKey) {
         // Toggle theme (only if not in input field)
-        if (!['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName)) {
+        if (e.target && e.target.tagName && !['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName)) {
           const themeToggle = document.querySelector('[data-theme-toggle]');
           if (themeToggle) {
             themeToggle.click();
