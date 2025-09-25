@@ -19,7 +19,7 @@ const CustomCursor = () => {
     window.addEventListener('resize', checkTouchDevice);
 
     // Add custom cursor class to body if not touch device
-    if (!isTouchDevice) {
+    if (!isTouchDevice && document.body) {
       document.body.classList.add('custom-cursor');
     }
 
@@ -32,7 +32,8 @@ const CustomCursor = () => {
 
     const handleMouseEnter = (e) => {
       const target = e.target;
-      if (target.matches('a, button, input, textarea, select, [role="button"], [tabindex]:not([tabindex="-1"])')) {
+      // Check if target is an Element and has the matches method
+      if (target && target.nodeType === 1 && target.matches && target.matches('a, button, input, textarea, select, [role="button"], [tabindex]:not([tabindex="-1"])')) {
         setIsHovering(true);
         setCursorVariant('hover');
       }
@@ -40,7 +41,8 @@ const CustomCursor = () => {
 
     const handleMouseLeave = (e) => {
       const target = e.target;
-      if (target.matches('a, button, input, textarea, select, [role="button"], [tabindex]:not([tabindex="-1"])')) {
+      // Check if target is an Element and has the matches method
+      if (target && target.nodeType === 1 && target.matches && target.matches('a, button, input, textarea, select, [role="button"], [tabindex]:not([tabindex="-1"])')) {
         setIsHovering(false);
         setCursorVariant('default');
       }
@@ -53,7 +55,9 @@ const CustomCursor = () => {
     }
 
     return () => {
-      document.body.classList.remove('custom-cursor');
+      if (document.body) {
+        document.body.classList.remove('custom-cursor');
+      }
       window.removeEventListener('resize', checkTouchDevice);
       window.removeEventListener('mousemove', mouseMove);
       document.removeEventListener('mouseenter', handleMouseEnter, true);
