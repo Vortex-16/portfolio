@@ -48,6 +48,22 @@ export default async function handler(req, res) {
     return res.status(200).end();
   }
 
+  // Add GET endpoint for debugging
+  if (req.method === 'GET') {
+    return res.status(200).json({
+      success: true,
+      message: 'Email API is running',
+      timestamp: new Date().toISOString(),
+      environment: {
+        NODE_ENV: process.env.NODE_ENV,
+        hasEmailUser: !!process.env.EMAIL_USER,
+        hasEmailPass: !!process.env.EMAIL_PASS,
+        hasEmailTo: !!process.env.EMAIL_TO,
+        emailUser: process.env.EMAIL_USER ? process.env.EMAIL_USER.replace(/@.*/, '@***') : 'Not set'
+      }
+    });
+  }
+
   if (req.method !== 'POST') {
     return res.status(405).json({ 
       success: false, 
@@ -56,6 +72,20 @@ export default async function handler(req, res) {
   }
 
   try {
+    // Check if environment variables are set
+    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+      return res.status(500).json({
+        success: false,
+        message: 'Email service not configured. Please set EMAIL_USER and EMAIL_PASS environment variables in Vercel dashboard.',
+        error: 'MISSING_CONFIG',
+        debug: {
+          hasEmailUser: !!process.env.EMAIL_USER,
+          hasEmailPass: !!process.env.EMAIL_PASS,
+          hasEmailTo: !!process.env.EMAIL_TO
+        }
+      });
+    }
+
     // Get client IP for rate limiting
     const clientIP = req.headers['x-forwarded-for'] || 
                     req.headers['x-real-ip'] || 
@@ -152,11 +182,27 @@ export default async function handler(req, res) {
   } catch (error) {
     console.error('Email sending error:', error);
     
+    // More specific error messages for debugging
+    let errorMessage = 'Failed to send email. Please try again later.';
+    let errorCode = 'INTERNAL_ERROR';
+    
+    if (error.message.includes('Invalid login')) {
+      errorMessage = 'Email authentication failed. Please check EMAIL_USER and EMAIL_PASS in Vercel environment variables.';
+      errorCode = 'AUTH_ERROR';
+    } else if (error.message.includes('getaddrinfo ENOTFOUND')) {
+      errorMessage = 'Unable to connect to email service.';
+      errorCode = 'CONNECTION_ERROR';
+    } else if (error.code === 'EAUTH') {
+      errorMessage = 'Gmail authentication failed. Please use an App Password, not your regular Gmail password.';
+      errorCode = 'AUTH_ERROR';
+    }
+    
     // Error response
     res.status(500).json({
       success: false,
-      message: 'Failed to send email. Please try again later.',
-      error: process.env.NODE_ENV === 'development' ? error.message : 'INTERNAL_ERROR'
+      message: errorMessage,
+      error: errorCode,
+      details: process.env.NODE_ENV === 'development' ? error.message : undefined
     });
   }
 }
