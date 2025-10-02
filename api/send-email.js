@@ -59,6 +59,7 @@ export default async function handler(req, res) {
         hasEmailUser: !!process.env.EMAIL_USER,
         hasEmailPass: !!process.env.EMAIL_PASS,
         hasEmailTo: !!process.env.EMAIL_TO,
+        hasRecipientEmail: !!process.env.RECIPIENT_EMAIL,
         emailUser: process.env.EMAIL_USER ? process.env.EMAIL_USER.replace(/@.*/, '@***') : 'Not set'
       }
     });
@@ -81,7 +82,8 @@ export default async function handler(req, res) {
         debug: {
           hasEmailUser: !!process.env.EMAIL_USER,
           hasEmailPass: !!process.env.EMAIL_PASS,
-          hasEmailTo: !!process.env.EMAIL_TO
+          hasEmailTo: !!process.env.EMAIL_TO,
+          hasRecipientEmail: !!process.env.RECIPIENT_EMAIL
         }
       });
     }
@@ -132,7 +134,7 @@ export default async function handler(req, res) {
     // Email content
     const mailOptions = {
       from: `"Portfolio Contact" <${process.env.EMAIL_USER}>`,
-      to: process.env.EMAIL_TO || process.env.EMAIL_USER,
+      to: process.env.RECIPIENT_EMAIL || process.env.EMAIL_TO || process.env.EMAIL_USER,
       subject: `Portfolio Contact: Message from ${name}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
