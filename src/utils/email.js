@@ -1,7 +1,3 @@
-// Backend Email API Configuration
-const API_BASE_URL = import.meta.env.VITE_API_URL || 
-  (import.meta.env.MODE === 'production' ? '' : 'http://localhost:5000');
-
 /**
  * Sends an email using the secure backend API
  * @param {Object} emailData - The email data
@@ -12,10 +8,15 @@ const API_BASE_URL = import.meta.env.VITE_API_URL ||
  */
 export const sendEmail = async (emailData) => {
   try {
-    console.log('Sending email to:', `${API_BASE_URL}/api/send-email`);
+    // Construct API URL properly to avoid double slashes
+    const baseUrl = import.meta.env.VITE_API_URL || 
+      (import.meta.env.MODE === 'production' ? '' : 'http://localhost:5000');
+    const apiUrl = baseUrl ? `${baseUrl}/api/send-email` : '/api/send-email';
+    
+    console.log('Sending email to:', apiUrl);
     console.log('Email data:', { ...emailData, message: emailData.message?.substring(0, 50) + '...' });
 
-    const response = await fetch(`${API_BASE_URL}/api/send-email`, {
+    const response = await fetch(apiUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -25,6 +26,16 @@ export const sendEmail = async (emailData) => {
 
     const result = await response.json();
     console.log('Server response:', result);
+    
+    // Log additional debugging info
+    if (!response.ok) {
+      console.error('API Error Details:', {
+        status: response.status,
+        statusText: response.statusText,
+        url: response.url,
+        result
+      });
+    }
 
     if (!response.ok) {
       throw new Error(result.message || `Server error: ${response.status}`);

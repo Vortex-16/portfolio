@@ -183,6 +183,12 @@ export default async function handler(req, res) {
 
   } catch (error) {
     console.error('Email sending error:', error);
+    console.error('Error details:', {
+      name: error.name,
+      message: error.message,
+      code: error.code,
+      stack: error.stack
+    });
     
     // More specific error messages for debugging
     let errorMessage = 'Failed to send email. Please try again later.';
@@ -197,6 +203,9 @@ export default async function handler(req, res) {
     } else if (error.code === 'EAUTH') {
       errorMessage = 'Gmail authentication failed. Please use an App Password, not your regular Gmail password.';
       errorCode = 'AUTH_ERROR';
+    } else if (error.message.includes('self signed certificate')) {
+      errorMessage = 'SSL certificate error. This might be a temporary issue.';
+      errorCode = 'SSL_ERROR';
     }
     
     // Error response
@@ -204,7 +213,12 @@ export default async function handler(req, res) {
       success: false,
       message: errorMessage,
       error: errorCode,
-      details: process.env.NODE_ENV === 'development' ? error.message : undefined
+      debug: {
+        errorName: error.name,
+        errorMessage: error.message,
+        errorCode: error.code,
+        timestamp: new Date().toISOString()
+      }
     });
   }
 }
