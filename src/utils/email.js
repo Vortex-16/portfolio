@@ -9,9 +9,20 @@
 export const sendEmail = async (emailData) => {
   try {
     // Construct API URL properly to avoid double slashes
-    const baseUrl = import.meta.env.VITE_API_URL || 
-      (import.meta.env.MODE === 'production' ? '' : 'http://localhost:5000');
-    const apiUrl = baseUrl ? `${baseUrl}/api/send-email` : '/api/send-email';
+    const baseUrl = import.meta.env.VITE_API_URL;
+    let apiUrl;
+    
+    if (baseUrl) {
+      // Remove trailing slash from baseUrl and ensure proper construction
+      const cleanBaseUrl = baseUrl.replace(/\/$/, '');
+      apiUrl = `${cleanBaseUrl}/api/send-email`;
+    } else if (import.meta.env.MODE === 'production') {
+      // In production without VITE_API_URL, use relative path
+      apiUrl = '/api/send-email';
+    } else {
+      // Development
+      apiUrl = 'http://localhost:5000/api/send-email';
+    }
     
     console.log('Sending email to:', apiUrl);
     console.log('Email data:', { ...emailData, message: emailData.message?.substring(0, 50) + '...' });
@@ -35,6 +46,11 @@ export const sendEmail = async (emailData) => {
         url: response.url,
         result
       });
+      
+      // Log the debug information if available
+      if (result.debug) {
+        console.error('Server Debug Info:', result.debug);
+      }
     }
 
     if (!response.ok) {
