@@ -92,7 +92,7 @@ const About = () => {
               </div>
 
               {/* Stats Grid */}
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-4 mb-6">
                 {stats.map((stat, index) => (
                   <motion.div
                     key={index}
@@ -115,6 +115,51 @@ const About = () => {
                   </motion.div>
                 ))}
               </div>
+
+              {/* Fun Facts */}
+              <motion.div 
+                className={`backdrop-blur-md border rounded-3xl p-6 ${
+                  isDark 
+                    ? 'bg-white/10 border-white/20' 
+                    : 'bg-emerald-900/80 border-emerald-700/40'
+                }`}
+                variants={itemVariants}
+                whileHover={{ scale: 1.01 }}
+                transition={{ duration: 0.2 }}
+              >
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="text-2xl">✨</span>
+                  <h4 className={`text-lg font-semibold ${
+                    isDark ? 'text-white' : 'text-emerald-50'
+                  }`}>Fun Facts About Me</h4>
+                </div>
+                <div className="space-y-3">
+                  {[
+                    { emoji: "☕", text: "Powered by coffee and curiosity" },
+                    { emoji: "🌄", text: "Daylight developer" },
+                    { emoji: "💻", text: "Code enthusiast" },
+                    { emoji: "📚", text: "Lifelong learner" },
+                    { emoji: "🎮", text: "Gamer in free time" },
+                  ].map((fact, index) => (
+                    <motion.div
+                      key={index}
+                      className={`flex items-center gap-3 p-3 rounded-xl ${
+                        isDark 
+                          ? 'bg-white/5' 
+                          : 'bg-emerald-800/30'
+                      }`}
+                      variants={itemVariants}
+                      whileHover={{ scale: 1.02, x: 5 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <div className="text-2xl">{fact.emoji}</div>
+                      <p className={`text-sm ${
+                        isDark ? 'text-white/80' : 'text-emerald-100'
+                      }`}>{fact.text}</p>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
             </motion.div>
 
             {/* Right Side - About Content */}
@@ -224,133 +269,111 @@ const About = () => {
                 </motion.div>
               </div>
 
-              {/* Skills Section */}
-              <motion.div 
-                className={`backdrop-blur-md border rounded-3xl p-8 ${
-                  isDark 
-                    ? 'bg-white/10 border-white/20' 
-                    : 'bg-emerald-900/80 border-emerald-700/40'
-                }`}
-                variants={itemVariants}
-                whileHover={{ scale: 1.01 }}
-                transition={{ duration: 0.2 }}
-              >
-                <div className="flex items-center gap-3 mb-6">
-                  <FaCode className="text-emerald-400 dark:text-purple-400 text-2xl" />
-                  <h4 className={`text-2xl font-semibold ${
-                    isDark ? 'text-white' : 'text-emerald-50'
-                  }`}>Skills & Proficiency</h4>
-                </div>
-                <div className="grid md:grid-cols-2 gap-6">
-                  {[
-                    { name: 'JavaScript', level: 85, icon: '🟨' },
-                    { name: 'React', level: 80, icon: '⚛️' },
-                    { name: 'HTML/CSS', level: 90, icon: '🎨' },
-                    { name: 'Python', level: 35, icon: '🐍' },
-                    { name: 'Node.js', level: 70, icon: '💚' },
-                    { name: 'MongoDB', level: 65, icon: '🍃' },
-                  ].map((skill, index) => (
-                    <motion.div
-                      key={skill.name}
-                      className={`p-4 rounded-2xl border ${
-                        isDark 
-                          ? 'bg-white/5 border-white/10' 
-                          : 'bg-emerald-800/30 border-emerald-600/30'
-                      }`}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.8 + index * 0.1, duration: 0.5 }}
-                      whileHover={{ scale: 1.05, y: -2 }}
-                    >
-                      <div className="flex items-center justify-between mb-3">
-                        <div className="flex items-center gap-3">
-                          <span className="text-2xl">{skill.icon}</span>
-                          <span className={`font-medium ${
-                            isDark ? 'text-white' : 'text-emerald-50'
-                          }`}>{skill.name}</span>
-                        </div>
-                        <span className={`text-sm font-semibold ${
-                          isDark ? 'text-emerald-400' : 'text-emerald-200'
-                        }`}>{skill.level}%</span>
-                      </div>
-                      <div className={`w-full rounded-full h-3 ${
-                        isDark ? 'bg-white/10' : 'bg-emerald-700/30'
-                      }`}>
-                        <motion.div
-                          className="bg-gradient-to-r from-emerald-400 to-emerald-600 dark:from-purple-400 dark:to-purple-600 h-3 rounded-full"
-                          initial={{ width: 0 }}
-                          animate={{ width: `${skill.level}%` }}
-                          transition={{ delay: 1.2 + index * 0.1, duration: 1, ease: "easeOut" }}
-                        />
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
+              {/* Skills & Interests Grid - Two Column Layout */}
+              <div className="grid lg:grid-cols-3 gap-6">
+                {/* Interests & Technologies - Left Side */}
+                <motion.div 
+                  className={`backdrop-blur-md border rounded-3xl p-6 flex flex-col ${
+                    isDark 
+                      ? 'bg-white/10 border-white/20' 
+                      : 'bg-emerald-900/80 border-emerald-700/40'
+                  }`}
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.01 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <div className="flex items-center gap-3 mb-6">
+                    <FaHeart className="text-emerald-400 dark:text-purple-400 text-2xl" />
+                    <h4 className={`text-xl font-semibold ${
+                      isDark ? 'text-white' : 'text-emerald-50'
+                    }`}>Interests & Technologies</h4>
+                  </div>
+                  <div className="flex flex-wrap gap-3 content-start">
+                    {interests.map((interest, index) => (
+                      <motion.span
+                        key={index}
+                        className={`px-4 py-2 backdrop-blur-md border rounded-full text-sm font-medium ${
+                          isDark 
+                            ? 'bg-white/10 border-white/20 text-white' 
+                            : 'bg-emerald-800/50 border-emerald-600/40 text-emerald-100'
+                        }`}
+                        initial={{ opacity: 0, scale: 0 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: 0.8 + index * 0.1, duration: 0.3 }}
+                        whileHover={{ scale: 1.1, y: -2 }}
+                      >
+                        {interest}
+                      </motion.span>
+                    ))}
+                  </div>
+                </motion.div>
 
-              {/* Interests & Technologies */}
-              <motion.div 
-                className={`backdrop-blur-md border rounded-3xl p-6 ${
-                  isDark 
-                    ? 'bg-white/10 border-white/20' 
-                    : 'bg-emerald-900/80 border-emerald-700/40'
-                }`}
-                variants={itemVariants}
-                whileHover={{ scale: 1.01 }}
-                transition={{ duration: 0.2 }}
-              >
-                <div className="flex items-center gap-3 mb-6">
-                  <FaHeart className="text-emerald-400 dark:text-purple-400 text-2xl" />
-                  <h4 className={`text-xl font-semibold ${
-                    isDark ? 'text-white' : 'text-emerald-50'
-                  }`}>Interests & Technologies</h4>
-                </div>
-                <div className="flex flex-wrap gap-3">
-                  {interests.map((interest, index) => (
-                    <motion.span
-                      key={index}
-                      className={`px-4 py-2 backdrop-blur-md border rounded-full text-sm font-medium ${
-                        isDark 
-                          ? 'bg-white/10 border-white/20 text-white' 
-                          : 'bg-emerald-800/50 border-emerald-600/40 text-emerald-100'
-                      }`}
-                      initial={{ opacity: 0, scale: 0 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 0.8 + index * 0.1, duration: 0.3 }}
-                      whileHover={{ scale: 1.1, y: -2 }}
-                    >
-                      {interest}
-                    </motion.span>
-                  ))}
-                </div>
-              </motion.div>
+                {/* Skills Section - Right Side */}
+                <motion.div 
+                  className={`lg:col-span-2 backdrop-blur-md border rounded-3xl p-8 ${
+                    isDark 
+                      ? 'bg-white/10 border-white/20' 
+                      : 'bg-emerald-900/80 border-emerald-700/40'
+                  }`}
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.01 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <div className="flex items-center gap-3 mb-6">
+                    <FaCode className="text-emerald-400 dark:text-purple-400 text-2xl" />
+                    <h4 className={`text-2xl font-semibold ${
+                      isDark ? 'text-white' : 'text-emerald-50'
+                    }`}>Skills & Proficiency</h4>
+                  </div>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    {[
+                      { name: 'JavaScript', level: 85, icon: '🟨' },
+                      { name: 'React', level: 80, icon: '⚛️' },
+                      { name: 'HTML/CSS', level: 90, icon: '🎨' },
+                      { name: 'Python', level: 35, icon: '🐍' },
+                      { name: 'Node.js', level: 70, icon: '💚' },
+                      { name: 'MongoDB', level: 65, icon: '🍃' },
+                    ].map((skill, index) => (
+                      <motion.div
+                        key={skill.name}
+                        className={`p-4 rounded-2xl border ${
+                          isDark 
+                            ? 'bg-white/5 border-white/10' 
+                            : 'bg-emerald-800/30 border-emerald-600/30'
+                        }`}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.8 + index * 0.1, duration: 0.5 }}
+                        whileHover={{ scale: 1.05, y: -2 }}
+                      >
+                        <div className="flex items-center justify-between mb-3">
+                          <div className="flex items-center gap-3">
+                            <span className="text-2xl">{skill.icon}</span>
+                            <span className={`font-medium ${
+                              isDark ? 'text-white' : 'text-emerald-50'
+                            }`}>{skill.name}</span>
+                          </div>
+                          <span className={`text-sm font-semibold ${
+                            isDark ? 'text-emerald-400' : 'text-emerald-200'
+                          }`}>{skill.level}%</span>
+                        </div>
+                        <div className={`w-full rounded-full h-3 ${
+                          isDark ? 'bg-white/10' : 'bg-emerald-700/30'
+                        }`}>
+                          <motion.div
+                            className="bg-gradient-to-r from-emerald-400 to-emerald-600 dark:from-purple-400 dark:to-purple-600 h-3 rounded-full"
+                            initial={{ width: 0 }}
+                            animate={{ width: `${skill.level}%` }}
+                            transition={{ delay: 1.2 + index * 0.1, duration: 1, ease: "easeOut" }}
+                          />
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
+              </div>
             </motion.div>
           </div>
-
-          {/* Fun Facts */}
-          <motion.div 
-            className="mt-16 text-center"
-            variants={itemVariants}
-          >
-            <h4 className="text-xl font-semibold text-white mb-6">Fun Facts About Me</h4>
-            <div className="grid md:grid-cols-3 gap-6">
-              {[
-                { emoji: "☕", text: "Powered by coffee and curiosity" },
-                { emoji: "🌙", text: "Night owl developer" },
-                { emoji: "🎮", text: "Gamer in free time" },
-              ].map((fact, index) => (
-                <motion.div
-                  key={index}
-                  className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6"
-                  variants={itemVariants}
-                  whileHover={{ scale: 1.05, y: -5 }}
-                >
-                  <div className="text-3xl mb-2">{fact.emoji}</div>
-                  <p className="text-white/80">{fact.text}</p>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
         </motion.div>
       </div>
     </section>

@@ -5,7 +5,7 @@ import ScrollProgress from './ui/ScrollProgress';
 import PerformanceMonitor from './ui/PerformanceMonitor';
 import AccessibilityOverlay from './ui/AccessibilityOverlay';
 import KeyboardShortcuts from './ui/KeyboardShortcuts';
-import SimpleBackground from './ui/SimpleBackground';
+import AnimatedBackground from './ui/AnimatedBackground';
 import ThemeToggle from './ui/ThemeToggle';
 import MusicPlayer from './ui/MusicPlayer';
 import ResponsiveNavigation from './ui/ResponsiveNavigation';
@@ -34,8 +34,8 @@ const Layout = () => {
       {/* Custom Cursor */}
       <CustomCursor />
       
-      {/* Background Effects */}
-      <SimpleBackground isDark={isDark} />
+      {/* Advanced Animated Background */}
+      <AnimatedBackground />
       
       {/* Gradient Overlay */}
       <div className={`fixed inset-0 pointer-events-none transition-opacity duration-500 ${

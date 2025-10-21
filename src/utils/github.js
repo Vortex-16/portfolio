@@ -3,6 +3,54 @@ const GITHUB_USERNAME = 'Vortex-16';
 const GITHUB_API_BASE = 'https://api.github.com';
 
 /**
+ * Fetch GitHub user statistics
+ * Returns total repos, stars, and followers
+ */
+export const fetchGitHubStats = async () => {
+  try {
+    // Fetch user data
+    const userResponse = await fetch(`${GITHUB_API_BASE}/users/${GITHUB_USERNAME}`);
+    
+    if (!userResponse.ok) {
+      console.warn('Failed to fetch GitHub user data');
+      return {
+        totalRepos: 47,
+        totalStars: 40,
+        followers: 25,
+      };
+    }
+
+    const userData = await userResponse.json();
+    
+    // Fetch all repositories to count stars
+    const reposResponse = await fetch(
+      `${GITHUB_API_BASE}/users/${GITHUB_USERNAME}/repos?per_page=100&sort=updated`
+    );
+    
+    let totalStars = 0;
+    
+    if (reposResponse.ok) {
+      const repos = await reposResponse.json();
+      totalStars = repos.reduce((sum, repo) => sum + (repo.stargazers_count || 0), 0);
+    }
+
+    return {
+      totalRepos: userData.public_repos || 47,
+      totalStars: totalStars || 40,
+      followers: userData.followers || 25,
+    };
+  } catch (error) {
+    console.error('Error fetching GitHub stats:', error);
+    // Return default values if API fails
+    return {
+      totalRepos: 47,
+      totalStars: 40,
+      followers: 25,
+    };
+  }
+};
+
+/**
  * Map of project names to image paths
  * This allows us to match GitHub repos with custom project images
  */

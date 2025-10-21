@@ -60,6 +60,43 @@ const Homepage = () => {
       className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden py-20 px-4"
       aria-label="Home section"
     >
+      {/* Decorative Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Animated rings */}
+        {[...Array(3)].map((_, i) => (
+          <div
+            key={`ring-${i}`}
+            className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border ${
+              isDark ? 'border-purple-500/20' : 'border-emerald-500/20'
+            }`}
+            style={{
+              width: `${(i + 1) * 300}px`,
+              height: `${(i + 1) * 300}px`,
+              animation: `spin ${20 + i * 5}s linear infinite`,
+            }}
+          />
+        ))}
+        
+        {/* Floating shapes */}
+        <div className={`absolute top-20 left-20 w-20 h-20 rounded-lg ${
+          isDark ? 'bg-purple-500/10' : 'bg-emerald-500/10'
+        } backdrop-blur-sm rotate-45 animate-pulse`} 
+        style={{ animationDuration: '3s' }} />
+        
+        <div className={`absolute bottom-32 right-32 w-16 h-16 rounded-full ${
+          isDark ? 'bg-pink-500/10' : 'bg-cyan-500/10'
+        } backdrop-blur-sm animate-bounce`}
+        style={{ animationDuration: '4s' }} />
+        
+        <div className={`absolute top-1/3 right-20 w-12 h-12 ${
+          isDark ? 'bg-violet-500/10' : 'bg-teal-500/10'
+        } backdrop-blur-sm animate-pulse`}
+        style={{ 
+          clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)',
+          animationDuration: '2.5s'
+        }} />
+      </div>
+
       {/* Hero Content */}
       <div className="container mx-auto max-w-7xl z-30 text-center mb-16">
         {/* Profile Image */}
