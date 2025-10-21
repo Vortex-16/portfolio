@@ -143,7 +143,7 @@ const About = () => {
                   ].map((fact, index) => (
                     <motion.div
                       key={index}
-                      className={`flex items-center gap-3 p-3 rounded-xl ${
+                      className={`flex items-center gap-3 p-3 rounded-full ${
                         isDark 
                           ? 'bg-white/5' 
                           : 'bg-emerald-800/30'
