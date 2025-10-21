@@ -2,12 +2,14 @@ import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { useTheme } from '../../hooks/useTheme';
 
-const LoadingScreen = ({ onComplete }) => {
+const LoadingScreen = ({ onComplete, onLoadingComplete }) => {
   const { isDark } = useTheme();
   const loadingRef = useRef(null);
   const progressRef = useRef(null);
   const textRef = useRef(null);
   const [progress, setProgress] = useState(0);
+
+  const handleComplete = onLoadingComplete || onComplete;
 
   useEffect(() => {
     const tl = gsap.timeline();
@@ -35,7 +37,7 @@ const LoadingScreen = ({ onComplete }) => {
       duration: 0.8,
       ease: 'power2.inOut',
       onComplete: () => {
-        onComplete();
+        if (handleComplete) handleComplete();
       }
     });
 

@@ -1,145 +1,177 @@
-import { motion } from 'framer-motion';
+import { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useTheme } from '../hooks/useTheme';
-import VariableProximity from './ui/VariableProximity';
+import { BentoGrid, BentoCard, BentoTitle, BentoDescription } from './ui/BentoGrid';
+import { FaCode, FaGraduationCap, FaLinux, FaRocket } from 'react-icons/fa';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Homepage = () => {
   const { isDark } = useTheme();
+  const heroRef = useRef(null);
+  const titleRef = useRef(null);
+  const subtitleRef = useRef(null);
+  const profileRef = useRef(null);
 
-  const scrollToProjects = () => {
-    const projectsSection = document.getElementById('projects');
-    if (projectsSection) {
-      projectsSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Hero animations
+      gsap.from(profileRef.current, {
+        scale: 0,
+        opacity: 0,
+        duration: 1,
+        ease: 'back.out(1.7)',
+      });
+
+      gsap.from(titleRef.current, {
+        opacity: 0,
+        y: 50,
+        duration: 1,
+        delay: 0.3,
+        ease: 'power3.out',
+      });
+
+      gsap.from(subtitleRef.current, {
+        opacity: 0,
+        y: 30,
+        duration: 0.8,
+        delay: 0.6,
+        ease: 'power2.out',
+      });
+
+      // Floating animation for profile
+      gsap.to(profileRef.current, {
+        y: -10,
+        duration: 2,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut',
+      });
+    }, heroRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
     <section 
-      id="home" 
-      className="min-h-screen flex items-center justify-center relative overflow-hidden z-20"
+      ref={heroRef}
+      className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden py-20 px-4"
       aria-label="Home section"
     >
-      {/* Main Content */}
-      <div className="container mx-auto px-6 z-30 text-center relative">
+      {/* Hero Content */}
+      <div className="container mx-auto max-w-7xl z-30 text-center mb-16">
         {/* Profile Image */}
-        <motion.div
-          className="mb-8"
-          initial={{ scale: 0, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ delay: 0.2, duration: 0.8, ease: "easeOut" }}
-        >
-          <div className="w-32 h-32 mx-auto rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 dark:from-purple-400 dark:to-purple-600 p-1 shadow-2xl hover:shadow-emerald-500/25 dark:hover:shadow-purple-500/25 transition-all duration-300">
-            <motion.img 
+        <div ref={profileRef} className="mb-8">
+          <div className={`w-40 h-40 mx-auto rounded-full p-1 shadow-2xl ${
+            isDark 
+              ? 'bg-gradient-to-br from-purple-400 to-purple-600' 
+              : 'bg-gradient-to-br from-emerald-400 to-emerald-600'
+          }`}>
+            <img 
               src="/PofileNew.jpeg" 
               alt="Vikash Gupta - Profile photo" 
               className="w-full h-full rounded-full object-cover"
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.3 }}
             />
           </div>
-        </motion.div>
+        </div>
 
-        {/* Animated Title */}
-        <motion.div
-          className="mb-8 px-4 md:px-8"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.8 }}
+        {/* Title */}
+        <h1 
+          ref={titleRef}
+          className={`text-4xl md:text-6xl lg:text-7xl font-bold mb-6 ${
+            isDark ? 'text-white' : 'text-emerald-950'
+          }`}
         >
-          <VariableProximity 
-            text="Hi, I'm Vikash Gupta — CSE Student at St. Thomas College of Engineering and Technology & Developer."
-            className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold leading-relaxed text-center max-w-7xl mx-auto ${
-              isDark ? 'text-white' : 'text-emerald-950'
-            }`}
-            isDark={isDark}
-          />
-        </motion.div>
+          Hi, I'm <span className={`${
+            isDark 
+              ? 'bg-gradient-to-r from-purple-400 to-pink-400' 
+              : 'bg-gradient-to-r from-emerald-500 to-cyan-500'
+          } bg-clip-text text-transparent`}>
+            Vikash Gupta
+          </span>
+        </h1>
 
         {/* Subtitle */}
-        <motion.p
-          className={`text-lg md:text-xl mb-12 max-w-2xl mx-auto ${
-            isDark ? 'text-white/80' : 'text-emerald-800'
+        <p
+          ref={subtitleRef}
+          className={`text-xl md:text-2xl mb-12 max-w-3xl mx-auto ${
+            isDark ? 'text-gray-300' : 'text-gray-700'
           }`}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8, duration: 0.6 }}
         >
           CSE Student at St. Thomas College of Engineering and Technology, passionate about creating 
-          innovative solutions and exploring the world of web development.
-        </motion.p>
+          innovative solutions and exploring modern technologies
+        </p>
+      </div>
 
-        {/* CTA Button */}
-        <motion.button
-          onClick={scrollToProjects}
-          className={`group relative z-50 px-8 py-4 backdrop-blur-md border font-semibold rounded-2xl transition-all duration-300 shadow-2xl overflow-hidden ${
-            isDark 
-              ? 'bg-white/10 border-white/20 text-white hover:bg-white/20' 
-              : 'bg-emerald-900/80 border-emerald-700/40 text-emerald-50 hover:bg-emerald-800/90'
-          }`}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1, duration: 0.6 }}
-          whileHover={{ 
-            scale: 1.05,
-            boxShadow: "0 20px 40px rgba(0,0,0,0.3)"
-          }}
-          whileTap={{ scale: 0.95 }}
-          aria-label="Navigate to projects section"
-        >
-          <span className="flex items-center gap-3 relative z-10">
-            Check My Work
-            <motion.span
-              className="text-xl"
-              animate={{ x: [0, 5, 0] }}
-              transition={{ 
-                repeat: Infinity, 
-                duration: 1.5,
-                ease: "easeInOut"
-              }}
+      {/* Bento Grid Highlights */}
+      <div className="container mx-auto max-w-7xl px-4">
+        <BentoGrid className="grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+          <BentoCard size="medium">
+            <FaCode className={`text-5xl mb-4 ${isDark ? 'text-cyan-400' : 'text-cyan-600'}`} />
+            <BentoTitle>Full Stack Developer</BentoTitle>
+            <BentoDescription>
+              Building modern web applications with React, Node.js, and cutting-edge technologies
+            </BentoDescription>
+            <Link 
+              to="/projects" 
+              className={`mt-4 inline-block text-sm font-semibold ${
+                isDark ? 'text-cyan-400 hover:text-cyan-300' : 'text-cyan-600 hover:text-cyan-700'
+              }`}
             >
-              →
-            </motion.span>
-          </span>
-          
-          {/* Button glow effect */}
-          <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-emerald-500/20 to-emerald-600/20 dark:from-purple-500/20 dark:to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl" />
-          
-          {/* Button ripple effect */}
-          <motion.div
-            className="absolute inset-0 rounded-2xl"
-            style={{
-              background: isDark 
-                ? 'radial-gradient(circle, rgba(168,85,247,0.3) 0%, transparent 70%)'
-                : 'radial-gradient(circle, rgba(5,150,105,0.3) 0%, transparent 70%)'
-            }}
-            initial={{ scale: 0, opacity: 0 }}
-            whileHover={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.4 }}
-          />
-        </motion.button>
+              View Projects →
+            </Link>
+          </BentoCard>
 
-        {/* Floating elements */}
-        <div className="absolute inset-0 pointer-events-none">
-          {[...Array(6)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-2 h-2 bg-white/20 rounded-full"
-              style={{
-                left: `${20 + (i * 15)}%`,
-                top: `${30 + (i * 10)}%`,
-              }}
-              animate={{
-                y: [0, -20, 0],
-                opacity: [0.2, 0.8, 0.2],
-              }}
-              transition={{
-                duration: 3 + i * 0.5,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: i * 0.2,
-              }}
-            />
-          ))}
-        </div>
+          <BentoCard size="medium">
+            <FaGraduationCap className={`text-5xl mb-4 ${isDark ? 'text-purple-400' : 'text-purple-600'}`} />
+            <BentoTitle>CSE Student</BentoTitle>
+            <BentoDescription>
+              Studying Computer Science at STCET, learning algorithms, data structures, and system design
+            </BentoDescription>
+            <Link 
+              to="/about" 
+              className={`mt-4 inline-block text-sm font-semibold ${
+                isDark ? 'text-purple-400 hover:text-purple-300' : 'text-purple-600 hover:text-purple-700'
+              }`}
+            >
+              Learn More →
+            </Link>
+          </BentoCard>
+
+          <BentoCard size="medium">
+            <FaLinux className={`text-5xl mb-4 ${isDark ? 'text-green-400' : 'text-green-600'}`} />
+            <BentoTitle>OS Enthusiast</BentoTitle>
+            <BentoDescription>
+              Exploring operating systems with EndeavourOS, learning Linux internals, and building my own OS
+            </BentoDescription>
+            <Link 
+              to="/os-journey" 
+              className={`mt-4 inline-block text-sm font-semibold ${
+                isDark ? 'text-green-400 hover:text-green-300' : 'text-green-600 hover:text-green-700'
+              }`}
+            >
+              My OS Journey →
+            </Link>
+          </BentoCard>
+
+          <BentoCard size="medium">
+            <FaRocket className={`text-5xl mb-4 ${isDark ? 'text-red-400' : 'text-red-600'}`} />
+            <BentoTitle>Let's Connect</BentoTitle>
+            <BentoDescription>
+              Interested in collaborating? Let's work together on exciting projects and innovative ideas
+            </BentoDescription>
+            <Link 
+              to="/contact" 
+              className={`mt-4 inline-block text-sm font-semibold ${
+                isDark ? 'text-red-400 hover:text-red-300' : 'text-red-600 hover:text-red-700'
+              }`}
+            >
+              Get in Touch →
+            </Link>
+          </BentoCard>
+        </BentoGrid>
       </div>
     </section>
   );

@@ -1,68 +1,69 @@
 import { useState } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { VscHome, VscArchive, VscAccount, VscSettingsGear, VscMenu, VscClose } from 'react-icons/vsc';
+import { FaLinux } from 'react-icons/fa';
 import { useTheme } from '../../hooks/useTheme';
 
-const NavItem = ({ icon: Icon, label, isActive, onClick, isMobile = false, isDock = false }) => {
+const NavItem = ({ to, icon: Icon, label, isActive, isMobile = false, isDock = false, onClick }) => {
   if (isDock) {
     return (
-      <motion.button
-        onClick={onClick}
-        className={`relative p-3 rounded-xl transition-all duration-300 group ${
-          isActive 
-            ? 'bg-emerald-500/30 dark:bg-purple-500/30 text-emerald-900 dark:text-purple-300 shadow-lg' 
-            : 'text-emerald-700 dark:text-white/80 hover:bg-emerald-400/20 dark:hover:bg-white/20'
-        }`}
-        whileHover={{ scale: 1.15, y: -2 }}
-        whileTap={{ scale: 0.95 }}
-        title={label}
-      >
-        <Icon size={22} className="transition-colors duration-200" />
-        {isActive && (
-          <motion.div
-            className="absolute -left-1 top-1/2 -translate-y-1/2 w-1 h-6 bg-emerald-600 dark:bg-purple-400 rounded-full"
-            layoutId="activeIndicator"
-            transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-          />
-        )}
-      </motion.button>
+      <NavLink to={to} onClick={onClick}>
+        <motion.div
+          className={`relative p-3 rounded-xl transition-all duration-300 group ${
+            isActive 
+              ? 'bg-emerald-500/30 dark:bg-purple-500/30 text-emerald-900 dark:text-purple-300 shadow-lg' 
+              : 'text-emerald-700 dark:text-white/80 hover:bg-emerald-400/20 dark:hover:bg-white/20'
+          }`}
+          whileHover={{ scale: 1.15, y: -2 }}
+          whileTap={{ scale: 0.95 }}
+          title={label}
+        >
+          <Icon size={22} className="transition-colors duration-200" />
+          {isActive && (
+            <motion.div
+              className="absolute -left-1 top-1/2 -translate-y-1/2 w-1 h-6 bg-emerald-600 dark:bg-purple-400 rounded-full"
+              layoutId="activeIndicator"
+              transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+            />
+          )}
+        </motion.div>
+      </NavLink>
     );
   }
 
   return (
-    <motion.button
-      onClick={onClick}
-      className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 text-left ${isActive
-        ? 'bg-emerald-600/40 dark:bg-purple-500/20 text-emerald-950 dark:text-purple-400 font-semibold shadow-md'
-        : 'text-emerald-800 dark:text-white/70 hover:text-emerald-900 dark:hover:text-white hover:bg-emerald-500/20 dark:hover:bg-white/10'
-        } ${isMobile ? 'justify-center w-auto' : 'justify-start w-full'}`}
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
-    >
-      <Icon size={20} className="flex-shrink-0" />
-      {!isMobile && <span className="font-medium whitespace-nowrap">{label}</span>}
-    </motion.button>
+    <NavLink to={to} onClick={onClick}>
+      <motion.div
+        className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 text-left ${isActive
+          ? 'bg-emerald-600/40 dark:bg-purple-500/20 text-emerald-950 dark:text-purple-400 font-semibold shadow-md'
+          : 'text-emerald-800 dark:text-white/70 hover:text-emerald-900 dark:hover:text-white hover:bg-emerald-500/20 dark:hover:bg-white/10'
+          } ${isMobile ? 'justify-center w-auto' : 'justify-start w-full'}`}
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
+      >
+        <Icon size={20} className="flex-shrink-0" />
+        {!isMobile && <span className="font-medium whitespace-nowrap">{label}</span>}
+      </motion.div>
+    </NavLink>
   );
 };
 
-const ResponsiveNavigation = ({ activeSection, onNavigate }) => {
+const ResponsiveNavigation = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { isDark } = useTheme();
+  const location = useLocation();
 
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-    onNavigate(sectionId);
-    setIsMobileMenuOpen(false); // Close mobile menu after navigation
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
   };
 
   const navItems = [
-    { id: 'home', icon: VscHome, label: 'Home' },
-    { id: 'about', icon: VscAccount, label: 'About' },
-    { id: 'projects', icon: VscArchive, label: 'Projects' },
-    { id: 'contact', icon: VscSettingsGear, label: 'Contact' },
+    { path: '/', icon: VscHome, label: 'Home' },
+    { path: '/about', icon: VscAccount, label: 'About' },
+    { path: '/projects', icon: VscArchive, label: 'Projects' },
+    { path: '/os-journey', icon: FaLinux, label: 'OS Journey' },
+    { path: '/contact', icon: VscSettingsGear, label: 'Contact' },
   ];
 
   return (
@@ -101,11 +102,11 @@ const ResponsiveNavigation = ({ activeSection, onNavigate }) => {
           
           {navItems.map((item) => (
             <NavItem
-              key={item.id}
+              key={item.path}
+              to={item.path}
               icon={item.icon}
               label={item.label}
-              isActive={activeSection === item.id}
-              onClick={() => scrollToSection(item.id)}
+              isActive={location.pathname === item.path}
               isDock={true}
             />
           ))}
@@ -185,12 +186,12 @@ const ResponsiveNavigation = ({ activeSection, onNavigate }) => {
                   <div className="space-y-2">
                     {navItems.map((item) => (
                       <NavItem
-                        key={item.id}
+                        key={item.path}
+                        to={item.path}
                         icon={item.icon}
                         label={item.label}
-                        isActive={activeSection === item.id}
-                        onClick={() => scrollToSection(item.id)}
-                        isMobile={false}
+                        isActive={location.pathname === item.path}
+                        onClick={closeMobileMenu}
                       />
                     ))}
                   </div>
@@ -215,11 +216,11 @@ const ResponsiveNavigation = ({ activeSection, onNavigate }) => {
         }`}>
           {navItems.map((item) => (
             <NavItem
-              key={`tablet-${item.id}`}
+              key={`tablet-${item.path}`}
+              to={item.path}
               icon={item.icon}
               label={item.label}
-              isActive={activeSection === item.id}
-              onClick={() => scrollToSection(item.id)}
+              isActive={location.pathname === item.path}
               isDock={true}
             />
           ))}
