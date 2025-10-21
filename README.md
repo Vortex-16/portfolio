@@ -73,27 +73,34 @@ Built files will be output to the /dist folder.
 
 ---
 
-📁 Project Structure
+<details>
+<summary>📁 Project Structure</summary>
 
-src/
-├── components/            # Main sections
-│   ├── Homepage.jsx       # Hero section
-│   ├── Projects.jsx       # GitHub project showcase
-│   ├── About.jsx          # About section
-│   └── Contact.jsx        # Contact form
-├── components/ui/         # Reusable components
-│   ├── HyperspeedBackground.jsx
-│   ├── VariableProximity.jsx
-│   ├── Dock.jsx
-│   ├── Carousel.jsx
-│   └── ThemeToggle.jsx
+  src/
+├── components/ # Main sections
+│ ├── Homepage.jsx # Hero section
+│ ├── Projects.jsx # GitHub project showcase
+│ ├── About.jsx # About section
+│ └── Contact.jsx # Contact form
+
+├── components/ui/ # Reusable UI components
+│ ├── HyperspeedBackground.jsx
+│ ├── VariableProximity.jsx
+│ ├── Dock.jsx
+│ ├── Carousel.jsx
+│ └── ThemeToggle.jsx
+
 ├── hooks/
-│   └── useTheme.jsx       # Theme logic
+│ └── useTheme.jsx # Theme management logic
+
 ├── utils/
-│   └── github.js          # GitHub API logic
-├── App.jsx                # Root component
-├── main.jsx               # Entry point
-└── index.css              # Global styles
+│ └── github.js # GitHub API integration
+
+├── App.jsx # Root component
+├── main.jsx # Application entry point
+└── index.css # Global styles
+
+</details>
 
 
 ---
