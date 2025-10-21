@@ -96,13 +96,98 @@ const Homepage = () => {
         {/* Subtitle */}
         <p
           ref={subtitleRef}
-          className={`text-xl md:text-2xl mb-12 max-w-3xl mx-auto ${
+          className={`text-xl md:text-2xl mb-8 max-w-3xl mx-auto ${
             isDark ? 'text-gray-300' : 'text-gray-700'
           }`}
         >
-          CSE Student at St. Thomas College of Engineering and Technology, passionate about creating 
-          innovative solutions and exploring modern technologies
+          CSE Student at St. Thomas College of Engineering and Technology
         </p>
+
+        {/* Quick Info Cards */}
+        <div className="flex flex-wrap justify-center gap-4 mb-8 max-w-4xl mx-auto">
+          <div className={`px-6 py-3 rounded-full backdrop-blur-md border ${
+            isDark 
+              ? 'bg-purple-500/10 border-purple-500/30' 
+              : 'bg-emerald-500/10 border-emerald-500/30'
+          }`}>
+            <span className={`font-semibold ${isDark ? 'text-purple-300' : 'text-emerald-700'}`}>
+              💻 Full Stack Developer
+            </span>
+          </div>
+          <div className={`px-6 py-3 rounded-full backdrop-blur-md border ${
+            isDark 
+              ? 'bg-blue-500/10 border-blue-500/30' 
+              : 'bg-blue-500/10 border-blue-500/30'
+          }`}>
+            <span className={`font-semibold ${isDark ? 'text-blue-300' : 'text-blue-700'}`}>
+              🐧 Linux Enthusiast
+            </span>
+          </div>
+          <div className={`px-6 py-3 rounded-full backdrop-blur-md border ${
+            isDark 
+              ? 'bg-pink-500/10 border-pink-500/30' 
+              : 'bg-pink-500/10 border-pink-500/30'
+          }`}>
+            <span className={`font-semibold ${isDark ? 'text-pink-300' : 'text-pink-700'}`}>
+              🚀 OS Explorer
+            </span>
+          </div>
+        </div>
+
+        {/* Bio */}
+        <p className={`text-base md:text-lg max-w-2xl mx-auto mb-8 ${
+          isDark ? 'text-gray-400' : 'text-gray-600'
+        }`}>
+          Passionate about building innovative web applications and exploring the depths of operating systems. 
+          Currently learning with <span className={`font-semibold ${isDark ? 'text-purple-400' : 'text-emerald-600'}`}>EndeavourOS</span> 
+          {' '}to understand Linux internals and working towards creating my own OS.
+        </p>
+
+        {/* Stats */}
+        <div className="grid grid-cols-3 gap-4 max-w-2xl mx-auto">
+          <div className={`p-4 rounded-xl backdrop-blur-md border ${
+            isDark 
+              ? 'bg-white/5 border-white/10' 
+              : 'bg-white/50 border-emerald-200/50'
+          }`}>
+            <div className={`text-3xl font-bold mb-1 ${
+              isDark ? 'text-purple-400' : 'text-emerald-600'
+            }`}>
+              10+
+            </div>
+            <div className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+              Projects
+            </div>
+          </div>
+          <div className={`p-4 rounded-xl backdrop-blur-md border ${
+            isDark 
+              ? 'bg-white/5 border-white/10' 
+              : 'bg-white/50 border-emerald-200/50'
+          }`}>
+            <div className={`text-3xl font-bold mb-1 ${
+              isDark ? 'text-purple-400' : 'text-emerald-600'
+            }`}>
+              3+
+            </div>
+            <div className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+              Years Coding
+            </div>
+          </div>
+          <div className={`p-4 rounded-xl backdrop-blur-md border ${
+            isDark 
+              ? 'bg-white/5 border-white/10' 
+              : 'bg-white/50 border-emerald-200/50'
+          }`}>
+            <div className={`text-3xl font-bold mb-1 ${
+              isDark ? 'text-purple-400' : 'text-emerald-600'
+            }`}>
+              ∞
+            </div>
+            <div className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+              Learning
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Bento Grid Highlights */}
