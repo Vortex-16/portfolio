@@ -336,7 +336,7 @@ const About = () => {
                     ].map((skill, index) => (
                       <motion.div
                         key={skill.name}
-                        className={`p-4 rounded-2xl border ${
+                        className={`p-4 rounded-full border ${
                           isDark 
                             ? 'bg-white/5 border-white/10' 
                             : 'bg-emerald-800/30 border-emerald-600/30'
