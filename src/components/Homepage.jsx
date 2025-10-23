@@ -57,243 +57,179 @@ const Homepage = () => {
   return (
     <section 
       ref={heroRef}
-      className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden py-20 px-4"
+      className="min-h-screen flex flex-col relative overflow-hidden"
       aria-label="Home section"
     >
-      {/* Decorative Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Animated rings */}
-        {[...Array(3)].map((_, i) => (
-          <div
-            key={`ring-${i}`}
-            className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border ${
-              isDark ? 'border-purple-500/20' : 'border-emerald-500/20'
-            }`}
-            style={{
-              width: `${(i + 1) * 300}px`,
-              height: `${(i + 1) * 300}px`,
-              animation: `spin ${20 + i * 5}s linear infinite`,
-            }}
-          />
-        ))}
-        
-        {/* Floating shapes */}
-        <div className={`absolute top-20 left-20 w-20 h-20 rounded-lg ${
-          isDark ? 'bg-purple-500/10' : 'bg-emerald-500/10'
-        } backdrop-blur-sm rotate-45 animate-pulse`} 
-        style={{ animationDuration: '3s' }} />
-        
-        <div className={`absolute bottom-32 right-32 w-16 h-16 rounded-full ${
-          isDark ? 'bg-pink-500/10' : 'bg-cyan-500/10'
-        } backdrop-blur-sm animate-bounce`}
-        style={{ animationDuration: '4s' }} />
-        
-        <div className={`absolute top-1/3 right-20 w-12 h-12 ${
-          isDark ? 'bg-violet-500/10' : 'bg-teal-500/10'
-        } backdrop-blur-sm animate-pulse`}
-        style={{ 
-          clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)',
-          animationDuration: '2.5s'
-        }} />
-      </div>
+      {/* Hero Section - Two Column Layout */}
+      <div className="flex-1 flex items-center justify-center py-12 lg:py-0 mt-32 lg:mt-24">
+        <div className="container mx-auto max-w-7xl px-6 lg:px-12 lg:pl-24">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+            {/* Left Column - Text Content */}
+            <div ref={titleRef} className="space-y-5 lg:space-y-6 order-2 lg:order-1">
+              <h1 className={`text-5xl sm:text-6xl lg:text-7xl font-normal leading-[1.1] ${
+                isDark ? 'text-white' : 'text-gray-900'
+              }`}>
+                My name<br />
+                <span className="font-bold">is Vikash</span>
+              </h1>
+              
+              <p className={`text-sm sm:text-base lg:text-base leading-relaxed ${
+                isDark ? 'text-gray-400' : 'text-gray-600'
+              }`}>
+                I am a professional programmer with more than<br />
+                3 years of experience
+              </p>
 
-      {/* Hero Content */}
-      <div className="container mx-auto max-w-7xl z-30 text-center mb-16">
-        {/* Profile Image */}
-        <div ref={profileRef} className="mb-8">
-          <div className={`w-40 h-40 mx-auto rounded-full p-1 shadow-2xl ${
-            isDark 
-              ? 'bg-gradient-to-br from-purple-400 to-purple-600' 
-              : 'bg-gradient-to-br from-emerald-400 to-emerald-600'
-          }`}>
-            <img 
-              src="/PofileNew.jpeg" 
-              alt="Vikash Gupta - Profile photo" 
-              className="w-full h-full rounded-full object-cover"
-            />
-          </div>
-        </div>
+              <div className="pt-2">
+                <Link 
+                  to="/about"
+                  className={`inline-block px-8 py-3 text-white font-medium rounded-full text-sm transition-all duration-300 ${
+                    isDark 
+                      ? 'bg-purple-600 hover:bg-purple-700' 
+                      : 'bg-orange-500 hover:bg-orange-600'
+                  }`}
+                >
+                  About Me
+                </Link>
+              </div>
 
-        {/* Title */}
-        <h1 
-          ref={titleRef}
-          className={`text-4xl md:text-6xl lg:text-7xl font-bold mb-6 ${
-            isDark ? 'text-white' : 'text-emerald-950'
-          }`}
-        >
-          Hi, I'm <span className={`${
-            isDark 
-              ? 'bg-gradient-to-r from-purple-400 to-pink-400' 
-              : 'bg-gradient-to-r from-emerald-500 to-cyan-500'
-          } bg-clip-text text-transparent`}>
-            Vikash Gupta
-          </span>
-        </h1>
-
-        {/* Subtitle */}
-        <p
-          ref={subtitleRef}
-          className={`text-xl md:text-2xl mb-8 max-w-3xl mx-auto ${
-            isDark ? 'text-gray-300' : 'text-gray-700'
-          }`}
-        >
-          CSE Student at St. Thomas College of Engineering and Technology
-        </p>
-
-        {/* Quick Info Cards */}
-        <div className="flex flex-wrap justify-center gap-4 mb-8 max-w-4xl mx-auto">
-          <div className={`px-6 py-3 rounded-full backdrop-blur-md border ${
-            isDark 
-              ? 'bg-purple-500/10 border-purple-500/30' 
-              : 'bg-emerald-500/10 border-emerald-500/30'
-          }`}>
-            <span className={`font-semibold ${isDark ? 'text-purple-300' : 'text-emerald-700'}`}>
-              💻 Full Stack Developer
-            </span>
-          </div>
-          <div className={`px-6 py-3 rounded-full backdrop-blur-md border ${
-            isDark 
-              ? 'bg-blue-500/10 border-blue-500/30' 
-              : 'bg-blue-500/10 border-blue-500/30'
-          }`}>
-            <span className={`font-semibold ${isDark ? 'text-blue-300' : 'text-blue-700'}`}>
-              🐧 Linux Enthusiast
-            </span>
-          </div>
-          <div className={`px-6 py-3 rounded-full backdrop-blur-md border ${
-            isDark 
-              ? 'bg-pink-500/10 border-pink-500/30' 
-              : 'bg-pink-500/10 border-pink-500/30'
-          }`}>
-            <span className={`font-semibold ${isDark ? 'text-pink-300' : 'text-pink-700'}`}>
-              🚀 OS Explorer
-            </span>
-          </div>
-        </div>
-
-        {/* Bio */}
-        <p className={`text-base md:text-lg max-w-2xl mx-auto mb-8 ${
-          isDark ? 'text-gray-400' : 'text-gray-600'
-        }`}>
-          Passionate about building innovative web applications and exploring the depths of operating systems. 
-          Currently learning with <span className={`font-semibold ${isDark ? 'text-purple-400' : 'text-emerald-600'}`}>EndeavourOS</span> 
-          {' '}to understand Linux internals and working towards creating my own OS.
-        </p>
-
-        {/* Stats */}
-        <div className="grid grid-cols-3 gap-4 max-w-2xl mx-auto">
-          <div className={`p-4 rounded-xl backdrop-blur-md border ${
-            isDark 
-              ? 'bg-white/5 border-white/10' 
-              : 'bg-white/50 border-emerald-200/50'
-          }`}>
-            <div className={`text-3xl font-bold mb-1 ${
-              isDark ? 'text-purple-400' : 'text-emerald-600'
-            }`}>
-              10+
+              {/* Technology Tags */}
+              <div ref={subtitleRef} className="flex flex-wrap gap-3 pt-3">
+                <span className={`px-5 py-2 text-white font-medium rounded text-sm ${
+                  isDark ? 'bg-purple-600' : 'bg-orange-500'
+                }`}>
+                  c
+                </span>
+                <span className={`px-5 py-2 text-white font-medium rounded text-sm ${
+                  isDark ? 'bg-purple-600' : 'bg-orange-500'
+                }`}>
+                  java
+                </span>
+                <span className={`px-5 py-2 font-medium rounded text-sm ${
+                  isDark 
+                    ? 'bg-gray-800 text-white' 
+                    : 'bg-gray-800 text-white'
+                }`}>
+                  javascript
+                </span>
+                <span className={`px-5 py-2 font-medium rounded text-sm ${
+                  isDark 
+                    ? 'bg-gray-200 text-gray-900' 
+                    : 'bg-gray-200 text-gray-900'
+                }`}>
+                  python
+                </span>
+              </div>
             </div>
-            <div className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-              Projects
-            </div>
-          </div>
-          <div className={`p-4 rounded-xl backdrop-blur-md border ${
-            isDark 
-              ? 'bg-white/5 border-white/10' 
-              : 'bg-white/50 border-emerald-200/50'
-          }`}>
-            <div className={`text-3xl font-bold mb-1 ${
-              isDark ? 'text-purple-400' : 'text-emerald-600'
-            }`}>
-              3+
-            </div>
-            <div className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-              Years Coding
-            </div>
-          </div>
-          <div className={`p-4 rounded-xl backdrop-blur-md border ${
-            isDark 
-              ? 'bg-white/5 border-white/10' 
-              : 'bg-white/50 border-emerald-200/50'
-          }`}>
-            <div className={`text-3xl font-bold mb-1 ${
-              isDark ? 'text-purple-400' : 'text-emerald-600'
-            }`}>
-              ∞
-            </div>
-            <div className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-              Learning
+
+            {/* Right Column - Profile Image */}
+            <div ref={profileRef} className="relative flex justify-center lg:justify-end items-center order-1 lg:order-2">
+              <div className="relative w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] lg:w-[380px] lg:h-[380px]">
+                <div 
+                  className={`absolute top-0 right-0 w-full h-full -z-10 rounded-full overflow-hidden ${
+                    isDark ? 'bg-purple-600' : 'bg-orange-500'
+                  }`}
+                  style={{
+                    clipPath: 'polygon(30% 0%, 100% 0%, 100% 100%, 0% 70%)'
+                  }}
+                />
+                
+                {/* Profile Image */}
+                <div className="relative z-10 w-full h-full">
+                  <img 
+                    src="/PofileNew.jpeg" 
+                    alt="Vikash Gupta - Profile photo" 
+                    className="w-full h-full rounded-full object-cover shadow-2xl"
+                  />
+                  
+                  {/* Experience Badge */}
+                  <div className={`absolute bottom-3 left-3 sm:bottom-4 sm:left-4 lg:bottom-5 lg:left-5 px-4 py-3 sm:px-5 sm:py-3 rounded-xl sm:rounded-2xl shadow-2xl ${
+                    isDark ? 'bg-gray-900' : 'bg-gray-900'
+                  }`}>
+                    <div className="text-white text-2xl sm:text-3xl font-bold leading-tight">3+</div>
+                    <div className="text-gray-400 text-xs sm:text-sm">years experience</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Bento Grid Highlights */}
-      <div className="container mx-auto max-w-7xl px-4">
-        <BentoGrid className="grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
-          <BentoCard size="medium">
-            <FaCode className={`text-5xl mb-4 ${isDark ? 'text-cyan-400' : 'text-cyan-600'}`} />
-            <BentoTitle>Full Stack Developer</BentoTitle>
-            <BentoDescription>
-              Building modern web applications with React, Node.js, and cutting-edge technologies
-            </BentoDescription>
-            <Link 
-              to="/projects" 
-              className={`mt-4 inline-block text-sm font-semibold ${
-                isDark ? 'text-cyan-400 hover:text-cyan-300' : 'text-cyan-600 hover:text-cyan-700'
-              }`}
-            >
-              View Projects →
-            </Link>
-          </BentoCard>
+      <div className="py-16 lg:py-20 px-6 lg:px-12 lg:pl-24 mt-12 lg:mt-20">
+        <div className="container mx-auto max-w-7xl">
+        
+          {/* Bento Grid Highlights */}
+          <BentoGrid className="grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
+            <BentoCard size="medium">
+              <FaCode className={`text-4xl lg:text-5xl mb-3 lg:mb-4 ${isDark ? 'text-cyan-400' : 'text-cyan-600'}`} />
+              <BentoTitle>Full Stack Developer</BentoTitle>
+              <BentoDescription>
+                Building modern web applications with React, Node.js, and cutting-edge technologies
+              </BentoDescription>
+              <Link 
+                to="/projects" 
+                className={`mt-3 lg:mt-4 inline-flex items-center gap-2 text-sm font-semibold group ${
+                  isDark ? 'text-cyan-400 hover:text-cyan-300' : 'text-cyan-600 hover:text-cyan-700'
+                }`}
+              >
+                View Projects 
+                <span className="transition-transform group-hover:translate-x-1">→</span>
+              </Link>
+            </BentoCard>
 
-          <BentoCard size="medium">
-            <FaGraduationCap className={`text-5xl mb-4 ${isDark ? 'text-purple-400' : 'text-purple-600'}`} />
-            <BentoTitle>CSE Student</BentoTitle>
-            <BentoDescription>
-              Studying Computer Science at STCET, learning algorithms, data structures, and system design
-            </BentoDescription>
-            <Link 
-              to="/about" 
-              className={`mt-4 inline-block text-sm font-semibold ${
-                isDark ? 'text-purple-400 hover:text-purple-300' : 'text-purple-600 hover:text-purple-700'
-              }`}
-            >
-              Learn More →
-            </Link>
-          </BentoCard>
+            <BentoCard size="medium">
+              <FaGraduationCap className={`text-4xl lg:text-5xl mb-3 lg:mb-4 ${isDark ? 'text-purple-400' : 'text-purple-600'}`} />
+              <BentoTitle>CSE Student</BentoTitle>
+              <BentoDescription>
+                Studying Computer Science at STCET, learning algorithms, data structures, and system design
+              </BentoDescription>
+              <Link 
+                to="/about" 
+                className={`mt-3 lg:mt-4 inline-flex items-center gap-2 text-sm font-semibold group ${
+                  isDark ? 'text-purple-400 hover:text-purple-300' : 'text-purple-600 hover:text-purple-700'
+                }`}
+              >
+                Learn More 
+                <span className="transition-transform group-hover:translate-x-1">→</span>
+              </Link>
+            </BentoCard>
 
-          <BentoCard size="medium">
-            <FaLinux className={`text-5xl mb-4 ${isDark ? 'text-green-400' : 'text-green-600'}`} />
-            <BentoTitle>OS Enthusiast</BentoTitle>
-            <BentoDescription>
-              Exploring operating systems with EndeavourOS, learning Linux internals, and building my own OS
-            </BentoDescription>
-            <Link 
-              to="/os-journey" 
-              className={`mt-4 inline-block text-sm font-semibold ${
-                isDark ? 'text-green-400 hover:text-green-300' : 'text-green-600 hover:text-green-700'
-              }`}
-            >
-              My OS Journey →
-            </Link>
-          </BentoCard>
+            <BentoCard size="medium">
+              <FaLinux className={`text-4xl lg:text-5xl mb-3 lg:mb-4 ${isDark ? 'text-green-400' : 'text-green-600'}`} />
+              <BentoTitle>OS Enthusiast</BentoTitle>
+              <BentoDescription>
+                Exploring operating systems with EndeavourOS, learning Linux internals, and building my own OS
+              </BentoDescription>
+              <Link 
+                to="/os-journey" 
+                className={`mt-3 lg:mt-4 inline-flex items-center gap-2 text-sm font-semibold group ${
+                  isDark ? 'text-green-400 hover:text-green-300' : 'text-green-600 hover:text-green-700'
+                }`}
+              >
+                My OS Journey 
+                <span className="transition-transform group-hover:translate-x-1">→</span>
+              </Link>
+            </BentoCard>
 
-          <BentoCard size="medium">
-            <FaRocket className={`text-5xl mb-4 ${isDark ? 'text-red-400' : 'text-red-600'}`} />
-            <BentoTitle>Let's Connect</BentoTitle>
-            <BentoDescription>
-              Interested in collaborating? Let's work together on exciting projects and innovative ideas
-            </BentoDescription>
-            <Link 
-              to="/contact" 
-              className={`mt-4 inline-block text-sm font-semibold ${
-                isDark ? 'text-red-400 hover:text-red-300' : 'text-red-600 hover:text-red-700'
-              }`}
-            >
-              Get in Touch →
-            </Link>
-          </BentoCard>
-        </BentoGrid>
+            <BentoCard size="medium">
+              <FaRocket className={`text-4xl lg:text-5xl mb-3 lg:mb-4 ${isDark ? 'text-red-400' : 'text-red-600'}`} />
+              <BentoTitle>Let's Connect</BentoTitle>
+              <BentoDescription>
+                Interested in collaborating? Let's work together on exciting projects and innovative ideas
+              </BentoDescription>
+              <Link 
+                to="/contact" 
+                className={`mt-3 lg:mt-4 inline-flex items-center gap-2 text-sm font-semibold group ${
+                  isDark ? 'text-red-400 hover:text-red-300' : 'text-red-600 hover:text-red-700'
+                }`}
+              >
+                Get in Touch 
+                <span className="transition-transform group-hover:translate-x-1">→</span>
+              </Link>
+            </BentoCard>
+          </BentoGrid>
+        </div>
       </div>
     </section>
   );

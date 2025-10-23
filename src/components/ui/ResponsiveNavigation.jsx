@@ -74,6 +74,7 @@ const ResponsiveNavigation = () => {
         initial={{ x: -100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ delay: 1, duration: 0.8, ease: 'easeOut' }}
+        style={{ marginTop: '-3rem' }}
       >
         <div className={`flex flex-col items-center gap-1 p-2 backdrop-blur-xl rounded-2xl border-2 shadow-2xl ${
           isDark 
