@@ -69,15 +69,15 @@ const Homepage = () => {
               <h1 className={`text-5xl sm:text-6xl lg:text-7xl font-normal leading-[1.1] ${
                 isDark ? 'text-white' : 'text-gray-900'
               }`}>
-                My name<br />
-                <span className="font-bold">is Vikash</span>
+                Hi<br />
+                <span className="font-bold">it's Vikash</span>
               </h1>
               
               <p className={`text-sm sm:text-base lg:text-base leading-relaxed ${
                 isDark ? 'text-gray-400' : 'text-gray-600'
               }`}>
-                I am a professional programmer with more than<br />
-                3 years of experience
+                Passionate about building innovative web applications and exploring the depths of operating systems. <br />
+                Currently learning with EndeavourOS to understand Linux internals and working towards creating my own OS.
               </p>
 
               <div className="pt-2">
