@@ -138,8 +138,9 @@ const About = () => {
                     { emoji: "☕", text: "Powered by coffee and curiosity" },
                     { emoji: "🌄", text: "Daylight developer" },
                     { emoji: "💻", text: "Code enthusiast" },
-                    { emoji: "📚", text: "Lifelong learner" },
+                    { emoji: "🏏", text: "Cricket lover" },
                     { emoji: "🎮", text: "Gamer in free time" },
+                    { emoji: "🌐", text: "Avid web explorer" },
                   ].map((fact, index) => (
                     <motion.div
                       key={index}

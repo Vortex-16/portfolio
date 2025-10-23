@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { ThemeProvider } from './hooks/useTheme';
 
 // Components
@@ -11,8 +11,23 @@ import About from './components/About';
 import Contact from './components/Contact';
 import OSJourney from './components/OSJourney';
 
+// Preload all route components
+const preloadRoutes = () => {
+  // These imports will be cached by the browser
+  import('./components/Homepage');
+  import('./components/About');
+  import('./components/Projects');
+  import('./components/Contact');
+  import('./components/OSJourney');
+};
+
 const AppContent = () => {
   const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Preload routes when app loads
+    preloadRoutes();
+  }, []);
 
   // Simulate loading
   if (isLoading) {

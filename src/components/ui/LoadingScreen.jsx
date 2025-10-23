@@ -8,38 +8,92 @@ const LoadingScreen = ({ onComplete, onLoadingComplete }) => {
   const progressRef = useRef(null);
   const textRef = useRef(null);
   const [progress, setProgress] = useState(0);
+  const [loadingText, setLoadingText] = useState('Initializing...');
 
   const handleComplete = onLoadingComplete || onComplete;
 
   useEffect(() => {
-    const tl = gsap.timeline();
+    // Preload all components and assets
+    const preloadAssets = async () => {
+      const assets = [
+        // Preload components by dynamically importing them
+        () => import('../Homepage'),
+        () => import('../About'),
+        () => import('../Projects'),
+        () => import('../Contact'),
+        () => import('../OSJourney'),
+        
+        // Preload any images or assets
+        () => new Promise((resolve) => {
+          const images = [
+            '/PofileNew.jpeg',
+            '/alpha.png',
+            // Add any other critical images
+          ];
+          let loadedCount = 0;
+          images.forEach(src => {
+            const img = new Image();
+            img.onload = img.onerror = () => {
+              loadedCount++;
+              if (loadedCount === images.length) resolve();
+            };
+            img.src = src;
+          });
+          if (images.length === 0) resolve();
+        })
+      ];
 
-    // Initial setup
-    gsap.set(loadingRef.current, { opacity: 1 });
-    gsap.set(progressRef.current, { width: '0%' });
+      const totalSteps = assets.length;
+      let completedSteps = 0;
 
-    // Loading animation
-    tl.to(progressRef.current, {
-      width: '100%',
-      duration: 3,
-      ease: 'power2.inOut',
-      onUpdate: function() {
-        setProgress(Math.round(this.progress() * 100));
+      // Load each asset with progress tracking
+      for (const loadAsset of assets) {
+        try {
+          setLoadingText(`Loading resources... (${completedSteps + 1}/${totalSteps})`);
+          await loadAsset();
+          completedSteps++;
+          const currentProgress = (completedSteps / totalSteps) * 80; // 80% for loading
+          setProgress(Math.round(currentProgress));
+        } catch (error) {
+          console.error('Error loading asset:', error);
+          completedSteps++;
+        }
       }
-    })
-    .to(textRef.current, {
-      opacity: 0,
-      y: -20,
-      duration: 0.5
-    }, '-=0.5')
-    .to(loadingRef.current, {
-      opacity: 0,
-      duration: 0.8,
-      ease: 'power2.inOut',
-      onComplete: () => {
-        if (handleComplete) handleComplete();
-      }
-    });
+
+      // Final 20% for animation
+      setLoadingText('Preparing your experience...');
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          setProgress(100);
+          resolve();
+        }, 500);
+      });
+    };
+
+    const startLoading = async () => {
+      await preloadAssets();
+      
+      // Animate out
+      const tl = gsap.timeline();
+      
+      tl.to(textRef.current, {
+        opacity: 0,
+        y: -20,
+        duration: 0.5
+      })
+      .to(loadingRef.current, {
+        opacity: 0,
+        duration: 0.8,
+        ease: 'power2.inOut',
+        onComplete: () => {
+          if (handleComplete) handleComplete();
+        }
+      });
+    };
+
+    startLoading();
+
+    startLoading();
 
     // Create floating particles
     const particles = [];
@@ -50,18 +104,20 @@ const LoadingScreen = ({ onComplete, onLoadingComplete }) => {
       } opacity-60`;
       particle.style.left = `${Math.random() * 100}%`;
       particle.style.top = `${Math.random() * 100}%`;
-      loadingRef.current.appendChild(particle);
-      particles.push(particle);
+      if (loadingRef.current) {
+        loadingRef.current.appendChild(particle);
+        particles.push(particle);
 
-      gsap.to(particle, {
-        y: `random(-50, 50)`,
-        x: `random(-50, 50)`,
-        rotation: 360,
-        duration: `random(2, 4)`,
-        repeat: -1,
-        yoyo: true,
-        ease: 'sine.inOut'
-      });
+        gsap.to(particle, {
+          y: `random(-50, 50)`,
+          x: `random(-50, 50)`,
+          rotation: 360,
+          duration: `random(2, 4)`,
+          repeat: -1,
+          yoyo: true,
+          ease: 'sine.inOut'
+        });
+      }
     }
 
     return () => {
@@ -71,25 +127,18 @@ const LoadingScreen = ({ onComplete, onLoadingComplete }) => {
         }
       });
     };
-  }, [isDark, onComplete]);
+  }, [isDark, handleComplete]);
 
-  const loadingTexts = [
-    'Loading amazing portfolio...',
-    'Preparing awesome animations...',
-    'Setting up interactive features...',
-    'Almost ready to code!'
-  ];
-
+  // Sync progress bar with progress state
   useEffect(() => {
-    const textInterval = setInterval(() => {
-      if (textRef.current) {
-        const randomText = loadingTexts[Math.floor(Math.random() * loadingTexts.length)];
-        textRef.current.textContent = randomText;
-      }
-    }, 800);
-
-    return () => clearInterval(textInterval);
-  }, []);
+    if (progressRef.current) {
+      gsap.to(progressRef.current, {
+        width: `${progress}%`,
+        duration: 0.3,
+        ease: 'power2.out'
+      });
+    }
+  }, [progress]);
 
   return (
     <div 
@@ -138,7 +187,7 @@ const LoadingScreen = ({ onComplete, onLoadingComplete }) => {
             isDark ? 'text-gray-300' : 'text-gray-600'
           }`}
         >
-          Loading amazing portfolio...
+          {loadingText}
         </div>
 
         {/* Animated Dots */}
