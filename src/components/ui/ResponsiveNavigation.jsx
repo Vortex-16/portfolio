@@ -12,8 +12,8 @@ const NavItem = ({ to, icon: Icon, label, isActive, isMobile = false, isDock = f
         <motion.div
           className={`relative p-3 rounded-xl transition-all duration-300 group ${
             isActive 
-              ? 'bg-emerald-500/30 dark:bg-purple-500/30 text-emerald-900 dark:text-purple-300 shadow-lg' 
-              : 'text-emerald-700 dark:text-white/80 hover:bg-emerald-400/20 dark:hover:bg-white/20'
+              ? 'bg-gray-800/90 dark:bg-purple-500/30 text-white dark:text-purple-300 shadow-lg' 
+              : 'text-gray-900 dark:text-white/80 hover:bg-gray-700/80 hover:text-white dark:hover:bg-white/20'
           }`}
           whileHover={{ scale: 1.15, y: -2 }}
           whileTap={{ scale: 0.95 }}
@@ -22,7 +22,7 @@ const NavItem = ({ to, icon: Icon, label, isActive, isMobile = false, isDock = f
           <Icon size={22} className="transition-colors duration-200" />
           {isActive && (
             <motion.div
-              className="absolute -left-1 top-1/2 -translate-y-1/2 w-1 h-6 bg-emerald-600 dark:bg-purple-400 rounded-full"
+              className="absolute -left-1 top-1/2 -translate-y-1/2 w-1 h-6 bg-gray-900 dark:bg-purple-400 rounded-full"
               layoutId="activeIndicator"
               transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
             />
@@ -36,8 +36,8 @@ const NavItem = ({ to, icon: Icon, label, isActive, isMobile = false, isDock = f
     <NavLink to={to} onClick={onClick}>
       <motion.div
         className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 text-left ${isActive
-          ? 'bg-emerald-600/40 dark:bg-purple-500/20 text-emerald-950 dark:text-purple-400 font-semibold shadow-md'
-          : 'text-emerald-800 dark:text-white/70 hover:text-emerald-900 dark:hover:text-white hover:bg-emerald-500/20 dark:hover:bg-white/10'
+          ? 'bg-gray-800/90 dark:bg-purple-500/20 text-white dark:text-purple-400 font-semibold shadow-md'
+          : 'text-gray-900 dark:text-white/70 hover:text-white hover:bg-gray-700/80 dark:hover:text-white dark:hover:bg-white/10'
           } ${isMobile ? 'justify-center w-auto' : 'justify-start w-full'}`}
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}

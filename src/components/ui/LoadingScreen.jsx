@@ -13,85 +13,121 @@ const LoadingScreen = ({ onComplete, onLoadingComplete }) => {
   const handleComplete = onLoadingComplete || onComplete;
 
   useEffect(() => {
-    // Preload all components and assets
+    // Preload all components and assets with detailed progress
     const preloadAssets = async () => {
-      const assets = [
-        // Preload components by dynamically importing them
-        () => import('../Homepage'),
-        () => import('../About'),
-        () => import('../Projects'),
-        () => import('../Contact'),
-        () => import('../OSJourney'),
-        
-        // Preload any images or assets
-        () => new Promise((resolve) => {
-          const images = [
-            '/PofileNew.jpeg',
-            '/alpha.png',
-            // Add any other critical images
-          ];
-          let loadedCount = 0;
-          images.forEach(src => {
-            const img = new Image();
-            img.onload = img.onerror = () => {
-              loadedCount++;
-              if (loadedCount === images.length) resolve();
-            };
-            img.src = src;
-          });
-          if (images.length === 0) resolve();
-        })
-      ];
+      setProgress(0);
+      
+      // Step 1: Load Homepage (0-15%)
+      setLoadingText('Loading Homepage...');
+      await import('../Homepage');
+      setProgress(15);
+      await new Promise(resolve => setTimeout(resolve, 200));
 
-      const totalSteps = assets.length;
-      let completedSteps = 0;
+      // Step 2: Load About page (15-25%)
+      setLoadingText('Loading About page...');
+      await import('../About');
+      setProgress(25);
+      await new Promise(resolve => setTimeout(resolve, 200));
 
-      // Load each asset with progress tracking
-      for (const loadAsset of assets) {
-        try {
-          setLoadingText(`Loading resources... (${completedSteps + 1}/${totalSteps})`);
-          await loadAsset();
-          completedSteps++;
-          const currentProgress = (completedSteps / totalSteps) * 80; // 80% for loading
-          setProgress(Math.round(currentProgress));
-        } catch (error) {
-          console.error('Error loading asset:', error);
-          completedSteps++;
-        }
+      // Step 3: Load Projects page with GitHub API (25-50%)
+      setLoadingText('Loading Projects...');
+      await import('../Projects');
+      // Preload GitHub data
+      try {
+        const response = await fetch('https://api.github.com/users/Vortex-16/repos?sort=updated&per_page=10');
+        await response.json();
+      } catch (error) {
+        console.log('GitHub API preload failed, will retry on page');
       }
+      setProgress(50);
+      await new Promise(resolve => setTimeout(resolve, 200));
 
-      // Final 20% for animation
-      setLoadingText('Preparing your experience...');
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          setProgress(100);
-          resolve();
-        }, 500);
+      // Step 4: Load Contact page (50-60%)
+      setLoadingText('Loading Contact page...');
+      await import('../Contact');
+      setProgress(60);
+      await new Promise(resolve => setTimeout(resolve, 200));
+
+      // Step 5: Load OS Journey page (60-70%)
+      setLoadingText('Loading OS Journey...');
+      await import('../OSJourney');
+      setProgress(70);
+      await new Promise(resolve => setTimeout(resolve, 200));
+
+      // Step 6: Load images and assets (70-85%)
+      setLoadingText('Loading assets...');
+      const images = [
+        '/PofileNew.jpeg',
+        '/alpha.png',
+        '/CantLaLa.mp3',
+        '/portfolio.mp3',
+        '/conci.mp3'
+      ];
+      
+      const imagePromises = images.map(src => {
+        return new Promise((resolve) => {
+          if (src.endsWith('.mp3')) {
+            // Preload audio
+            const audio = new Audio();
+            audio.preload = 'auto';
+            audio.oncanplaythrough = resolve;
+            audio.onerror = resolve;
+            audio.src = src;
+          } else {
+            // Preload image
+            const img = new Image();
+            img.onload = resolve;
+            img.onerror = resolve;
+            img.src = src;
+          }
+        });
       });
+
+      await Promise.all(imagePromises);
+      setProgress(85);
+      await new Promise(resolve => setTimeout(resolve, 200));
+
+      // Step 7: Initialize UI components (85-95%)
+      setLoadingText('Initializing UI components...');
+      await import('./MusicPlayer');
+      await import('./CustomCursor');
+      await import('./AnimatedBackground');
+      setProgress(95);
+      await new Promise(resolve => setTimeout(resolve, 200));
+
+      // Step 8: Final preparation (95-100%)
+      setLoadingText('Almost ready...');
+      await new Promise(resolve => setTimeout(resolve, 300));
+      setProgress(100);
+      await new Promise(resolve => setTimeout(resolve, 300));
     };
 
     const startLoading = async () => {
-      await preloadAssets();
-      
-      // Animate out
-      const tl = gsap.timeline();
-      
-      tl.to(textRef.current, {
-        opacity: 0,
-        y: -20,
-        duration: 0.5
-      })
-      .to(loadingRef.current, {
-        opacity: 0,
-        duration: 0.8,
-        ease: 'power2.inOut',
-        onComplete: () => {
-          if (handleComplete) handleComplete();
-        }
-      });
+      try {
+        await preloadAssets();
+        
+        // Animate out
+        const tl = gsap.timeline();
+        
+        tl.to(textRef.current, {
+          opacity: 0,
+          y: -20,
+          duration: 0.5
+        })
+        .to(loadingRef.current, {
+          opacity: 0,
+          duration: 0.8,
+          ease: 'power2.inOut',
+          onComplete: () => {
+            if (handleComplete) handleComplete();
+          }
+        });
+      } catch (error) {
+        console.error('Loading error:', error);
+        // Still complete even if there's an error
+        if (handleComplete) handleComplete();
+      }
     };
-
-    startLoading();
 
     startLoading();
 

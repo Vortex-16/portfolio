@@ -1,4 +1,5 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 import { useTheme } from '../hooks/useTheme';
 import CustomCursor from './ui/CustomCursor';
 import ScrollProgress from './ui/ScrollProgress';
@@ -12,6 +13,16 @@ import ResponsiveNavigation from './ui/ResponsiveNavigation';
 
 const Layout = () => {
   const { isDark } = useTheme();
+  const location = useLocation();
+
+  // Scroll to top on route change
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }, [location.pathname]);
 
   return (
     <div className={`min-h-screen transition-all duration-500 ${

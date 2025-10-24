@@ -125,15 +125,6 @@ const Homepage = () => {
             {/* Right Column - Profile Image */}
             <div ref={profileRef} className="relative flex justify-center lg:justify-end items-center order-1 lg:order-2">
               <div className="relative w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] lg:w-[380px] lg:h-[380px]">
-                <div 
-                  className={`absolute top-0 right-0 w-full h-full -z-10 rounded-full overflow-hidden ${
-                    isDark ? 'bg-purple-600' : 'bg-orange-500'
-                  }`}
-                  style={{
-                    clipPath: 'polygon(30% 0%, 100% 0%, 100% 100%, 0% 70%)'
-                  }}
-                />
-                
                 {/* Profile Image */}
                 <div className="relative z-10 w-full h-full">
                   <img 
