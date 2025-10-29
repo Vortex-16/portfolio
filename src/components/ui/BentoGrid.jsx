@@ -46,7 +46,7 @@ export const BentoGrid = ({ children, className = '' }) => {
   return (
     <div 
       ref={gridRef}
-      className={`grid gap-4 md:gap-6 auto-rows-auto ${className}`}
+      className={`grid gap-5 md:gap-6 lg:gap-8 auto-rows-auto ${className}`}
     >
       {children}
     </div>
@@ -108,9 +108,9 @@ export const BentoCard = ({
   const sizeClasses = {
     small: 'col-span-1 row-span-1',
     medium: 'col-span-1 md:col-span-2 row-span-1',
-    large: 'col-span-1 md:col-span-2 lg:col-span-3 row-span-2',
+    large: 'col-span-1 md:col-span-2 lg:col-span-2 row-span-2',
     tall: 'col-span-1 md:col-span-1 row-span-2',
-    wide: 'col-span-1 md:col-span-3 row-span-1',
+    wide: 'col-span-1 md:col-span-2 lg:col-span-3 row-span-1',
   };
 
   return (

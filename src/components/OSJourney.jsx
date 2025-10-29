@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useTheme } from '../hooks/useTheme';
 import { BentoGrid, BentoCard, BentoTitle, BentoDescription } from './ui/BentoGrid';
+import InteractiveTerminal from './ui/InteractiveTerminal';
 import { FaLinux, FaTerminal, FaCode, FaBook, FaRocket, FaCog } from 'react-icons/fa';
 import { SiArchlinux, SiGnubash, SiVim, SiGit } from 'react-icons/si';
 
@@ -11,42 +12,22 @@ gsap.registerPlugin(ScrollTrigger);
 const OSJourney = () => {
   const { isDark } = useTheme();
   const headerRef = useRef(null);
-  const terminalRef = useRef(null);
 
   useEffect(() => {
-    // Animate header
     gsap.from(headerRef.current, {
       opacity: 0,
       y: -50,
       duration: 1,
       ease: 'power3.out',
     });
-
-    // Terminal typing effect
-    const terminal = terminalRef.current;
-    if (terminal) {
-      const text = "vikash@endeavouros:~$ exploring the depths of operating systems...";
-      let i = 0;
-      
-      const typeWriter = () => {
-        if (i < text.length) {
-          terminal.textContent += text.charAt(i);
-          i++;
-          setTimeout(typeWriter, 50);
-        }
-      };
-      
-      setTimeout(typeWriter, 500);
-    }
   }, []);
 
   return (
-    <div className={`min-h-screen py-20 px-4 md:px-8 lg:px-16 ${
+    <div className={`min-h-screen pt-40 pb-20 px-4 md:px-8 lg:pl-32 lg:pr-16 ${
       isDark 
         ? 'bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900' 
         : 'bg-gradient-to-br from-emerald-50 via-emerald-100 to-emerald-200'
     }`}>
-      {/* Header Section */}
       <div ref={headerRef} className="max-w-7xl mx-auto mb-16 text-center">
         <div className="flex items-center justify-center mb-6">
           <FaLinux className={`text-6xl md:text-8xl ${isDark ? 'text-purple-400' : 'text-emerald-600'}`} />
@@ -63,25 +44,10 @@ const OSJourney = () => {
         </p>
       </div>
 
-      {/* Terminal Display */}
-      <div className={`max-w-5xl mx-auto mb-16 p-6 rounded-xl ${
-        isDark ? 'bg-gray-900/80' : 'bg-gray-800/90'
-      } backdrop-blur-sm border ${isDark ? 'border-purple-500/30' : 'border-emerald-500/30'}`}>
-        <div className="flex items-center gap-2 mb-4">
-          <div className="w-3 h-3 rounded-full bg-red-500"></div>
-          <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-          <div className="w-3 h-3 rounded-full bg-green-500"></div>
-        </div>
-        <div className="font-mono text-green-400 text-sm md:text-base">
-          <p ref={terminalRef} className="whitespace-pre-wrap"></p>
-          <span className="animate-pulse">▋</span>
-        </div>
-      </div>
+      <InteractiveTerminal />
 
-      {/* Bento Grid Layout */}
-      <div className="max-w-7xl mx-auto">
-        <BentoGrid className="grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
-          {/* Why OS Development */}
+      <div className="max-w-7xl mx-auto px-4">
+        <BentoGrid className="grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
           <BentoCard size="large">
             <div className="h-full flex flex-col justify-between">
               <div>
@@ -102,9 +68,8 @@ const OSJourney = () => {
             </div>
           </BentoCard>
 
-          {/* EndeavourOS */}
           <BentoCard size="medium">
-            <SiArchlinux className={`text-5xl mb-4 ${isDark ? 'text-blue-400' : 'text-blue-600'}`} />
+            <SiArchlinux className={`text-5xl mb-4 mx-auto ${isDark ? 'text-blue-400' : 'text-blue-600'}`} />
             <BentoTitle>EndeavourOS</BentoTitle>
             <BentoDescription>
               My daily driver for learning Linux internals. An Arch-based distribution that 
@@ -117,9 +82,8 @@ const OSJourney = () => {
             </ul>
           </BentoCard>
 
-          {/* Learning Resources */}
           <BentoCard size="tall">
-            <FaBook className={`text-4xl mb-4 ${isDark ? 'text-yellow-400' : 'text-yellow-600'}`} />
+            <FaBook className={`text-4xl mb-4 mx-auto ${isDark ? 'text-yellow-400' : 'text-yellow-600'}`} />
             <BentoTitle>Learning Path</BentoTitle>
             <div className="space-y-3 mt-4">
               <div className={`p-3 rounded-lg ${isDark ? 'bg-gray-800/50' : 'bg-white/50'}`}>
@@ -149,9 +113,8 @@ const OSJourney = () => {
             </div>
           </BentoCard>
 
-          {/* Terminal Skills */}
           <BentoCard size="medium">
-            <FaTerminal className={`text-4xl mb-4 ${isDark ? 'text-green-400' : 'text-green-600'}`} />
+            <FaTerminal className={`text-4xl mb-4 mx-auto ${isDark ? 'text-green-400' : 'text-green-600'}`} />
             <BentoTitle>Terminal Mastery</BentoTitle>
             <BentoDescription>
               Living in the terminal, mastering shell scripting, and understanding the command-line tools 
@@ -164,9 +127,8 @@ const OSJourney = () => {
             </div>
           </BentoCard>
 
-          {/* Current Projects */}
           <BentoCard size="wide">
-            <FaCode className={`text-4xl mb-4 ${isDark ? 'text-cyan-400' : 'text-cyan-600'}`} />
+            <FaCode className={`text-4xl mb-4 mx-auto ${isDark ? 'text-cyan-400' : 'text-cyan-600'}`} />
             <BentoTitle>Current OS Projects</BentoTitle>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
               <div className={`p-4 rounded-lg ${isDark ? 'bg-gray-800/50' : 'bg-white/50'}`}>
@@ -196,9 +158,8 @@ const OSJourney = () => {
             </div>
           </BentoCard>
 
-          {/* System Architecture */}
           <BentoCard size="medium">
-            <FaCog className={`text-4xl mb-4 ${isDark ? 'text-purple-400' : 'text-purple-600'}`} />
+            <FaCog className={`text-4xl mb-4 mx-auto ${isDark ? 'text-purple-400' : 'text-purple-600'}`} />
             <BentoTitle>System Architecture</BentoTitle>
             <BentoDescription>
               Understanding computer architecture, CPU operations, memory hierarchies, 
@@ -211,9 +172,8 @@ const OSJourney = () => {
             </div>
           </BentoCard>
 
-          {/* Future Vision */}
           <BentoCard size="large">
-            <FaRocket className={`text-5xl mb-4 ${isDark ? 'text-red-400' : 'text-red-600'}`} />
+            <FaRocket className={`text-5xl mb-4 mx-auto ${isDark ? 'text-red-400' : 'text-red-600'}`} />
             <BentoTitle>My OS Vision</BentoTitle>
             <BentoDescription className="mb-4">
               My goal is to create a microkernel-based OS that emphasizes:
