@@ -29,23 +29,31 @@ const AppContent = () => {
     preloadRoutes();
   }, []);
 
-  // Simulate loading
-  if (isLoading) {
-    return <LoadingScreen onLoadingComplete={() => setIsLoading(false)} />;
-  }
-
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Homepage />} />
-          <Route path="about" element={<About />} />
-          <Route path="projects" element={<Projects />} />
-          <Route path="os-journey" element={<OSJourney />} />
-          <Route path="contact" element={<Contact />} />
-        </Route>
-      </Routes>
-    </Router>
+    <>
+      {/* Background that persists during transition */}
+      <div className="fixed inset-0 -z-10 bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900" />
+      
+      {/* Loading Screen */}
+      {isLoading && (
+        <LoadingScreen onLoadingComplete={() => setIsLoading(false)} />
+      )}
+      
+      {/* Main App - Only show when not loading */}
+      {!isLoading && (
+        <Router>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Homepage />} />
+              <Route path="about" element={<About />} />
+              <Route path="projects" element={<Projects />} />
+              <Route path="os-journey" element={<OSJourney />} />
+              <Route path="contact" element={<Contact />} />
+            </Route>
+          </Routes>
+        </Router>
+      )}
+    </>
   );
 };
 

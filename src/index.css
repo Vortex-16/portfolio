@@ -17,6 +17,13 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  background: linear-gradient(to bottom right, #111827, #581c87, #6b21a8);
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+  background: transparent;
 }
 
 /* Smooth scrolling */
