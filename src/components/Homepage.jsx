@@ -121,8 +121,9 @@ const Homepage = () => {
               </div>
             </div>
 
-            <div ref={profileRef} className="relative flex justify-center lg:justify-end items-center order-1 lg:order-2">
-              <div className="relative w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] lg:w-[380px] lg:h-[380px]">
+            {/* Profile image - visible on mobile, hidden on desktop */}
+            <div ref={profileRef} className="relative flex justify-center lg:hidden items-center order-1 lg:order-2">
+              <div className="relative w-[280px] h-[280px] sm:w-[320px] sm:h-[320px]">
                 <div className="relative z-10 w-full h-full">
                   <img 
                     src="/PofileNew.jpeg" 
@@ -130,7 +131,7 @@ const Homepage = () => {
                     className="w-full h-full rounded-full object-cover shadow-2xl"
                   />
                   
-                  <div className={`absolute bottom-3 left-3 sm:bottom-4 sm:left-4 lg:bottom-5 lg:left-5 px-4 py-3 sm:px-5 sm:py-3 rounded-xl sm:rounded-2xl shadow-2xl ${
+                  <div className={`absolute bottom-3 left-3 sm:bottom-4 sm:left-4 px-4 py-3 sm:px-5 sm:py-3 rounded-xl sm:rounded-2xl shadow-2xl ${
                     isDark ? 'bg-gray-900' : 'bg-gray-900'
                   }`}>
                     <div className="text-white text-2xl sm:text-3xl font-bold leading-tight">3+</div>
