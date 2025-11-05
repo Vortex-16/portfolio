@@ -332,8 +332,8 @@ const About = () => {
                       { name: 'React', level: 80, icon: '⚛️' },
                       { name: 'HTML/CSS', level: 90, icon: '🎨' },
                       { name: 'Python', level: 35, icon: '🐍' },
-                      { name: 'Node.js', level: 70, icon: '💚' },
-                      { name: 'MongoDB', level: 65, icon: '🍃' },
+                      { name: 'Node.js', level: 40, icon: '💚' },
+                      { name: 'MongoDB', level: 35, icon: '🍃' },
                     ].map((skill, index) => (
                       <motion.div
                         key={skill.name}
