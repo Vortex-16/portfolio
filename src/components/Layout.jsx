@@ -6,7 +6,6 @@ import ScrollProgress from './ui/ScrollProgress';
 import PerformanceMonitor from './ui/PerformanceMonitor';
 import AccessibilityOverlay from './ui/AccessibilityOverlay';
 import KeyboardShortcuts from './ui/KeyboardShortcuts';
-import AnimatedBackground from './ui/AnimatedBackground';
 import ThemeToggle from './ui/ThemeToggle';
 import MusicPlayer from './ui/MusicPlayer';
 import ResponsiveNavigation from './ui/ResponsiveNavigation';
@@ -34,7 +33,6 @@ const Layout = () => {
       <KeyboardShortcuts />
       <PerformanceMonitor isDevelopment={import.meta.env.DEV} />
       <CustomCursor />
-      <AnimatedBackground />
       
       <div className={`fixed inset-0 pointer-events-none transition-opacity duration-500 ${
         isDark 

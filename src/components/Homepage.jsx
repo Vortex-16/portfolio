@@ -5,6 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useTheme } from '../hooks/useTheme';
 import { LiquidGlassGrid, LiquidGlassCard } from './ui/LiquidGlassCard';
 import { FaCode, FaGraduationCap, FaLinux, FaRocket } from 'react-icons/fa';
+import VantaGlobe from './ui/VantaGlobe';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -58,6 +59,9 @@ const Homepage = () => {
       className="min-h-screen flex flex-col relative overflow-hidden"
       aria-label="Home section"
     >
+      {/* Vanta Globe Background */}
+      <VantaGlobe />
+      
       <div className="flex-1 flex items-center justify-center py-12 lg:py-0 mt-32 lg:mt-24">
         <div className="container mx-auto max-w-7xl px-6 lg:px-12 lg:pl-24">
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">

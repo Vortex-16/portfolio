@@ -31,9 +31,6 @@ const AppContent = () => {
 
   return (
     <>
-      {/* Background that persists during transition */}
-      <div className="fixed inset-0 -z-10 bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900" />
-      
       {/* Loading Screen */}
       {isLoading && (
         <LoadingScreen onLoadingComplete={() => setIsLoading(false)} />
