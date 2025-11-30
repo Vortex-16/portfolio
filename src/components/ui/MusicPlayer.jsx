@@ -14,9 +14,7 @@ const MusicPlayer = () => {
   const [currentTime, setCurrentTime] = useState(0);
 
   const tracks = [
-    { name: 'Portfolio Theme', file: '/portfolio.mp3' },
-    { name: 'Cant La La', file: '/CantLaLa.mp3' },
-    { name: 'Conoci', file: '/conci.mp3' }
+    { name: 'Portfolio Theme', file: '/portfolio.mp3' }
   ];
 
   // Initialize audio and auto-play
@@ -166,7 +164,7 @@ const MusicPlayer = () => {
           layout
         >
           {/* Compact View */}
-          <div className="flex items-center p-3">
+          <div className="flex items-center p-3 gap-2">
             {/* Play/Pause Button */}
             <motion.button
               onClick={togglePlay}
@@ -194,7 +192,7 @@ const MusicPlayer = () => {
             {!isExpanded && (
               <motion.button
                 onClick={() => setIsExpanded(true)}
-                className={`ml-2 p-1 rounded transition-colors ${
+                className={`p-1 rounded transition-colors ${
                   isDark 
                     ? 'text-white/70 hover:text-white hover:bg-white/10' 
                     : 'text-emerald-200 hover:text-emerald-50 hover:bg-emerald-800/30'
@@ -206,6 +204,27 @@ const MusicPlayer = () => {
                   <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
                 </svg>
               </motion.button>
+            )}
+
+            {/* Close Button at right edge */}
+            {isExpanded && (
+              <div className="flex-1 flex justify-end">
+                <motion.button
+                  onClick={() => setIsExpanded(false)}
+                  className={`p-1 rounded transition-colors ${
+                    isDark 
+                      ? 'text-white/70 hover:text-white hover:bg-white/10' 
+                      : 'text-emerald-200 hover:text-emerald-50 hover:bg-emerald-800/30'
+                  }`}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  aria-label="Collapse music player"
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                  </svg>
+                </motion.button>
+              </div>
             )}
           </div>
 
@@ -249,7 +268,7 @@ const MusicPlayer = () => {
                 </div>
 
                 {/* Controls */}
-                <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center gap-3 mb-3">
                   {/* Mute Button */}
                   <motion.button
                     onClick={toggleMute}
@@ -281,7 +300,7 @@ const MusicPlayer = () => {
                     step="0.01"
                     value={volume}
                     onChange={handleVolumeChange}
-                    className={`flex-1 mx-2 h-1 rounded-full appearance-none cursor-pointer ${
+                    className={`flex-1 h-1 rounded-full appearance-none cursor-pointer ${
                       isDark ? 'bg-white/20' : 'bg-emerald-800/30'
                     }`}
                     style={{
@@ -290,23 +309,6 @@ const MusicPlayer = () => {
                         : `linear-gradient(to right, rgb(110 231 183) 0%, rgb(110 231 183) ${volume * 100}%, rgba(34 197 94, 0.3) ${volume * 100}%, rgba(34 197 94, 0.3) 100%)`
                     }}
                   />
-
-                  {/* Close Button */}
-                  <motion.button
-                    onClick={() => setIsExpanded(false)}
-                    className={`p-1 rounded transition-colors ${
-                      isDark 
-                        ? 'text-white/70 hover:text-white hover:bg-white/10' 
-                        : 'text-emerald-200 hover:text-emerald-50 hover:bg-emerald-800/30'
-                    }`}
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                    aria-label="Collapse music player"
-                  >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-                    </svg>
-                  </motion.button>
                 </div>
 
                 {/* Track Selection */}

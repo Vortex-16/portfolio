@@ -32,8 +32,8 @@ const About = () => {
   };
 
   const stats = [
-    { icon: FaGraduationCap, label: "CSE Student", value: "2024-2028" },
-    { icon: FaCode, label: "Projects", value: "25+" },
+    { icon: FaGraduationCap, label: "CSE Student", value: "2024-2028", inline: true },
+    { icon: FaCode, label: "Projects", value: "15+" },
     { icon: FaRocket, label: "Technologies", value: "8+" },
     { icon: FaHeart, label: "Coffee Cups", value: "∞" },
   ];
@@ -106,12 +106,17 @@ const About = () => {
                     transition={{ duration: 0.2 }}
                   >
                     <stat.icon className="text-3xl text-emerald-400 dark:text-purple-400 mx-auto mb-3" />
-                    <div className={`text-2xl font-bold ${
-                      isDark ? 'text-white' : 'text-emerald-50'
-                    }`}>{stat.value}</div>
-                    <div className={`text-sm ${
-                      isDark ? 'text-white/70' : 'text-emerald-200'
-                    }`}>{stat.label}</div>
+                    {stat.inline ? (
+                      <div className="flex flex-col items-center">
+                        <span className={`text-2xl font-bold ${isDark ? 'text-white' : 'text-emerald-50'}`}>{stat.label}</span>
+                        <span className={`text-sm font-semibold ${isDark ? 'text-emerald-400' : 'text-emerald-200'}`}>{stat.value}</span>
+                      </div>
+                    ) : (
+                      <>
+                        <div className={`text-2xl font-bold ${isDark ? 'text-white' : 'text-emerald-50'}`}>{stat.value}</div>
+                        <div className={`text-sm ${isDark ? 'text-white/70' : 'text-emerald-200'}`}>{stat.label}</div>
+                      </>
+                    )}
                   </motion.div>
                 ))}
               </div>
@@ -167,7 +172,7 @@ const About = () => {
             <motion.div className="lg:col-span-2 space-y-8" variants={itemVariants}>
               {/* Introduction Card */}
               <motion.div 
-                className={`backdrop-blur-md border rounded-3xl p-8 ${
+                className={`backdrop-blur-md border rounded-3xl p-4 ${
                   isDark 
                     ? 'bg-white/10 border-white/20' 
                     : 'bg-emerald-900/80 border-emerald-700/40'
@@ -328,16 +333,18 @@ const About = () => {
                   </div>
                   <div className="grid md:grid-cols-2 gap-6">
                     {[
-                      { name: 'JavaScript', level: 85, icon: '🟨' },
-                      { name: 'React', level: 80, icon: '⚛️' },
-                      { name: 'HTML/CSS', level: 90, icon: '🎨' },
-                      { name: 'Python', level: 35, icon: '🐍' },
-                      { name: 'Node.js', level: 40, icon: '💚' },
-                      { name: 'MongoDB', level: 35, icon: '🍃' },
+                      { name: 'JavaScript', level: 85 },
+                      { name: 'React', level: 80 },
+                      { name: 'HTML/CSS', level: 90 },
+                      { name: 'C', level: 70 },
+                      { name: 'Python', level: 75 },
+                      { name: 'Java', level: 65 },
+                      { name: 'Node.js', level: 40},
+                      { name: 'MongoDB', level: 35 },
                     ].map((skill, index) => (
                       <motion.div
                         key={skill.name}
-                        className={`p-4 rounded-full border ${
+                        className={`p-4 rounded-xl border ${
                           isDark 
                             ? 'bg-white/5 border-white/10' 
                             : 'bg-emerald-800/30 border-emerald-600/30'
