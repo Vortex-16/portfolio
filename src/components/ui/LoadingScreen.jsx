@@ -114,7 +114,13 @@ const LoadingScreen = ({ onComplete, onLoadingComplete }) => {
         '/alpha.png',
         '/CantLaLa.mp3',
         '/portfolio.mp3',
-        '/conci.mp3'
+        '/conci.mp3',
+        '/CODIGO.png',
+        '/MaaJankiDrAmrit.png',
+        '/PragatiPath.jpg',
+        'iitkgprp.png',
+        '/Python.png',
+        
       ];
 
       const imagePromises = images.map(src => {
