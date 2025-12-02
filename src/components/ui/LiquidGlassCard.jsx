@@ -181,7 +181,7 @@ export const LiquidGlassCard = ({
       />
 
       {/* Content */}
-      <div className="relative z-10 p-6 lg:p-8 flex flex-col items-center text-center">
+      <div className="relative z-10 p-5 md:p-6 lg:p-8 flex flex-col items-center text-center">
         {children}
       </div>
 

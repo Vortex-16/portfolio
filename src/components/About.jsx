@@ -57,9 +57,9 @@ const About = () => {
           animate={isInView ? "visible" : "hidden"}
         >
           {/* Section Header */}
-          <motion.div className="text-center mb-16" variants={itemVariants}>
+          <motion.div className="text-center mb-12 md:mb-16" variants={itemVariants}>
             <motion.h2 
-              className={`text-4xl md:text-5xl font-bold mb-6 ${
+              className={`font-lexa text-4xl md:text-5xl font-bold mb-6 ${
                 isDark ? 'text-white' : 'text-emerald-950'
               }`}
               variants={itemVariants}
@@ -172,7 +172,7 @@ const About = () => {
             <motion.div className="lg:col-span-2 space-y-8" variants={itemVariants}>
               {/* Introduction Card */}
               <motion.div 
-                className={`backdrop-blur-md border rounded-3xl p-4 ${
+                className={`backdrop-blur-md border rounded-3xl p-5 md:p-6 ${
                   isDark 
                     ? 'bg-white/10 border-white/20' 
                     : 'bg-emerald-900/80 border-emerald-700/40'
@@ -181,12 +181,12 @@ const About = () => {
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.2 }}
               >
-                <h3 className={`text-3xl font-bold mb-6 ${
+                <h3 className={`font-lexa text-2xl md:text-3xl font-bold mb-4 md:mb-6 ${
                   isDark ? 'text-white' : 'text-emerald-50'
                 }`}>
                   Hello! I'm Vikash Gupta 👋
                 </h3>
-                <div className={`space-y-4 text-lg leading-relaxed ${
+                <div className={`font-monorama space-y-3 md:space-y-4 text-base md:text-lg leading-relaxed ${
                   isDark ? 'text-white/80' : 'text-emerald-100'
                 }`}>
                   <p>

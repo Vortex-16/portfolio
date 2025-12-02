@@ -156,9 +156,9 @@ const Contact = () => {
           animate={isInView ? "visible" : "hidden"}
         >
           {/* Section Header */}
-          <motion.div className="text-center mb-16" variants={itemVariants}>
+          <motion.div className="text-center mb-12 md:mb-16" variants={itemVariants}>
             <motion.h2 
-              className={`text-4xl md:text-5xl font-bold mb-6 ${
+              className={`font-lexa text-4xl md:text-5xl font-bold mb-6 ${
                 isDark ? 'text-white' : 'text-emerald-950'
               }`}
               variants={itemVariants}
@@ -169,7 +169,7 @@ const Contact = () => {
               </span>
             </motion.h2>
             <motion.p 
-              className={`text-lg max-w-2xl mx-auto ${
+              className={`font-monorama text-base md:text-lg max-w-2xl mx-auto ${
                 isDark ? 'text-white/70' : 'text-emerald-800'
               }`}
               variants={itemVariants}
@@ -182,12 +182,12 @@ const Contact = () => {
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Contact Form */}
             <motion.div variants={itemVariants}>
-              <div className={`backdrop-blur-md border rounded-3xl p-8 ${
+              <div className={`backdrop-blur-md border rounded-2xl md:rounded-3xl p-5 md:p-8 ${
                 isDark 
                   ? 'bg-white/10 border-white/20' 
                   : 'bg-emerald-900/80 border-emerald-700/40'
               }`}>
-                <h3 className={`text-2xl font-bold mb-6 ${
+                <h3 className={`font-monorama text-xl md:text-2xl font-bold mb-4 md:mb-6 ${
                   isDark ? 'text-white' : 'text-emerald-50'
                 }`}>Send me a message</h3>
                 <form onSubmit={handleSubmit} className="space-y-6">
@@ -331,14 +331,14 @@ const Contact = () => {
             {/* Contact Information */}
             <motion.div className="space-y-8" variants={itemVariants}>
               {/* Contact Info Cards */}
-              <div className="space-y-4">
-                <h3 className={`text-2xl font-bold mb-6 ${
+              <div className="space-y-3 md:space-y-4">
+                <h3 className={`font-monorama text-xl md:text-2xl font-bold mb-4 md:mb-6 ${
                   isDark ? 'text-white' : 'text-emerald-950'
                 }`}>Contact Information</h3>
                 {contactInfo.map((info, index) => (
                   <motion.div
                     key={index}
-                    className={`backdrop-blur-md border rounded-2xl p-6 ${
+                    className={`backdrop-blur-md border rounded-xl md:rounded-2xl p-4 md:p-6 ${
                       isDark 
                         ? 'bg-white/10 border-white/20' 
                         : 'bg-emerald-900/80 border-emerald-700/40'
@@ -381,17 +381,17 @@ const Contact = () => {
 
               {/* Social Links */}
               <motion.div variants={itemVariants}>
-                <h4 className={`text-xl font-semibold mb-4 ${
+                <h4 className={`font-monorama text-lg md:text-xl font-semibold mb-3 md:mb-4 ${
                   isDark ? 'text-white' : 'text-emerald-950'
                 }`}>Follow me on</h4>
-                <div className="flex gap-4">
+                <div className="flex gap-3 md:gap-4">
                   {socialLinks.map((social, index) => (
                     <motion.a
                       key={index}
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`p-4 backdrop-blur-md border rounded-xl transition-all duration-300 ${
+                      className={`p-3 md:p-4 backdrop-blur-md border rounded-lg md:rounded-xl transition-all duration-300 ${
                         isDark 
                           ? 'bg-white/10 border-white/20 text-white/70 hover:text-white' 
                           : 'bg-emerald-900/80 border-emerald-700/40 text-emerald-200 hover:text-emerald-50'
@@ -399,7 +399,7 @@ const Contact = () => {
                       whileHover={{ scale: 1.1, y: -2 }}
                       whileTap={{ scale: 0.95 }}
                     >
-                      <social.icon size={24} />
+                      <social.icon size={20} className="md:w-6 md:h-6" />
                     </motion.a>
                   ))}
                 </div>
@@ -407,20 +407,20 @@ const Contact = () => {
 
               {/* Availability */}
               <motion.div 
-                className={`backdrop-blur-md border rounded-2xl p-6 ${
+                className={`backdrop-blur-md border rounded-xl md:rounded-2xl p-4 md:p-6 ${
                   isDark 
                     ? 'bg-white/10 border-white/20' 
                     : 'bg-emerald-900/80 border-emerald-700/40'
                 }`}
                 variants={itemVariants}
               >
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-                  <h4 className={`text-lg font-semibold ${
+                <div className="flex items-center gap-2 md:gap-3 mb-3 md:mb-4">
+                  <div className="w-2.5 h-2.5 md:w-3 md:h-3 bg-green-400 rounded-full animate-pulse"></div>
+                  <h4 className={`font-monorama text-base md:text-lg font-semibold ${
                     isDark ? 'text-white' : 'text-emerald-50'
                   }`}>Available for opportunities</h4>
                 </div>
-                <p className={`text-sm ${
+                <p className={`font-monorama text-xs md:text-sm ${
                   isDark ? 'text-white/70' : 'text-emerald-200'
                 }`}>
                   I'm currently looking for internship opportunities and exciting projects to work on. 
@@ -432,10 +432,10 @@ const Contact = () => {
 
           {/* Footer */}
           <motion.div 
-            className="mt-16 pt-8 border-t border-white/20 text-center"
+            className="mt-12 md:mt-16 pt-6 md:pt-8 border-t border-white/20 text-center"
             variants={itemVariants}
           >
-            <p className="text-white/60">
+            <p className="font-monorama text-sm md:text-base text-white/60">
               Made with ❤️ by Vikash Gupta • © 2025
             </p>
           </motion.div>

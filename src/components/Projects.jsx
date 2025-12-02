@@ -122,7 +122,7 @@ const Projects = () => {
           </div>
 
           {/* Main Title */}
-          <h2 className={`header-line text-5xl md:text-6xl lg:text-7xl font-bold mb-6 ${
+          <h2 className={`header-line font-lexa text-4xl md:text-5xl lg:text-6xl font-bold mb-6 ${
             isDark ? 'text-white' : 'text-gray-900'
           }`}>
             Featured{' '}
@@ -136,7 +136,7 @@ const Projects = () => {
           </h2>
 
           {/* Description */}
-          <p className={`header-line text-lg md:text-xl max-w-3xl mx-auto mb-12 ${
+          <p className={`header-line font-monorama text-base md:text-lg max-w-3xl mx-auto mb-10 md:mb-12 ${
             isDark ? 'text-gray-300' : 'text-gray-700'
           }`}>
             A collection of projects that showcase my skills in web development, 
@@ -145,57 +145,57 @@ const Projects = () => {
           </p>
 
           {/* Stats Section */}
-          <div ref={statsRef} className="header-line grid grid-cols-3 gap-6 max-w-3xl mx-auto">
-            <div className={`p-6 rounded-2xl backdrop-blur-md border ${
+          <div ref={statsRef} className="header-line grid grid-cols-3 gap-3 md:gap-6 max-w-3xl mx-auto">
+            <div className={`p-4 md:p-6 rounded-xl md:rounded-2xl backdrop-blur-md border ${
               isDark 
                 ? 'bg-white/5 border-white/10' 
                 : 'bg-white/50 border-emerald-200/50'
             }`}>
-              <FaCode className={`text-4xl mb-3 mx-auto ${
+              <FaCode className={`text-2xl md:text-4xl mb-2 md:mb-3 mx-auto ${
                 isDark ? 'text-purple-400' : 'text-emerald-600'
               }`} />
-              <div className={`text-3xl font-bold mb-1 ${
+              <div className={`font-monorama text-xl md:text-3xl font-bold mb-1 ${
                 isDark ? 'text-purple-400' : 'text-emerald-600'
               }`}>
                 <span className="stat-number" data-target={projects.length > 0 ? projects.length : 5}>0</span>+
               </div>
-              <div className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+              <div className={`font-monorama text-[10px] md:text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
                 Projects Built
               </div>
             </div>
 
-            <div className={`p-6 rounded-2xl backdrop-blur-md border ${
+            <div className={`p-4 md:p-6 rounded-xl md:rounded-2xl backdrop-blur-md border ${
               isDark 
                 ? 'bg-white/5 border-white/10' 
                 : 'bg-white/50 border-emerald-200/50'
             }`}>
-              <FaGithub className={`text-4xl mb-3 mx-auto ${
+              <FaGithub className={`text-2xl md:text-4xl mb-2 md:mb-3 mx-auto ${
                 isDark ? 'text-purple-400' : 'text-emerald-600'
               }`} />
-              <div className={`text-3xl font-bold mb-1 ${
+              <div className={`font-monorama text-xl md:text-3xl font-bold mb-1 ${
                 isDark ? 'text-purple-400' : 'text-emerald-600'
               }`}>
                 <span className="stat-number" data-target={githubStats.totalRepos}>0</span>
               </div>
-              <div className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+              <div className={`font-monorama text-[10px] md:text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
                 GitHub Repos
               </div>
             </div>
 
-            <div className={`p-6 rounded-2xl backdrop-blur-md border ${
+            <div className={`p-4 md:p-6 rounded-xl md:rounded-2xl backdrop-blur-md border ${
               isDark 
                 ? 'bg-white/5 border-white/10' 
                 : 'bg-white/50 border-emerald-200/50'
             }`}>
-              <FaStar className={`text-4xl mb-3 mx-auto ${
+              <FaStar className={`text-2xl md:text-4xl mb-2 md:mb-3 mx-auto ${
                 isDark ? 'text-purple-400' : 'text-emerald-600'
               }`} />
-              <div className={`text-3xl font-bold mb-1 ${
+              <div className={`font-monorama text-xl md:text-3xl font-bold mb-1 ${
                 isDark ? 'text-purple-400' : 'text-emerald-600'
               }`}>
                 <span className="stat-number" data-target={githubStats.totalStars}>0</span>+
               </div>
-              <div className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+              <div className={`font-monorama text-[10px] md:text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
                 GitHub Stars
               </div>
             </div>

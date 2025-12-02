@@ -160,10 +160,10 @@ const ResponsiveNavigation = () => {
               >
                 <div className="flex flex-col p-6 pt-20">
                   <div className="mb-8">
-                    <h2 className={`text-xl font-bold mb-2 ${isDark ? 'text-white' : 'text-emerald-50'}`}>
+                    <h2 className={`font-lexa text-xl font-bold mb-2 ${isDark ? 'text-white' : 'text-emerald-50'}`}>
                       Vikash Gupta
                     </h2>
-                    <p className={`text-sm ${isDark ? 'text-white/60' : 'text-emerald-200'}`}>
+                    <p className={`font-monorama text-sm ${isDark ? 'text-white/60' : 'text-emerald-200'}`}>
                       CSE Student & Developer
                     </p>
 
