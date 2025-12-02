@@ -56,7 +56,7 @@ const InteractiveTerminal = () => {
       output: [
         'Education:',
         '  🎓 Computer Science Engineering',
-        '  📍 STCET (Sathyabama College)',
+        '  📍 STCET (St. Thomas College of Engineering and Technology)',
         '  📚 Algorithms, Data Structures, System Design'
       ]
     },
