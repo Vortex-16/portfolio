@@ -238,6 +238,38 @@ const OSJourney = () => {
             </div>
           </OSBentoCard>
 
+          <OSBentoCard size="large" delay={0.22}>
+            <div className="h-full flex flex-col">
+              <div className="flex items-center gap-2 mb-3">
+                <FaRocket className={`text-3xl md:text-4xl ${isDark ? 'text-red-400' : 'text-red-600'}`} />
+                <h3 className={`font-lexa text-lg md:text-xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                  My OS Vision
+                </h3>
+              </div>
+              <p className={`font-monorama text-xs md:text-sm mb-3 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
+                Creating a microkernel-based OS that emphasizes:
+              </p>
+              <ul className={`font-monorama space-y-2 text-sm flex-grow ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
+                {[
+                  'Modularity and minimal kernel footprint',
+                  'Security through isolation',
+                  'Modern hardware support',
+                  'Developer-friendly tooling',
+                ].map((item, i) => (
+                  <li key={i} className="flex items-center gap-2">
+                    <span className={`w-2 h-2 rounded-full flex-shrink-0 ${isDark ? 'bg-red-400' : 'bg-red-600'}`}></span>
+                    <span className="text-xs md:text-sm">{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className={`mt-3 p-3 rounded-xl ${isDark ? 'bg-red-900/30 border border-red-500/30' : 'bg-red-100/60 border border-red-300/50'}`}>
+                <p className={`font-monorama text-xs italic ${isDark ? 'text-red-200' : 'text-red-800'}`}>
+                  "Every great OS started as a hobby project. This is mine."
+                </p>
+              </div>
+            </div>
+          </OSBentoCard>
+
           {/* Current OS Projects - Wide Card */}
           <OSBentoCard size="wide" delay={0.25}>
             <div className="flex flex-col">
@@ -279,39 +311,6 @@ const OSJourney = () => {
               <div className={`mt-auto p-2 md:p-3 rounded-lg w-full ${isDark ? 'bg-purple-900/40' : 'bg-purple-100/60'}`}>
                 <p className={`font-monorama text-xs ${isDark ? 'text-purple-200' : 'text-purple-800'}`}>
                   CPU → Memory → Storage → I/O
-                </p>
-              </div>
-            </div>
-          </OSBentoCard>
-
-          {/* My OS Vision - Large Card */}
-          <OSBentoCard size="large" delay={0.35}>
-            <div className="h-full flex flex-col">
-              <div className="flex items-center gap-2 mb-3">
-                <FaRocket className={`text-3xl md:text-4xl ${isDark ? 'text-red-400' : 'text-red-600'}`} />
-                <h3 className={`font-lexa text-lg md:text-xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                  My OS Vision
-                </h3>
-              </div>
-              <p className={`font-monorama text-xs md:text-sm mb-3 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
-                Creating a microkernel-based OS that emphasizes:
-              </p>
-              <ul className={`font-monorama space-y-2 text-sm flex-grow ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
-                {[
-                  'Modularity and minimal kernel footprint',
-                  'Security through isolation',
-                  'Modern hardware support',
-                  'Developer-friendly tooling',
-                ].map((item, i) => (
-                  <li key={i} className="flex items-center gap-2">
-                    <span className={`w-2 h-2 rounded-full flex-shrink-0 ${isDark ? 'bg-red-400' : 'bg-red-600'}`}></span>
-                    <span className="text-xs md:text-sm">{item}</span>
-                  </li>
-                ))}
-              </ul>
-              <div className={`mt-3 p-3 rounded-xl ${isDark ? 'bg-red-900/30 border border-red-500/30' : 'bg-red-100/60 border border-red-300/50'}`}>
-                <p className={`font-monorama text-xs italic ${isDark ? 'text-red-200' : 'text-red-800'}`}>
-                  "Every great OS started as a hobby project. This is mine."
                 </p>
               </div>
             </div>

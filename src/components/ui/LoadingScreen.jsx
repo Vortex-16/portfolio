@@ -265,7 +265,7 @@ const LoadingScreen = ({ onComplete, onLoadingComplete }) => {
     <div
       ref={loadingRef}
       className={`fixed inset-0 z-[9999] flex items-center justify-center ${isTransitioning ? 'pointer-events-none' : ''
-        } ${isDark ? 'bg-[#0a0a0f]' : 'bg-[#f0fdf4]'}`}
+        } ${isDark ? 'bg-[#0a0a0f]' : 'bg-[#ecfdf5]'}`}
       style={{
         willChange: 'opacity',
         backfaceVisibility: 'hidden',
@@ -304,12 +304,12 @@ const LoadingScreen = ({ onComplete, onLoadingComplete }) => {
               <div className="text-center">
                 <div className={`font-lexa text-7xl md:text-8xl font-bold mb-8 ${isDark
                     ? 'text-white'
-                    : 'text-gray-900'
+                    : 'text-emerald-900'
                   }`}
                   style={{
                     textShadow: isDark 
                       ? '0 0 40px rgba(168, 85, 247, 0.4)' 
-                      : '0 0 40px rgba(5, 150, 105, 0.3)'
+                      : '0 0 40px rgba(5, 150, 105, 0.4)'
                   }}>
                   VIKASH
                 </div>
@@ -320,7 +320,7 @@ const LoadingScreen = ({ onComplete, onLoadingComplete }) => {
           <video
             ref={videoRef}
             className={`w-full h-full object-cover transition-opacity duration-500 ${videoLoaded ? 'opacity-100' : 'opacity-0'}`}
-            style={{ backgroundColor: isDark ? '#0a0a0f' : '#f0fdf4', objectFit: 'cover' }}
+            style={{ backgroundColor: isDark ? '#0a0a0f' : '#ecfdf5', objectFit: 'cover' }}
             preload="auto"
             playsInline
             onLoadedData={handleVideoLoaded}
@@ -348,14 +348,14 @@ const LoadingScreen = ({ onComplete, onLoadingComplete }) => {
 
           {/* Loading indicator during video */}
           {videoLoaded && !assetsLoaded && (
-            <div className="absolute bottom-6 right-6 flex flex-col items-end gap-2 px-5 py-3 rounded-xl backdrop-blur-md bg-black/40 border border-white/10">
+            <div className={`absolute bottom-6 right-6 flex flex-col items-end gap-2 px-5 py-3 rounded-xl backdrop-blur-md border ${isDark ? 'bg-black/40 border-white/10' : 'bg-white/40 border-emerald-200/30'}`}>
               <div className="flex items-baseline gap-1">
-                <span className={`font-monorama text-4xl font-bold tabular-nums ${isDark ? 'text-purple-400' : 'text-emerald-500'}`}>
+                <span className={`font-monorama text-4xl font-bold tabular-nums ${isDark ? 'text-purple-400' : 'text-emerald-600'}`}>
                   {String(progress).padStart(3, '0')}
                 </span>
-                <span className={`font-monorama text-lg ${isDark ? 'text-purple-400/60' : 'text-emerald-500/60'}`}>%</span>
+                <span className={`font-monorama text-lg ${isDark ? 'text-purple-400/60' : 'text-emerald-600/60'}`}>%</span>
               </div>
-              <div className={`font-monorama text-[10px] tracking-wider opacity-60 ${isDark ? 'text-purple-300' : 'text-emerald-600'}`}>
+              <div className={`font-monorama text-[10px] tracking-wider opacity-60 ${isDark ? 'text-purple-300' : 'text-emerald-700'}`}>
                 {binaryStream.slice(0, 20)}
               </div>
             </div>
