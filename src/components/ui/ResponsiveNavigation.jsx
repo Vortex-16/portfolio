@@ -83,7 +83,7 @@ const ResponsiveNavigation = () => {
         }`}>
           {/* Alpha Coder Logo */}
           <motion.a
-            href="https://alpha-coders.vercel.app/"
+            href="https://alphacoders-official.vercel.app/"
             target="_blank"
             rel="noopener noreferrer"
             className="p-2 mb-2 rounded-xl hover:bg-white/10 transition-all duration-200"
