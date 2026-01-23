@@ -1,13 +1,12 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Autoplay, EffectCoverflow } from 'swiper/modules';
+import { Pagination, Autoplay, EffectCards } from 'swiper/modules';
 import { FaGithub, FaExternalLinkAlt, FaStar, FaCodeBranch } from 'react-icons/fa';
-import { motion } from 'framer-motion';
 import { useTheme } from '../../hooks/useTheme';
 
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
-import 'swiper/css/effect-coverflow';
+import 'swiper/css/effect-cards';
 
 const SwiperCarousel = ({ projects = [] }) => {
   const { isDark } = useTheme();
@@ -21,242 +20,185 @@ const SwiperCarousel = ({ projects = [] }) => {
   }
 
   return (
-    <div className="w-full max-w-7xl mx-auto px-4 relative">
+    <div className="projects-carousel-wrapper">
+      {/* Main Carousel Section */}
       <Swiper
-        modules={[Autoplay, Pagination, EffectCoverflow]}
-        spaceBetween={20}
-        slidesPerView={1}
+        modules={[Autoplay, Pagination, EffectCards]}
+        effect="cards"
+        grabCursor={true}
         centeredSlides={true}
-        loop={true}
+        slidesPerView={1}
+        cardsEffect={{
+          perSlideOffset: 8,
+          perSlideRotate: 2,
+          rotate: true,
+          slideShadows: false,
+        }}
         autoplay={{
-          delay: 3000,
-          disableOnInteraction: false,
+          delay: 5000,
+          disableOnInteraction: true,
           pauseOnMouseEnter: true,
         }}
         pagination={{
           clickable: true,
           dynamicBullets: true,
-          el: '.swiper-pagination-custom',
         }}
-        effect="coverflow"
-        coverflowEffect={{
-          rotate: 30,
-          stretch: 0,
-          depth: 150,
-          modifier: 1,
-          slideShadows: true,
-        }}
-        speed={800}
-        breakpoints={{
-          640: {
-            slidesPerView: 1,
-            spaceBetween: 15,
-          },
-          768: {
-            slidesPerView: 2,
-            spaceBetween: 20,
-          },
-          1024: {
-            slidesPerView: 3,
-            spaceBetween: 25,
-          },
-        }}
-        className="mySwiper pb-16"
-        style={{ 
-          height: '550px', 
-          width: '100%' 
-        }}
+        speed={600}
+        className="projects-swiper"
       >
         {projects.map((project, index) => (
-          <SwiperSlide key={project.id}>
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              className={`backdrop-blur-md border rounded-3xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-300 h-[500px] flex flex-col group ${
-                isDark 
-                  ? 'bg-white/10 border-white/20 hover:bg-white/15' 
-                  : 'bg-emerald-900/80 border-emerald-700/40 hover:bg-emerald-800/90'
-              }`}
+          <SwiperSlide key={project.id || index}>
+            <div
+              className={`project-card rounded-3xl overflow-hidden shadow-2xl h-full flex flex-col ${isDark
+                  ? 'bg-gradient-to-br from-purple-900/90 via-violet-900/80 to-purple-800/90 border border-purple-500/30'
+                  : 'bg-gradient-to-br from-emerald-800/95 via-emerald-700/90 to-emerald-800/95 border border-emerald-400/40'
+                }`}
             >
               {/* Project Image */}
-              <div className="relative h-48 overflow-hidden">
+              <div className="relative h-52 overflow-hidden">
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
                   onError={(e) => {
                     e.target.src = '/AlphaTemplateProjectImage.png';
-                    console.log(`Failed to load image for ${project.title}: ${project.image}`);
                   }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+
                 {/* Stats Badges */}
                 <div className="absolute top-4 right-4 flex gap-2">
                   {project.stars > 0 && (
-                    <div className="bg-black/50 backdrop-blur-sm px-2 py-1 rounded-full flex items-center gap-1 text-white text-xs">
+                    <div className="bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-full flex items-center gap-1.5 text-white text-xs font-medium">
                       <FaStar className="text-yellow-400" />
                       <span>{project.stars}</span>
                     </div>
                   )}
                   {project.forks > 0 && (
-                    <div className="bg-black/50 backdrop-blur-sm px-2 py-1 rounded-full flex items-center gap-1 text-white text-xs">
+                    <div className="bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-full flex items-center gap-1.5 text-white text-xs font-medium">
                       <FaCodeBranch className="text-blue-400" />
                       <span>{project.forks}</span>
                     </div>
                   )}
                 </div>
+
+                {/* Project Title Overlay */}
+                <div className="absolute bottom-0 left-0 right-0 p-5">
+                  <h3 className="text-2xl font-bold text-white drop-shadow-lg">
+                    {project.title}
+                  </h3>
+                </div>
               </div>
 
               {/* Project Content */}
               <div className="p-6 flex-1 flex flex-col">
-                <h3 className={`text-xl font-bold mb-3 line-clamp-1 ${
-                  isDark ? 'text-white' : 'text-emerald-50'
-                }`}>
-                  {project.title}
-                </h3>
-                
-                <p className={`text-sm mb-4 flex-1 line-clamp-3 ${
-                  isDark ? 'text-white/80' : 'text-emerald-200'
-                }`}>
+                <p className="text-white/85 text-sm leading-relaxed mb-5 flex-1 line-clamp-4">
                   {project.description}
                 </p>
 
                 {/* Technologies */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.technologies.slice(0, 3).map((tech, techIndex) => (
+                <div className="flex flex-wrap gap-2 mb-5">
+                  {project.technologies.slice(0, 4).map((tech, techIndex) => (
                     <span
                       key={techIndex}
-                      className={`px-3 py-1 text-xs rounded-full border ${
-                        isDark 
-                          ? 'bg-purple-500/20 text-purple-100 border-purple-400/30'
-                          : 'bg-emerald-500/20 text-emerald-100 border-emerald-400/30'
-                      }`}
+                      className={`px-3 py-1.5 text-xs font-medium rounded-full ${isDark
+                          ? 'bg-purple-500/25 text-purple-200 border border-purple-400/30'
+                          : 'bg-emerald-500/25 text-emerald-100 border border-emerald-400/30'
+                        }`}
                     >
                       {tech}
                     </span>
                   ))}
-                  {project.technologies.length > 3 && (
-                    <span className="px-3 py-1 bg-white/10 text-white/70 text-xs rounded-full border border-white/20">
-                      +{project.technologies.length - 3}
+                  {project.technologies.length > 4 && (
+                    <span className="px-3 py-1.5 bg-white/15 text-white/80 text-xs font-medium rounded-full border border-white/20">
+                      +{project.technologies.length - 4}
                     </span>
                   )}
                 </div>
 
                 {/* Action Buttons */}
                 <div className="flex gap-3 mt-auto">
-                  <motion.a
+                  <a
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`flex-1 py-2 px-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 text-sm font-medium backdrop-blur-sm ${
-                      isDark 
-                        ? 'bg-purple-600/80 hover:bg-purple-600 text-white'
-                        : 'bg-emerald-600/80 hover:bg-emerald-600 text-white'
-                    }`}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
+                    className={`flex-1 py-3 px-4 rounded-xl font-medium text-sm flex items-center justify-center gap-2 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] ${isDark
+                        ? 'bg-purple-600 hover:bg-purple-500 text-white shadow-lg shadow-purple-500/25'
+                        : 'bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg shadow-emerald-500/25'
+                      }`}
                   >
-                    <FaGithub />
-                    <span>Code</span>
-                  </motion.a>
-                  
+                    <FaGithub className="text-lg" />
+                    <span>View Code</span>
+                  </a>
+
                   {project.live && project.live !== '#' && (
-                    <motion.a
+                    <a
                       href={project.live}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 bg-white/20 hover:bg-white/30 text-white py-2 px-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 text-sm font-medium backdrop-blur-sm border border-white/30"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
+                      className="flex-1 bg-white/15 hover:bg-white/25 text-white py-3 px-4 rounded-xl font-medium text-sm flex items-center justify-center gap-2 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] border border-white/25"
                     >
                       <FaExternalLinkAlt />
-                      <span>Live</span>
-                    </motion.a>
+                      <span>Live Demo</span>
+                    </a>
                   )}
                 </div>
               </div>
-            </motion.div>
+            </div>
           </SwiperSlide>
         ))}
       </Swiper>
 
-      {/* Custom Pagination - Centered */}
-      <div className="swiper-pagination-custom flex justify-center items-center mt-8 w-full"></div>
-
-      {/* Custom Styles */}
-      <style jsx>{`
-        .mySwiper {
+      {/* Carousel Styles */}
+      <style>{`
+        .projects-carousel-wrapper {
           width: 100%;
-          padding-top: 20px;
-          padding-bottom: 50px;
-          position: relative;
+          max-width: 420px;
+          margin: 0 auto;
+          padding: 20px 0;
         }
         
-        .mySwiper .swiper-slide {
-          background-position: center;
-          background-size: cover;
-          width: 300px;
-          height: 480px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
+        .projects-swiper {
+          width: 100%;
+          padding: 30px 10px 60px 10px;
+          overflow: visible;
         }
         
-        .swiper-pagination-custom {
-          position: absolute !important;
-          bottom: 10px !important;
-          left: 50% !important;
-          transform: translateX(-50%) !important;
-          width: auto !important;
-          display: flex !important;
-          justify-content: center !important;
-          align-items: center !important;
+        .projects-swiper .swiper-slide {
+          height: auto;
+          min-height: 520px;
         }
         
-        .mySwiper .swiper-pagination-bullet {
-          background: rgba(255, 255, 255, 0.5) !important;
-          opacity: 0.7 !important;
-          width: 10px !important;
-          height: 10px !important;
+        .project-card {
+          height: 100%;
+          min-height: 520px;
+        }
+        
+        /* Pagination Styles */
+        .projects-swiper .swiper-pagination {
+          bottom: 15px !important;
+        }
+        
+        .projects-swiper .swiper-pagination-bullet {
+          background: ${isDark ? 'rgba(168, 85, 247, 0.5)' : 'rgba(5, 150, 105, 0.5)'};
+          opacity: 1;
+          width: 10px;
+          height: 10px;
           margin: 0 6px !important;
-          transition: all 0.3s ease !important;
-          border-radius: 50% !important;
+          transition: all 0.3s ease;
         }
         
-        .mySwiper .swiper-pagination-bullet-active {
-          background: ${isDark ? '#a855f7' : '#059669'} !important;
-          opacity: 1 !important;
-          transform: scale(1.4) !important;
+        .projects-swiper .swiper-pagination-bullet-active {
+          background: ${isDark ? '#a855f7' : '#059669'};
+          transform: scale(1.4);
         }
         
-        .line-clamp-1 {
+        /* Line clamp utilities */
+        .line-clamp-4 {
           display: -webkit-box;
-          -webkit-line-clamp: 1;
+          -webkit-line-clamp: 4;
           -webkit-box-orient: vertical;
           overflow: hidden;
-        }
-        
-        .line-clamp-3 {
-          display: -webkit-box;
-          -webkit-line-clamp: 3;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-        }
-        
-        /* Ensure Swiper container has proper dimensions */
-        .swiper {
-          width: 100%;
-          height: 100%;
-          position: relative;
-        }
-        
-        .swiper-wrapper {
-          width: 100%;
-          height: 100%;
-          display: flex;
-          align-items: center;
         }
       `}</style>
     </div>
