@@ -23,24 +23,22 @@ const Layout = () => {
   }, [location.pathname]);
 
   return (
-    <div className={`min-h-screen transition-all duration-500 ${
-      isDark 
-        ? 'bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900' 
-        : 'bg-gradient-to-br from-emerald-50 via-emerald-100 to-emerald-200'
-    }`}>
+    <div className={`min-h-screen transition-all duration-500 ${isDark
+      ? 'bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900'
+      : 'bg-gradient-to-br from-emerald-50 via-emerald-100 to-emerald-200'
+      }`}>
       <ScrollProgress />
       <AccessibilityOverlay />
       <KeyboardShortcuts />
       <PerformanceMonitor isDevelopment={import.meta.env.DEV} />
       <CustomCursor />
-      
-      <div className={`fixed inset-0 pointer-events-none transition-opacity duration-500 ${
-        isDark 
-          ? 'bg-gradient-to-br from-slate-900/50 via-purple-900/30 to-violet-900/50' 
-          : 'bg-gradient-to-br from-emerald-900/20 via-emerald-800/15 to-emerald-700/25'
-      }`} />
 
-      <ThemeToggle />
+      <div className={`fixed inset-0 pointer-events-none transition-opacity duration-500 ${isDark
+        ? 'bg-[#0f0f0f]' // Plain Arch Black
+        : 'bg-gradient-to-br from-emerald-50 via-emerald-100 to-emerald-200'
+        }`} />
+
+
       <ResponsiveNavigation />
 
       <main id="main" className="relative z-10">

@@ -58,10 +58,9 @@ const About = () => {
         >
           {/* Section Header */}
           <motion.div className="text-center mb-12 md:mb-16" variants={itemVariants}>
-            <motion.h2 
-              className={`font-lexa text-4xl md:text-5xl font-bold mb-6 ${
-                isDark ? 'text-white' : 'text-emerald-950'
-              }`}
+            <motion.h2
+              className={`font-lexa text-4xl md:text-5xl font-bold mb-6 ${isDark ? 'text-white' : 'text-emerald-950'
+                }`}
               variants={itemVariants}
             >
               About{' '}
@@ -82,9 +81,9 @@ const About = () => {
                   transition={{ duration: 0.3 }}
                 >
                   <div className="w-full h-full rounded-3xl overflow-hidden">
-                    <img 
-                      src="/iitkgprp.png" 
-                      alt="Vikash Gupta" 
+                    <img
+                      src="https://github.com/Vortex-16.png"
+                      alt="Vikash Gupta"
                       className="w-full h-full object-cover"
                     />
                   </div>
@@ -96,11 +95,10 @@ const About = () => {
                 {stats.map((stat, index) => (
                   <motion.div
                     key={index}
-                    className={`backdrop-blur-md border rounded-2xl p-6 text-center ${
-                      isDark 
-                        ? 'bg-white/10 border-white/20' 
+                    className={`backdrop-blur-md border rounded-2xl p-6 text-center ${isDark
+                        ? 'bg-white/10 border-white/20'
                         : 'bg-emerald-900/80 border-emerald-700/40'
-                    }`}
+                      }`}
                     variants={itemVariants}
                     whileHover={{ scale: 1.05, y: -5 }}
                     transition={{ duration: 0.2 }}
@@ -122,21 +120,19 @@ const About = () => {
               </div>
 
               {/* Fun Facts */}
-              <motion.div 
-                className={`backdrop-blur-md border rounded-3xl p-6 ${
-                  isDark 
-                    ? 'bg-white/10 border-white/20' 
+              <motion.div
+                className={`backdrop-blur-md border rounded-3xl p-6 ${isDark
+                    ? 'bg-white/10 border-white/20'
                     : 'bg-emerald-900/80 border-emerald-700/40'
-                }`}
+                  }`}
                 variants={itemVariants}
                 whileHover={{ scale: 1.01 }}
                 transition={{ duration: 0.2 }}
               >
                 <div className="flex items-center gap-3 mb-4">
                   <span className="text-2xl">✨</span>
-                  <h4 className={`text-lg font-semibold ${
-                    isDark ? 'text-white' : 'text-emerald-50'
-                  }`}>Fun Facts About Me</h4>
+                  <h4 className={`text-lg font-semibold ${isDark ? 'text-white' : 'text-emerald-50'
+                    }`}>Fun Facts About Me</h4>
                 </div>
                 <div className="space-y-3">
                   {[
@@ -149,19 +145,17 @@ const About = () => {
                   ].map((fact, index) => (
                     <motion.div
                       key={index}
-                      className={`flex items-center gap-3 p-3 rounded-full ${
-                        isDark 
-                          ? 'bg-white/5' 
+                      className={`flex items-center gap-3 p-3 rounded-full ${isDark
+                          ? 'bg-white/5'
                           : 'bg-emerald-800/30'
-                      }`}
+                        }`}
                       variants={itemVariants}
                       whileHover={{ scale: 1.02, x: 5 }}
                       transition={{ duration: 0.2 }}
                     >
                       <div className="text-2xl">{fact.emoji}</div>
-                      <p className={`text-sm ${
-                        isDark ? 'text-white/80' : 'text-emerald-100'
-                      }`}>{fact.text}</p>
+                      <p className={`text-sm ${isDark ? 'text-white/80' : 'text-emerald-100'
+                        }`}>{fact.text}</p>
                     </motion.div>
                   ))}
                 </div>
@@ -171,32 +165,29 @@ const About = () => {
             {/* Right Side - About Content */}
             <motion.div className="lg:col-span-2 space-y-8" variants={itemVariants}>
               {/* Introduction Card */}
-              <motion.div 
-                className={`backdrop-blur-md border rounded-3xl p-5 md:p-6 ${
-                  isDark 
-                    ? 'bg-white/10 border-white/20' 
+              <motion.div
+                className={`backdrop-blur-md border rounded-3xl p-5 md:p-6 ${isDark
+                    ? 'bg-white/10 border-white/20'
                     : 'bg-emerald-900/80 border-emerald-700/40'
-                }`}
+                  }`}
                 variants={itemVariants}
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.2 }}
               >
-                <h3 className={`font-lexa text-2xl md:text-3xl font-bold mb-4 md:mb-6 ${
-                  isDark ? 'text-white' : 'text-emerald-50'
-                }`}>
+                <h3 className={`font-lexa text-2xl md:text-3xl font-bold mb-4 md:mb-6 ${isDark ? 'text-white' : 'text-emerald-50'
+                  }`}>
                   Hello! I'm Vikash Gupta 👋
                 </h3>
-                <div className={`font-monorama space-y-3 md:space-y-4 text-base md:text-lg leading-relaxed ${
-                  isDark ? 'text-white/80' : 'text-emerald-100'
-                }`}>
+                <div className={`font-monorama space-y-3 md:space-y-4 text-base md:text-lg leading-relaxed ${isDark ? 'text-white/80' : 'text-emerald-100'
+                  }`}>
                   <p>
-                    I'm a passionate Computer Science & Engineering student at St. Thomas College of Engineering and Technology (2024-2028), 
-                    with a love for creating innovative solutions through code. My journey in tech started with curiosity 
+                    I'm a passionate Computer Science & Engineering student at St. Thomas College of Engineering and Technology (2024-2028),
+                    with a love for creating innovative solutions through code. My journey in tech started with curiosity
                     and has evolved into a deep passion for web development and software engineering.
                   </p>
                   <p>
-                    Currently in my academic journey, I spend my time learning cutting-edge technologies, 
-                    building projects, and exploring the endless possibilities that programming offers. 
+                    Currently in my academic journey, I spend my time learning cutting-edge technologies,
+                    building projects, and exploring the endless possibilities that programming offers.
                     I believe in writing clean, efficient code and creating user experiences that make a difference.
                   </p>
                 </div>
@@ -205,60 +196,51 @@ const About = () => {
               {/* Education & Focus Grid */}
               <div className="grid md:grid-cols-2 gap-6">
                 {/* Education Section */}
-                <motion.div 
-                  className={`backdrop-blur-md border rounded-3xl p-6 ${
-                    isDark 
-                      ? 'bg-white/10 border-white/20' 
+                <motion.div
+                  className={`backdrop-blur-md border rounded-3xl p-6 ${isDark
+                      ? 'bg-white/10 border-white/20'
                       : 'bg-emerald-900/80 border-emerald-700/40'
-                  }`}
+                    }`}
                   variants={itemVariants}
                   whileHover={{ scale: 1.02, y: -5 }}
                   transition={{ duration: 0.2 }}
                 >
                   <div className="flex items-center gap-3 mb-4">
                     <FaGraduationCap className="text-emerald-400 dark:text-purple-400 text-2xl" />
-                    <h4 className={`text-xl font-semibold ${
-                      isDark ? 'text-white' : 'text-emerald-50'
-                    }`}>Education</h4>
+                    <h4 className={`text-xl font-semibold ${isDark ? 'text-white' : 'text-emerald-50'
+                      }`}>Education</h4>
                   </div>
                   <div>
-                    <h5 className={`font-semibold mb-1 ${
-                      isDark ? 'text-white' : 'text-emerald-50'
-                    }`}>Bachelor of Technology</h5>
-                    <p className={`text-sm mb-1 ${
-                      isDark ? 'text-white/70' : 'text-emerald-200'
-                    }`}>Computer Science & Engineering</p>
-                    <p className={`text-sm mb-2 ${
-                      isDark ? 'text-white/60' : 'text-emerald-300'
-                    }`}>St. Thomas College of Engineering and Technology</p>
+                    <h5 className={`font-semibold mb-1 ${isDark ? 'text-white' : 'text-emerald-50'
+                      }`}>Bachelor of Technology</h5>
+                    <p className={`text-sm mb-1 ${isDark ? 'text-white/70' : 'text-emerald-200'
+                      }`}>Computer Science & Engineering</p>
+                    <p className={`text-sm mb-2 ${isDark ? 'text-white/60' : 'text-emerald-300'
+                      }`}>St. Thomas College of Engineering and Technology</p>
                     <div className="inline-block bg-emerald-500/20 dark:bg-purple-500/20 px-3 py-1 rounded-full">
-                      <span className={`text-xs font-medium ${
-                        isDark ? 'text-emerald-300' : 'text-emerald-100'
-                      }`}>2024 - 2028</span>
+                      <span className={`text-xs font-medium ${isDark ? 'text-emerald-300' : 'text-emerald-100'
+                        }`}>2024 - 2028</span>
                     </div>
                   </div>
                 </motion.div>
 
                 {/* Current Focus */}
-                <motion.div 
-                  className={`backdrop-blur-md border rounded-3xl p-6 ${
-                    isDark 
-                      ? 'bg-white/10 border-white/20' 
+                <motion.div
+                  className={`backdrop-blur-md border rounded-3xl p-6 ${isDark
+                      ? 'bg-white/10 border-white/20'
                       : 'bg-emerald-900/80 border-emerald-700/40'
-                  }`}
+                    }`}
                   variants={itemVariants}
                   whileHover={{ scale: 1.02, y: -5 }}
                   transition={{ duration: 0.2 }}
                 >
                   <div className="flex items-center gap-3 mb-4">
                     <FaRocket className="text-emerald-400 dark:text-purple-400 text-2xl" />
-                    <h4 className={`text-xl font-semibold ${
-                      isDark ? 'text-white' : 'text-emerald-50'
-                    }`}>Current Focus</h4>
+                    <h4 className={`text-xl font-semibold ${isDark ? 'text-white' : 'text-emerald-50'
+                      }`}>Current Focus</h4>
                   </div>
-                  <ul className={`space-y-3 ${
-                    isDark ? 'text-white/80' : 'text-emerald-100'
-                  }`}>
+                  <ul className={`space-y-3 ${isDark ? 'text-white/80' : 'text-emerald-100'
+                    }`}>
                     <li className="flex items-center gap-3">
                       <span className="w-2 h-2 bg-emerald-400 dark:bg-purple-400 rounded-full"></span>
                       MERN-stack & NEXT JS
@@ -278,31 +260,28 @@ const About = () => {
               {/* Skills & Interests Grid - Two Column Layout */}
               <div className="grid lg:grid-cols-3 gap-6">
                 {/* Interests & Technologies - Left Side */}
-                <motion.div 
-                  className={`backdrop-blur-md border rounded-3xl p-6 flex flex-col ${
-                    isDark 
-                      ? 'bg-white/10 border-white/20' 
+                <motion.div
+                  className={`backdrop-blur-md border rounded-3xl p-6 flex flex-col ${isDark
+                      ? 'bg-white/10 border-white/20'
                       : 'bg-emerald-900/80 border-emerald-700/40'
-                  }`}
+                    }`}
                   variants={itemVariants}
                   whileHover={{ scale: 1.01 }}
                   transition={{ duration: 0.2 }}
                 >
                   <div className="flex items-center gap-3 mb-6">
                     <FaHeart className="text-emerald-400 dark:text-purple-400 text-2xl" />
-                    <h4 className={`text-xl font-semibold ${
-                      isDark ? 'text-white' : 'text-emerald-50'
-                    }`}>Interests & Technologies</h4>
+                    <h4 className={`text-xl font-semibold ${isDark ? 'text-white' : 'text-emerald-50'
+                      }`}>Interests & Technologies</h4>
                   </div>
                   <div className="flex flex-wrap gap-3 content-start">
                     {interests.map((interest, index) => (
                       <motion.span
                         key={index}
-                        className={`px-4 py-2 backdrop-blur-md border rounded-full text-sm font-medium ${
-                          isDark 
-                            ? 'bg-white/10 border-white/20 text-white' 
+                        className={`px-4 py-2 backdrop-blur-md border rounded-full text-sm font-medium ${isDark
+                            ? 'bg-white/10 border-white/20 text-white'
                             : 'bg-emerald-800/50 border-emerald-600/40 text-emerald-100'
-                        }`}
+                          }`}
                         initial={{ opacity: 0, scale: 0 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ delay: 0.8 + index * 0.1, duration: 0.3 }}
@@ -315,21 +294,19 @@ const About = () => {
                 </motion.div>
 
                 {/* Skills Section - Right Side */}
-                <motion.div 
-                  className={`lg:col-span-2 backdrop-blur-md border rounded-3xl p-8 ${
-                    isDark 
-                      ? 'bg-white/10 border-white/20' 
+                <motion.div
+                  className={`lg:col-span-2 backdrop-blur-md border rounded-3xl p-8 ${isDark
+                      ? 'bg-white/10 border-white/20'
                       : 'bg-emerald-900/80 border-emerald-700/40'
-                  }`}
+                    }`}
                   variants={itemVariants}
                   whileHover={{ scale: 1.01 }}
                   transition={{ duration: 0.2 }}
                 >
                   <div className="flex items-center gap-3 mb-6">
                     <FaCode className="text-emerald-400 dark:text-purple-400 text-2xl" />
-                    <h4 className={`text-2xl font-semibold ${
-                      isDark ? 'text-white' : 'text-emerald-50'
-                    }`}>Skills & Proficiency</h4>
+                    <h4 className={`text-2xl font-semibold ${isDark ? 'text-white' : 'text-emerald-50'
+                      }`}>Skills & Proficiency</h4>
                   </div>
                   <div className="grid md:grid-cols-2 gap-6">
                     {[
@@ -339,16 +316,15 @@ const About = () => {
                       { name: 'C', level: 70 },
                       { name: 'Python', level: 75 },
                       { name: 'Java', level: 65 },
-                      { name: 'Node.js', level: 40},
+                      { name: 'Node.js', level: 40 },
                       { name: 'MongoDB', level: 35 },
                     ].map((skill, index) => (
                       <motion.div
                         key={skill.name}
-                        className={`p-4 rounded-xl border ${
-                          isDark 
-                            ? 'bg-white/5 border-white/10' 
+                        className={`p-4 rounded-xl border ${isDark
+                            ? 'bg-white/5 border-white/10'
                             : 'bg-emerald-800/30 border-emerald-600/30'
-                        }`}
+                          }`}
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.8 + index * 0.1, duration: 0.5 }}
@@ -357,17 +333,14 @@ const About = () => {
                         <div className="flex items-center justify-between mb-3">
                           <div className="flex items-center gap-3">
                             <span className="text-2xl">{skill.icon}</span>
-                            <span className={`font-medium ${
-                              isDark ? 'text-white' : 'text-emerald-50'
-                            }`}>{skill.name}</span>
+                            <span className={`font-medium ${isDark ? 'text-white' : 'text-emerald-50'
+                              }`}>{skill.name}</span>
                           </div>
-                          <span className={`text-sm font-semibold ${
-                            isDark ? 'text-emerald-400' : 'text-emerald-200'
-                          }`}>{skill.level}%</span>
+                          <span className={`text-sm font-semibold ${isDark ? 'text-emerald-400' : 'text-emerald-200'
+                            }`}>{skill.level}%</span>
                         </div>
-                        <div className={`w-full rounded-full h-3 ${
-                          isDark ? 'bg-white/10' : 'bg-emerald-700/30'
-                        }`}>
+                        <div className={`w-full rounded-full h-3 ${isDark ? 'bg-white/10' : 'bg-emerald-700/30'
+                          }`}>
                           <motion.div
                             className="bg-gradient-to-r from-emerald-400 to-emerald-600 dark:from-purple-400 dark:to-purple-600 h-3 rounded-full"
                             initial={{ width: 0 }}

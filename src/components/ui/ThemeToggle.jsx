@@ -1,18 +1,17 @@
 import { motion } from 'framer-motion';
 import { useTheme } from '../../hooks/useTheme';
 
-const ThemeToggle = () => {
+const ThemeToggle = ({ className = "" }) => {
   const { theme, toggleTheme, isDark } = useTheme();
 
   return (
     <motion.button
       onClick={toggleTheme}
       data-theme-toggle
-      className={`fixed top-6 right-6 z-50 p-3 rounded-full backdrop-blur-md border transition-all duration-300 ${
-        isDark 
-          ? 'bg-white/10 border-white/20 text-white hover:bg-white/20' 
+      className={`p-2 rounded-full backdrop-blur-md border transition-all duration-300 ${isDark
+          ? 'bg-white/10 border-white/20 text-white hover:bg-white/20'
           : 'bg-emerald-900/80 border-emerald-700/40 text-emerald-50 hover:bg-emerald-800/90 shadow-lg'
-      }`}
+        } ${className}`}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
       initial={{ opacity: 0, scale: 0 }}

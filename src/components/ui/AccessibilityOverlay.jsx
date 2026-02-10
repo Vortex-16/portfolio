@@ -16,7 +16,7 @@ const AccessibilityOverlay = () => {
 
     // Apply accessibility settings
     document.documentElement.style.fontSize = `${fontSize}%`;
-    
+
     if (highContrast) {
       document.body.classList.add('high-contrast');
     } else {
@@ -45,13 +45,7 @@ const AccessibilityOverlay = () => {
 
   return (
     <>
-      {/* Skip to main content link */}
-      <a
-        href="#main"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-emerald-600 text-white px-4 py-2 rounded-md z-50"
-      >
-        Skip to main content
-      </a>
+
 
       {/* Accessibility tools panel */}
       <AnimatePresence>
@@ -63,7 +57,7 @@ const AccessibilityOverlay = () => {
             exit={{ opacity: 0, x: 50 }}
           >
             <h3 className="text-lg font-semibold mb-3">Accessibility Tools</h3>
-            
+
             <div className="space-y-3">
               <div>
                 <label className="block text-sm font-medium mb-1">
