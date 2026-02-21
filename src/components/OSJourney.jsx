@@ -85,8 +85,8 @@ const OSBentoCard = ({ children, className = '', size = 'medium', delay = 0 }) =
       ref={cardRef}
       className={`
         ${sizeClasses[size]}
-        ${isDark 
-          ? 'bg-gradient-to-br from-purple-900/40 via-violet-900/30 to-fuchsia-900/40 border-purple-500/20' 
+        ${isDark
+          ? 'bg-[#0d0d0d] border-white/8'
           : 'bg-gradient-to-br from-white/90 via-emerald-50/70 to-emerald-100/90 border-emerald-300/50'
         }
         backdrop-blur-xl
@@ -96,7 +96,7 @@ const OSBentoCard = ({ children, className = '', size = 'medium', delay = 0 }) =
         transition-all
         duration-300
         hover:shadow-2xl
-        ${isDark ? 'hover:shadow-purple-500/10' : 'hover:shadow-emerald-500/20'}
+        ${isDark ? 'hover:shadow-arch-blue/10 hover:border-arch-blue/20' : 'hover:shadow-emerald-500/20'}
         ${className}
       `}
       style={{ transformStyle: 'preserve-3d' }}
@@ -120,24 +120,21 @@ const OSJourney = () => {
   }, []);
 
   return (
-    <div className={`min-h-screen pt-32 md:pt-40 pb-20 px-4 md:px-8 lg:pl-32 lg:pr-16 ${
-      isDark 
-        ? 'bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900' 
+    <div className={`min-h-screen pt-32 md:pt-40 pb-20 px-4 md:px-8 lg:pl-32 lg:pr-16 ${isDark
+        ? 'bg-[#0f0f0f]'
         : 'bg-gradient-to-br from-emerald-50 via-emerald-100 to-emerald-200'
-    }`}>
+      }`}>
       {/* Header Section */}
       <div ref={headerRef} className="max-w-7xl mx-auto mb-12 md:mb-16 text-center">
         <div className="flex items-center justify-center mb-4 md:mb-6">
-          <FaLinux className={`text-5xl md:text-7xl lg:text-8xl ${isDark ? 'text-purple-400' : 'text-emerald-600'}`} />
+          <FaLinux className={`text-5xl md:text-7xl lg:text-8xl ${isDark ? 'text-[#1793d1]' : 'text-emerald-600'}`} />
         </div>
-        <h1 className={`font-lexa text-3xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 ${
-          isDark ? 'text-white' : 'text-gray-900'
-        }`}>
+        <h1 className={`font-lexa text-3xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 ${isDark ? 'text-white' : 'text-gray-900'
+          }`}>
           My Journey into Operating Systems
         </h1>
-        <p className={`font-monorama text-base md:text-xl max-w-3xl mx-auto ${
-          isDark ? 'text-gray-300' : 'text-gray-700'
-        }`}>
+        <p className={`font-monorama text-base md:text-xl max-w-3xl mx-auto ${isDark ? 'text-gray-300' : 'text-gray-700'
+          }`}>
           Building the foundation to create my own OS, exploring Linux from the ground up with EndeavourOS
         </p>
       </div>
@@ -150,23 +147,21 @@ const OSJourney = () => {
       {/* Bento Grid Layout */}
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 lg:gap-6 auto-rows-auto">
-          
+
           {/* Why Build an OS - Large Featured Card */}
           <OSBentoCard size="large" delay={0}>
             <div className="h-full flex flex-col">
-              <h3 className={`font-lexa text-xl md:text-2xl font-bold mb-3 flex items-center gap-2 ${
-                isDark ? 'text-white' : 'text-gray-900'
-              }`}>
+              <h3 className={`font-lexa text-xl md:text-2xl font-bold mb-3 flex items-center gap-2 ${isDark ? 'text-white' : 'text-gray-900'
+                }`}>
                 <span className="text-2xl">🚀</span> Why Build an OS?
               </h3>
-              <p className={`font-monorama text-sm md:text-base mb-4 flex-grow ${
-                isDark ? 'text-gray-300' : 'text-gray-700'
-              }`}>
-                Building an operating system is the ultimate challenge in computer science. 
+              <p className={`font-monorama text-sm md:text-base mb-4 flex-grow ${isDark ? 'text-gray-300' : 'text-gray-700'
+                }`}>
+                Building an operating system is the ultimate challenge in computer science.
                 It's about understanding every layer from hardware to software.
               </p>
-              <div className={`p-3 md:p-4 rounded-xl ${isDark ? 'bg-purple-900/40' : 'bg-emerald-100/60'}`}>
-                <p className={`font-monorama text-xs md:text-sm italic ${isDark ? 'text-purple-200' : 'text-emerald-800'}`}>
+              <div className={`p-3 md:p-4 rounded-xl ${isDark ? 'bg-white/5 border border-white/8' : 'bg-emerald-100/60'}`}>
+                <p className={`font-monorama text-xs md:text-sm italic ${isDark ? 'text-gray-400' : 'text-emerald-800'}`}>
                   "The dream of every true programmer is to build their own operating system."
                 </p>
               </div>
@@ -301,15 +296,15 @@ const OSJourney = () => {
           {/* System Architecture */}
           <OSBentoCard size="medium" delay={0.3}>
             <div className="flex flex-col items-center text-center h-full">
-              <FaCog className={`text-4xl mb-3 ${isDark ? 'text-purple-400' : 'text-purple-600'}`} />
+              <FaCog className={`text-4xl mb-3 ${isDark ? 'text-[#1793d1]' : 'text-emerald-600'}`} />
               <h3 className={`font-lexa text-lg md:text-xl font-bold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
                 System Architecture
               </h3>
               <p className={`font-monorama text-xs md:text-sm mb-3 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
                 Understanding computer architecture and hardware-software interfaces.
               </p>
-              <div className={`mt-auto p-2 md:p-3 rounded-lg w-full ${isDark ? 'bg-purple-900/40' : 'bg-purple-100/60'}`}>
-                <p className={`font-monorama text-xs ${isDark ? 'text-purple-200' : 'text-purple-800'}`}>
+              <div className={`mt-auto p-2 md:p-3 rounded-lg w-full ${isDark ? 'bg-white/5 border border-white/8' : 'bg-emerald-100/60'}`}>
+                <p className={`font-monorama text-xs ${isDark ? 'text-gray-400' : 'text-emerald-800'}`}>
                   CPU → Memory → Storage → I/O
                 </p>
               </div>

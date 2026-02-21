@@ -7,7 +7,6 @@ import PerformanceMonitor from './ui/PerformanceMonitor';
 import AccessibilityOverlay from './ui/AccessibilityOverlay';
 import KeyboardShortcuts from './ui/KeyboardShortcuts';
 import ThemeToggle from './ui/ThemeToggle';
-import MusicPlayer from './ui/MusicPlayer';
 import ResponsiveNavigation from './ui/ResponsiveNavigation';
 
 const Layout = () => {
@@ -24,7 +23,7 @@ const Layout = () => {
 
   return (
     <div className={`min-h-screen transition-all duration-500 ${isDark
-      ? 'bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900'
+      ? 'bg-[#0f0f0f]'
       : 'bg-gradient-to-br from-emerald-50 via-emerald-100 to-emerald-200'
       }`}>
       <ScrollProgress />
@@ -41,11 +40,9 @@ const Layout = () => {
 
       <ResponsiveNavigation />
 
-      <main id="main" className="relative z-10">
+      <main id="main" className="relative z-10 pb-24 lg:pb-0">
         <Outlet />
       </main>
-
-      <MusicPlayer />
     </div>
   );
 };

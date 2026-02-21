@@ -1,14 +1,28 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FaGithub, FaExternalLinkAlt, FaStar, FaCodeBranch } from 'react-icons/fa';
+import { useTheme } from '../../hooks/useTheme';
 
 const ProjectCard = ({ project, index }) => {
+    const { isDark } = useTheme();
+
     return (
         <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: index * 0.05 }}
-            className="group flex flex-col bg-emerald-50 dark:bg-[#171717] border border-emerald-100 dark:border-zinc-800 rounded-xl overflow-hidden hover:shadow-xl hover:border-emerald-200 dark:hover:border-arch-blue transition-all duration-300"
+            className="group flex flex-col rounded-xl overflow-hidden transition-all duration-300 hover:shadow-2xl"
+            style={{
+                backgroundColor: isDark ? '#0a0a0a' : '#ecfdf5',
+                border: isDark ? '1px solid rgba(39,39,42,0.9)' : '1px solid #d1fae5',
+                boxShadow: isDark ? '0 0 0 0 transparent' : undefined,
+            }}
+            whileHover={{
+                boxShadow: isDark
+                    ? '0 8px 32px rgba(0,0,0,0.6)'
+                    : '0 8px 32px rgba(5,150,105,0.12)',
+                borderColor: isDark ? 'rgba(23,147,209,0.4)' : '#6ee7b7',
+            }}
         >
             {/* Image Section */}
             <div className="relative overflow-hidden aspect-video">
@@ -17,7 +31,7 @@ const ProjectCard = ({ project, index }) => {
                     alt={project.title}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     onError={(e) => {
-                        e.target.src = "https://images.unsplash.com/photo-1555099962-4199c345e5dd?q=80&w=2070&auto=format&fit=crop"; // Fallback
+                        e.target.src = "https://images.unsplash.com/photo-1555099962-4199c345e5dd?q=80&w=2070&auto=format&fit=crop";
                     }}
                 />
                 <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
@@ -49,10 +63,10 @@ const ProjectCard = ({ project, index }) => {
             {/* Content Section */}
             <div className="flex-1 p-5 flex flex-col">
                 <div className="flex justify-between items-start mb-2">
-                    <span className="text-xs font-semibold tracking-wide text-emerald-600 dark:text-arch-blue uppercase">
+                    <span style={{ color: isDark ? '#1793d1' : '#059669' }} className="text-xs font-semibold tracking-wide uppercase">
                         {project.category}
                     </span>
-                    <div className="flex items-center gap-3 text-emerald-800/60 dark:text-gray-400 text-xs">
+                    <div className="flex items-center gap-3 text-xs" style={{ color: isDark ? '#71717a' : '#6b7280' }}>
                         {project.stars > 0 && (
                             <span className="flex items-center gap-1">
                                 <FaStar className="text-amber-400" /> {project.stars}
@@ -66,11 +80,14 @@ const ProjectCard = ({ project, index }) => {
                     </div>
                 </div>
 
-                <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2 line-clamp-1 group-hover:text-emerald-600 dark:group-hover:text-arch-blue transition-colors">
+                <h3
+                    className="text-lg font-bold mb-2 line-clamp-1 transition-colors"
+                    style={{ color: isDark ? '#ffffff' : '#111827' }}
+                >
                     {project.title}
                 </h3>
 
-                <p className="text-emerald-800 dark:text-gray-400 text-sm mb-4 line-clamp-2 flex-grow">
+                <p className="text-sm mb-4 line-clamp-2 flex-grow" style={{ color: isDark ? '#71717a' : '#065f46' }}>
                     {project.description || "No description provided."}
                 </p>
 
@@ -79,13 +96,25 @@ const ProjectCard = ({ project, index }) => {
                     {project.techStack?.slice(0, 3).map((tech) => (
                         <span
                             key={tech}
-                            className="px-2 py-1 text-[10px] font-medium bg-emerald-100/50 dark:bg-zinc-800 text-emerald-800 dark:text-gray-300 rounded border border-emerald-200 dark:border-zinc-700"
+                            className="px-2 py-1 text-[10px] font-medium rounded"
+                            style={{
+                                backgroundColor: isDark ? '#111111' : 'rgba(209,250,229,0.5)',
+                                color: isDark ? '#a1a1aa' : '#065f46',
+                                border: isDark ? '1px solid #1e1e1e' : '1px solid #a7f3d0',
+                            }}
                         >
                             {tech}
                         </span>
                     ))}
                     {project.techStack?.length > 3 && (
-                        <span className="px-2 py-1 text-[10px] font-medium bg-emerald-100/50 dark:bg-zinc-800 text-emerald-700/70 dark:text-gray-500 rounded border border-emerald-200 dark:border-zinc-700">
+                        <span
+                            className="px-2 py-1 text-[10px] font-medium rounded"
+                            style={{
+                                backgroundColor: isDark ? '#111111' : 'rgba(209,250,229,0.5)',
+                                color: isDark ? '#52525b' : '#6ee7b7',
+                                border: isDark ? '1px solid #1e1e1e' : '1px solid #a7f3d0',
+                            }}
+                        >
                             +{project.techStack.length - 3}
                         </span>
                     )}

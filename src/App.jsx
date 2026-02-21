@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { ThemeProvider } from './hooks/useTheme';
+import { MusicProvider } from './hooks/useMusicPlayer';
 
 // Components
 import LoadingScreen from './components/ui/LoadingScreen';
@@ -35,7 +36,7 @@ const AppContent = () => {
       {isLoading && (
         <LoadingScreen onLoadingComplete={() => setIsLoading(false)} />
       )}
-      
+
       {/* Main App - Only show when not loading */}
       {!isLoading && (
         <Router>
@@ -57,7 +58,9 @@ const AppContent = () => {
 function App() {
   return (
     <ThemeProvider>
-      <AppContent />
+      <MusicProvider>
+        <AppContent />
+      </MusicProvider>
     </ThemeProvider>
   );
 }
