@@ -9,8 +9,8 @@ const ThemeToggle = ({ className = "" }) => {
       onClick={toggleTheme}
       data-theme-toggle
       className={`p-2 rounded-full backdrop-blur-md border transition-all duration-300 ${isDark
-          ? 'bg-white/10 border-white/20 text-white hover:bg-white/20'
-          : 'bg-emerald-900/80 border-emerald-700/40 text-emerald-50 hover:bg-emerald-800/90 shadow-lg'
+        ? 'bg-white/10 border-white/20 text-white hover:bg-white/20'
+        : 'bg-emerald-50/80 border-emerald-200/40 text-emerald-900 hover:bg-emerald-100/90 shadow-lg'
         } ${className}`}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
