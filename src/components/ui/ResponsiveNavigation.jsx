@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { VscHome, VscArchive, VscAccount, VscSettingsGear } from 'react-icons/vsc';
@@ -7,6 +7,7 @@ import { MdWifiOff, MdSignalWifiStatusbarConnectedNoInternet } from 'react-icons
 import { useTheme } from '../../hooks/useTheme';
 import ThemeToggle from './ThemeToggle';
 import { useMusicPlayer } from '../../hooks/useMusicPlayer';
+import ControlPanel from './ControlPanel';
 
 // Compact music button for the mobile top bar
 const MobileMusicButton = () => {
@@ -92,11 +93,11 @@ const BatteryButton = () => {
       update(b);
       b.addEventListener('levelchange', () => update(b));
       b.addEventListener('chargingchange', () => update(b));
-    }).catch(() => {});
+    }).catch(() => { });
     return () => {
       if (bat) {
-        bat.removeEventListener('levelchange', () => {});
-        bat.removeEventListener('chargingchange', () => {});
+        bat.removeEventListener('levelchange', () => { });
+        bat.removeEventListener('chargingchange', () => { });
       }
     };
   }, []);
@@ -104,16 +105,16 @@ const BatteryButton = () => {
   const pct = Math.round(battery.level * 100);
   const Icon =
     battery.level > 0.87 ? FaBatteryFull :
-    battery.level > 0.62 ? FaBatteryThreeQuarters :
-    battery.level > 0.37 ? FaBatteryHalf :
-    battery.level > 0.12 ? FaBatteryQuarter :
-    FaBatteryEmpty;
+      battery.level > 0.62 ? FaBatteryThreeQuarters :
+        battery.level > 0.37 ? FaBatteryHalf :
+          battery.level > 0.12 ? FaBatteryQuarter :
+            FaBatteryEmpty;
 
   const color =
     battery.charging ? 'text-emerald-400' :
-    battery.level <= 0.15 ? 'text-red-400' :
-    battery.level <= 0.3 ? 'text-amber-400' :
-    'inherit';
+      battery.level <= 0.15 ? 'text-red-400' :
+        battery.level <= 0.3 ? 'text-amber-400' :
+          'inherit';
 
   return (
     <span title={`${pct}%${battery.charging ? ' (Charging)' : ''}`} className={`flex items-center ${color}`}>
@@ -189,6 +190,9 @@ const ResponsiveNavigation = () => {
   const [time, setTime] = useState(new Date());
   const { isDark } = useTheme();
   const location = useLocation();
+  const [showControlPanel, setShowControlPanel] = useState(false);
+  const systemTrayRef = useRef(null);
+  const mobileTrayRef = useRef(null);
 
   useEffect(() => {
     const timer = setInterval(() => setTime(new Date()), 1000);
@@ -245,15 +249,21 @@ const ResponsiveNavigation = () => {
           {/* Right: System Tray & Profile */}
           <div className="flex items-center gap-3">
             {/* System Tray */}
-            <div className={`flex items-center gap-3 px-4 py-1.5 rounded-full backdrop-blur-md border border-white/20 shadow-lg ${isDark ? 'bg-arch-black/80 text-gray-300' : 'bg-white/80 text-gray-600'}`}>
-              <ThemeToggle className="!p-0 !bg-transparent !border-none !shadow-none hover:!bg-transparent" />
-              <div className="w-px h-3 bg-current opacity-20"></div>
-              {/* Music button */}
-              <DesktopMusicButton />
-              <div className="w-px h-3 bg-current opacity-20"></div>
-              <WifiButton />
-              <VolumeButton />
-              <BatteryButton />
+            <div
+              ref={systemTrayRef}
+              onClick={() => setShowControlPanel(!showControlPanel)}
+              className={`flex items-center gap-3 px-4 py-1.5 rounded-full backdrop-blur-md border border-white/20 shadow-lg cursor-pointer hover:bg-white/5 transition-colors ${isDark ? 'bg-arch-black/80 text-gray-300' : 'bg-white/80 text-gray-600'}`}
+            >
+              <div className="flex items-center gap-3 pointer-events-none">
+                <ThemeToggle className="!p-0 !bg-transparent !border-none !shadow-none hover:!bg-transparent" />
+                <div className="w-px h-3 bg-current opacity-20"></div>
+                {/* Music button */}
+                <DesktopMusicButton />
+                <div className="w-px h-3 bg-current opacity-20"></div>
+                <WifiButton />
+                <VolumeButton />
+                <BatteryButton />
+              </div>
             </div>
 
             {/* Profile/Power */}
@@ -280,7 +290,11 @@ const ResponsiveNavigation = () => {
         {/* Slim top bar - just logo + music btn + theme toggle */}
         <div className={`fixed top-0 left-0 right-0 z-50 px-4 py-2.5 flex justify-between items-center backdrop-blur-md border-b ${isDark ? 'bg-black/85 border-white/10' : 'bg-white/85 border-gray-100'}`}>
           <span className={`font-lexa font-bold tracking-widest text-sm ${isDark ? 'text-white' : 'text-gray-900'}`}>VIKASH</span>
-          <div className="flex items-center gap-2">
+          <div
+            ref={mobileTrayRef}
+            onClick={() => setShowControlPanel(!showControlPanel)}
+            className="flex items-center gap-2 cursor-pointer active:opacity-70"
+          >
             <MobileMusicButton />
             <ThemeToggle />
           </div>
@@ -350,6 +364,13 @@ const ResponsiveNavigation = () => {
           </motion.nav>
         </div>
       </div>
+
+      {/* OS Control Panel */}
+      <ControlPanel
+        isOpen={showControlPanel}
+        onClose={() => setShowControlPanel(false)}
+        anchorRef={window.innerWidth >= 1024 ? systemTrayRef : mobileTrayRef}
+      />
     </>
   );
 };

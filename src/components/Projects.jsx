@@ -1,35 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../hooks/useTheme';
-import { manualProjects, filters } from '../data/projects';
-import { fetchGitHubProjects } from '../utils/github';
+import { projects, filters } from '../data/projects';
 import ProjectCard from './ui/ProjectCard';
+import ProjectDetailsModal from './ui/ProjectDetailsModal';
 
 const Projects = () => {
   const [activeFilter, setActiveFilter] = useState("All");
-  const [projects, setProjects] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [selectedProject, setSelectedProject] = useState(null);
   const { isDark } = useTheme();
-
-  useEffect(() => {
-    const loadProjects = async () => {
-      setLoading(true);
-      try {
-        const githubData = await fetchGitHubProjects();
-        // Merge manual projects with GitHub projects
-        const allProjects = [...manualProjects, ...githubData];
-        setProjects(allProjects);
-      } catch (error) {
-        console.error("Failed to load projects:", error);
-        // Fallback to minimal manual projects if GitHub fails
-        setProjects(manualProjects);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadProjects();
-  }, []);
 
   const filteredProjects = activeFilter === "All"
     ? projects
@@ -98,29 +77,24 @@ const Projects = () => {
           ))}
         </div>
 
-        {/* Loading State */}
-        {loading ? (
-          <div className="flex justify-center items-center h-64">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"></div>
-          </div>
-        ) : (
-          <motion.div
-            layout
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          >
-            <AnimatePresence mode="popLayout">
-              {filteredProjects.map((project, index) => (
-                <ProjectCard
-                  key={project.id}
-                  project={project}
-                  index={index}
-                />
-              ))}
-            </AnimatePresence>
-          </motion.div>
-        )}
+        {/* Project Grid */}
+        <motion.div
+          layout
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
+          <AnimatePresence mode="popLayout">
+            {filteredProjects.map((project, index) => (
+              <ProjectCard
+                key={project.id}
+                project={project}
+                index={index}
+                onClick={() => setSelectedProject(project)}
+              />
+            ))}
+          </AnimatePresence>
+        </motion.div>
 
-        {!loading && filteredProjects.length === 0 && (
+        {filteredProjects.length === 0 && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -132,6 +106,17 @@ const Projects = () => {
           </motion.div>
         )}
       </div>
+
+      {/* Project Details Modal */}
+      <AnimatePresence>
+        {selectedProject && (
+          <ProjectDetailsModal
+            project={selectedProject}
+            onClose={() => setSelectedProject(null)}
+          />
+        )}
+      </AnimatePresence>
+
     </section>
   );
 };

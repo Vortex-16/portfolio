@@ -120,10 +120,7 @@ const OSJourney = () => {
   }, []);
 
   return (
-    <div className={`min-h-screen pt-32 md:pt-40 pb-20 px-4 md:px-8 lg:pl-32 lg:pr-16 ${isDark
-        ? 'bg-[#0f0f0f]'
-        : 'bg-gradient-to-br from-emerald-50 via-emerald-100 to-emerald-200'
-      }`}>
+    <div className="min-h-screen pt-32 md:pt-40 pb-20 px-4 md:px-8 lg:pl-32 lg:pr-16">
       {/* Header Section */}
       <div ref={headerRef} className="max-w-7xl mx-auto mb-12 md:mb-16 text-center">
         <div className="flex items-center justify-center mb-4 md:mb-6">

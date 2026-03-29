@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { useTheme } from '../../hooks/useTheme';
+import { Frame } from './Frame';
 
 const InteractiveTerminal = () => {
   const { isDark } = useTheme();
@@ -135,17 +136,47 @@ const InteractiveTerminal = () => {
   };
 
   return (
+    <div className="relative max-w-4xl mx-auto mb-12 p-3 group">
+      {/* Cosmic UI Frame background */}
+      <Frame
+        paths={[
+          {
+            d: "M 10 10 L 990 10 L 990 990 L 10 990 Z", // Approximate path layout, will stretch via viewBox
+            styles: {
+              fill: "rgba(0,0,0,0)",
+              stroke: isDark ? "rgba(255, 255, 255, 0.4)" : "rgba(5, 150, 105, 0.4)",
+              strokeWidth: "2",
+            },
+          },
+          {
+            d: "M 0 15 L 15 0 L 30 0 L 15 15 Z", // Corner accent
+            styles: {
+              fill: isDark ? "rgba(255, 255, 255, 0.6)" : "rgba(5, 150, 105, 0.6)",
+            },
+          },
+          {
+            d: "M 1000 985 L 985 1000 L 970 1000 L 985 985 Z", // Corner accent bottom right
+            styles: {
+              fill: isDark ? "rgba(255, 255, 255, 0.6)" : "rgba(5, 150, 105, 0.6)",
+            },
+          }
+        ]}
+        viewBox="0 0 1000 1000"
+        preserveAspectRatio="none"
+        className="text-white z-0 opacity-50 group-hover:opacity-100 transition-opacity duration-300"
+      />
+
     <div 
-      className={`max-w-4xl mx-auto mb-12 rounded-lg overflow-hidden ${
-        isDark ? 'bg-gray-900/90' : 'bg-gray-800/95'
-      } backdrop-blur-sm border ${isDark ? 'border-purple-500/30' : 'border-emerald-500/30'} shadow-xl cursor-text`}
+      className={`relative z-10 rounded-lg overflow-hidden ${
+        isDark ? 'bg-[#0f0f0f]/50' : 'bg-white/30'
+      } backdrop-blur-md border ${isDark ? 'border-white/10' : 'border-emerald-500/20'} shadow-2xl cursor-text`}
       onClick={handleTerminalClick}
     >
-      <div className="flex items-center gap-2 px-3 py-2 bg-gray-800/60 border-b border-gray-700/50">
+      <div className={`flex items-center gap-2 px-3 py-2 border-b ${isDark ? 'bg-black/20 border-white/5' : 'bg-white/20 border-emerald-500/10'}`}>
         <div className="w-2.5 h-2.5 rounded-full bg-red-500"></div>
         <div className="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
         <div className="w-2.5 h-2.5 rounded-full bg-green-500"></div>
-        <span className="ml-2 text-xs text-gray-400 font-mono">vikash@portfolio ~ Interactive Terminal</span>
+        <span className={`ml-2 text-xs font-mono ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>vikash@portfolio ~ Interactive Terminal</span>
       </div>
       
       <div 
@@ -185,6 +216,7 @@ const InteractiveTerminal = () => {
           <span className="text-green-400 animate-pulse">▋</span>
         </form>
       </div>
+    </div>
     </div>
   );
 };

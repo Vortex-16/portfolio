@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { FaGithub, FaExternalLinkAlt, FaStar, FaCodeBranch } from 'react-icons/fa';
 import { useTheme } from '../../hooks/useTheme';
 
-const ProjectCard = ({ project, index }) => {
+const ProjectCard = ({ project, index, onClick }) => {
     const { isDark } = useTheme();
 
     return (
@@ -11,7 +11,8 @@ const ProjectCard = ({ project, index }) => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: index * 0.05 }}
-            className="group flex flex-col rounded-xl overflow-hidden transition-all duration-300 hover:shadow-2xl"
+            onClick={onClick}
+            className="group flex flex-col rounded-xl overflow-hidden transition-all duration-300 hover:shadow-2xl cursor-pointer"
             style={{
                 backgroundColor: isDark ? '#0a0a0a' : '#ecfdf5',
                 border: isDark ? '1px solid rgba(39,39,42,0.9)' : '1px solid #d1fae5',

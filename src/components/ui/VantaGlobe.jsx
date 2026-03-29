@@ -18,12 +18,12 @@ const VantaGlobe = () => {
         gyroControls: false,
         minHeight: 200.00,
         minWidth: 200.00,
-        scale: 1.00,
-        scaleMobile: 1.00,
+        scale: 0.50,
+        scaleMobile: 0.50,
         color: isDark ? 0x9e4bba : 0x059669,
         color2: isDark ? 0x4c2a59 : 0x34d399,
         backgroundColor: isDark ? 0x1e1e2f : 0xd1fae5,
-        size: 1.0,
+        size: 0.8,
         backgroundAlpha: 0,
       });
     }
@@ -48,8 +48,8 @@ const VantaGlobe = () => {
   }, [isDark]);
 
   return (
-    <div 
-      ref={vantaRef} 
+    <div
+      ref={vantaRef}
       className="fixed inset-0 -z-10"
       style={{ width: '100%', height: '100%' }}
     />

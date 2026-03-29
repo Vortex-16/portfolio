@@ -89,29 +89,8 @@ html {
   will-change: opacity;
 }
 
-/* Custom cursor styles */
-* {
-  cursor: auto;
-}
+/* Custom cursor styles removed - using default system cursor */
 
-body {
-  cursor: auto;
-}
-
-/* Hide default cursor on desktop when custom cursor is active */
-@media (hover: hover) and (pointer: fine) {
-  body.custom-cursor * {
-    cursor: none !important;
-  }
-  body.custom-cursor {
-    cursor: none !important;
-  }
-}
-
-/* Custom cursor override for interactive elements */
-a, button, input, textarea, select, [role="button"], [tabindex]:not([tabindex="-1"]) {
-  cursor: pointer;
-}
 
 /* Accessibility utilities */
 .sr-only {
@@ -195,15 +174,7 @@ body.reduced-motion *::after {
   background: linear-gradient(45deg, #047857, #0E7490);
 }
 
-/* Disable cursor trail on touch devices and ensure cursor visibility */
-@media (hover: none) and (pointer: coarse) {
-  * {
-    cursor: auto !important;
-  }
-  body {
-    cursor: auto !important;
-  }
-}
+/* Disable cursor trail handled by default cursor now */
 
 /* Animation performance improvements */
 @media (prefers-reduced-motion: reduce) {

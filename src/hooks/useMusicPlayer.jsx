@@ -78,7 +78,7 @@ export const MusicProvider = ({ children }) => {
 
     return (
         <MusicContext.Provider value={{
-            isPlaying, isMuted, volume, currentTrack, duration, currentTime, tracks,
+            isPlaying, isMuted, volume, setVolume, currentTrack, duration, currentTime, tracks,
             togglePlay, toggleMute, handleVolumeChange, handleLoadedMetadata,
             handleTimeUpdate, handleEnded, handleSeek, changeTrack, formatTime, audioRef,
         }}>

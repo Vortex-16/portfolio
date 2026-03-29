@@ -21,13 +21,13 @@ export const ThemeProvider = ({ children }) => {
 
   useEffect(() => {
     const root = document.documentElement;
-    
+
     // Remove previous theme class
     root.classList.remove('light', 'dark');
-    
+
     // Add current theme class
     root.classList.add(theme);
-    
+
     // Save to localStorage
     localStorage.setItem('theme', theme);
   }, [theme]);
@@ -36,10 +36,14 @@ export const ThemeProvider = ({ children }) => {
     setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
   };
 
+  const [brightness, setBrightness] = useState(100);
+
   const value = {
     theme,
     toggleTheme,
     isDark: theme === 'dark',
+    brightness,
+    setBrightness,
   };
 
   return (

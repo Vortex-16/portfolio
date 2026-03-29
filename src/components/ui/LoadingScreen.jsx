@@ -3,28 +3,28 @@ import { gsap } from 'gsap';
 import { useTheme } from '../../hooks/useTheme';
 
 const bootSequence = [
-  { text: "Arch Linux 6.8.9-arch1-1 (tty1)", color: "text-white", delay: 80 },
-  { text: " ", color: "", delay: 40 },
-  { text: "[    0.000000] Booting Linux on physical CPU 0x0", color: "text-gray-500", delay: 60 },
-  { text: "[    0.000000] ACPI: Core revision 20230628", color: "text-gray-500", delay: 40 },
-  { text: "[    0.419201] pci 0000:00:00.0: [8086:29c0] type 00 class 0x060000", color: "text-gray-500", delay: 40 },
-  { text: "[  OK  ] Started Kernel Audit Daemon.", color: "text-green-400", delay: 60 },
-  { text: "[  OK  ] Started D-Bus System Message Bus.", color: "text-green-400", delay: 60 },
-  { text: "[  OK  ] Started Network Manager.", color: "text-green-400", delay: 60 },
-  { text: "[  OK  ] Reached target Network.", color: "text-green-400", delay: 50 },
-  { text: "         Mounting /boot/efi...", color: "text-gray-400", delay: 40 },
-  { text: "[  OK  ] Mounted /boot/efi.", color: "text-green-400", delay: 50 },
-  { text: "[  OK  ] Started User Manager for UID 1000.", color: "text-green-400", delay: 60 },
-  { text: "[  OK  ] Started Session 1 of user vikash.", color: "text-green-400", delay: 70 },
-  { text: "         Starting Hyprland Compositor...", color: "text-cyan-400", delay: 80 },
-  { text: "[  OK  ] target Graphical Interface.", color: "text-green-400", delay: 60 },
-  { text: " ", color: "", delay: 30 },
-  { text: ">>> Initializing Portfolio...", color: "text-purple-400", delay: 90 },
-  { text: ">>> Loading project data...", color: "text-purple-400", delay: 80 },
-  { text: ">>> Fetching GitHub contributions...", color: "text-purple-400", delay: 80 },
-  { text: ">>> Mounting asset pipeline...", color: "text-purple-400", delay: 70 },
-  { text: " ", color: "", delay: 30 },
-  { text: "[  OK  ] System Ready. Welcome, vikash.", color: "text-green-400 font-semibold", delay: 120 },
+  { text: "Arch Linux 6.8.9-arch1-1 (tty1)", color: "text-white", delay: 40 },
+  { text: " ", color: "", delay: 20 },
+  { text: "[    0.000000] Booting Linux on physical CPU 0x0", color: "text-gray-500", delay: 30 },
+  { text: "[    0.000000] ACPI: Core revision 20230628", color: "text-gray-500", delay: 20 },
+  { text: "[    0.419201] pci 0000:00:00.0: [8086:29c0] type 00 class 0x060000", color: "text-gray-500", delay: 20 },
+  { text: "[  OK  ] Started Kernel Audit Daemon.", color: "text-green-400", delay: 30 },
+  { text: "[  OK  ] Started D-Bus System Message Bus.", color: "text-green-400", delay: 30 },
+  { text: "[  OK  ] Started Network Manager.", color: "text-green-400", delay: 30 },
+  { text: "[  OK  ] Reached target Network.", color: "text-green-400", delay: 25 },
+  { text: "         Mounting /boot/efi...", color: "text-gray-400", delay: 20 },
+  { text: "[  OK  ] Mounted /boot/efi.", color: "text-green-400", delay: 25 },
+  { text: "[  OK  ] Started User Manager for UID 1000.", color: "text-green-400", delay: 30 },
+  { text: "[  OK  ] Started Session 1 of user vikash.", color: "text-green-400", delay: 35 },
+  { text: "         Starting Hyprland Compositor...", color: "text-cyan-400", delay: 40 },
+  { text: "[  OK  ] target Graphical Interface.", color: "text-green-400", delay: 30 },
+  { text: " ", color: "", delay: 15 },
+  { text: ">>> Initializing Portfolio...", color: "text-purple-400", delay: 45 },
+  { text: ">>> Loading project data...", color: "text-purple-400", delay: 40 },
+  { text: ">>> Fetching GitHub contributions...", color: "text-purple-400", delay: 40 },
+  { text: ">>> Mounting asset pipeline...", color: "text-purple-400", delay: 35 },
+  { text: " ", color: "", delay: 15 },
+  { text: "[  OK  ] System Ready. Welcome, vikash.", color: "text-green-400 font-semibold", delay: 60 },
 ];
 
 const LoadingScreen = ({ onComplete, onLoadingComplete }) => {
@@ -66,7 +66,7 @@ const LoadingScreen = ({ onComplete, onLoadingComplete }) => {
   useEffect(() => {
     if (!isWideScreen) return;
     if (currentLineIndex >= bootSequence.length) {
-      setTimeout(triggerExit, 600);
+      setTimeout(triggerExit, 250);
       return;
     }
 
@@ -93,9 +93,9 @@ const LoadingScreen = ({ onComplete, onLoadingComplete }) => {
         setCurrentLineText('');
         setTimeout(() => {
           setCurrentLineIndex(i => i + 1);
-        }, line.delay ?? 60);
+        }, line.delay ?? 30);
       }
-    }, 12); // chars per tick
+    }, 6); // chars per tick
 
     return () => clearInterval(charInterval);
   }, [currentLineIndex, isWideScreen, triggerExit]);
@@ -111,7 +111,7 @@ const LoadingScreen = ({ onComplete, onLoadingComplete }) => {
   useEffect(() => {
     if (isWideScreen) return;
     const start = Date.now();
-    const duration = 2200;
+    const duration = 1100;
     const frame = () => {
       const elapsed = Date.now() - start;
       const p = Math.min((elapsed / duration) * 100, 100);
