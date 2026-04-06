@@ -8,6 +8,7 @@ import AccessibilityOverlay from './ui/AccessibilityOverlay';
 import KeyboardShortcuts from './ui/KeyboardShortcuts';
 import ThemeToggle from './ui/ThemeToggle';
 import ResponsiveNavigation from './ui/ResponsiveNavigation';
+import AskVikash from './ui/AskVikash';
 
 const Layout = () => {
   const { isDark } = useTheme();
@@ -52,6 +53,8 @@ const Layout = () => {
       <main id="main" className="relative z-10 pb-24 lg:pb-0">
         <Outlet />
       </main>
+
+      <AskVikash />
     </div>
   );
 };

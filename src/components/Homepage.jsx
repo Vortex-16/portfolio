@@ -64,33 +64,44 @@ const Homepage = () => {
 
       <div className="flex-1 flex items-center justify-center py-8 md:py-12 lg:py-0 mt-24 md:mt-28 lg:mt-24">
         <div className="container mx-auto max-w-7xl px-4 md:px-6 lg:px-12 lg:pl-24">
-          <div className="grid lg:grid-cols-2 gap-8 md:gap-10 lg:gap-16 items-center">
-            <div ref={titleRef} className="space-y-4 md:space-y-5 lg:space-y-6 order-2 lg:order-1">
+          <div className="flex flex-col items-center text-center max-w-4xl mx-auto gap-8 md:gap-10">
+            <div ref={titleRef} className="space-y-4 md:space-y-5 lg:space-y-6 flex flex-col items-center">
               <h1 className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.1] ${isDark ? 'text-white' : 'text-gray-900'
                 }`}>
                 <span className="font-monorama font-normal">Hi</span><br />
                 <span className="font-lexa font-bold">it's Vikash</span>
               </h1>
 
-              <p className={`font-monorama text-sm sm:text-base lg:text-base leading-relaxed ${isDark ? 'text-gray-400' : 'text-gray-600'
+              <p className={`font-monorama text-sm sm:text-base lg:text-base leading-relaxed max-w-2xl ${isDark ? 'text-gray-400' : 'text-gray-600'
                 }`}>
                 Passionate about building innovative web applications and exploring the depths of operating systems. <br className="hidden md:block" />
                 Currently learning with EndeavourOS to understand Linux internals and working towards creating my own OS.
               </p>
 
-              <div className="pt-2">
+              <div className="pt-2 flex justify-center gap-4">
                 <Link
                   to="/about"
-                  className={`inline-block px-6 md:px-8 py-2.5 md:py-3 text-white font-monorama font-medium rounded-full text-sm transition-all duration-300 ${isDark
+                  className={`inline-block px-6 md:px-8 py-2.5 md:py-3 text-white font-monorama font-medium rounded-full text-sm shadow-lg transition-all duration-300 ${isDark
                     ? 'bg-purple-600 hover:bg-purple-700'
                     : 'bg-orange-500 hover:bg-orange-600'
                     }`}
                 >
                   About Me
                 </Link>
+                <a
+                  href="/resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`inline-flex items-center justify-center px-6 md:px-8 py-2.5 md:py-3 font-monorama font-medium rounded-full border-2 text-sm transition-all duration-300 ${isDark
+                    ? 'border-purple-600 text-purple-300 hover:bg-purple-600 hover:text-white'
+                    : 'border-orange-500 text-orange-600 hover:bg-orange-500 hover:text-white'
+                    }`}
+                >
+                  Resume
+                </a>
               </div>
 
-              <div ref={subtitleRef} className="flex flex-wrap gap-2 md:gap-3 pt-2 md:pt-3">
+              <div ref={subtitleRef} className="flex flex-wrap justify-center gap-2 md:gap-3 pt-2 md:pt-3">
                 <span className={`font-monorama px-4 md:px-5 py-1.5 md:py-2 text-white font-medium rounded text-xs md:text-sm ${isDark ? 'bg-purple-600' : 'bg-orange-500'
                   }`}>
                   c
@@ -111,25 +122,6 @@ const Homepage = () => {
                   }`}>
                   python
                 </span>
-              </div>
-            </div>
-
-            {/* Profile image - visible on mobile, hidden on desktop */}
-            <div ref={profileRef} className="relative flex justify-center lg:hidden items-center order-1 lg:order-2">
-              <div className="relative w-[220px] h-[220px] sm:w-[280px] sm:h-[280px] md:w-[320px] md:h-[320px]">
-                <div className="relative z-10 w-full h-full">
-                  <img
-                    src="/PofileNew.jpeg"
-                    alt="Vikash Gupta - Profile photo"
-                    className="w-full h-full rounded-full object-cover shadow-2xl"
-                  />
-
-                  <div className={`absolute bottom-2 left-2 sm:bottom-3 sm:left-3 md:bottom-4 md:left-4 px-3 py-2 sm:px-4 sm:py-3 md:px-5 md:py-3 rounded-xl sm:rounded-2xl shadow-2xl ${isDark ? 'bg-gray-900' : 'bg-gray-900'
-                    }`}>
-                    <div className="text-white text-xl sm:text-2xl md:text-3xl font-bold font-monorama leading-tight">3+</div>
-                    <div className="text-gray-400 text-[10px] sm:text-xs md:text-sm font-monorama">years experience</div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>

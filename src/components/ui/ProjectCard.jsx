@@ -11,8 +11,7 @@ const ProjectCard = ({ project, index, onClick }) => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: index * 0.05 }}
-            onClick={onClick}
-            className="group flex flex-col rounded-xl overflow-hidden transition-all duration-300 hover:shadow-2xl cursor-pointer"
+            className="group flex flex-col rounded-xl overflow-hidden transition-all duration-300 hover:shadow-2xl"
             style={{
                 backgroundColor: isDark ? '#0a0a0a' : '#ecfdf5',
                 border: isDark ? '1px solid rgba(39,39,42,0.9)' : '1px solid #d1fae5',
@@ -62,7 +61,7 @@ const ProjectCard = ({ project, index, onClick }) => {
             </div>
 
             {/* Content Section */}
-            <div className="flex-1 p-5 flex flex-col">
+            <div className="flex-1 p-5 flex flex-col cursor-pointer" onClick={onClick}>
                 <div className="flex justify-between items-start mb-2">
                     <span style={{ color: isDark ? '#1793d1' : '#059669' }} className="text-xs font-semibold tracking-wide uppercase">
                         {project.category}

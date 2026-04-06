@@ -292,8 +292,7 @@ const ResponsiveNavigation = () => {
           <span className={`font-lexa font-bold tracking-widest text-sm ${isDark ? 'text-white' : 'text-gray-900'}`}>VIKASH</span>
           <div
             ref={mobileTrayRef}
-            onClick={() => setShowControlPanel(!showControlPanel)}
-            className="flex items-center gap-2 cursor-pointer active:opacity-70"
+            className="flex items-center gap-2"
           >
             <MobileMusicButton />
             <ThemeToggle />

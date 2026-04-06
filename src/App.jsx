@@ -23,18 +23,26 @@ const preloadRoutes = () => {
 };
 
 const AppContent = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  // Skip boot on return visits
+  const [isLoading, setIsLoading] = useState(
+    () => !localStorage.getItem('vk_visited')
+  );
 
   useEffect(() => {
     // Preload routes when app loads
     preloadRoutes();
   }, []);
 
+  const handleLoadingComplete = () => {
+    localStorage.setItem('vk_visited', '1');
+    setIsLoading(false);
+  };
+
   return (
     <>
       {/* Loading Screen */}
       {isLoading && (
-        <LoadingScreen onLoadingComplete={() => setIsLoading(false)} />
+        <LoadingScreen onLoadingComplete={handleLoadingComplete} />
       )}
 
       {/* Main App - Only show when not loading */}

@@ -26,7 +26,10 @@ export const projects = [
         techStack: ["HTML", "CSS", "JavaScript"],
         demo: "https://vortex-16.github.io/aims/",
         github: "https://github.com/Vortex-16/aims-2-0",
-        featured: true
+        featured: true,
+        problem: "Academic institutions were tracking attendance manually on paper, causing errors, delays, and no real-time visibility for faculty.",
+        solution: "Built a role-based web dashboard where administrators input attendance data, faculty view live summaries, and students check their own records instantly.",
+        result: "Deployed at client institution; reduced manual processing time by ~70% and eliminated attendance disputes.",
     },
     {
         id: "client-2",
@@ -37,7 +40,10 @@ export const projects = [
         techStack: ["TypeScript", "Next.js", "Tailwind"],
         demo: "https://aims-2-0.vercel.app/",
         github: "https://github.com/Vortex-16/aims",
-        featured: true
+        featured: true,
+        problem: "AIMS v1 suffered from slow page loads, no analytics, and a dated UI that frustrated faculty.",
+        solution: "Migrated entirely to Next.js + TypeScript with server-side rendering, added chart-based analytics, and redesigned the UI with Tailwind.",
+        result: "50% faster load times vs v1. Client renewed contract and requested additional modules.",
     },
     {
         id: "client-3",
@@ -94,20 +100,24 @@ export const projects = [
         github: "https://github.com/Vortex-16/SpiceNPaste",
         featured: false
     },
-    {
-        id: "client-8",
-        title: "",
-        description: "",
-        image: "",
-        category: "Client Work",
-        techStack: [""],
-        demo: "",
-        github: "",
-        featured: false
-    },
 
     // ── GROUP / HACKATHON ─────────────────────────────────────────────────────
 
+    {
+        id: "grp-devtrack",
+        title: "DevTrack",
+        description: "Prove your consistency. Map your growth. Master your craft. DevTrack is an AI-enhanced developer ecosystem designed to bridge the gap between learning and building.",
+        image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=2070&auto=format&fit=crop",
+        category: "Hackathon",
+        techStack: ["React", "Llama 3.3", "Node.js", "GitHub API", "Real-time Data"],
+        demo: "https://devtrackweb.xyz/",
+        github: "https://github.com/Vortex-16/devtrack",
+        featured: true,
+        demoType: "devtrack",
+        problem: "Traditional portfolios only show the final result, failing to capture the consistency, growth, and learning process of a developer.",
+        solution: "Built a 'Consistency Engine' merging live GitHub data for @Vortex-16 with learning logs, featuring Llama 3.3-powered project intelligence for security audit and complexity analysis.",
+        result: "Awarded 'Best Innovative Project'. Helps developers master their craft by mapping growth and identifying critical hotspots in their codebase.",
+    },
     {
         id: "grp-1",
         title: "College Coding Club Website",
@@ -122,24 +132,30 @@ export const projects = [
     {
         id: "grp-2",
         title: "Arynox LLM",
-        description: "ARYNOX is a cutting-edge education platform designed to provide students with 24/7 academic support through a Socratic AI Tutoring system. Instead of simply giving answers, ARYNOX guides students through their course materials using hints and inquiry-based learning, ensuring academic integrity and deeper understanding.",
+        description: "ARYNOX is a cutting-edge education platform with a Socratic AI Tutoring system. Instead of giving answers, it guides students through materials using hints and inquiry-based learning.",
         image: "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?q=80&w=2070&auto=format&fit=crop",
         category: "Hackathon",
-        techStack: ["React", "Node.js"],
+        techStack: ["React", "Node.js", "LangChain", "ChromaDB"],
         demo: "https://arynox-llm.onrender.com/",
         github: "https://github.com/Vortex-16/arynox.llm",
-        featured: true
+        featured: true,
+        problem: "Students needed 24/7 academic support but existing chatbots gave direct answers, undermining learning and academic integrity.",
+        solution: "Built a RAG-powered Socratic tutor that retrieves relevant course material and asks guiding questions instead of revealing answers, using LangChain + ChromaDB vector search.",
+        result: "Won recognition at hackathon. System handles real student queries with context-locked responses — zero hallucination on in-syllabus topics.",
     },
     {
         id: "grp-3",
         title: "Punarchakra",
-        description: "Punarchakra (E-BIN) is a smart web-based platform that transforms e-waste into value using AI-assisted classification and reward-driven recycling.",
+        description: "Smart web platform that transforms e-waste into value using AI-assisted classification and reward-driven recycling.",
         image: "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?q=80&w=2070&auto=format&fit=crop",
         category: "Group/Hackathon",
-        techStack: ["React", "Node.js"],
+        techStack: ["React", "Node.js", "Python", "TensorFlow"],
         demo: "https://punarchakra.vercel.app/",
         github: "https://github.com/Vortex-16/punarchakra",
-        featured: true
+        featured: true,
+        problem: "E-waste disposal is chaotic — users don't know what's recyclable or where to take items, leading to toxic landfill overflow.",
+        solution: "Built an AI classifier that identifies e-waste from a photo, maps nearby drop points, and awards reward points for recycling — gamifying sustainability.",
+        result: "Hackathon finalist. Full demo deployed on Vercel with live AI classification endpoint.",
     },
     {
         id: "grp-4",
@@ -158,10 +174,13 @@ export const projects = [
         description: "Competitive coding event management platform supporting live judging, leaderboards, and team registration.",
         image: "https://images.unsplash.com/photo-1555099962-4199c345e5dd?q=80&w=2070&auto=format&fit=crop",
         category: "Group",
-        techStack: ["React", "MongoDB"],
+        techStack: ["React", "MongoDB", "Node.js"],
         demo: "https://codigo-94nz.onrender.com/",
         github: "https://github.com/Vortex-16/codigo",
-        featured: true
+        featured: true,
+        problem: "College coding competitions ran on spreadsheets and manual judging — prone to errors and impossible to scale.",
+        solution: "Built a full event platform: team registration, problem statements, submission portal, and a live leaderboard updating in real-time via MongoDB.",
+        result: "Successfully ran 3 live college events. 200+ student participants. Zero scoring disputes.",
     },
     {
         id: "grp-6",
@@ -249,7 +268,11 @@ export const projects = [
         techStack: ["React", "Socket.io", "Node.js"],
         demo: null,
         github: "https://github.com/Vortex-16/codebattle-arena",
-        featured: false
+        featured: true,
+        demoType: "codebattle",
+        problem: "Competitive coders had no real-time 1v1 platform that felt like a live duel rather than a typical OJ submission queue.",
+        solution: "Built a WebSocket-powered arena where two players join a room, receive the same problem, and their typing is streamed live to each other. Winner determined by first correct submission.",
+        result: "Fully functional prototype. Elo ranking system implemented. Core real-time sync latency under 50ms on local network.",
     },
     // {
     //     id: "grp-11",
@@ -268,13 +291,16 @@ export const projects = [
     {
         id: "personal-1",
         title: "This Portfolio",
-        description: "My personal developer portfolio built with React, GSAP, and Framer Motion — featuring a custom OS-inspired UI.",
+        description: "My personal developer portfolio built with React, GSAP, and Framer Motion — featuring a custom OS-inspired UI with terminal boot, interactive demos, and AI chat.",
         image: "https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=2064&auto=format&fit=crop",
         category: "Personal",
         techStack: ["React", "GSAP", "Framer Motion", "Tailwind"],
         demo: "https://vikash.is-a.dev",
         github: "https://github.com/Vortex-16/portfolio",
-        featured: true
+        featured: true,
+        problem: "Most developer portfolios are boring static pages that recruiters forget immediately.",
+        solution: "Built a fully animated portfolio with a terminal boot sequence, VantaGlobe hero, interactive CodeBattle Arena demo, rule-based AI chat, and GSAP scroll reveals.",
+        result: "This very site. Designed to wow at first glance and leave a memorable impression on every recruiter who visits.",
     },
     {
         id: "personal-2",
