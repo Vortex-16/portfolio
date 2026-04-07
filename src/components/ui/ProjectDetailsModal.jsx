@@ -34,7 +34,7 @@ const ProjectDetailsModal = ({ project, onClose }) => {
                 {/* Close Button */}
                 <button
                     onClick={onClose}
-                    className="absolute top-4 right-4 z-10 p-2 bg-black/40 text-white rounded-full hover:bg-black/60 transition-colors backdrop-blur-sm"
+                    className="absolute top-4 right-4 z-[60] p-2 bg-black/40 text-white rounded-full hover:bg-black/60 transition-colors backdrop-blur-sm"
                 >
                     <FaTimes size={18} />
                 </button>
