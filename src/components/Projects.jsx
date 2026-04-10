@@ -18,12 +18,17 @@ const Projects = () => {
   const [showBattle, setShowBattle] = useState(false);
   const [showDevTrack, setShowDevTrack] = useState(false);
   const { isDark } = useTheme();
-  const gridRef = useScrollReveal();
+  // Pass activeFilter to trigger re-observation of new elements in the grid
+  const gridRef = useScrollReveal({ activeFilter });
 
   const filteredProjects = (activeFilter === "All"
     ? projects
-    : projects.filter(project => project.category === activeFilter)
-  ).filter((p) => !p.demoType); // exclude the battle card from the grid
+    : projects.filter(project => 
+        project.category?.toLowerCase()
+          .split('/')
+          .some(cat => cat.trim() === activeFilter.toLowerCase())
+      )
+  ).filter((p) => !p.demoType); // exclude the special featured cards from the main grid
 
   return (
     <section className="min-h-screen py-24 relative z-10 overflow-hidden">

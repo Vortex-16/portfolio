@@ -32,7 +32,7 @@ const useScrollReveal = (options = {}) => {
     targets.forEach((t) => observer.observe(t));
 
     return () => observer.disconnect();
-  }, []);
+  }, [options]);
 
   return containerRef;
 };
