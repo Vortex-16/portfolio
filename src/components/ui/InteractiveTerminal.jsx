@@ -91,7 +91,7 @@ const InteractiveTerminal = () => {
 
   const executeCommand = (cmd) => {
     const trimmedCmd = cmd.trim().toLowerCase();
-    
+
     if (trimmedCmd === '') {
       return;
     }
@@ -166,57 +166,56 @@ const InteractiveTerminal = () => {
         className="text-white z-0 opacity-50 group-hover:opacity-100 transition-opacity duration-300"
       />
 
-    <div 
-      className={`relative z-10 rounded-lg overflow-hidden ${
-        isDark ? 'bg-[#0f0f0f]/50' : 'bg-white/30'
-      } backdrop-blur-md border ${isDark ? 'border-white/10' : 'border-emerald-500/20'} shadow-2xl cursor-text`}
-      onClick={handleTerminalClick}
-    >
-      <div className={`flex items-center gap-2 px-3 py-2 border-b ${isDark ? 'bg-black/20 border-white/5' : 'bg-white/20 border-emerald-500/10'}`}>
-        <div className="w-2.5 h-2.5 rounded-full bg-red-500"></div>
-        <div className="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
-        <div className="w-2.5 h-2.5 rounded-full bg-green-500"></div>
-        <span className={`ml-2 text-xs font-mono ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>vikash@portfolio ~ Interactive Terminal</span>
-      </div>
-      
-      <div 
-        ref={terminalRef}
-        className="p-3 h-64 overflow-y-auto font-mono text-xs leading-relaxed"
-        style={{
-          scrollbarWidth: 'thin',
-          scrollbarColor: '#4B5563 transparent'
-        }}
+      <div
+        className={`relative z-10 rounded-lg overflow-hidden ${isDark ? 'bg-[#0f0f0f]/50' : 'bg-white/30'
+          } backdrop-blur-md border ${isDark ? 'border-white/10' : 'border-emerald-500/20'} shadow-2xl cursor-text`}
+        onClick={handleTerminalClick}
       >
-        {history.map((line, index) => (
-          <div key={index} className="mb-0.5">
-            {line.type === 'output' && (
-              <div className="text-green-400">{line.text}</div>
-            )}
-            {line.type === 'input' && (
-              <div className="text-gray-300">{line.text}</div>
-            )}
-            {line.type === 'error' && (
-              <div className="text-red-400">{line.text}</div>
-            )}
-          </div>
-        ))}
-        
-        <form onSubmit={handleSubmit} className="flex items-center gap-1.5 mt-1">
-          <span className="text-cyan-400 flex-shrink-0">vikash@portfolio:~$</span>
-          <input
-            ref={inputRef}
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            className="flex-1 bg-transparent text-green-400 outline-none border-none font-mono"
-            autoFocus
-            spellCheck={false}
-            autoComplete="off"
-          />
-          <span className="text-green-400 animate-pulse">▋</span>
-        </form>
+        <div className={`flex items-center gap-2 px-3 py-2 border-b ${isDark ? 'bg-black/20 border-white/5' : 'bg-white/20 border-emerald-500/10'}`}>
+          <div className="w-2.5 h-2.5 rounded-full bg-red-500"></div>
+          <div className="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
+          <div className="w-2.5 h-2.5 rounded-full bg-green-500"></div>
+          <span className={`ml-2 text-xs font-mono ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>vikash@portfolio ~ Interactive Terminal</span>
+        </div>
+
+        <div
+          ref={terminalRef}
+          className="p-3 h-64 overflow-y-auto font-mono text-xs leading-relaxed"
+          style={{
+            scrollbarWidth: 'thin',
+            scrollbarColor: '#4B5563 transparent'
+          }}
+        >
+          {history.map((line, index) => (
+            <div key={index} className="mb-0.5">
+              {line.type === 'output' && (
+                <div className="text-green-400">{line.text}</div>
+              )}
+              {line.type === 'input' && (
+                <div className="text-gray-300">{line.text}</div>
+              )}
+              {line.type === 'error' && (
+                <div className="text-red-400">{line.text}</div>
+              )}
+            </div>
+          ))}
+
+          <form onSubmit={handleSubmit} className="flex items-center gap-1.5 mt-1">
+            <span className="text-cyan-400 flex-shrink-0">vikash@portfolio:~$</span>
+            <input
+              ref={inputRef}
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              className="flex-1 bg-transparent text-green-400 outline-none border-none font-mono"
+              autoFocus
+              spellCheck={false}
+              autoComplete="off"
+            />
+            <span className="text-green-400 animate-pulse">▋</span>
+          </form>
+        </div>
       </div>
-    </div>
     </div>
   );
 };

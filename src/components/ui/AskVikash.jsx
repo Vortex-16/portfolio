@@ -118,12 +118,12 @@ const AskVikash = () => {
         id="ask-vikash-btn"
         onClick={() => setOpen((o) => !o)}
         title="Ask about Vikash"
-        className={`fixed bottom-24 right-5 z-[900] w-12 h-12 rounded-full flex items-center justify-center shadow-xl transition-all duration-300 active:scale-90 ${
+        className={`fixed bottom-24 right-5 z-[900] w-12 h-12 rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 active:scale-90 backdrop-blur-xl border ${
           open
-            ? isDark ? 'bg-white/10 text-white' : 'bg-gray-200 text-gray-900'
-            : isDark ? 'bg-purple-600 hover:bg-purple-500 text-white' : 'bg-indigo-600 hover:bg-indigo-500 text-white'
+            ? isDark ? 'bg-white/20 border-white/30 text-white' : 'bg-white/40 border-black/10 text-gray-900'
+            : isDark ? 'bg-white/10 border-white/20 text-white hover:bg-white/20' : 'bg-emerald-500/10 border-emerald-500/20 text-emerald-700 hover:bg-emerald-500/20'
         }`}
-        style={open ? {} : { boxShadow: isDark ? '0 0 24px rgba(139,92,246,0.5)' : '0 0 24px rgba(99,102,241,0.4)' }}
+        style={open ? {} : { boxShadow: isDark ? '0 0 20px rgba(255,255,255,0.1)' : '0 0 20px rgba(5,150,105,0.15)' }}
       >
         {open ? <FaTimes size={16} /> : <FaComments size={16} />}
       </button>

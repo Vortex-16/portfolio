@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { VscHome, VscArchive, VscAccount, VscSettingsGear } from 'react-icons/vsc';
+import { Home, User, Mail, Terminal, FolderGit2 } from 'lucide-react';
 import { FaLinux, FaWifi, FaVolumeUp, FaVolumeMute, FaBatteryFull, FaBatteryThreeQuarters, FaBatteryHalf, FaBatteryQuarter, FaBatteryEmpty } from 'react-icons/fa';
 import { MdWifiOff, MdSignalWifiStatusbarConnectedNoInternet } from 'react-icons/md';
 import { useTheme } from '../../hooks/useTheme';
@@ -153,9 +153,9 @@ const DesktopMusicButton = () => {
 const NavItem = ({ to, icon: Icon, label, isActive, isMobile = false, onClick }) => {
   if (isMobile) {
     return (
-      <NavLink to={to} onClick={onClick} className="block w-full">
+      <NavLink to={to} onClick={onClick} className="block w-full rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2">
         <div
-          className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 ${isActive
+          className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 ${isActive
             ? 'bg-gray-800/90 dark:bg-purple-500/20 text-white dark:text-purple-400 font-semibold shadow-md'
             : 'text-gray-900 dark:text-gray-200 hover:text-white hover:bg-gray-700/80 dark:hover:text-white dark:hover:bg-white/10'
             }`}
@@ -169,7 +169,7 @@ const NavItem = ({ to, icon: Icon, label, isActive, isMobile = false, onClick })
 
   // Hyprland Workspace Style (Desktop)
   return (
-    <NavLink to={to}>
+    <NavLink to={to} className="rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 dark:focus-visible:ring-arch-blue focus-visible:ring-offset-2 dark:focus-visible:ring-offset-black transition-all">
       <div
         className={`relative flex items-center justify-center w-8 h-8 rounded-full transition-all duration-300 ${isActive
           ? 'bg-emerald-500 dark:bg-arch-blue w-12'
@@ -177,9 +177,8 @@ const NavItem = ({ to, icon: Icon, label, isActive, isMobile = false, onClick })
           }`}
         title={label}
       >
-        <span className={`text-xs font-bold ${isActive ? 'text-white' : 'text-gray-600 dark:text-gray-400'}`}>
-          {/* Use Number or Icon */}
-          {label === 'Home' ? '1' : label === 'About' ? '2' : label === 'Projects' ? '3' : label === 'OS Journey' ? '4' : '5'}
+        <span className={`flex items-center justify-center transition-all duration-300 ${isActive ? 'text-white' : 'text-gray-600 dark:text-gray-400'}`}>
+          <Icon size={isActive ? 18 : 15} strokeWidth={2.5} />
         </span>
       </div>
     </NavLink>
@@ -209,11 +208,11 @@ const ResponsiveNavigation = () => {
 
 
   const navItems = [
-    { path: '/', icon: VscHome, label: 'Home' },
-    { path: '/about', icon: VscAccount, label: 'About' },
-    { path: '/projects', icon: VscArchive, label: 'Projects' },
-    { path: '/os-journey', icon: FaLinux, label: 'OS Journey' },
-    { path: '/contact', icon: VscSettingsGear, label: 'Contact' },
+    { path: '/', icon: Home, label: 'Home' },
+    { path: '/about', icon: User, label: 'About' },
+    { path: '/projects', icon: FolderGit2, label: 'Projects' },
+    { path: '/os-journey', icon: Terminal, label: 'OS Journey' },
+    { path: '/contact', icon: Mail, label: 'Contact' },
   ];
 
   return (

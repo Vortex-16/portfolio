@@ -10,7 +10,7 @@ function Frame({
   const svgRef = useRef(null);
 
   useEffect(() => {
-    if (svgRef.current && svgRef.current.parentElement) {
+    if (svgRef.current && svgRef.current.parentElement && paths) {
       const instance = setupSvgRenderer({
         el: svgRef.current,
         paths,
