@@ -1,23 +1,27 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../hooks/useTheme';
-import { projects, filters } from '../data/projects';
+import { useGitHubProjects } from '../hooks/useGitHubProjects';
+import { filters } from '../data/projects';
 import ProjectCard from './ui/ProjectCard';
 import ProjectDetailsModal from './ui/ProjectDetailsModal';
 import CodeBattleDemo from './ui/CodeBattleDemo';
 import DevTrackDemo from './ui/DevTrackDemo';
 import useScrollReveal from '../hooks/useScrollReveal';
 import { FaBolt, FaCode, FaRocket } from 'react-icons/fa';
-
-const codeBattleProject = projects.find((p) => p.demoType === 'codebattle');
-const devTrackProject = projects.find((p) => p.demoType === 'devtrack');
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 
 const Projects = () => {
+  const { projects, loading } = useGitHubProjects();
   const [activeFilter, setActiveFilter] = useState("All");
   const [selectedProject, setSelectedProject] = useState(null);
   const [showBattle, setShowBattle] = useState(false);
   const [showDevTrack, setShowDevTrack] = useState(false);
   const { isDark } = useTheme();
+
+  const codeBattleProject = projects.find((p) => p.demoType === 'codebattle');
+  const devTrackProject = projects.find((p) => p.demoType === 'devtrack');
+
   // Pass activeFilter to trigger re-observation of new elements in the grid
   const gridRef = useScrollReveal({ activeFilter });
 
@@ -200,26 +204,41 @@ const Projects = () => {
 
         {/* Project Grid */}
         <div ref={gridRef}>
-          <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <AnimatePresence mode="popLayout">
-              {filteredProjects.map((project, index) => (
-                <div key={project.id} className="scroll-reveal" style={{ transitionDelay: `${(index % 3) * 0.07}s` }}>
-                  <ProjectCard
-                    project={project}
-                    index={index}
-                    onClick={() => setSelectedProject(project)}
-                  />
-                </div>
-              ))}
-            </AnimatePresence>
-          </motion.div>
-        </div>
+          {loading ? (
+            <div className="flex flex-col items-center justify-center py-20">
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                className="text-indigo-500 mb-4"
+              >
+                <AiOutlineLoading3Quarters size={40} />
+              </motion.div>
+              <p className={`font-mono text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>Syncing with GitHub Intelligence...</p>
+            </div>
+          ) : (
+            <>
+              <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <AnimatePresence mode="popLayout">
+                  {filteredProjects.map((project, index) => (
+                    <div key={project.id} className="scroll-reveal" style={{ transitionDelay: `${(index % 3) * 0.07}s` }}>
+                      <ProjectCard
+                        project={project}
+                        index={index}
+                        onClick={() => setSelectedProject(project)}
+                      />
+                    </div>
+                  ))}
+                </AnimatePresence>
+              </motion.div>
 
-        {filteredProjects.length === 0 && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-20">
-            <p className={`text-xl ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>No projects found in this category.</p>
-          </motion.div>
-        )}
+              {filteredProjects.length === 0 && (
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-20">
+                  <p className={`text-xl ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>No projects found in this category.</p>
+                </motion.div>
+              )}
+            </>
+          )}
+        </div>
       </div>
 
       {/* Project Details Modal */}
