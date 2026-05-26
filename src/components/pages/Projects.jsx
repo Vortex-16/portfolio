@@ -1,25 +1,22 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useTheme } from '../hooks/useTheme';
-import { useGitHubProjects } from '../hooks/useGitHubProjects';
-import { filters } from '../data/projects';
-import ProjectCard from './ui/ProjectCard';
-import ProjectDetailsModal from './ui/ProjectDetailsModal';
-import CodeBattleDemo from './ui/CodeBattleDemo';
-import DevTrackDemo from './ui/DevTrackDemo';
-import useScrollReveal from '../hooks/useScrollReveal';
-import { FaBolt, FaCode, FaRocket } from 'react-icons/fa';
+import { useTheme } from '../../hooks/useTheme';
+import { useGitHubProjects } from '../../hooks/useGitHubProjects';
+import { filters } from '../../constants/projects';
+import ProjectCard from '../ui/ProjectCard';
+import ProjectDetailsModal from '../ui/ProjectDetailsModal';
+import DevTrackDemo from '../ui/DevTrackDemo';
+import useScrollReveal from '../../hooks/useScrollReveal';
+import { FaCode, FaRocket } from 'react-icons/fa';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 
 const Projects = () => {
   const { projects, loading } = useGitHubProjects();
   const [activeFilter, setActiveFilter] = useState("All");
   const [selectedProject, setSelectedProject] = useState(null);
-  const [showBattle, setShowBattle] = useState(false);
   const [showDevTrack, setShowDevTrack] = useState(false);
   const { isDark } = useTheme();
 
-  const codeBattleProject = projects.find((p) => p.demoType === 'codebattle');
   const devTrackProject = projects.find((p) => p.demoType === 'devtrack');
 
   // Pass activeFilter to trigger re-observation of new elements in the grid
@@ -61,66 +58,6 @@ const Projects = () => {
             A curated list of projects, experiments, and contributions.
           </motion.p>
         </div>
-
-        {/* ── CodeBattle Featured Hero ── */}
-        {codeBattleProject && (
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            className="mb-14"
-          >
-            <div className={`rounded-2xl p-5 sm:p-6 border ${isDark ? 'bg-[#0d0d0d] border-white/10' : 'bg-gray-950 border-white/5'}`}>
-              {/* Featured label */}
-              <div className="flex items-center justify-between mb-4 flex-wrap gap-3">
-                <div className="flex items-center gap-2">
-                  <FaBolt className="text-yellow-400" size={14} />
-                  <span className="font-mono text-xs text-yellow-400 font-bold tracking-widest uppercase">Featured Interactive Demo</span>
-                </div>
-                <div className="flex gap-2">
-                  <button
-                    onClick={() => setShowBattle(!showBattle)}
-                    id="toggle-battle-demo"
-                    className={`flex items-center gap-2 px-4 py-2 rounded-lg font-mono text-xs font-bold transition-all active:scale-95 ${showBattle ? 'bg-white/10 text-white' : 'bg-green-500 hover:bg-green-400 text-black'}`}
-                  >
-                    <FaCode size={11} />
-                    {showBattle ? 'Hide Demo' : 'Launch Arena'}
-                  </button>
-                  <button
-                    onClick={() => setSelectedProject(codeBattleProject)}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-lg font-mono text-xs font-bold transition-all active:scale-95 border ${isDark ? 'border-white/15 text-gray-400 hover:text-white' : 'border-white/10 text-gray-400 hover:text-white'}`}
-                  >
-                    Case Study
-                  </button>
-                </div>
-              </div>
-
-              <div className="mb-4">
-                <h3 className="font-lexa text-xl font-bold text-white mb-1">{codeBattleProject.title}</h3>
-                <p className="font-mono text-xs text-gray-500">{codeBattleProject.description}</p>
-                <div className="flex flex-wrap gap-2 mt-2">
-                  {codeBattleProject.techStack.map((t) => (
-                    <span key={t} className="font-mono text-[10px] px-2 py-0.5 rounded bg-white/5 text-gray-400 border border-white/10">{t}</span>
-                  ))}
-                </div>
-              </div>
-
-              <AnimatePresence>
-                {showBattle && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.35 }}
-                    className="overflow-hidden"
-                  >
-                    <CodeBattleDemo />
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          </motion.div>
-        )}
 
         {/* ── DevTrack Featured Hero ── */}
         {devTrackProject && (

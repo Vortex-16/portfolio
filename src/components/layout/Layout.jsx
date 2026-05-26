@@ -1,14 +1,14 @@
 import { Outlet, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
-import { useTheme } from '../hooks/useTheme';
-import ScrollProgress from './ui/ScrollProgress';
-import InteractiveDotGrid from './ui/InteractiveDotGrid';
-import PerformanceMonitor from './ui/PerformanceMonitor';
-import AccessibilityOverlay from './ui/AccessibilityOverlay';
-import KeyboardShortcuts from './ui/KeyboardShortcuts';
-import ThemeToggle from './ui/ThemeToggle';
-import ResponsiveNavigation from './ui/ResponsiveNavigation';
-import AskVikash from './ui/AskVikash';
+import { useTheme } from '../../hooks/useTheme';
+import ScrollProgress from '../ui/ScrollProgress';
+import InteractiveDotGrid from '../ui/InteractiveDotGrid';
+import PerformanceMonitor from '../ui/PerformanceMonitor';
+import AccessibilityOverlay from '../ui/AccessibilityOverlay';
+import KeyboardShortcuts from '../ui/KeyboardShortcuts';
+import ThemeToggle from '../ui/ThemeToggle';
+import ResponsiveNavigation from '../ui/ResponsiveNavigation';
+import AskVikash from '../ui/AskVikash';
 
 const Layout = () => {
   const { isDark } = useTheme();

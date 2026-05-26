@@ -5,21 +5,21 @@ import { MusicProvider } from './hooks/useMusicPlayer';
 
 // Components
 import LoadingScreen from './components/ui/LoadingScreen';
-import Layout from './components/Layout';
-import Homepage from './components/Homepage';
-import Projects from './components/Projects';
-import About from './components/About';
-import Contact from './components/Contact';
-import OSJourney from './components/OSJourney';
+import Layout from './components/layout/Layout';
+import Homepage from './components/pages/Homepage';
+import Projects from './components/pages/Projects';
+import About from './components/pages/About';
+import Contact from './components/pages/Contact';
+import OSJourney from './components/pages/OSJourney';
 
 // Preload all route components
 const preloadRoutes = () => {
   // These imports will be cached by the browser
-  import('./components/Homepage');
-  import('./components/About');
-  import('./components/Projects');
-  import('./components/Contact');
-  import('./components/OSJourney');
+  import('./components/pages/Homepage');
+  import('./components/pages/About');
+  import('./components/pages/Projects');
+  import('./components/pages/Contact');
+  import('./components/pages/OSJourney');
 };
 
 const AppContent = () => {

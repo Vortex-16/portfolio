@@ -1,6 +1,5 @@
-import { projects as localProjects } from '../data/projects';
-
-const GITHUB_USERNAME = 'Vortex-16';
+import { projects as localProjects } from '../constants/projects';
+import { GITHUB_USERNAME } from '../constants/github';
 
 /**
  * Fetches all repositories from GitHub and merges them with the local projects.js data.
@@ -69,7 +68,8 @@ export const fetchGitHubProjects = async () => {
           id: `gh-${repo.id}`,
           title: repo.name.replace(/-/g, ' ').replace(/_/g, ' ').split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' '),
           description: repo.description || "No description provided.",
-          image: `https://opengraph.githubassets.com/1/${GITHUB_USERNAME}/${repo.name}`,
+          // Use a local template image as fallback to avoid 429 errors from GitHub OG
+          image: "/project-fallback.png", 
           category: getCategory(repo),
           techStack: repo.language ? [repo.language] : [],
           demo: repo.homepage,

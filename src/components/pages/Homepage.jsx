@@ -2,10 +2,10 @@ import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useTheme } from '../hooks/useTheme';
-import { LiquidGlassGrid, LiquidGlassCard } from './ui/LiquidGlassCard';
+import { useTheme } from '../../hooks/useTheme';
+import { LiquidGlassGrid, LiquidGlassCard } from '../ui/LiquidGlassCard';
 import { FaCode, FaGraduationCap, FaLinux, FaRocket } from 'react-icons/fa';
-import VantaGlobe from './ui/VantaGlobe';
+import VantaGlobe from '../ui/VantaGlobe';
 
 gsap.registerPlugin(ScrollTrigger);
 

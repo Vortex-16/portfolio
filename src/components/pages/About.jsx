@@ -1,7 +1,8 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { FaGraduationCap, FaCode, FaRocket, FaHeart } from 'react-icons/fa';
-import { useTheme } from '../hooks/useTheme';
+import { useTheme } from '../../hooks/useTheme';
+
 
 const About = () => {
   const ref = useRef(null);

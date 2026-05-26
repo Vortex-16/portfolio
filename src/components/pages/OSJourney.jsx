@@ -1,8 +1,9 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useTheme } from '../hooks/useTheme';
-import InteractiveTerminal from './ui/InteractiveTerminal';
+import { useTheme } from '../../hooks/useTheme';
+import InteractiveTerminal from '../ui/InteractiveTerminal';
+import { OS_PROGRESSION, ENDEAVOUR_OS_IMG } from '../../constants/os';
 import { FaLinux, FaTerminal, FaCode, FaBook, FaRocket, FaCog } from 'react-icons/fa';
 import { SiArchlinux, SiGnubash, SiVim, SiGit } from 'react-icons/si';
 
@@ -168,7 +169,11 @@ const OSJourney = () => {
           {/* EndeavourOS Card */}
           <OSBentoCard size="medium" delay={0.1}>
             <div className="flex flex-col items-center text-center h-full">
-              <SiArchlinux className={`text-4xl md:text-5xl mb-3 ${isDark ? 'text-blue-400' : 'text-blue-600'}`} />
+              <img
+                src={ENDEAVOUR_OS_IMG}
+                alt="EndeavourOS"
+                className="w-16 h-16 object-contain rounded-xl mb-3"
+              />
               <h3 className={`font-lexa text-lg md:text-xl font-bold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
                 EndeavourOS
               </h3>
@@ -226,6 +231,46 @@ const OSJourney = () => {
                 <SiGnubash className={`text-2xl md:text-3xl ${isDark ? 'text-gray-400' : 'text-gray-600'}`} />
                 <SiVim className={`text-2xl md:text-3xl ${isDark ? 'text-green-500' : 'text-green-600'}`} />
                 <SiGit className={`text-2xl md:text-3xl ${isDark ? 'text-orange-400' : 'text-orange-600'}`} />
+              </div>
+            </div>
+          </OSBentoCard>
+
+          {/* OS Learning Progression - Wide Card */}
+          <OSBentoCard size="wide" delay={0.22}>
+            <div className="flex flex-col">
+              <div className="flex items-center gap-2 mb-4">
+                <FaRocket className={`text-2xl ${isDark ? 'text-purple-400' : 'text-purple-600'}`} />
+                <h3 className={`font-lexa text-lg md:text-xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                  OS Learning Progression
+                </h3>
+              </div>
+              <div className="grid grid-cols-3 sm:grid-cols-6 gap-3 md:gap-4">
+                {OS_PROGRESSION.map((os, i, arr) => (
+                  <div key={os.name} className="relative flex flex-col items-center group">
+                    {/* connector line */}
+                    {i < arr.length - 1 && (
+                      <div className={`hidden sm:block absolute top-5 left-[calc(50%+20px)] w-[calc(100%-10px)] h-px ${
+                        isDark ? 'bg-white/10' : 'bg-gray-300/60'
+                      }`} />
+                    )}
+                    <div className={`w-10 h-10 rounded-xl overflow-hidden flex items-center justify-center mb-2 border transition-transform duration-200 group-hover:scale-110 ${
+                      isDark ? 'bg-white/5 border-white/10' : 'bg-white border-gray-200'
+                    }`}>
+                      <img
+                        src={os.src}
+                        alt={os.name}
+                        className="w-8 h-8 object-contain"
+                        loading="lazy"
+                      />
+                    </div>
+                    <p className={`font-monorama font-semibold text-[10px] text-center leading-tight ${
+                      isDark ? 'text-gray-300' : 'text-gray-800'
+                    }`}>{os.name}</p>
+                    <p className={`font-monorama text-[9px] text-center mt-0.5 ${
+                      isDark ? 'text-gray-500' : 'text-gray-500'
+                    }`}>{os.label}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </OSBentoCard>

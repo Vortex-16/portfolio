@@ -1,8 +1,8 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
 import { FaGithub, FaLinkedin, FaInstagram, FaEnvelope, FaPhone, FaMapMarkerAlt, FaPaperPlane, FaCheckCircle, FaExclamationCircle } from 'react-icons/fa';
-import { useTheme } from '../hooks/useTheme';
-import { sendEmail, validateEmailData } from '../utils/email.js';
+import { useTheme } from '../../hooks/useTheme';
+import { sendEmail, validateEmailData } from '../../utils/email.js';
 
 const Contact = () => {
   const ref = useRef(null);
