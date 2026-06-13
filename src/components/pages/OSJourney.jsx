@@ -3,355 +3,93 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useTheme } from '../../hooks/useTheme';
 import InteractiveTerminal from '../ui/InteractiveTerminal';
-import { OS_PROGRESSION, ENDEAVOUR_OS_IMG } from '../../constants/os';
-import { FaLinux, FaTerminal, FaCode, FaBook, FaRocket, FaCog } from 'react-icons/fa';
-import { SiArchlinux, SiGnubash, SiVim, SiGit } from 'react-icons/si';
+import OSJourneyTimeline from '../ui/OSJourneyTimeline';
+import { OS_PROGRESSION } from '../../constants/os';
+import { FaLinux } from 'react-icons/fa';
 
 gsap.registerPlugin(ScrollTrigger);
-
-// Custom Bento Card for OS Journey
-const OSBentoCard = ({ children, className = '', size = 'medium', delay = 0 }) => {
-  const { isDark } = useTheme();
-  const cardRef = useRef(null);
-
-  useEffect(() => {
-    const card = cardRef.current;
-    if (!card) return;
-
-    gsap.fromTo(
-      card,
-      { opacity: 0, y: 40, scale: 0.95 },
-      {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 0.7,
-        delay,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: card,
-          start: 'top 85%',
-          toggleActions: 'play none none reverse',
-        },
-      }
-    );
-
-    const handleMouseMove = (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-      const rotateX = (y - centerY) / 25;
-      const rotateY = (centerX - x) / 25;
-
-      gsap.to(card, {
-        rotateX,
-        rotateY,
-        duration: 0.3,
-        ease: 'power2.out',
-        transformPerspective: 1000,
-      });
-    };
-
-    const handleMouseLeave = () => {
-      gsap.to(card, {
-        rotateX: 0,
-        rotateY: 0,
-        duration: 0.5,
-        ease: 'power2.out',
-      });
-    };
-
-    card.addEventListener('mousemove', handleMouseMove);
-    card.addEventListener('mouseleave', handleMouseLeave);
-
-    return () => {
-      card.removeEventListener('mousemove', handleMouseMove);
-      card.removeEventListener('mouseleave', handleMouseLeave);
-    };
-  }, [delay]);
-
-  const sizeClasses = {
-    small: 'col-span-1',
-    medium: 'col-span-1 md:col-span-1',
-    large: 'col-span-1 md:col-span-2',
-    tall: 'col-span-1 row-span-2',
-    wide: 'col-span-1 md:col-span-2 lg:col-span-3',
-    featured: 'col-span-1 md:col-span-2 row-span-1 md:row-span-2',
-  };
-
-  return (
-    <div
-      ref={cardRef}
-      className={`
-        ${sizeClasses[size]}
-        ${isDark
-          ? 'bg-[#0d0d0d] border-white/8'
-          : 'bg-gradient-to-br from-white/90 via-emerald-50/70 to-emerald-100/90 border-emerald-300/50'
-        }
-        backdrop-blur-xl
-        border
-        rounded-2xl
-        p-5 md:p-6
-        transition-all
-        duration-300
-        hover:shadow-2xl
-        ${isDark ? 'hover:shadow-arch-blue/10 hover:border-arch-blue/20' : 'hover:shadow-emerald-500/20'}
-        ${className}
-      `}
-      style={{ transformStyle: 'preserve-3d' }}
-    >
-      {children}
-    </div>
-  );
-};
 
 const OSJourney = () => {
   const { isDark } = useTheme();
   const headerRef = useRef(null);
+  const stripRef = useRef(null);
 
   useEffect(() => {
-    gsap.from(headerRef.current, {
-      opacity: 0,
-      y: -50,
-      duration: 1,
-      ease: 'power3.out',
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const ctx = gsap.context(() => {
+      gsap.from(headerRef.current, {
+        opacity: 0,
+        y: -50,
+        duration: 1,
+        ease: 'power3.out',
+      });
+
+      // Reveal the distro strip logos on scroll.
+      gsap.from(stripRef.current?.querySelectorAll('[data-distro]') || [], {
+        opacity: 0,
+        y: 30,
+        scale: 0.8,
+        duration: 0.5,
+        stagger: 0.08,
+        ease: 'back.out(1.6)',
+        scrollTrigger: { trigger: stripRef.current, start: 'top 85%' },
+      });
     });
+    return () => ctx.revert();
   }, []);
 
   return (
     <div className="min-h-screen pt-32 md:pt-40 pb-20 px-4 md:px-8 lg:pl-32 lg:pr-16">
       {/* Header Section */}
-      <div ref={headerRef} className="max-w-7xl mx-auto mb-12 md:mb-16 text-center">
+      <div ref={headerRef} className="max-w-6xl mx-auto mb-12 md:mb-16 text-center">
         <div className="flex items-center justify-center mb-4 md:mb-6">
           <FaLinux className={`text-5xl md:text-7xl lg:text-8xl ${isDark ? 'text-[#1793d1]' : 'text-emerald-600'}`} />
         </div>
-        <h1 className={`font-lexa text-3xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 ${isDark ? 'text-white' : 'text-gray-900'
-          }`}>
+        <h1 className={`font-lexa text-3xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}>
           My Journey into Operating Systems
         </h1>
-        <p className={`font-monorama text-base md:text-xl max-w-3xl mx-auto ${isDark ? 'text-gray-300' : 'text-gray-700'
-          }`}>
-          Building the foundation to create my own OS, exploring Linux from the ground up with EndeavourOS
+        <p className={`font-monorama text-base md:text-xl max-w-3xl mx-auto ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
+          From a first Java program in BlueJ to ricing Arch on Wayland — the winding road from Windows into Linux, chasing the dream of building my own OS.
         </p>
       </div>
 
+      {/* Animated Journey Carousel */}
+      <div className="max-w-5xl mx-auto mb-16 md:mb-24">
+        <OSJourneyTimeline />
+      </div>
+
       {/* Interactive Terminal */}
-      <div className="max-w-7xl mx-auto mb-12 md:mb-16">
+      <div className="max-w-7xl mx-auto mb-16 md:mb-24">
         <InteractiveTerminal />
       </div>
 
-      {/* Bento Grid Layout */}
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 lg:gap-6 auto-rows-auto">
-
-          {/* Why Build an OS - Large Featured Card */}
-          <OSBentoCard size="large" delay={0}>
-            <div className="h-full flex flex-col">
-              <h3 className={`font-lexa text-xl md:text-2xl font-bold mb-3 flex items-center gap-2 ${isDark ? 'text-white' : 'text-gray-900'
-                }`}>
-                <span className="text-2xl">🚀</span> Why Build an OS?
-              </h3>
-              <p className={`font-monorama text-sm md:text-base mb-4 flex-grow ${isDark ? 'text-gray-300' : 'text-gray-700'
-                }`}>
-                Building an operating system is the ultimate challenge in computer science.
-                It's about understanding every layer from hardware to software.
+      {/* Distros I've run */}
+      <div ref={stripRef} className="max-w-5xl mx-auto">
+        <h2 className={`font-lexa text-xl md:text-2xl font-bold mb-6 text-center ${isDark ? 'text-white' : 'text-gray-900'}`}>
+          Distros I've Lived In
+        </h2>
+        <div className="flex flex-wrap items-start justify-center gap-5 md:gap-8">
+          {OS_PROGRESSION.map((os) => (
+            <a
+              key={os.name}
+              href={os.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-distro
+              title={`Visit ${os.name} website`}
+              className="group flex flex-col items-center w-24 md:w-28 focus:outline-none"
+            >
+              <div className={`w-20 h-20 md:w-24 md:h-24 rounded-2xl flex items-center justify-center mb-2 border backdrop-blur-xl transition-all duration-200 group-hover:scale-110 group-hover:-translate-y-1 ${isDark ? 'bg-white/[0.06] border-white/15 group-hover:border-arch-blue/40' : 'bg-white/40 border-white/60 group-hover:border-emerald-400/60'} group-hover:shadow-xl`}>
+                <img src={os.src} alt={os.name} className="w-14 h-14 md:w-16 md:h-16 object-contain drop-shadow-md" loading="lazy" />
+              </div>
+              <p className={`font-monorama font-semibold text-xs text-center leading-tight transition-colors ${isDark ? 'text-gray-200 group-hover:text-arch-blue' : 'text-gray-800 group-hover:text-emerald-700'}`}>
+                {os.name}
               </p>
-              <div className={`p-3 md:p-4 rounded-xl ${isDark ? 'bg-white/5 border border-white/8' : 'bg-emerald-100/60'}`}>
-                <p className={`font-monorama text-xs md:text-sm italic ${isDark ? 'text-gray-400' : 'text-emerald-800'}`}>
-                  "The dream of every true programmer is to build their own operating system."
-                </p>
-              </div>
-            </div>
-          </OSBentoCard>
-
-          {/* EndeavourOS Card */}
-          <OSBentoCard size="medium" delay={0.1}>
-            <div className="flex flex-col items-center text-center h-full">
-              <img
-                src={ENDEAVOUR_OS_IMG}
-                alt="EndeavourOS"
-                className="w-16 h-16 object-contain rounded-xl mb-3"
-              />
-              <h3 className={`font-lexa text-lg md:text-xl font-bold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                EndeavourOS
-              </h3>
-              <p className={`font-monorama text-xs md:text-sm mb-3 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
-                My daily driver for learning Linux internals.
+              <p className={`font-monorama text-[10px] text-center mt-0.5 ${isDark ? 'text-gray-500' : 'text-gray-500'}`}>
+                {os.label}
               </p>
-              <ul className={`font-monorama text-xs space-y-1 text-left ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                <li>✓ Rolling release</li>
-                <li>✓ AUR access</li>
-                <li>✓ Lightweight</li>
-              </ul>
-            </div>
-          </OSBentoCard>
-
-          {/* Learning Path - Tall Card */}
-          <OSBentoCard size="tall" delay={0.15}>
-            <div className="flex flex-col h-full">
-              <div className="flex items-center gap-2 mb-4">
-                <FaBook className={`text-3xl ${isDark ? 'text-yellow-400' : 'text-yellow-600'}`} />
-                <h3 className={`font-lexa text-lg md:text-xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                  Learning Path
-                </h3>
-              </div>
-              <div className="space-y-3 flex-grow">
-                {[
-                  { title: 'OS Development', desc: 'OSDev.org, Bootloaders' },
-                  { title: 'Kernel Programming', desc: 'Linux Kernel, Memory' },
-                  { title: 'System Programming', desc: 'C/C++, Assembly, POSIX' },
-                  { title: 'Low-Level Debugging', desc: 'GDB, QEMU, Valgrind' },
-                ].map((item, i) => (
-                  <div key={i} className={`p-2 md:p-3 rounded-lg ${isDark ? 'bg-gray-800/50' : 'bg-white/60'}`}>
-                    <p className={`font-monorama font-semibold text-sm ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                      {item.title}
-                    </p>
-                    <p className={`font-monorama text-xs ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                      {item.desc}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </OSBentoCard>
-
-          {/* Terminal Mastery */}
-          <OSBentoCard size="medium" delay={0.2}>
-            <div className="flex flex-col items-center text-center h-full">
-              <FaTerminal className={`text-4xl mb-3 ${isDark ? 'text-green-400' : 'text-green-600'}`} />
-              <h3 className={`font-lexa text-lg md:text-xl font-bold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                Terminal Mastery
-              </h3>
-              <p className={`font-monorama text-xs md:text-sm mb-4 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
-                Living in the terminal, mastering shell scripting.
-              </p>
-              <div className="flex gap-3 mt-auto">
-                <SiGnubash className={`text-2xl md:text-3xl ${isDark ? 'text-gray-400' : 'text-gray-600'}`} />
-                <SiVim className={`text-2xl md:text-3xl ${isDark ? 'text-green-500' : 'text-green-600'}`} />
-                <SiGit className={`text-2xl md:text-3xl ${isDark ? 'text-orange-400' : 'text-orange-600'}`} />
-              </div>
-            </div>
-          </OSBentoCard>
-
-          {/* OS Learning Progression - Wide Card */}
-          <OSBentoCard size="wide" delay={0.22}>
-            <div className="flex flex-col">
-              <div className="flex items-center gap-2 mb-4">
-                <FaRocket className={`text-2xl ${isDark ? 'text-purple-400' : 'text-purple-600'}`} />
-                <h3 className={`font-lexa text-lg md:text-xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                  OS Learning Progression
-                </h3>
-              </div>
-              <div className="grid grid-cols-3 sm:grid-cols-6 gap-3 md:gap-4">
-                {OS_PROGRESSION.map((os, i, arr) => (
-                  <div key={os.name} className="relative flex flex-col items-center group">
-                    {/* connector line */}
-                    {i < arr.length - 1 && (
-                      <div className={`hidden sm:block absolute top-5 left-[calc(50%+20px)] w-[calc(100%-10px)] h-px ${
-                        isDark ? 'bg-white/10' : 'bg-gray-300/60'
-                      }`} />
-                    )}
-                    <div className={`w-10 h-10 rounded-xl overflow-hidden flex items-center justify-center mb-2 border transition-transform duration-200 group-hover:scale-110 ${
-                      isDark ? 'bg-white/5 border-white/10' : 'bg-white border-gray-200'
-                    }`}>
-                      <img
-                        src={os.src}
-                        alt={os.name}
-                        className="w-8 h-8 object-contain"
-                        loading="lazy"
-                      />
-                    </div>
-                    <p className={`font-monorama font-semibold text-[10px] text-center leading-tight ${
-                      isDark ? 'text-gray-300' : 'text-gray-800'
-                    }`}>{os.name}</p>
-                    <p className={`font-monorama text-[9px] text-center mt-0.5 ${
-                      isDark ? 'text-gray-500' : 'text-gray-500'
-                    }`}>{os.label}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </OSBentoCard>
-
-          <OSBentoCard size="large" delay={0.22}>
-            <div className="h-full flex flex-col">
-              <div className="flex items-center gap-2 mb-3">
-                <FaRocket className={`text-3xl md:text-4xl ${isDark ? 'text-red-400' : 'text-red-600'}`} />
-                <h3 className={`font-lexa text-lg md:text-xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                  My OS Vision
-                </h3>
-              </div>
-              <p className={`font-monorama text-xs md:text-sm mb-3 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
-                Creating a microkernel-based OS that emphasizes:
-              </p>
-              <ul className={`font-monorama space-y-2 text-sm flex-grow ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
-                {[
-                  'Modularity and minimal kernel footprint',
-                  'Security through isolation',
-                  'Modern hardware support',
-                  'Developer-friendly tooling',
-                ].map((item, i) => (
-                  <li key={i} className="flex items-center gap-2">
-                    <span className={`w-2 h-2 rounded-full flex-shrink-0 ${isDark ? 'bg-red-400' : 'bg-red-600'}`}></span>
-                    <span className="text-xs md:text-sm">{item}</span>
-                  </li>
-                ))}
-              </ul>
-              <div className={`mt-3 p-3 rounded-xl ${isDark ? 'bg-red-900/30 border border-red-500/30' : 'bg-red-100/60 border border-red-300/50'}`}>
-                <p className={`font-monorama text-xs italic ${isDark ? 'text-red-200' : 'text-red-800'}`}>
-                  "Every great OS started as a hobby project. This is mine."
-                </p>
-              </div>
-            </div>
-          </OSBentoCard>
-
-          {/* Current OS Projects - Wide Card */}
-          <OSBentoCard size="wide" delay={0.25}>
-            <div className="flex flex-col">
-              <div className="flex items-center gap-2 mb-4">
-                <FaCode className={`text-3xl ${isDark ? 'text-cyan-400' : 'text-cyan-600'}`} />
-                <h3 className={`font-lexa text-lg md:text-xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                  Current OS Projects
-                </h3>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4">
-                {[
-                  { title: 'Bootloader', desc: 'Custom bootloader in Assembly' },
-                  { title: 'Kernel Modules', desc: 'Linux kernel module development' },
-                  { title: 'Shell Implementation', desc: 'Unix shell from scratch in C' },
-                ].map((project, i) => (
-                  <div key={i} className={`p-3 md:p-4 rounded-xl ${isDark ? 'bg-gray-800/50' : 'bg-white/60'}`}>
-                    <h4 className={`font-monorama font-bold text-sm mb-1 ${isDark ? 'text-cyan-300' : 'text-cyan-700'}`}>
-                      {project.title}
-                    </h4>
-                    <p className={`font-monorama text-xs ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                      {project.desc}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </OSBentoCard>
-
-          {/* System Architecture */}
-          <OSBentoCard size="medium" delay={0.3}>
-            <div className="flex flex-col items-center text-center h-full">
-              <FaCog className={`text-4xl mb-3 ${isDark ? 'text-[#1793d1]' : 'text-emerald-600'}`} />
-              <h3 className={`font-lexa text-lg md:text-xl font-bold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                System Architecture
-              </h3>
-              <p className={`font-monorama text-xs md:text-sm mb-3 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
-                Understanding computer architecture and hardware-software interfaces.
-              </p>
-              <div className={`mt-auto p-2 md:p-3 rounded-lg w-full ${isDark ? 'bg-white/5 border border-white/8' : 'bg-emerald-100/60'}`}>
-                <p className={`font-monorama text-xs ${isDark ? 'text-gray-400' : 'text-emerald-800'}`}>
-                  CPU → Memory → Storage → I/O
-                </p>
-              </div>
-            </div>
-          </OSBentoCard>
+            </a>
+          ))}
         </div>
       </div>
     </div>

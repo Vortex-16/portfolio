@@ -119,6 +119,17 @@ export const projects = [
         result: "Awarded 'Best Innovative Project'. Helps developers master their craft with actionable 'What Next' suggestions and premium Glassmorphism UI.",
     },
     {
+        id: "grp-devtrack-lite",
+        title: "DevTrack Lite",
+        description: "A streamlined edition of DevTrack — lightweight project & learning tracker focused on speed, offline-first logging, and a distraction-free developer dashboard.",
+        image: "/DevTrackLite.png",
+        category: "Group",
+        techStack: ["React", "Node.js", "GitHub API"],
+        demo: null,
+        github: "https://github.com/Vortex-16/DevTrack-Lite",
+        featured: true,
+    },
+    {
         id: "grp-1",
         title: "College Coding Club Website",
         description: "Official website for the college coding club featuring event listings, leaderboard, and member profiles.",

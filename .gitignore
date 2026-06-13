@@ -16,6 +16,7 @@ dist-ssr/
 
 # Local environment files
 *.local
+LOCAL_Report.md
 *.env
 .env
 

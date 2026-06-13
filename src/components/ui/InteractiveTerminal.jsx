@@ -1,10 +1,86 @@
 import { useState, useRef, useEffect } from 'react';
 import { useTheme } from '../../hooks/useTheme';
-import { Frame } from './Frame';
+import { FaTerminal, FaLinux, FaFolderOpen, FaCodeBranch, FaHourglassHalf, FaClock } from 'react-icons/fa';
+
+const PoshPrompt = ({ dir = 'portfolio', branch = 'main', executionTime = '0ms', time }) => {
+  return (
+    <div className="flex flex-wrap items-center gap-y-1 select-none font-mono text-[11px] leading-none my-1">
+      {/* Segment 1: User / OS Info */}
+      <div className="flex items-center bg-[#0d9488] text-white pl-2.5 pr-1.5 py-1 rounded-l-md h-6">
+        <FaLinux className="mr-1 text-[13px]" />
+        <span className="font-bold">vikash</span>
+      </div>
+      {/* Arrow 1 -> 2 */}
+      <div className="h-6 bg-[#ec4899]">
+        <svg className="h-full w-2.5 text-[#0d9488] fill-current" viewBox="0 0 10 20" preserveAspectRatio="none">
+          <path d="M0 0 L10 10 L0 20 Z" />
+        </svg>
+      </div>
+
+      {/* Segment 2: Directory */}
+      <div className="flex items-center bg-[#ec4899] text-white px-2 py-1 h-6">
+        <FaFolderOpen className="mr-1 text-[11px]" />
+        <span>{dir}</span>
+      </div>
+      {/* Arrow 2 -> 3 */}
+      <div className="h-6 bg-[#f59e0b]">
+        <svg className="h-full w-2.5 text-[#ec4899] fill-current" viewBox="0 0 10 20" preserveAspectRatio="none">
+          <path d="M0 0 L10 10 L0 20 Z" />
+        </svg>
+      </div>
+
+      {/* Segment 3: Git Branch */}
+      <div className="flex items-center bg-[#f59e0b] text-slate-900 px-2 py-1 h-6 font-bold">
+        <FaCodeBranch className="mr-1 text-[12px]" />
+        <span>{branch}</span>
+      </div>
+      {/* Arrow 3 -> 4 */}
+      <div className="h-6 bg-[#8b5cf6]">
+        <svg className="h-full w-2.5 text-[#f59e0b] fill-current" viewBox="0 0 10 20" preserveAspectRatio="none">
+          <path d="M0 0 L10 10 L0 20 Z" />
+        </svg>
+      </div>
+
+      {/* Segment 4: Exec Time */}
+      <div className="flex items-center bg-[#8b5cf6] text-white px-2 py-1 h-6">
+        <FaHourglassHalf className="mr-1 text-[10px]" />
+        <span>{executionTime}</span>
+      </div>
+      {/* Arrow 4 -> 5 */}
+      <div className="h-6 bg-[#06b6d4]">
+        <svg className="h-full w-2.5 text-[#8b5cf6] fill-current" viewBox="0 0 10 20" preserveAspectRatio="none">
+          <path d="M0 0 L10 10 L0 20 Z" />
+        </svg>
+      </div>
+
+      {/* Segment 5: Time */}
+      <div className="flex items-center bg-[#06b6d4] text-slate-950 px-2.5 py-1 rounded-r-md h-6 font-medium">
+        <FaClock className="mr-1 text-[11px]" />
+        <span>{time}</span>
+      </div>
+      {/* Arrow 5 -> End */}
+      <div className="h-6">
+        <svg className="h-full w-2.5 text-[#06b6d4] fill-current" viewBox="0 0 10 20" preserveAspectRatio="none">
+          <path d="M0 0 L10 10 L0 20 Z" />
+        </svg>
+      </div>
+    </div>
+  );
+};
+
+const PoshInputPrefix = () => (
+  <div className="flex items-center gap-1.5 select-none font-mono text-[13px] h-5">
+    {/* <span className="text-yellow-400 font-bold"></span> */}
+    <span className="text-[#f43f5e] font-semibold">Vortex</span>
+    <span className="text-[#06b6d4] font-bold">&gt;&gt;</span>
+  </div>
+);
+
 
 const InteractiveTerminal = () => {
   const { isDark } = useTheme();
   const [input, setInput] = useState('');
+  const [timeStr, setTimeStr] = useState('');
   const [history, setHistory] = useState([
     { type: 'output', text: 'Welcome to Vikash\'s Interactive Terminal!' },
     { type: 'output', text: 'Type "help" to see available commands.' },
@@ -12,6 +88,21 @@ const InteractiveTerminal = () => {
   ]);
   const terminalRef = useRef(null);
   const inputRef = useRef(null);
+
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      let hours = now.getHours();
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+      hours = hours % 12;
+      hours = hours ? hours : 12;
+      setTimeStr(`${hours}:${minutes} ${ampm}`);
+    };
+    updateTime();
+    const interval = setInterval(updateTime, 30000);
+    return () => clearInterval(interval);
+  }, []);
 
   const commands = {
     help: {
@@ -96,7 +187,15 @@ const InteractiveTerminal = () => {
       return;
     }
 
-    const newHistory = [...history, { type: 'input', text: `$ ${cmd}` }];
+    const now = new Date();
+    let hours = now.getHours();
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12;
+    const cmdTime = `${hours}:${minutes} ${ampm}`;
+
+    const newHistory = [...history, { type: 'input', text: cmd, time: cmdTime }];
 
     if (trimmedCmd === 'clear') {
       setHistory([]);
@@ -136,63 +235,63 @@ const InteractiveTerminal = () => {
   };
 
   return (
-    <div className="relative max-w-4xl mx-auto mb-12 p-3 group">
-      {/* Cosmic UI Frame background */}
-      <Frame
-        paths={[
-          {
-            d: "M 10 10 L 990 10 L 990 990 L 10 990 Z", // Approximate path layout, will stretch via viewBox
-            styles: {
-              fill: "rgba(0,0,0,0)",
-              stroke: isDark ? "rgba(255, 255, 255, 0.4)" : "rgba(5, 150, 105, 0.4)",
-              strokeWidth: "2",
-            },
-          },
-          {
-            d: "M 0 15 L 15 0 L 30 0 L 15 15 Z", // Corner accent
-            styles: {
-              fill: isDark ? "rgba(255, 255, 255, 0.6)" : "rgba(5, 150, 105, 0.6)",
-            },
-          },
-          {
-            d: "M 1000 985 L 985 1000 L 970 1000 L 985 985 Z", // Corner accent bottom right
-            styles: {
-              fill: isDark ? "rgba(255, 255, 255, 0.6)" : "rgba(5, 150, 105, 0.6)",
-            },
-          }
-        ]}
-        viewBox="0 0 1000 1000"
-        preserveAspectRatio="none"
-        className="text-white z-0 opacity-50 group-hover:opacity-100 transition-opacity duration-300"
+    <div className="relative max-w-4xl mx-auto mb-12 group" onClick={handleTerminalClick}>
+      {/* Ambient glow behind the glass */}
+      <div
+        aria-hidden
+        className={`pointer-events-none absolute -inset-1.5 rounded-[1.75rem] blur-2xl opacity-40 group-hover:opacity-70 transition-opacity duration-500 ${isDark
+          ? 'bg-gradient-to-r from-blue-600/40 via-cyan-500/20 to-emerald-500/30'
+          : 'bg-gradient-to-r from-emerald-500/30 via-cyan-500/20 to-blue-500/30'
+          }`}
       />
 
-      <div
-        className={`relative z-10 rounded-lg overflow-hidden ${isDark ? 'bg-[#0f0f0f]/50' : 'bg-white/30'
-          } backdrop-blur-md border ${isDark ? 'border-white/10' : 'border-emerald-500/20'} shadow-2xl cursor-text`}
-        onClick={handleTerminalClick}
-      >
-        <div className={`flex items-center gap-2 px-3 py-2 border-b ${isDark ? 'bg-black/20 border-white/5' : 'bg-white/20 border-emerald-500/10'}`}>
-          <div className="w-2.5 h-2.5 rounded-full bg-red-500"></div>
-          <div className="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
-          <div className="w-2.5 h-2.5 rounded-full bg-green-500"></div>
-          <span className={`ml-2 text-xs font-mono ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>vikash@portfolio ~ Interactive Terminal</span>
+      {/* Glass terminal window */}
+      <div className={`relative rounded-2xl overflow-hidden border ${isDark ? 'border-white/10 bg-[#080d1a]/40 ring-black/40' : 'border-black/10 bg-white/20 ring-white/20'
+        } shadow-2xl backdrop-blur-2xl cursor-text ring-1`}>
+        {/* Title bar */}
+        <div className={`flex items-center px-4 py-2.5 border-b ${isDark ? 'border-white/10 bg-white/[0.02]' : 'border-black/10 bg-black/[0.02]'
+          }`}>
+          <div className="flex gap-2">
+            <span className="w-3 h-3 rounded-full bg-[#ff5f57] hover:brightness-110" />
+            <span className="w-3 h-3 rounded-full bg-[#febc2e]" />
+            <span className="w-3 h-3 rounded-full bg-[#28c840]" />
+          </div>
+          <div className={`flex items-center gap-2 mx-auto text-xs font-mono ${isDark ? 'text-gray-300/80' : 'text-gray-700/80'
+            }`}>
+            <FaTerminal className={isDark ? 'text-cyan-400' : 'text-cyan-600'} size={12} />
+            <span>vikash@linux: ~</span>
+          </div>
+          <span className={`text-[10px] font-mono tracking-wider ${isDark ? 'text-gray-500' : 'text-gray-400'
+            }`}>zsh</span>
         </div>
 
+        {/* Terminal body */}
         <div
           ref={terminalRef}
-          className="p-3 h-64 overflow-y-auto font-mono text-xs leading-relaxed"
+          className="p-4 h-72 overflow-y-auto font-mono text-[13px] leading-relaxed"
           style={{
             scrollbarWidth: 'thin',
-            scrollbarColor: '#4B5563 transparent'
+            scrollbarColor: isDark ? '#334155 transparent' : '#cbd5e1 transparent',
+            background: isDark
+              ? 'radial-gradient(120% 80% at 0% 0%, rgba(56,189,248,0.06), transparent 60%)'
+              : 'radial-gradient(120% 80% at 0% 0%, rgba(5,150,105,0.03), transparent 60%)',
           }}
         >
           {history.map((line, index) => (
-            <div key={index} className="mb-0.5">
+            <div key={index} className="mb-3">
               {line.type === 'output' && (
-                <div className="text-green-400">{line.text}</div>
+                <div className={`whitespace-pre-wrap ${isDark ? 'text-gray-300' : 'text-gray-800'}`}>{line.text}</div>
               )}
               {line.type === 'input' && (
-                <div className="text-gray-300">{line.text}</div>
+                <div className="mt-1">
+                  <div className="flex flex-wrap items-center">
+                    <PoshPrompt time={line.time || '10:15 AM'} />
+                  </div>
+                  <div className="flex items-center gap-1.5 mt-1">
+                    <PoshInputPrefix />
+                    <span className={isDark ? 'text-emerald-300 ml-1' : 'text-emerald-700 ml-1'}>{line.text}</span>
+                  </div>
+                </div>
               )}
               {line.type === 'error' && (
                 <div className="text-red-400">{line.text}</div>
@@ -200,19 +299,27 @@ const InteractiveTerminal = () => {
             </div>
           ))}
 
-          <form onSubmit={handleSubmit} className="flex items-center gap-1.5 mt-1">
-            <span className="text-cyan-400 flex-shrink-0">vikash@portfolio:~$</span>
-            <input
-              ref={inputRef}
-              type="text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              className="flex-1 bg-transparent text-green-400 outline-none border-none font-mono"
-              autoFocus
-              spellCheck={false}
-              autoComplete="off"
-            />
-            <span className="text-green-400 animate-pulse">▋</span>
+          {/* Live prompt */}
+          <form onSubmit={handleSubmit} className="mt-1">
+            <div className="flex flex-wrap items-center">
+              <PoshPrompt time={timeStr} />
+            </div>
+            <div className="flex items-center gap-1.5 mt-1">
+              <PoshInputPrefix />
+              <input
+                ref={inputRef}
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                className={`flex-1 ml-1 bg-transparent outline-none border-none font-mono ${isDark
+                  ? 'text-emerald-300 caret-emerald-300'
+                  : 'text-emerald-700 caret-emerald-700'
+                  }`}
+                autoFocus
+                spellCheck={false}
+                autoComplete="off"
+              />
+            </div>
           </form>
         </div>
       </div>

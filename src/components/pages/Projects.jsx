@@ -1,14 +1,19 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useTheme } from '../../hooks/useTheme';
 import { useGitHubProjects } from '../../hooks/useGitHubProjects';
 import { filters } from '../../constants/projects';
 import ProjectCard from '../ui/ProjectCard';
 import ProjectDetailsModal from '../ui/ProjectDetailsModal';
 import DevTrackDemo from '../ui/DevTrackDemo';
-import useScrollReveal from '../../hooks/useScrollReveal';
+import CoverFlow from '../ui/CoverFlow';
+import useGsapReveal from '../../hooks/useGsapReveal';
 import { FaCode, FaRocket } from 'react-icons/fa';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Projects = () => {
   const { projects, loading } = useGitHubProjects();
@@ -17,10 +22,39 @@ const Projects = () => {
   const [showDevTrack, setShowDevTrack] = useState(false);
   const { isDark } = useTheme();
 
+  const sectionRef = useRef(null);
+  const windmillRef = useRef(null);
+
   const devTrackProject = projects.find((p) => p.demoType === 'devtrack');
 
-  // Pass activeFilter to trigger re-observation of new elements in the grid
-  const gridRef = useScrollReveal({ activeFilter });
+  // Featured projects power the cover-flow carousel.
+  const featuredProjects = projects.filter((p) => p.featured).slice(0, 10);
+
+  // GSAP ScrollTrigger reveal — re-runs when the filter or load state changes
+  // so freshly-rendered cards animate in with a staggered batch.
+  const gridRef = useGsapReveal({
+    selector: '.gsap-reveal',
+    deps: [activeFilter, loading],
+  });
+
+  // Mesmerising-but-tasteful scroll accent: a decorative ring spins as the
+  // section scrolls past (windmill-style scrub). Reduced-motion safe.
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const ctx = gsap.context(() => {
+      gsap.to(windmillRef.current, {
+        rotateZ: 320,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 1,
+        },
+      });
+    }, sectionRef);
+    return () => ctx.revert();
+  }, []);
 
   const filteredProjects = (activeFilter === "All"
     ? projects
@@ -32,8 +66,27 @@ const Projects = () => {
   ).filter((p) => !p.demoType); // exclude the special featured cards from the main grid
 
   return (
-    <section className="min-h-screen py-24 relative z-10 overflow-hidden">
+    <section ref={sectionRef} className="min-h-screen py-24 relative z-10 overflow-hidden">
 
+      {/* Decorative windmill accent — spins on scroll */}
+      <div
+        ref={windmillRef}
+        aria-hidden
+        className="pointer-events-none absolute -top-10 -right-10 w-64 h-64 opacity-[0.07] z-0"
+        style={{ willChange: 'transform' }}
+      >
+        <svg viewBox="0 0 200 200" className={isDark ? 'text-arch-blue' : 'text-emerald-600'}>
+          {[0, 45, 90, 135, 180, 225, 270, 315].map((deg) => (
+            <rect
+              key={deg}
+              x="96" y="20" width="8" height="80" rx="4"
+              fill="currentColor"
+              transform={`rotate(${deg} 100 100)`}
+            />
+          ))}
+          <circle cx="100" cy="100" r="10" fill="currentColor" />
+        </svg>
+      </div>
 
       <div className="container mx-auto px-6 lg:px-20 relative z-20">
         {/* Header */}
@@ -58,6 +111,19 @@ const Projects = () => {
             A curated list of projects, experiments, and contributions.
           </motion.p>
         </div>
+
+        {/* ── Featured Cover Flow ── */}
+        {!loading && featuredProjects.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="mb-16"
+          >
+            <CoverFlow projects={featuredProjects} onSelect={setSelectedProject} />
+          </motion.div>
+        )}
 
         {/* ── DevTrack Featured Hero ── */}
         {devTrackProject && (
@@ -154,10 +220,10 @@ const Projects = () => {
             </div>
           ) : (
             <>
-              <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-fr">
                 <AnimatePresence mode="popLayout">
                   {filteredProjects.map((project, index) => (
-                    <div key={project.id} className="scroll-reveal" style={{ transitionDelay: `${(index % 3) * 0.07}s` }}>
+                    <div key={project.id} className="gsap-reveal h-full">
                       <ProjectCard
                         project={project}
                         index={index}

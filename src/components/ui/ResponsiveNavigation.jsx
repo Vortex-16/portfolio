@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Home, User, Mail, Terminal, FolderGit2 } from 'lucide-react';
@@ -193,6 +193,11 @@ const ResponsiveNavigation = () => {
   const systemTrayRef = useRef(null);
   const mobileTrayRef = useRef(null);
 
+  // Stable handlers so the memoized ControlPanel doesn't re-render on every
+  // clock tick (this nav re-renders once per second to update the time).
+  const toggleControlPanel = useCallback(() => setShowControlPanel((v) => !v), []);
+  const closeControlPanel = useCallback(() => setShowControlPanel(false), []);
+
   useEffect(() => {
     const timer = setInterval(() => setTime(new Date()), 1000);
     return () => clearInterval(timer);
@@ -250,7 +255,7 @@ const ResponsiveNavigation = () => {
             {/* System Tray */}
             <div
               ref={systemTrayRef}
-              onClick={() => setShowControlPanel(!showControlPanel)}
+              onClick={toggleControlPanel}
               className={`flex items-center gap-3 px-4 py-1.5 rounded-full backdrop-blur-md border border-white/20 shadow-lg cursor-pointer hover:bg-white/5 transition-colors ${isDark ? 'bg-arch-black/80 text-gray-300' : 'bg-white/80 text-gray-600'}`}
             >
               <div className="flex items-center gap-3 pointer-events-none">
@@ -366,7 +371,7 @@ const ResponsiveNavigation = () => {
       {/* OS Control Panel */}
       <ControlPanel
         isOpen={showControlPanel}
-        onClose={() => setShowControlPanel(false)}
+        onClose={closeControlPanel}
         anchorRef={window.innerWidth >= 1024 ? systemTrayRef : mobileTrayRef}
       />
     </>

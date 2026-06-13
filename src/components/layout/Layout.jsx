@@ -1,6 +1,7 @@
 import { Outlet, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useTheme } from '../../hooks/useTheme';
+import useLenis from '../../hooks/useLenis';
 import ScrollProgress from '../ui/ScrollProgress';
 import InteractiveDotGrid from '../ui/InteractiveDotGrid';
 import PerformanceMonitor from '../ui/PerformanceMonitor';
@@ -11,16 +12,19 @@ import ResponsiveNavigation from '../ui/ResponsiveNavigation';
 import AskVikash from '../ui/AskVikash';
 
 const Layout = () => {
-  const { isDark } = useTheme();
+  const { isDark, brightness } = useTheme();
   const location = useLocation();
+  const lenisRef = useLenis();
 
   useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'smooth'
-    });
-  }, [location.pathname]);
+    // Scroll to top on route change — go through Lenis when available so the
+    // smooth-scroll engine stays in sync, otherwise fall back to native.
+    if (lenisRef.current) {
+      lenisRef.current.scrollTo(0, { immediate: true });
+    } else {
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    }
+  }, [location.pathname, lenisRef]);
 
   return (
     <div
@@ -55,6 +59,16 @@ const Layout = () => {
       </main>
 
       <AskVikash />
+
+      {/* Screen-brightness dimmer — driven by the Control Centre slider.
+          A pointer-events-none overlay (instead of a CSS filter on <html>,
+          which would break every position:fixed element). Sits below the
+          control panel (z-100) so the panel stays readable while you adjust. */}
+      <div
+        aria-hidden
+        className="fixed inset-0 z-[60] pointer-events-none bg-black transition-opacity duration-150"
+        style={{ opacity: Math.min(0.85, Math.max(0, (100 - (brightness ?? 100)) / 100)) }}
+      />
     </div>
   );
 };
