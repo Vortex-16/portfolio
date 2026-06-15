@@ -5,7 +5,8 @@ export const filters = [
     "Hackathon",
     "Client Work",
     "Assignment",
-    "YouTube"
+    "YouTube",
+    "Basics & Time Pass"
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -512,6 +513,86 @@ export const projects = [
         techStack: ["C", "Python"],
         demo: null,
         github: "https://github.com/Vortex-16/c-and-python-shardha-maam-dsa",
+        featured: false
+    },
+
+    // ── BASICS & TIME PASS ────────────────────────────────────────────────────
+
+    {
+        id: "basics-1",
+        title: "Smart AI Bot",
+        description: "An interactive, conversational AI chatbot assistant featuring a clean, responsive interface and direct message handling.",
+        image: "https://images.unsplash.com/photo-1531747118685-ca8fa6e08806?q=80&w=2070&auto=format&fit=crop",
+        category: "Basics & Time Pass",
+        techStack: ["HTML", "CSS", "JavaScript"],
+        demo: "https://smart-chat-bot-1.netlify.app/",
+        github: null,
+        featured: false
+    },
+    {
+        id: "basics-2",
+        title: "DAV 2.0 (AI)",
+        description: "An advanced iteration of the DAV virtual assistant platform, integrating AI models with a futuristic interface.",
+        image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2064&auto=format&fit=crop",
+        category: "Basics & Time Pass",
+        techStack: ["HTML", "CSS", "JavaScript"],
+        demo: "https://dav-ai.netlify.app/",
+        github: "https://github.com/Vortex-16/DAV",
+        featured: false
+    },
+    {
+        id: "basics-3",
+        title: "DAV 2.0 (Voice)",
+        description: "Futuristic virtual voice assistant platform featuring voice-generated search interactions and responsive layout controls.",
+        image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=2070&auto=format&fit=crop",
+        category: "Basics & Time Pass",
+        techStack: ["HTML", "CSS", "JavaScript"],
+        demo: "https://vikash-dav-2.netlify.app/",
+        github: "https://github.com/Vortex-16/DAV",
+        featured: false
+    },
+    {
+        id: "basics-4",
+        title: "Verilog Lab Portal",
+        description: "An interactive computer architecture simulation portal. Includes custom timing trace engines, live circuit SVGs, and direct Verilog code downloaders.",
+        image: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop",
+        category: "Basics & Time Pass",
+        techStack: ["React", "Verilog", "SVG", "GSAP"],
+        demo: "https://computer-arch.netlify.app/",
+        github: "https://github.com/Vortex-16/Computer-Architecture-Verilog-",
+        featured: false
+    },
+    {
+        id: "basics-5",
+        title: "DAA Visualizer",
+        description: "Explore 22+ fundamental computer science algorithms with step-by-step visual proof state machines, performance metrics, and C source code.",
+        image: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?q=80&w=2070&auto=format&fit=crop",
+        category: "Basics & Time Pass",
+        techStack: ["React", "CSS", "JavaScript"],
+        demo: "https://designanalysisofalgorithm.netlify.app/",
+        github: "https://github.com/Vortex-16/DAA",
+        featured: false
+    },
+    {
+        id: "basics-6",
+        title: "Discrete Mathematics Explorer",
+        description: "Interactive study guide for computer science discrete mathematics with tools for set operations, Euclidean algorithm GCD visualizer, and combinatorics.",
+        image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=2070&auto=format&fit=crop",
+        category: "Basics & Time Pass",
+        techStack: ["HTML", "CSS", "JavaScript"],
+        demo: "https://makautdiscretemaths.netlify.app/",
+        github: null,
+        featured: false
+    },
+    {
+        id: "basics-7",
+        title: "DevTrack OS",
+        description: "A conversion-optimized SaaS product landing page showcasing DevTrack's real-time engineering analytics, blocker detection, and team alignment tools.",
+        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop",
+        category: "Basics & Time Pass",
+        techStack: ["React", "Tailwind CSS", "Framer Motion"],
+        demo: "https://devtrackos.netlify.app/",
+        github: null,
         featured: false
     }
 
