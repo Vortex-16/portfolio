@@ -17,23 +17,30 @@ const OSJourney = () => {
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const ctx = gsap.context(() => {
-      gsap.from(headerRef.current, {
-        opacity: 0,
-        y: -50,
-        duration: 1,
-        ease: 'power3.out',
-      });
+      if (headerRef.current) {
+        gsap.from(headerRef.current, {
+          opacity: 0,
+          y: -50,
+          duration: 1,
+          ease: 'power3.out',
+        });
+      }
 
       // Reveal the distro strip logos on scroll.
-      gsap.from(stripRef.current?.querySelectorAll('[data-distro]') || [], {
-        opacity: 0,
-        y: 30,
-        scale: 0.8,
-        duration: 0.5,
-        stagger: 0.08,
-        ease: 'back.out(1.6)',
-        scrollTrigger: { trigger: stripRef.current, start: 'top 85%' },
-      });
+      if (stripRef.current) {
+        const distroLogos = stripRef.current.querySelectorAll('[data-distro]');
+        if (distroLogos.length > 0) {
+          gsap.from(distroLogos, {
+            opacity: 0,
+            y: 30,
+            scale: 0.8,
+            duration: 0.5,
+            stagger: 0.08,
+            ease: 'back.out(1.6)',
+            scrollTrigger: { trigger: stripRef.current, start: 'top 85%' },
+          });
+        }
+      }
     });
     return () => ctx.revert();
   }, []);

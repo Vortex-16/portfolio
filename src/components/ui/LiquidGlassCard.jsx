@@ -133,16 +133,15 @@ export const LiquidGlassCard = ({
           absolute inset-0 
           backdrop-blur-xl
           ${isDark 
-            ? 'bg-gradient-to-br from-purple-900/20 via-purple-800/10 to-violet-900/20' 
-            : 'bg-gradient-to-br from-emerald-100/40 via-emerald-200/30 to-teal-100/40'
+            ? 'bg-gradient-to-br from-purple-900/20 via-purple-800/10 to-violet-900/20 border-purple-500/20' 
+            : 'bg-white/80 border-emerald-400/40 shadow-lg shadow-emerald-950/5'
           }
           border
-          ${isDark ? 'border-purple-500/20' : 'border-emerald-400/30'}
         `}
         style={{
           background: isDark
-            ? 'linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(88, 28, 135, 0.05) 50%, rgba(168, 85, 247, 0.1) 100%)'
-            : 'linear-gradient(135deg, rgba(5, 150, 105, 0.15) 0%, rgba(16, 185, 129, 0.1) 50%, rgba(20, 184, 166, 0.15) 100%)',
+            ? 'linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(88, 28, 135, 0.1) 50%, rgba(168, 85, 247, 0.15) 100%)'
+            : 'linear-gradient(135deg, rgba(255, 255, 255, 0.88) 0%, rgba(209, 250, 229, 0.75) 50%, rgba(255, 255, 255, 0.92) 100%)',
         }}
       />
 

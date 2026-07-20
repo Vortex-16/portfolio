@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+﻿import { useState, useEffect, useRef, useCallback } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Home, User, Mail, Terminal, FolderGit2 } from 'lucide-react';
@@ -279,7 +279,7 @@ const ResponsiveNavigation = () => {
               whileHover={{ scale: 1.05 }}
             >
               <img
-                src="/alpha.png"
+                src="/alpha.webp"
                 alt="Alpha Coder"
                 className="h-5 w-5 rounded-full object-cover"
               />

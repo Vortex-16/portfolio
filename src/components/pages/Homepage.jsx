@@ -5,7 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useTheme } from '../../hooks/useTheme';
 import { LiquidGlassGrid, LiquidGlassCard } from '../ui/LiquidGlassCard';
 import { FaCode, FaGraduationCap, FaLinux, FaRocket } from 'react-icons/fa';
-import VantaGlobe from '../ui/VantaGlobe';
+import AnimeHeroBackground from '../ui/VantaGlobe';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -18,36 +18,42 @@ const Homepage = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.from(profileRef.current, {
-        scale: 0,
-        opacity: 0,
-        duration: 1,
-        ease: 'back.out(1.7)',
-      });
+      if (profileRef.current) {
+        gsap.from(profileRef.current, {
+          scale: 0,
+          opacity: 0,
+          duration: 1,
+          ease: 'back.out(1.7)',
+        });
 
-      gsap.from(titleRef.current, {
-        opacity: 0,
-        y: 50,
-        duration: 1,
-        delay: 0.3,
-        ease: 'power3.out',
-      });
+        gsap.to(profileRef.current, {
+          y: -10,
+          duration: 2,
+          repeat: -1,
+          yoyo: true,
+          ease: 'sine.inOut',
+        });
+      }
 
-      gsap.from(subtitleRef.current, {
-        opacity: 0,
-        y: 30,
-        duration: 0.8,
-        delay: 0.6,
-        ease: 'power2.out',
-      });
+      if (titleRef.current) {
+        gsap.from(titleRef.current, {
+          opacity: 0,
+          y: 50,
+          duration: 1,
+          delay: 0.3,
+          ease: 'power3.out',
+        });
+      }
 
-      gsap.to(profileRef.current, {
-        y: -10,
-        duration: 2,
-        repeat: -1,
-        yoyo: true,
-        ease: 'sine.inOut',
-      });
+      if (subtitleRef.current) {
+        gsap.from(subtitleRef.current, {
+          opacity: 0,
+          y: 30,
+          duration: 0.8,
+          delay: 0.6,
+          ease: 'power2.out',
+        });
+      }
     }, heroRef);
 
     return () => ctx.revert();
@@ -59,20 +65,19 @@ const Homepage = () => {
       className="min-h-screen flex flex-col relative overflow-hidden"
       aria-label="Home section"
     >
-      {/* Vanta Globe Background */}
-      <VantaGlobe />
+      <AnimeHeroBackground />
 
       <div className="flex-1 flex items-center justify-center py-8 md:py-12 lg:py-0 mt-24 md:mt-28 lg:mt-24">
         <div className="container mx-auto max-w-7xl px-4 md:px-6 lg:px-12 lg:pl-24">
           <div className="flex flex-col items-center text-center max-w-4xl mx-auto gap-8 md:gap-10">
             <div ref={titleRef} className="space-y-4 md:space-y-5 lg:space-y-6 flex flex-col items-center">
-              <h1 className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.1] ${isDark ? 'text-white' : 'text-gray-900'
+              <h1 className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.1] ${isDark ? 'text-white' : 'text-emerald-950'
                 }`}>
-                <span className="font-monorama font-normal">Hi</span><br />
-                <span className="font-lexa font-bold">it's Vikash</span>
+                <span className="font-lexa font-normal tracking-tight">Hi</span><br />
+                <span className="font-lexa font-extrabold tracking-tight">it's Vikash</span>
               </h1>
 
-              <p className={`font-monorama text-sm sm:text-base lg:text-base leading-relaxed max-w-2xl ${isDark ? 'text-gray-400' : 'text-gray-600'
+              <p className={`font-sans text-sm sm:text-base lg:text-lg leading-relaxed max-w-2xl font-medium ${isDark ? 'text-gray-300' : 'text-slate-800'
                 }`}>
                 Passionate about building innovative web applications and exploring the depths of operating systems. <br className="hidden md:block" />
                 Currently learning with EndeavourOS to understand Linux internals and working towards creating my own OS.
@@ -81,9 +86,9 @@ const Homepage = () => {
               <div className="pt-2 flex justify-center gap-4">
                 <Link
                   to="/about"
-                  className={`inline-block px-6 md:px-8 py-2.5 md:py-3 text-white font-monorama font-medium rounded-full text-sm shadow-lg transition-all duration-300 ${isDark
-                    ? 'bg-purple-600 hover:bg-purple-700'
-                    : 'bg-orange-500 hover:bg-orange-600'
+                  className={`inline-block px-6 md:px-8 py-2.5 md:py-3 text-white font-lexa font-semibold rounded-full text-sm shadow-lg transition-all duration-300 ${isDark
+                    ? 'bg-purple-600 hover:bg-purple-500 shadow-purple-600/30'
+                    : 'bg-emerald-600 hover:bg-emerald-500 shadow-emerald-600/30'
                     }`}
                 >
                   About Me
@@ -92,9 +97,9 @@ const Homepage = () => {
                   href="https://1drv.ms/w/c/c2b579426f4edd17/IQTYS1k-zHSVRYmcY4N_D0V5AQFASVNVQjTijmzdJTTV608"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`inline-flex items-center justify-center px-6 md:px-8 py-2.5 md:py-3 font-monorama font-medium rounded-full border-2 text-sm transition-all duration-300 ${isDark
-                    ? 'border-purple-600 text-purple-300 hover:bg-purple-600 hover:text-white'
-                    : 'border-orange-500 text-orange-600 hover:bg-orange-500 hover:text-white'
+                  className={`inline-flex items-center justify-center px-6 md:px-8 py-2.5 md:py-3 font-lexa font-semibold rounded-full border-2 text-sm transition-all duration-300 ${isDark
+                    ? 'border-purple-500 text-purple-300 hover:bg-purple-600 hover:text-white'
+                    : 'border-emerald-600 text-emerald-900 hover:bg-emerald-600 hover:text-white'
                     }`}
                 >
                   Resume
@@ -102,26 +107,17 @@ const Homepage = () => {
               </div>
 
               <div ref={subtitleRef} className="flex flex-wrap justify-center gap-2 md:gap-3 pt-2 md:pt-3">
-                <span className={`font-monorama px-4 md:px-5 py-1.5 md:py-2 text-white font-medium rounded text-xs md:text-sm ${isDark ? 'bg-purple-600' : 'bg-orange-500'
-                  }`}>
-                  c
-                </span>
-                <span className={`font-monorama px-4 md:px-5 py-1.5 md:py-2 text-white font-medium rounded text-xs md:text-sm ${isDark ? 'bg-purple-600' : 'bg-orange-500'
-                  }`}>
-                  java
-                </span>
-                <span className={`font-monorama px-4 md:px-5 py-1.5 md:py-2 font-medium rounded text-xs md:text-sm ${isDark
-                  ? 'bg-gray-800 text-white'
-                  : 'bg-gray-800 text-white'
-                  }`}>
-                  javascript
-                </span>
-                <span className={`font-monorama px-4 md:px-5 py-1.5 md:py-2 font-medium rounded text-xs md:text-sm ${isDark
-                  ? 'bg-gray-200 text-gray-900'
-                  : 'bg-gray-200 text-gray-900'
-                  }`}>
-                  python
-                </span>
+                {['C', 'Java', 'JavaScript', 'Python'].map((tech) => (
+                  <span
+                    key={tech}
+                    className={`font-mono text-xs font-bold tracking-wider px-4 py-1.5 rounded-full border transition-all ${isDark
+                      ? 'bg-purple-500/10 border-purple-500/30 text-purple-300'
+                      : 'bg-emerald-600/10 border-emerald-600/30 text-emerald-950 font-semibold'
+                      }`}
+                  >
+                    {tech}
+                  </span>
+                ))}
               </div>
             </div>
           </div>
@@ -133,16 +129,16 @@ const Homepage = () => {
 
           <LiquidGlassGrid className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 lg:gap-6">
             <LiquidGlassCard variant="cutcorner" animationDelay={0}>
-              <FaCode className={`text-3xl md:text-4xl lg:text-5xl mb-3 lg:mb-4 ${isDark ? 'text-cyan-400' : 'text-cyan-600'}`} />
-              <h3 className={`font-lexa text-lg md:text-xl lg:text-2xl font-bold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+              <FaCode className={`text-3xl md:text-4xl lg:text-5xl mb-3 lg:mb-4 ${isDark ? 'text-cyan-400' : 'text-teal-700'}`} />
+              <h3 className={`font-lexa text-lg md:text-xl lg:text-2xl font-bold mb-2 ${isDark ? 'text-white' : 'text-slate-900'}`}>
                 Full Stack Developer
               </h3>
-              <p className={`font-monorama text-xs md:text-sm lg:text-base mb-3 md:mb-4 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
+              <p className={`font-sans text-xs md:text-sm lg:text-base leading-relaxed mb-3 md:mb-4 font-normal ${isDark ? 'text-gray-300' : 'text-slate-700'}`}>
                 Building modern web applications with React, Node.js, and cutting-edge technologies
               </p>
               <Link
                 to="/projects"
-                className={`mt-auto inline-flex items-center gap-2 text-sm font-semibold group ${isDark ? 'text-cyan-400 hover:text-cyan-300' : 'text-cyan-600 hover:text-cyan-700'
+                className={`mt-auto inline-flex items-center gap-2 text-sm font-semibold group ${isDark ? 'text-cyan-400 hover:text-cyan-300' : 'text-teal-700 hover:text-teal-900'
                   }`}
               >
                 View Projects
@@ -151,16 +147,16 @@ const Homepage = () => {
             </LiquidGlassCard>
 
             <LiquidGlassCard variant="slanted" animationDelay={0.1}>
-              <FaGraduationCap className={`text-3xl md:text-4xl lg:text-5xl mb-3 lg:mb-4 ${isDark ? 'text-purple-400' : 'text-purple-600'}`} />
-              <h3 className={`font-lexa text-lg md:text-xl lg:text-2xl font-bold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+              <FaGraduationCap className={`text-3xl md:text-4xl lg:text-5xl mb-3 lg:mb-4 ${isDark ? 'text-purple-400' : 'text-purple-700'}`} />
+              <h3 className={`font-lexa text-lg md:text-xl lg:text-2xl font-bold mb-2 ${isDark ? 'text-white' : 'text-slate-900'}`}>
                 CSE Student
               </h3>
-              <p className={`font-monorama text-xs md:text-sm lg:text-base mb-3 md:mb-4 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
+              <p className={`font-sans text-xs md:text-sm lg:text-base leading-relaxed mb-3 md:mb-4 font-normal ${isDark ? 'text-gray-300' : 'text-slate-700'}`}>
                 Studying Computer Science at STCET, learning algorithms, data structures, and system design
               </p>
               <Link
                 to="/about"
-                className={`mt-auto inline-flex items-center gap-2 text-sm font-semibold group ${isDark ? 'text-purple-400 hover:text-purple-300' : 'text-purple-600 hover:text-purple-700'
+                className={`mt-auto inline-flex items-center gap-2 text-sm font-semibold group ${isDark ? 'text-purple-400 hover:text-purple-300' : 'text-purple-700 hover:text-purple-900'
                   }`}
               >
                 Learn More
@@ -169,16 +165,16 @@ const Homepage = () => {
             </LiquidGlassCard>
 
             <LiquidGlassCard variant="default" animationDelay={0.2}>
-              <FaLinux className={`text-3xl md:text-4xl lg:text-5xl mb-3 lg:mb-4 ${isDark ? 'text-green-400' : 'text-green-600'}`} />
-              <h3 className={`font-lexa text-lg md:text-xl lg:text-2xl font-bold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+              <FaLinux className={`text-3xl md:text-4xl lg:text-5xl mb-3 lg:mb-4 ${isDark ? 'text-emerald-400' : 'text-emerald-700'}`} />
+              <h3 className={`font-lexa text-lg md:text-xl lg:text-2xl font-bold mb-2 ${isDark ? 'text-white' : 'text-slate-900'}`}>
                 OS Enthusiast
               </h3>
-              <p className={`font-monorama text-xs md:text-sm lg:text-base mb-3 md:mb-4 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
+              <p className={`font-sans text-xs md:text-sm lg:text-base leading-relaxed mb-3 md:mb-4 font-normal ${isDark ? 'text-gray-300' : 'text-slate-700'}`}>
                 Exploring operating systems with EndeavourOS, learning Linux internals, and building my own OS
               </p>
               <Link
                 to="/os-journey"
-                className={`mt-auto inline-flex items-center gap-2 text-sm font-semibold group ${isDark ? 'text-green-400 hover:text-green-300' : 'text-green-600 hover:text-green-700'
+                className={`mt-auto inline-flex items-center gap-2 text-sm font-semibold group ${isDark ? 'text-emerald-400 hover:text-emerald-300' : 'text-emerald-700 hover:text-emerald-900'
                   }`}
               >
                 My OS Journey
@@ -187,16 +183,16 @@ const Homepage = () => {
             </LiquidGlassCard>
 
             <LiquidGlassCard variant="cutcorner" animationDelay={0.3}>
-              <FaRocket className={`text-3xl md:text-4xl lg:text-5xl mb-3 lg:mb-4 ${isDark ? 'text-red-400' : 'text-red-600'}`} />
-              <h3 className={`font-lexa text-lg md:text-xl lg:text-2xl font-bold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+              <FaRocket className={`text-3xl md:text-4xl lg:text-5xl mb-3 lg:mb-4 ${isDark ? 'text-rose-400' : 'text-rose-700'}`} />
+              <h3 className={`font-lexa text-lg md:text-xl lg:text-2xl font-bold mb-2 ${isDark ? 'text-white' : 'text-slate-900'}`}>
                 Let's Connect
               </h3>
-              <p className={`font-monorama text-xs md:text-sm lg:text-base mb-3 md:mb-4 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
+              <p className={`font-sans text-xs md:text-sm lg:text-base leading-relaxed mb-3 md:mb-4 font-normal ${isDark ? 'text-gray-300' : 'text-slate-700'}`}>
                 Interested in collaborating? Let's work together on exciting projects and innovative ideas
               </p>
               <Link
                 to="/contact"
-                className={`mt-auto inline-flex items-center gap-2 text-sm font-semibold group ${isDark ? 'text-red-400 hover:text-red-300' : 'text-red-600 hover:text-red-700'
+                className={`mt-auto inline-flex items-center gap-2 text-sm font-semibold group ${isDark ? 'text-rose-400 hover:text-rose-300' : 'text-rose-700 hover:text-rose-900'
                   }`}
               >
                 Get in Touch

@@ -41,6 +41,8 @@ const Projects = () => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     const ctx = gsap.context(() => {
+      if (!starSvgRef.current || !sectionRef.current || !starContainerRef.current) return;
+
       // 1. Scroll-driven movement: star travels down the screen (y: 60vh) while rotating 720deg
       gsap.fromTo(
         starSvgRef.current,
