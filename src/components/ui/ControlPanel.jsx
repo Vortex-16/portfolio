@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, memo } from 'react';
+﻿import { useEffect, useRef, useState, memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../../hooks/useTheme';
 import { useMusicPlayer } from '../../hooks/useMusicPlayer';
@@ -153,7 +153,7 @@ const ControlPanel = ({ isOpen, onClose, anchorRef }) => {
                         <div className="flex items-center justify-between mb-6 px-2">
                             <div className="flex items-center gap-3">
                                 <div className={`p-0.5 rounded-full border-2 ${isDark ? 'border-arch-blue' : 'border-emerald-500'}`}>
-                                    <img src="/alpha.png" alt="User" className="w-10 h-10 rounded-full object-cover" />
+                                    <img src="/alpha.webp" alt="User" className="w-10 h-10 rounded-full object-cover" />
                                 </div>
                                 <div>
                                     <h3 className={`text-sm font-bold tracking-tight ${isDark ? 'text-white' : 'text-gray-900'}`}>Vikash</h3>

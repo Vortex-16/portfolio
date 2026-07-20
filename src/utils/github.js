@@ -1,4 +1,4 @@
-import { projects as localProjects } from '../constants/projects';
+﻿import { projects as localProjects } from '../constants/projects';
 import { GITHUB_USERNAME } from '../constants/github';
 
 /**
@@ -69,7 +69,7 @@ export const fetchGitHubProjects = async () => {
           title: repo.name.replace(/-/g, ' ').replace(/_/g, ' ').split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' '),
           description: repo.description || "No description provided.",
           // Use a local template image as fallback to avoid 429 errors from GitHub OG
-          image: "/project-fallback.png", 
+          image: "/project-fallback.webp", 
           category: getCategory(repo),
           techStack: repo.language ? [repo.language] : [],
           demo: repo.homepage,
