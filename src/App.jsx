@@ -1,37 +1,31 @@
-import { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { lazy, Suspense, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from './hooks/useTheme';
 import { MusicProvider } from './hooks/useMusicPlayer';
 
-// Components
+// Static imports for always-needed shell components
 import LoadingScreen from './components/ui/LoadingScreen';
 import Layout from './components/layout/Layout';
-import Homepage from './components/pages/Homepage';
-import Projects from './components/pages/Projects';
-import About from './components/pages/About';
-import Contact from './components/pages/Contact';
-import OSJourney from './components/pages/OSJourney';
 
-// Preload all route components
-const preloadRoutes = () => {
-  // These imports will be cached by the browser
-  import('./components/pages/Homepage');
-  import('./components/pages/About');
-  import('./components/pages/Projects');
-  import('./components/pages/Contact');
-  import('./components/pages/OSJourney');
-};
+// Lazy-loaded page routes — each page ships as its own JS chunk.
+// Vite will only fetch a page's code when the user first navigates to it.
+const Homepage = lazy(() => import('./components/pages/Homepage'));
+const About    = lazy(() => import('./components/pages/About'));
+const Projects = lazy(() => import('./components/pages/Projects'));
+const OSJourney = lazy(() => import('./components/pages/OSJourney'));
+const Contact  = lazy(() => import('./components/pages/Contact'));
+
+// Minimal suspense fallback — just keeps the layout from flashing.
+// The LoadingScreen handles the real first-load experience.
+const PageFallback = () => (
+  <div className="min-h-screen" aria-hidden="true" />
+);
 
 const AppContent = () => {
   // Skip boot on return visits
   const [isLoading, setIsLoading] = useState(
     () => !localStorage.getItem('vk_visited')
   );
-
-  useEffect(() => {
-    // Preload routes when app loads
-    preloadRoutes();
-  }, []);
 
   const handleLoadingComplete = () => {
     localStorage.setItem('vk_visited', '1');
@@ -48,15 +42,17 @@ const AppContent = () => {
       {/* Main App - Only show when not loading */}
       {!isLoading && (
         <Router>
-          <Routes>
-            <Route path="/" element={<Layout />}>
-              <Route index element={<Homepage />} />
-              <Route path="about" element={<About />} />
-              <Route path="projects" element={<Projects />} />
-              <Route path="os-journey" element={<OSJourney />} />
-              <Route path="contact" element={<Contact />} />
-            </Route>
-          </Routes>
+          <Suspense fallback={<PageFallback />}>
+            <Routes>
+              <Route path="/" element={<Layout />}>
+                <Route index element={<Homepage />} />
+                <Route path="about" element={<About />} />
+                <Route path="projects" element={<Projects />} />
+                <Route path="os-journey" element={<OSJourney />} />
+                <Route path="contact" element={<Contact />} />
+              </Route>
+            </Routes>
+          </Suspense>
         </Router>
       )}
     </>

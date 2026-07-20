@@ -63,6 +63,10 @@ const ProjectCard = ({ project, onClick }) => {
                 <img
                     src={project.image}
                     alt={project.title}
+                    width={640}
+                    height={360}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     onError={(e) => {
                         e.target.src = "/project-fallback.png";

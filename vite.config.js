@@ -14,12 +14,38 @@ export default defineConfig({
     outDir: 'dist',
     sourcemap: false,
     minify: 'terser',
+    // Raise the warning threshold — Vanta+Three are now async chunks
+    chunkSizeWarningLimit: 1000,
+    terserOptions: {
+      compress: {
+        // Strip all console.* calls from the production build
+        drop_console: true,
+        drop_debugger: true,
+        // Inline small functions for extra savings
+        passes: 2,
+      },
+    },
     rollupOptions: {
       output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom'],
-          animations: ['framer-motion'],
-          three: ['three'],
+        manualChunks(id) {
+          // Three.js + Vanta — large async bundle, keep together
+          if (id.includes('node_modules/three') || id.includes('node_modules/vanta')) {
+            return 'vendor-three';
+          }
+          // Framer Motion — used across pages
+          if (id.includes('node_modules/framer-motion')) {
+            return 'vendor-framer';
+          }
+          // GSAP
+          if (id.includes('node_modules/gsap') || id.includes('node_modules/@gsap')) {
+            return 'vendor-gsap';
+          }
+          // React Router
+          if (id.includes('node_modules/react-router-dom') || id.includes('node_modules/@remix-run')) {
+            return 'vendor-router';
+          }
+          // Core React — let Rollup handle this automatically to avoid circular deps
+          // (do NOT manually chunk react/react-dom here)
         },
       },
     },
@@ -32,4 +58,3 @@ export default defineConfig({
     port: 4173,
   },
 })
-

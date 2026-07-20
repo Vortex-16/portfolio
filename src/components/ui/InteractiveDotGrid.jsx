@@ -62,7 +62,6 @@ export default function InteractiveDotGrid({
 
         // Initial setup
         resizeCanvas();
-        console.log("InteractiveDotGrid Initialized:", { width: canvas.width, height: canvas.height });
 
         // Add resize observer
         const resizeObserver = new ResizeObserver(() => {

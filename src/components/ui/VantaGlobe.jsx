@@ -1,15 +1,24 @@
 import { useEffect, useRef } from 'react';
 import { useTheme } from '../../hooks/useTheme';
-import GLOBE from 'vanta/dist/vanta.globe.min';
-import * as THREE from 'three';
 
 const VantaGlobe = () => {
   const { isDark } = useTheme();
   const vantaRef = useRef(null);
   const vantaEffect = useRef(null);
 
+  // Dynamic import so THREE + Vanta are NOT in the initial JS bundle.
+  // They only load after the component mounts, keeping FCP fast.
   useEffect(() => {
-    if (!vantaEffect.current) {
+    let cancelled = false;
+
+    const initVanta = async () => {
+      const [{ default: GLOBE }, THREE] = await Promise.all([
+        import('vanta/dist/vanta.globe.min'),
+        import('three'),
+      ]);
+
+      if (cancelled || !vantaRef.current) return;
+
       vantaEffect.current = GLOBE({
         el: vantaRef.current,
         THREE: THREE,
@@ -26,17 +35,21 @@ const VantaGlobe = () => {
         size: 0.8,
         backgroundAlpha: 0,
       });
-    }
+    };
+
+    initVanta();
 
     return () => {
+      cancelled = true;
       if (vantaEffect.current) {
         vantaEffect.current.destroy();
         vantaEffect.current = null;
       }
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Update colors when theme changes
+  // Update colors when theme changes (Vanta already loaded by this point)
   useEffect(() => {
     if (vantaEffect.current) {
       vantaEffect.current.setOptions({
