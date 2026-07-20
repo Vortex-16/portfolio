@@ -89,7 +89,7 @@ const Homepage = () => {
                   About Me
                 </Link>
                 <a
-                  href="/resume.pdf"
+                  href="https://1drv.ms/w/c/c2b579426f4edd17/IQTYS1k-zHSVRYmcY4N_D0V5AQFASVNVQjTijmzdJTTV608"
                   target="_blank"
                   rel="noopener noreferrer"
                   className={`inline-flex items-center justify-center px-6 md:px-8 py-2.5 md:py-3 font-monorama font-medium rounded-full border-2 text-sm transition-all duration-300 ${isDark

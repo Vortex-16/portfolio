@@ -6,7 +6,7 @@ export const filters = [
     "Client Work",
     "Assignment",
     "YouTube",
-    "Basics & Time Pass"
+    "Experiments"
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────

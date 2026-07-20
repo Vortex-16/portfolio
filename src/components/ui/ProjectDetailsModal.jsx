@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { motion } from 'framer-motion';
 import { FaGithub, FaExternalLinkAlt, FaTimes, FaExclamationTriangle, FaCog, FaChartBar } from 'react-icons/fa';
@@ -6,6 +6,22 @@ import { useTheme } from '../../hooks/useTheme';
 
 const ProjectDetailsModal = ({ project, onClose }) => {
     const { isDark } = useTheme();
+
+    // Prevent background page scrolling when modal is active (Lenis + native)
+    useEffect(() => {
+        const originalOverflow = document.body.style.overflow;
+        document.body.style.overflow = 'hidden';
+
+        const handleKeyDown = (e) => {
+            if (e.key === 'Escape') onClose?.();
+        };
+        window.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            document.body.style.overflow = originalOverflow || '';
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [onClose]);
 
     if (!project) return null;
 
@@ -21,6 +37,7 @@ const ProjectDetailsModal = ({ project, onClose }) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={handleBackdropClick}
+            data-lenis-prevent
             className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 overflow-y-auto backdrop-blur-md bg-black/60"
         >
             <motion.div
@@ -28,6 +45,7 @@ const ProjectDetailsModal = ({ project, onClose }) => {
                 animate={{ scale: 1, y: 0, opacity: 1 }}
                 exit={{ scale: 0.9, y: 20, opacity: 0 }}
                 transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+                data-lenis-prevent
                 className={`relative w-[95%] max-w-3xl max-h-[90vh] rounded-[2rem] overflow-x-hidden overflow-y-auto sm:overflow-hidden flex flex-col md:flex-row shadow-2xl ${isDark ? 'bg-[#121212] border border-zinc-800' : 'bg-[#151515] border border-zinc-700'}`}
                 style={{ boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.7)' }}
             >
@@ -79,7 +97,7 @@ const ProjectDetailsModal = ({ project, onClose }) => {
                         <span className="font-lexa text-[10px] tracking-widest font-bold">CLUB</span>
                     </div>
 
-                    <div className="mt-2 sm:mt-10 sm:pr-16 overflow-y-auto" style={{ maxHeight: '55vh', scrollbarWidth: 'none' }}>
+                    <div data-lenis-prevent className="mt-2 sm:mt-10 sm:pr-16 overflow-y-auto" style={{ maxHeight: '55vh', scrollbarWidth: 'none' }}>
                         {/* Title */}
                         <div className="mb-4">
                             <span className="text-[10px] sm:text-xs font-monorama font-bold tracking-widest text-zinc-400 uppercase block mb-1">PROJECT</span>

@@ -321,7 +321,7 @@ const ResponsiveNavigation = () => {
                 <NavLink key={item.path} to={item.path} className="relative">
                   <motion.div
                     whileTap={{ scale: 0.88 }}
-                    className="relative flex flex-col items-center justify-center px-4 py-2 rounded-xl transition-colors duration-200"
+                    className="relative flex flex-col items-center justify-center px-2.5 sm:px-3.5 py-1.5 rounded-xl transition-colors duration-200"
                   >
                     {/* Active background pill */}
                     {isActive && (
@@ -344,7 +344,7 @@ const ResponsiveNavigation = () => {
                     />
                     {/* Label */}
                     <span
-                      className={`relative z-10 text-[9px] font-semibold mt-0.5 tracking-wide transition-colors duration-200 ${isActive
+                      className={`relative z-10 text-[9px] font-semibold mt-0.5 tracking-wide whitespace-nowrap transition-colors duration-200 ${isActive
                         ? isDark ? 'text-arch-blue' : 'text-emerald-600'
                         : isDark ? 'text-gray-600' : 'text-gray-400'
                         }`}
