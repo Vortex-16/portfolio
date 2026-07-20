@@ -1,72 +1,27 @@
-import { useEffect, useRef } from 'react';
+import React from 'react';
 import { useTheme } from '../../hooks/useTheme';
+import { Vortex } from './vortex';
 
-const VantaGlobe = () => {
+const VortexHeroBackground = () => {
   const { isDark } = useTheme();
-  const vantaRef = useRef(null);
-  const vantaEffect = useRef(null);
-
-  // Dynamic import so THREE + Vanta are NOT in the initial JS bundle.
-  // They only load after the component mounts, keeping FCP fast.
-  useEffect(() => {
-    let cancelled = false;
-
-    const initVanta = async () => {
-      const [{ default: GLOBE }, THREE] = await Promise.all([
-        import('vanta/dist/vanta.globe.min'),
-        import('three'),
-      ]);
-
-      if (cancelled || !vantaRef.current) return;
-
-      vantaEffect.current = GLOBE({
-        el: vantaRef.current,
-        THREE: THREE,
-        mouseControls: true,
-        touchControls: true,
-        gyroControls: false,
-        minHeight: 200.00,
-        minWidth: 200.00,
-        scale: 0.50,
-        scaleMobile: 0.50,
-        color: isDark ? 0x9e4bba : 0x059669,
-        color2: isDark ? 0x4c2a59 : 0x34d399,
-        backgroundColor: isDark ? 0x1e1e2f : 0xd1fae5,
-        size: 0.8,
-        backgroundAlpha: 0,
-      });
-    };
-
-    initVanta();
-
-    return () => {
-      cancelled = true;
-      if (vantaEffect.current) {
-        vantaEffect.current.destroy();
-        vantaEffect.current = null;
-      }
-    };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  // Update colors when theme changes (Vanta already loaded by this point)
-  useEffect(() => {
-    if (vantaEffect.current) {
-      vantaEffect.current.setOptions({
-        color: isDark ? 0x9e4bba : 0x059669,
-        color2: isDark ? 0x4c2a59 : 0x34d399,
-        backgroundColor: isDark ? 0x1e1e2f : 0xd1fae5,
-      });
-    }
-  }, [isDark]);
 
   return (
-    <div
-      ref={vantaRef}
-      className="fixed inset-0 -z-10"
-      style={{ width: '100%', height: '100%' }}
-    />
+    <div className="fixed inset-0 -z-10 pointer-events-none w-full h-full">
+      <Vortex
+        isDark={isDark}
+        backgroundColor="transparent"
+        particleCount={isDark ? 450 : 250}
+        baseHue={isDark ? 260 : 160}
+        baseSpeed={0.1}
+        rangeSpeed={1.5}
+        baseRadius={1}
+        rangeRadius={2}
+        containerClassName="w-full h-full"
+      />
+    </div>
   );
 };
 
-export default VantaGlobe;
+export default VortexHeroBackground;
+
+
