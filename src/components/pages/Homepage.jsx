@@ -95,14 +95,13 @@ const Homepage = () => {
                 </Link>
                 <a
                   href="/Resume.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  download="Vikash_Gupta_Resume.pdf"
                   className={`inline-flex items-center justify-center px-6 md:px-8 py-2.5 md:py-3 font-lexa font-semibold rounded-full border-2 text-sm transition-all duration-300 ${isDark
                     ? 'border-purple-500 text-purple-300 hover:bg-purple-600 hover:text-white'
                     : 'border-emerald-600 text-emerald-900 hover:bg-emerald-600 hover:text-white'
                     }`}
                 >
-                  Resume
+                  Download Resume
                 </a>
               </div>
 

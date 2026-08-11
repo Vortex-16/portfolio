@@ -1,20 +1,7 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
-import { FaGraduationCap, FaCode, FaRocket, FaHeart, FaDownload, FaExpand, FaFileAlt } from 'react-icons/fa';
+import { FaGraduationCap, FaCode, FaRocket, FaHeart } from 'react-icons/fa';
 import { useTheme } from '../../hooks/useTheme';
-
-// ── Resume embed source ──────────────────────────────────────────────────────
-// Embed URL from OneDrive (right-click → Embed → copy iframe src).
-// The ?em=2 parameter tells OneDrive to render in embedded viewer mode.
-const ONEDRIVE_EMBED_URL = 'https://1drv.ms/w/c/c2b579426f4edd17/IQTYS1k-zHSVRYmcY4N_D0V5AQFASVNVQjTijmzdJTTV608?em=2';
-
-// Full-screen / share URL (same doc, opens editable view in new tab)
-const ONEDRIVE_SHARE_URL = 'https://1drv.ms/w/c/c2b579426f4edd17/IQTYS1k-zHSVRYmcY4N_D0V5AQFASVNVQjTijmzdJTTV608';
-
-// Falls back to /public/resume.pdf if embed URL is not set
-const RESUME_EMBED_URL = ONEDRIVE_EMBED_URL ?? '/resume.pdf#view=FitH';
-const IS_LIVE = Boolean(ONEDRIVE_EMBED_URL);
-// ─────────────────────────────────────────────────────────────────────────────
 
 
 
