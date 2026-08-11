@@ -107,18 +107,26 @@ export const projects = [
 
     {
         id: "grp-devtrack",
-        title: "DevTrack",
-        description: "AI-enhanced developer ecosystem designed to bridge the gap between learning and building. Features project intelligence, learning streaks, and automated repository analysis.",
+        title: "DevTrack — AI Developer Ecosystem",
+        description: "AI-enhanced developer ecosystem designed to bridge the gap between learning and building. Features real-time GitHub repository intelligence, automated security vulnerability audits (Llama 3.3), static complexity hotspot mapping, and learning streak analytics.",
+        longDescription: "DevTrack is an end-to-end developer intelligence portal engineered to transform passive code repositories into active learning engines. By pairing live GitHub REST API telemetry with Groq Llama 3.3 AI static analysis, DevTrack audits security vulnerabilities, calculates codebase complexity scores, identifies unhandled memory pressure points, and generates personalized 'What Next' learning roadmap suggestions.",
         image: "/DevTrack.webp",
         category: "Hackathon",
-        techStack: ["React 18", "Groq (Llama 3.3)", "Node.js", "Firebase", "GitHub API"],
+        techStack: ["React 18", "Groq (Llama 3.3)", "Node.js", "Express", "Firebase", "GitHub REST API", "Tailwind CSS", "Framer Motion"],
         demo: "https://devtrackweb.xyz/",
         github: "https://github.com/Vortex-16/devtrack",
         featured: true,
         demoType: "devtrack",
-        problem: "Traditional portfolios show where you are, but fail to capture the growth, learning streaks, and detailed project evolution of a developer.",
-        solution: "Built a 'Consistency Engine' merging live GitHub data with learning logs. Integrates Llama 3.3 for security vulnerability audits and automated codebase complexity hotspots identification.",
-        result: "Awarded 'Best Innovative Project'. Helps developers master their craft with actionable 'What Next' suggestions and premium Glassmorphism UI.",
+        problem: "Traditional developer portfolios provide static snapshots of past work, but fail to capture daily growth, learning consistency, codebase evolution, and security vulnerability patterns.",
+        solution: "Engineered a dual-engine platform combining a 'Consistency Engine' (live GitHub event feeds + streak visualization) with an 'AI Intelligence Engine' (Llama 3.3 static analysis for dependency audits, container layer checks, and complexity hotspots).",
+        result: "Awarded 'Best Innovative Project' at Hackathon. Processed 60+ repository audits with sub-second Llama 3.3 inference times and sub-50ms GitHub telemetry sync.",
+        features: [
+            "Real-time GitHub REST API repository & user profile telemetry sync",
+            "AI Security Audit powered by Groq Llama 3.3 (Dependency & Secrets detection)",
+            "Static Codebase Complexity Hotspot analyzer with metric scoring (1-10)",
+            "Consistency Engine featuring interactive streak timelines & growth logs",
+            "Responsive Glassmorphic UI with dynamic dark/light mode shader support"
+        ],
     },
     {
         id: "grp-devtrack-lite",

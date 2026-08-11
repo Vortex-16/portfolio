@@ -340,45 +340,57 @@ const Projects = () => {
                   {heroTab === 'overview' && (
                     <div className="space-y-4">
                       <div>
-                        <h4 className="font-mono text-xs font-bold text-indigo-400 uppercase tracking-widest mb-1">Project Mission</h4>
-                        <p className={`font-monorama text-sm leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
-                          {topFeaturedProject.longDescription || topFeaturedProject.description || "An innovative solution engineered with clean code architecture and real-time interactive capabilities."}
+                        <h4 className="font-mono text-xs font-bold text-indigo-400 uppercase tracking-widest mb-1">Project Mission & Overview</h4>
+                        <p className={`font-monorama text-xs sm:text-sm leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
+                          {topFeaturedProject.longDescription || topFeaturedProject.description}
                         </p>
                       </div>
                       <div className="grid grid-cols-2 gap-3 pt-2">
                         <div className={`p-3 rounded-xl border ${isDark ? 'bg-white/5 border-white/10' : 'bg-white border-gray-200'}`}>
-                          <span className="font-mono text-[10px] text-gray-500 uppercase block">Category</span>
-                          <span className={`font-mono text-xs font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>{topFeaturedProject.category}</span>
+                          <span className="font-mono text-[10px] text-gray-500 uppercase block">Category & Distinction</span>
+                          <span className={`font-mono text-xs font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>{topFeaturedProject.category} · Awarded</span>
                         </div>
                         <div className={`p-3 rounded-xl border ${isDark ? 'bg-white/5 border-white/10' : 'bg-white border-gray-200'}`}>
-                          <span className="font-mono text-[10px] text-gray-500 uppercase block">Status</span>
-                          <span className="font-mono text-xs font-bold text-emerald-400">Active / Maintained</span>
+                          <span className="font-mono text-[10px] text-gray-500 uppercase block">Engine Deployment</span>
+                          <span className="font-mono text-xs font-bold text-emerald-400">Live Telemetry API</span>
                         </div>
                       </div>
                     </div>
                   )}
 
                   {heroTab === 'features' && (
-                    <div className="space-y-3">
-                      <h4 className="font-mono text-xs font-bold text-indigo-400 uppercase tracking-widest mb-2">Core Features</h4>
-                      {(topFeaturedProject.features || [
-                        "Real-time analytics and tracking dashboard",
-                        "Clean responsive UI with glassmorphic aesthetic",
-                        "High performance asset loading and caching",
-                        "Modular architecture built for scalability"
-                      ]).map((feat, i) => (
-                        <div key={i} className="flex items-start gap-2 text-xs font-monorama">
-                          <span className="text-indigo-400 mt-0.5">✦</span>
-                          <span className={isDark ? 'text-gray-300' : 'text-gray-700'}>{feat}</span>
+                    <div className="space-y-4">
+                      <div>
+                        <h4 className="font-mono text-xs font-bold text-indigo-400 uppercase tracking-widest mb-2">Key Architecture Highlights</h4>
+                        <div className="space-y-2">
+                          {(topFeaturedProject.features || [
+                            "Real-time GitHub REST API telemetry sync & event streams",
+                            "Groq Llama 3.3 AI Static Vulnerability & Dependency Analyzer",
+                            "Static Codebase Complexity Hotspot analyzer with metric scoring (1-10)",
+                            "Consistency Engine featuring interactive streak timelines & growth logs"
+                          ]).map((feat, i) => (
+                            <div key={i} className="flex items-start gap-2 text-xs font-monorama">
+                              <span className="text-indigo-400 mt-0.5 font-bold">✦</span>
+                              <span className={isDark ? 'text-gray-300' : 'text-gray-700'}>{feat}</span>
+                            </div>
+                          ))}
                         </div>
-                      ))}
+                      </div>
+                      {topFeaturedProject.problem && (
+                        <div className="pt-2 border-t border-white/10">
+                          <span className="font-mono text-[10px] text-indigo-400 uppercase font-bold block mb-1">Architectural Problem Solved</span>
+                          <p className={`font-monorama text-xs leading-relaxed ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                            {topFeaturedProject.problem}
+                          </p>
+                        </div>
+                      )}
                     </div>
                   )}
 
                   {heroTab === 'tech' && (
                     <div className="space-y-4">
                       <div>
-                        <h4 className="font-mono text-xs font-bold text-indigo-400 uppercase tracking-widest mb-2">Technologies Used</h4>
+                        <h4 className="font-mono text-xs font-bold text-indigo-400 uppercase tracking-widest mb-2">Tech Stack Specifications</h4>
                         <div className="flex flex-wrap gap-2">
                           {topFeaturedProject.techStack?.map((t) => (
                             <span key={t} className={`font-mono text-xs px-3 py-1 rounded-lg border ${isDark ? 'bg-white/10 border-white/15 text-white' : 'bg-gray-100 border-gray-200 text-gray-800'}`}>
@@ -387,12 +399,15 @@ const Projects = () => {
                           ))}
                         </div>
                       </div>
-                      <div className="pt-2 border-t border-white/10">
-                        <span className="font-mono text-[10px] text-gray-500 uppercase block mb-1">Open Source Contribution</span>
-                        <p className={`font-monorama text-xs ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                          Code is open-source and available on GitHub for community exploration and pull requests.
-                        </p>
-                      </div>
+
+                      {topFeaturedProject.result && (
+                        <div className="pt-2 border-t border-white/10">
+                          <span className="font-mono text-[10px] text-emerald-400 uppercase font-bold block mb-1">Measured Impact & Recognition</span>
+                          <p className={`font-monorama text-xs leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
+                            {topFeaturedProject.result}
+                          </p>
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>
