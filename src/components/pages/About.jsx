@@ -86,14 +86,14 @@ const About = () => {
               </motion.h2>
             </motion.div>
 
-            <div className="grid lg:grid-cols-3 gap-8 items-start">
-              {/* Left Side - Profile Image */}
-              <motion.div className="lg:col-span-1" variants={itemVariants}>
+            <div className="grid lg:grid-cols-12 gap-8 items-start">
+              {/* Left Column (4 cols) - Profile, Stats & Fun Facts */}
+              <motion.div className="lg:col-span-4 space-y-6" variants={itemVariants}>
                 {/* Profile Image */}
-                <div className="relative mb-8">
+                <div className="relative">
                   <motion.div
-                    className="w-72 h-72 mx-auto rounded-3xl bg-gradient-to-br from-emerald-400 to-emerald-600 dark:from-purple-400 dark:to-purple-600 p-1 shadow-2xl"
-                    whileHover={{ scale: 1.05, rotate: 2 }}
+                    className="w-64 h-64 sm:w-72 sm:h-72 mx-auto rounded-3xl bg-gradient-to-br from-emerald-400 to-emerald-600 dark:from-purple-400 dark:to-purple-600 p-1 shadow-2xl"
+                    whileHover={{ scale: 1.03, rotate: 1.5 }}
                     transition={{ duration: 0.3 }}
                   >
                     <div className="w-full h-full rounded-3xl overflow-hidden">
@@ -107,28 +107,28 @@ const About = () => {
                 </div>
 
                 {/* Stats Grid */}
-                <div className="grid grid-cols-2 gap-4 mb-6">
+                <div className="grid grid-cols-2 gap-4">
                   {stats.map((stat, index) => (
                     <motion.div
                       key={index}
-                      className={`backdrop-blur-md border rounded-2xl p-6 text-center ${isDark
+                      className={`backdrop-blur-md border rounded-2xl p-4 text-center ${isDark
                         ? 'bg-white/10 border-white/20'
                         : 'bg-emerald-900/80 border-emerald-700/40'
                         }`}
                       variants={itemVariants}
-                      whileHover={{ scale: 1.05, y: -5 }}
+                      whileHover={{ scale: 1.03, y: -3 }}
                       transition={{ duration: 0.2 }}
                     >
-                      <stat.icon className="text-3xl text-emerald-400 dark:text-purple-400 mx-auto mb-3" />
+                      <stat.icon className="text-2xl text-emerald-400 dark:text-purple-400 mx-auto mb-2" />
                       {stat.inline ? (
                         <div className="flex flex-col items-center">
-                          <span className={`text-2xl font-bold ${isDark ? 'text-white' : 'text-emerald-50'}`}>{stat.label}</span>
-                          <span className={`text-sm font-semibold ${isDark ? 'text-emerald-400' : 'text-emerald-200'}`}>{stat.value}</span>
+                          <span className={`text-xl font-bold ${isDark ? 'text-white' : 'text-emerald-50'}`}>{stat.label}</span>
+                          <span className={`text-xs font-semibold ${isDark ? 'text-emerald-400' : 'text-emerald-200'}`}>{stat.value}</span>
                         </div>
                       ) : (
                         <>
-                          <div className={`text-2xl font-bold ${isDark ? 'text-white' : 'text-emerald-50'}`}>{stat.value}</div>
-                          <div className={`text-sm ${isDark ? 'text-white/70' : 'text-emerald-200'}`}>{stat.label}</div>
+                          <div className={`text-xl font-bold ${isDark ? 'text-white' : 'text-emerald-50'}`}>{stat.value}</div>
+                          <div className={`text-xs ${isDark ? 'text-white/70' : 'text-emerald-200'}`}>{stat.label}</div>
                         </>
                       )}
                     </motion.div>
@@ -146,13 +146,13 @@ const About = () => {
                   transition={{ duration: 0.2 }}
                 >
                   <div className="flex items-center gap-3 mb-4">
-                    <span className="text-2xl">✨</span>
+                    <span className="text-xl">✨</span>
                     <h4 className={`text-lg font-semibold ${isDark ? 'text-white' : 'text-emerald-50'
                       }`}>Fun Facts About Me</h4>
                   </div>
-                  <div className="space-y-3">
+                  <div className="space-y-2.5">
                     {[
-                      { emoji: "☕", text: "Powered by coffee and curiosity" },
+                      { emoji: "☕", text: "Powered by coffee & curiosity" },
                       { emoji: "🌄", text: "Daylight developer" },
                       { emoji: "💻", text: "Code enthusiast" },
                       { emoji: "🏏", text: "Cricket lover" },
@@ -161,16 +161,16 @@ const About = () => {
                     ].map((fact, index) => (
                       <motion.div
                         key={index}
-                        className={`flex items-center gap-3 p-3 rounded-full ${isDark
+                        className={`flex items-center gap-3 p-2.5 rounded-2xl ${isDark
                           ? 'bg-white/5'
                           : 'bg-emerald-800/30'
                           }`}
                         variants={itemVariants}
-                        whileHover={{ scale: 1.02, x: 5 }}
+                        whileHover={{ scale: 1.02, x: 4 }}
                         transition={{ duration: 0.2 }}
                       >
-                        <div className="text-2xl">{fact.emoji}</div>
-                        <p className={`text-sm ${isDark ? 'text-white/80' : 'text-emerald-100'
+                        <div className="text-xl">{fact.emoji}</div>
+                        <p className={`text-xs sm:text-sm ${isDark ? 'text-white/80' : 'text-emerald-100'
                           }`}>{fact.text}</p>
                       </motion.div>
                     ))}
@@ -178,23 +178,23 @@ const About = () => {
                 </motion.div>
               </motion.div>
 
-              {/* Right Side - About Content */}
-              <motion.div className="lg:col-span-2 space-y-8" variants={itemVariants}>
+              {/* Right Column (8 cols) - Main Content, Education, Focus, Interests & Skills */}
+              <motion.div className="lg:col-span-8 space-y-6" variants={itemVariants}>
                 {/* Introduction Card */}
                 <motion.div
-                  className={`backdrop-blur-md border rounded-3xl p-5 md:p-6 ${isDark
+                  className={`backdrop-blur-md border rounded-3xl p-6 md:p-8 ${isDark
                     ? 'bg-white/10 border-white/20'
                     : 'bg-emerald-900/80 border-emerald-700/40'
                     }`}
                   variants={itemVariants}
-                  whileHover={{ scale: 1.02 }}
+                  whileHover={{ scale: 1.01 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <h3 className={`font-lexa text-2xl md:text-3xl font-bold mb-4 md:mb-6 ${isDark ? 'text-white' : 'text-emerald-50'
+                  <h3 className={`font-lexa text-2xl md:text-3xl font-bold mb-4 ${isDark ? 'text-white' : 'text-emerald-50'
                     }`}>
                     Hello! I'm Vikash Gupta 👋
                   </h3>
-                  <div className={`font-monorama space-y-3 md:space-y-4 text-base md:text-lg leading-relaxed ${isDark ? 'text-white/80' : 'text-emerald-100'
+                  <div className={`font-monorama space-y-3 text-sm md:text-base leading-relaxed ${isDark ? 'text-white/80' : 'text-emerald-100'
                     }`}>
                     <p>
                       Frontend developer and CSE undergrad at St. Thomas College of Engineering & Technology (2024–2028).
@@ -209,7 +209,7 @@ const About = () => {
                   </div>
                 </motion.div>
 
-                {/* Education & Focus Grid */}
+                {/* Education & Current Focus */}
                 <div className="grid md:grid-cols-2 gap-6">
                   {/* Education Section */}
                   <motion.div
@@ -218,7 +218,7 @@ const About = () => {
                       : 'bg-emerald-900/80 border-emerald-700/40'
                       }`}
                     variants={itemVariants}
-                    whileHover={{ scale: 1.02, y: -5 }}
+                    whileHover={{ scale: 1.01, y: -3 }}
                     transition={{ duration: 0.2 }}
                   >
                     <div className="flex items-center gap-3 mb-4">
@@ -231,7 +231,7 @@ const About = () => {
                         }`}>Bachelor of Technology</h5>
                       <p className={`text-sm mb-1 ${isDark ? 'text-white/70' : 'text-emerald-200'
                         }`}>Computer Science & Engineering</p>
-                      <p className={`text-sm mb-2 ${isDark ? 'text-white/60' : 'text-emerald-300'
+                      <p className={`text-xs sm:text-sm mb-3 ${isDark ? 'text-white/60' : 'text-emerald-300'
                         }`}>St. Thomas College of Engineering and Technology</p>
                       <div className="inline-block bg-emerald-500/20 dark:bg-purple-500/20 px-3 py-1 rounded-full">
                         <span className={`text-xs font-medium ${isDark ? 'text-emerald-300' : 'text-emerald-100'
@@ -247,7 +247,7 @@ const About = () => {
                       : 'bg-emerald-900/80 border-emerald-700/40'
                       }`}
                     variants={itemVariants}
-                    whileHover={{ scale: 1.02, y: -5 }}
+                    whileHover={{ scale: 1.01, y: -3 }}
                     transition={{ duration: 0.2 }}
                   >
                     <div className="flex items-center gap-3 mb-4">
@@ -255,124 +255,118 @@ const About = () => {
                       <h4 className={`text-xl font-semibold ${isDark ? 'text-white' : 'text-emerald-50'
                         }`}>Current Focus</h4>
                     </div>
-                    <ul className={`space-y-3 ${isDark ? 'text-white/80' : 'text-emerald-100'
+                    <ul className={`space-y-2.5 text-xs sm:text-sm ${isDark ? 'text-white/80' : 'text-emerald-100'
                       }`}>
-                      <li className="flex items-center gap-3">
-                        <span className="w-2 h-2 bg-emerald-400 dark:bg-purple-400 rounded-full"></span>
+                      <li className="flex items-center gap-2.5">
+                        <span className="w-2 h-2 bg-emerald-400 dark:bg-purple-400 rounded-full shrink-0"></span>
                         MERN-stack & NEXT JS
                       </li>
-                      <li className="flex items-center gap-3">
-                        <span className="w-2 h-2 bg-emerald-400 dark:bg-purple-400 rounded-full"></span>
+                      <li className="flex items-center gap-2.5">
+                        <span className="w-2 h-2 bg-emerald-400 dark:bg-purple-400 rounded-full shrink-0"></span>
                         Data Structures & Algorithms
                       </li>
-                      <li className="flex items-center gap-3">
-                        <span className="w-2 h-2 bg-emerald-400 dark:bg-purple-400 rounded-full"></span>
+                      <li className="flex items-center gap-2.5">
+                        <span className="w-2 h-2 bg-emerald-400 dark:bg-purple-400 rounded-full shrink-0"></span>
                         Open-source contributions
                       </li>
                     </ul>
                   </motion.div>
                 </div>
 
-                {/* Skills & Interests Grid - Two Column Layout */}
-                <div className="grid lg:grid-cols-3 gap-6">
-                  {/* Interests & Technologies - Left Side */}
-                  <motion.div
-                    className={`backdrop-blur-md border rounded-3xl p-6 flex flex-col ${isDark
-                      ? 'bg-white/10 border-white/20'
-                      : 'bg-emerald-900/80 border-emerald-700/40'
-                      }`}
-                    variants={itemVariants}
-                    whileHover={{ scale: 1.01 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <div className="flex items-center gap-3 mb-6">
-                      <FaHeart className="text-emerald-400 dark:text-purple-400 text-2xl" />
-                      <h4 className={`text-xl font-semibold ${isDark ? 'text-white' : 'text-emerald-50'
-                        }`}>Interests & Technologies</h4>
-                    </div>
-                    <div className="flex flex-wrap gap-3 content-start">
-                      {interests.map((interest, index) => (
-                        <motion.span
-                          key={index}
-                          className={`px-4 py-2 backdrop-blur-md border rounded-full text-sm font-medium ${isDark
-                            ? 'bg-white/10 border-white/20 text-white'
-                            : 'bg-emerald-800/50 border-emerald-600/40 text-emerald-100'
-                            }`}
-                          initial={{ opacity: 0, scale: 0 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{ delay: 0.8 + index * 0.1, duration: 0.3 }}
-                          whileHover={{ scale: 1.1, y: -2 }}
-                        >
-                          {interest}
-                        </motion.span>
-                      ))}
-                    </div>
-                  </motion.div>
+                {/* Interests Section */}
+                <motion.div
+                  className={`backdrop-blur-md border rounded-3xl p-6 ${isDark
+                    ? 'bg-white/10 border-white/20'
+                    : 'bg-emerald-900/80 border-emerald-700/40'
+                    }`}
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.01 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <div className="flex items-center gap-3 mb-4">
+                    <FaHeart className="text-emerald-400 dark:text-purple-400 text-2xl" />
+                    <h4 className={`text-xl font-semibold ${isDark ? 'text-white' : 'text-emerald-50'
+                      }`}>Interests & Technologies</h4>
+                  </div>
+                  <div className="flex flex-wrap gap-2.5">
+                    {interests.map((interest, index) => (
+                      <motion.span
+                        key={index}
+                        className={`px-3.5 py-1.5 backdrop-blur-md border rounded-full text-xs font-medium ${isDark
+                          ? 'bg-white/10 border-white/20 text-white'
+                          : 'bg-emerald-800/50 border-emerald-600/40 text-emerald-100'
+                          }`}
+                        initial={{ opacity: 0, scale: 0 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: 0.8 + index * 0.05, duration: 0.3 }}
+                        whileHover={{ scale: 1.08, y: -2 }}
+                      >
+                        {interest}
+                      </motion.span>
+                    ))}
+                  </div>
+                </motion.div>
 
-                  {/* Skills Section - Right Side */}
-                  <motion.div
-                    className={`lg:col-span-2 backdrop-blur-md border rounded-3xl p-8 ${isDark
-                      ? 'bg-white/10 border-white/20'
-                      : 'bg-emerald-900/80 border-emerald-700/40'
-                      }`}
-                    variants={itemVariants}
-                    whileHover={{ scale: 1.01 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <div className="flex items-center gap-3 mb-6">
-                      <FaCode className="text-emerald-400 dark:text-purple-400 text-2xl" />
-                      <h4 className={`text-2xl font-semibold ${isDark ? 'text-white' : 'text-emerald-50'
-                        }`}>Skills & Proficiency</h4>
-                    </div>
-                    <div className="grid md:grid-cols-2 gap-6">
-                      {[
-                        { name: 'JavaScript (ES6+)', level: 88 },
-                        { name: 'React / Next.js', level: 85 },
-                        { name: 'TypeScript', level: 75 },
-                        { name: 'HTML5 / CSS3', level: 92 },
-                        { name: 'Tailwind CSS', level: 88 },
-                        { name: 'Node.js / Express.js', level: 74 },
-                        { name: 'MongoDB', level: 72 },
-                        { name: 'Firebase', level: 80 },
-                        { name: 'GCP', level: 71 },
-                        { name: 'REST APIs / Git', level: 82 },
-                        { name: 'C / Python', level: 72 },
-                        { name: 'GSAP / Framer Motion', level: 78 },
-                      ].map((skill, index) => (
-                        <motion.div
-                          key={skill.name}
-                          className={`p-4 rounded-xl border ${isDark
-                            ? 'bg-white/5 border-white/10'
-                            : 'bg-emerald-800/30 border-emerald-600/30'
-                            }`}
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: 0.8 + index * 0.1, duration: 0.5 }}
-                          whileHover={{ scale: 1.05, y: -2 }}
-                        >
-                          <div className="flex items-center justify-between mb-3">
-                            <div className="flex items-center gap-3">
-                              <span className="text-2xl">{skill.icon}</span>
-                              <span className={`font-medium ${isDark ? 'text-white' : 'text-emerald-50'
-                                }`}>{skill.name}</span>
-                            </div>
-                            <span className={`text-sm font-semibold ${isDark ? 'text-emerald-400' : 'text-emerald-200'
-                              }`}>{skill.level}%</span>
-                          </div>
-                          <div className={`w-full rounded-full h-3 ${isDark ? 'bg-white/10' : 'bg-emerald-700/30'
-                            }`}>
-                            <motion.div
-                              className="bg-gradient-to-r from-emerald-400 to-emerald-600 dark:from-purple-400 dark:to-purple-600 h-3 rounded-full"
-                              initial={{ width: 0 }}
-                              animate={{ width: `${skill.level}%` }}
-                              transition={{ delay: 1.2 + index * 0.1, duration: 1, ease: "easeOut" }}
-                            />
-                          </div>
-                        </motion.div>
-                      ))}
-                    </div>
-                  </motion.div>
-                </div>
+                {/* Skills Section */}
+                <motion.div
+                  className={`backdrop-blur-md border rounded-3xl p-6 md:p-8 ${isDark
+                    ? 'bg-white/10 border-white/20'
+                    : 'bg-emerald-900/80 border-emerald-700/40'
+                    }`}
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.005 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <div className="flex items-center gap-3 mb-6">
+                    <FaCode className="text-emerald-400 dark:text-purple-400 text-2xl" />
+                    <h4 className={`text-2xl font-semibold ${isDark ? 'text-white' : 'text-emerald-50'
+                      }`}>Skills & Proficiency</h4>
+                  </div>
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    {[
+                      { name: 'JavaScript (ES6+)', level: 88 },
+                      { name: 'React / Next.js', level: 85 },
+                      { name: 'TypeScript', level: 75 },
+                      { name: 'HTML5 / CSS3', level: 92 },
+                      { name: 'Tailwind CSS', level: 88 },
+                      { name: 'Node.js / Express.js', level: 74 },
+                      { name: 'MongoDB', level: 72 },
+                      { name: 'Firebase', level: 80 },
+                      { name: 'GCP', level: 71 },
+                      { name: 'REST APIs / Git', level: 82 },
+                      { name: 'C / Python', level: 72 },
+                      { name: 'GSAP / Framer Motion', level: 78 },
+                    ].map((skill, index) => (
+                      <motion.div
+                        key={skill.name}
+                        className={`p-3.5 rounded-xl border ${isDark
+                          ? 'bg-white/5 border-white/10'
+                          : 'bg-emerald-800/30 border-emerald-600/30'
+                          }`}
+                        initial={{ opacity: 0, x: -15 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.8 + index * 0.05, duration: 0.4 }}
+                        whileHover={{ scale: 1.03, y: -2 }}
+                      >
+                        <div className="flex items-center justify-between mb-2">
+                          <span className={`text-xs font-medium ${isDark ? 'text-white' : 'text-emerald-50'
+                            }`}>{skill.name}</span>
+                          <span className={`text-xs font-semibold ${isDark ? 'text-emerald-400' : 'text-emerald-200'
+                            }`}>{skill.level}%</span>
+                        </div>
+                        <div className={`w-full rounded-full h-2.5 ${isDark ? 'bg-white/10' : 'bg-emerald-700/30'
+                          }`}>
+                          <motion.div
+                            className="bg-gradient-to-r from-emerald-400 to-emerald-600 dark:from-purple-400 dark:to-purple-600 h-2.5 rounded-full"
+                            initial={{ width: 0 }}
+                            animate={{ width: `${skill.level}%` }}
+                            transition={{ delay: 1 + index * 0.05, duration: 0.8, ease: "easeOut" }}
+                          />
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
               </motion.div>
             </div>
           </motion.div>
