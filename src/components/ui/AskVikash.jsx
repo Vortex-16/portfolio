@@ -4,73 +4,23 @@ import {
   FaComments, FaTimes, FaPaperPlane, FaRobot,
   FaChevronDown, FaCode, FaLaptopCode,
 } from 'react-icons/fa';
+import { AI_KB_ENTRIES } from '../../constants/aiKnowledge';
 
-/* ── Knowledge base: keyword → response ── */
-const KB = [
-  {
-    keys: ['hello', 'hi', 'hey', 'greet', 'sup'],
-    answer: `Hey! I'm a bot that knows everything about Vikash. Ask me anything — his projects, skills, availability, or experience!`,
-  },
-  {
-    keys: ['stack', 'tech', 'language', 'skill', 'use', 'know'],
-    answer: `Vikash's core stack:\n• Frontend — React, Next.js, Framer Motion, GSAP\n• Backend — Node.js, Express, Python (FastAPI)\n• DB — MongoDB, PostgreSQL, ChromaDB\n• DevOps — Linux (EndeavourOS), Git, Docker\n• AI/ML — LangChain, RAG pipelines, NVIDIA API`,
-  },
-  {
-    keys: ['project', 'built', 'build', 'work', 'portfolio'],
-    answer: `Notable projects:\n• Arynox LLM — Socratic AI tutoring platform (Hackathon)\n• AIMS 2.0 — Academic management system (Client)\n• Codigo — Competitive coding event platform\n• Punarchakra — AI e-waste recycling platform\n• This portfolio — React + GSAP + Framer Motion\n\nType "tell me about [project]" for details!`,
-  },
-  {
-    keys: ['arynox', 'llm', 'tutor', 'ai tutor'],
-    answer: `Arynox LLM is an AI-powered education platform Vikash built for a hackathon. It uses RAG (Retrieval-Augmented Generation) with ChromaDB to guide students through course materials Socratically — asking questions instead of giving direct answers. Stack: React + Node.js + LangChain + NVIDIA API.`,
-  },
-  {
-    keys: ['aims', 'academic', 'institution', 'management'],
-    answer: `AIMS and AIMS 2.0 are academic management systems Vikash built as client work. AIMS handles attendance, roles, and dashboards. The 2.0 version migrated to TypeScript + Next.js with faster queries and enhanced analytics.`,
-  },
-  {
-    keys: ['codebattle', 'battle', 'arena', 'competitive', 'coding platform'],
-    answer: `CodeBattle Arena is a real-time 1v1 competitive coding platform with a live code editor, test case runner, and Elo ranking system. Built with React + Socket.io + Node.js. You can see the interactive demo right on the Projects page!`,
-  },
-  {
-    keys: ['available', 'hire', 'job', 'open', 'freelance', 'opportunity', 'work with'],
-    answer: `Yes! Vikash is open to:\n• Freelance / client web projects\n• SDE internships\n• Open source collaboration\n\nBest way to reach him: vikash@example.com or the Contact page.`,
-  },
-  {
-    keys: ['experience', 'year', 'how long', 'background'],
-    answer: `Vikash has 3+ years of development experience. He's been building web apps since his first year of CSE at STCET. He's shipped 25+ projects across client work, hackathons, and personal experiments.`,
-  },
-  {
-    keys: ['linux', 'arch', 'os', 'operating system', 'endeavour', 'kernel'],
-    answer: `Vikash is deep into OS internals — he daily-drives EndeavourOS with a customized Hyprland setup and is actively working towards building his own OS from scratch. Check out his OS Journey page for the full timeline!`,
-  },
-  {
-    keys: ['favourite', 'favorite', 'best', 'proud', 'proud of'],
-    answer: `His favourite project is Arynox LLM — it combines AI, education, and real-world impact. The RAG pipeline took the most engineering effort and the Socratic tutoring mechanic is something he's genuinely proud of.`,
-  },
-  {
-    keys: ['college', 'study', 'education', 'stcet', 'degree'],
-    answer: `Vikash is studying Computer Science Engineering (CSE) at St. Thomas' College of Engineering & Technology (STCET), Kolkata. He's active in the college coding club and has represented at IIT Kharagpur's Kshitij fest.`,
-  },
-  {
-    keys: ['contact', 'email', 'reach', 'message', 'dm'],
-    answer: `You can reach Vikash via the Contact page on this portfolio. He typically responds within 24 hours!`,
-  },
-];
-
+/* ── Knowledge base matcher ── */
 const SUGGESTIONS = [
-  'What can Vikash build?',
-  'Is he available to hire?',
-  'Tell me about Arynox',
-  "What\u2019s his tech stack?",
-  'Favourite project?',
+  'Who is Vikash?',
+  'What is his tech stack?',
+  'Tell me about DevTrack & Arynox',
+  'What are his achievements?',
+  'Is he open for internships?',
 ];
 
 function findAnswer(query) {
   const q = query.toLowerCase();
-  for (const entry of KB) {
+  for (const entry of AI_KB_ENTRIES) {
     if (entry.keys.some((k) => q.includes(k))) return entry.answer;
   }
-  return `I don't have a specific answer for that, but you can explore Vikash's projects, OS journey, and contact page to learn more. Ask me about his stack, projects, availability, or experience!`;
+  return `I'm Vikash's Portfolio AI Assistant! You can ask me about his tech stack, major projects (DevTrack, Arynox, CodeBattle, TrustED), education at STCET, achievements (Google Solution Challenge Top 106, SIH), or internship availability!`;
 }
 
 const AskVikash = () => {

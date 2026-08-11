@@ -32,3 +32,7 @@ LOCAL_Report.md
 *.njsproj
 *.sln
 *.sw?
+
+# AI Context Knowledge Base
+AI_KNOWLEDGE_BASE.md
+
