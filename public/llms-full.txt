@@ -1,0 +1,14 @@
+# Vikash Gupta - Full Portfolio & Documentation
+
+> Detailed documentation for AI agents, crawlers, and LLM reasoning models.
+
+## Overview
+Vikash Gupta is a 2nd-year Computer Science & Engineering student at STCET, specializing in full-stack web development (React, Node.js, Next.js, Tailwind CSS, GSAP, Framer Motion) and system engineering (Linux internals, C, Java, Python).
+
+## Site Structure & Content
+- [Homepage](https://vikash.is-a.dev/): Interactive OS boot terminal, developer role cards, and skill badges.
+- [About](https://vikash.is-a.dev/about): Educational background at STCET, technical skill breakdown, and bio.
+- [Journey](https://vikash.is-a.dev/journey): Chronological timeline of academic milestones, projects, and hackathons.
+- [Projects](https://vikash.is-a.dev/projects): Categorized showcase of hackathon wins, personal projects, and client work.
+- [OS Journey](https://vikash.is-a.dev/os-journey): Exploration of EndeavourOS, Arch Linux customization, kernel concepts, and custom OS development progress.
+- [Contact](https://vikash.is-a.dev/contact): Contact details, social profiles, and direct contact form.

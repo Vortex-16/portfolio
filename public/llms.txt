@@ -2,17 +2,21 @@
 
 > Computer Science & Engineering student specializing in web development, software engineering, and operating systems.
 
-## Main Navigation Pages
-- Homepage: https://vikash.is-a.dev/
-- About Me: https://vikash.is-a.dev/about
-- Journey: https://vikash.is-a.dev/journey
-- Projects Portfolio: https://vikash.is-a.dev/projects
-- OS Journey: https://vikash.is-a.dev/os-journey
-- Contact: https://vikash.is-a.dev/contact
+## Main Navigation
+- [Homepage](https://vikash.is-a.dev/): Developer portfolio hero section and skills overview.
+- [About Me](https://vikash.is-a.dev/about): Education background at STCET, technical skills, and experience.
+- [Journey](https://vikash.is-a.dev/journey): Interactive career and study milestone timeline.
+- [Projects Portfolio](https://vikash.is-a.dev/projects): Full project catalog with filtering, live demos, and source code.
+- [OS Journey](https://vikash.is-a.dev/os-journey): Linux internals, EndeavourOS setup, and OS engineering notes.
+- [Contact](https://vikash.is-a.dev/contact): Get in touch via email, GitHub, LinkedIn, or message form.
 
-## Key Projects
-- DevTrack: AI Developer Ecosystem (https://devtrackweb.xyz/)
-- Arynox LLM: Socratic RAG-based AI Tutoring platform
-- Punarchakra: AI-assisted e-waste recycling platform
-- ChainTorque: Web3 CAD marketplace and ecosystem
-- Codigo: Competitive coding event management platform
+## Featured Projects
+- [DevTrack](https://devtrackweb.xyz/): AI Developer Ecosystem for real-time repository intelligence and vulnerability audits.
+- [Arynox LLM](https://arynox-llm.onrender.com/): Socratic RAG-based AI Tutoring platform.
+- [Punarchakra](https://punarchakra.vercel.app/): Smart e-waste classification and recycling platform.
+- [ChainTorque](https://chaintorque-landing.onrender.com/): Web3 CAD marketplace and decentralized 3D ecosystem.
+- [Codigo](https://codigo-94nz.onrender.com/): Competitive coding event management platform.
+
+## Resources
+- [Resume](https://vikash.is-a.dev/Resume.pdf): Official PDF resume of Vikash Gupta.
+- [GitHub Profile](https://github.com/Vortex-16): Open-source repositories and code contributions.

@@ -111,7 +111,7 @@ const LoadingScreen = ({ onComplete, onLoadingComplete }) => {
   useEffect(() => {
     if (isWideScreen) return;
     const start = Date.now();
-    const duration = 1100;
+    const duration = 500;
     const frame = () => {
       const elapsed = Date.now() - start;
       const p = Math.min((elapsed / duration) * 100, 100);

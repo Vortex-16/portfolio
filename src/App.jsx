@@ -40,23 +40,21 @@ const AppContent = () => {
         <LoadingScreen onLoadingComplete={handleLoadingComplete} />
       )}
 
-      {/* Main App - Only show when not loading */}
-      {!isLoading && (
-        <Router>
-          <Suspense fallback={<PageFallback />}>
-            <Routes>
-              <Route path="/" element={<Layout />}>
-                <Route index element={<Homepage />} />
-                <Route path="about" element={<About />} />
-                <Route path="journey" element={<Journey />} />
-                <Route path="projects" element={<Projects />} />
-                <Route path="os-journey" element={<OSJourney />} />
-                <Route path="contact" element={<Contact />} />
-              </Route>
-            </Routes>
-          </Suspense>
-        </Router>
-      )}
+      {/* Main App */}
+      <Router>
+        <Suspense fallback={<PageFallback />}>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Homepage />} />
+              <Route path="about" element={<About />} />
+              <Route path="journey" element={<Journey />} />
+              <Route path="projects" element={<Projects />} />
+              <Route path="os-journey" element={<OSJourney />} />
+              <Route path="contact" element={<Contact />} />
+            </Route>
+          </Routes>
+        </Suspense>
+      </Router>
     </>
   );
 };
