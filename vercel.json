@@ -1,7 +1,7 @@
 {
   "headers": [
     {
-      "source": "/Resume.pdf",
+      "source": "/(Resume|resume).pdf",
       "headers": [
         { "key": "Content-Type", "value": "application/pdf" },
         { "key": "Content-Disposition", "value": "attachment; filename=\"Vikash_Gupta_Resume.pdf\"" }
