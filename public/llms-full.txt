@@ -3,7 +3,7 @@
 > Detailed documentation for AI agents, crawlers, and LLM reasoning models.
 
 ## Overview
-Vikash Gupta is a 2nd-year Computer Science & Engineering student at STCET, specializing in full-stack web development (React, Node.js, Next.js, Tailwind CSS, GSAP, Framer Motion) and system engineering (Linux internals, C, Java, Python).
+Vikash Gupta is a 3rd-year Computer Science & Engineering student at STCET, specializing in full-stack web development (React, Node.js, Next.js, Tailwind CSS, GSAP, Framer Motion) and system engineering (Linux internals, C, Java, Python).
 
 ## Site Structure & Content
 - [Homepage](https://vikash.is-a.dev/): Interactive OS boot terminal, developer role cards, and skill badges.
