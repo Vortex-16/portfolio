@@ -10,7 +10,7 @@ const VortexHeroBackground = () => {
       <Vortex
         isDark={isDark}
         backgroundColor="transparent"
-        particleCount={isDark ? 450 : 250}
+        particleCount={typeof window !== 'undefined' && window.innerWidth < 768 ? (isDark ? 120 : 80) : (isDark ? 300 : 180)}
         baseHue={isDark ? 260 : 160}
         baseSpeed={0.1}
         rangeSpeed={1.5}
