@@ -1,0 +1,18 @@
+# Vikash Gupta - Portfolio & Systems Developer
+
+> Computer Science & Engineering student specializing in web development, software engineering, and operating systems.
+
+## Main Navigation Pages
+- Homepage: https://vikash.is-a.dev/
+- About Me: https://vikash.is-a.dev/about
+- Journey: https://vikash.is-a.dev/journey
+- Projects Portfolio: https://vikash.is-a.dev/projects
+- OS Journey: https://vikash.is-a.dev/os-journey
+- Contact: https://vikash.is-a.dev/contact
+
+## Key Projects
+- DevTrack: AI Developer Ecosystem (https://devtrackweb.xyz/)
+- Arynox LLM: Socratic RAG-based AI Tutoring platform
+- Punarchakra: AI-assisted e-waste recycling platform
+- ChainTorque: Web3 CAD marketplace and ecosystem
+- Codigo: Competitive coding event management platform

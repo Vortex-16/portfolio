@@ -145,9 +145,9 @@ const Homepage = () => {
           <LiquidGlassGrid className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 lg:gap-6">
             <LiquidGlassCard variant="cutcorner" animationDelay={0}>
               <FaCode className={`text-3xl md:text-4xl lg:text-5xl mb-3 lg:mb-4 ${isDark ? 'text-cyan-400' : 'text-teal-700'}`} />
-              <h3 className={`font-lexa text-lg md:text-xl lg:text-2xl font-bold mb-2 ${isDark ? 'text-white' : 'text-slate-900'}`}>
+              <h2 className={`font-lexa text-lg md:text-xl lg:text-2xl font-bold mb-2 ${isDark ? 'text-white' : 'text-slate-900'}`}>
                 Full Stack Developer
-              </h3>
+              </h2>
               <p className={`font-sans text-xs md:text-sm lg:text-base leading-relaxed mb-3 md:mb-4 font-normal ${isDark ? 'text-gray-300' : 'text-slate-700'}`}>
                 Building modern web applications with React, Node.js, and cutting-edge technologies
               </p>
@@ -163,9 +163,9 @@ const Homepage = () => {
 
             <LiquidGlassCard variant="slanted" animationDelay={0.1}>
               <FaGraduationCap className={`text-3xl md:text-4xl lg:text-5xl mb-3 lg:mb-4 ${isDark ? 'text-purple-400' : 'text-purple-700'}`} />
-              <h3 className={`font-lexa text-lg md:text-xl lg:text-2xl font-bold mb-2 ${isDark ? 'text-white' : 'text-slate-900'}`}>
+              <h2 className={`font-lexa text-lg md:text-xl lg:text-2xl font-bold mb-2 ${isDark ? 'text-white' : 'text-slate-900'}`}>
                 CSE Student
-              </h3>
+              </h2>
               <p className={`font-sans text-xs md:text-sm lg:text-base leading-relaxed mb-3 md:mb-4 font-normal ${isDark ? 'text-gray-300' : 'text-slate-700'}`}>
                 Studying Computer Science at STCET, learning algorithms, data structures, and system design
               </p>
@@ -181,9 +181,9 @@ const Homepage = () => {
 
             <LiquidGlassCard variant="default" animationDelay={0.2}>
               <FaLinux className={`text-3xl md:text-4xl lg:text-5xl mb-3 lg:mb-4 ${isDark ? 'text-emerald-400' : 'text-emerald-700'}`} />
-              <h3 className={`font-lexa text-lg md:text-xl lg:text-2xl font-bold mb-2 ${isDark ? 'text-white' : 'text-slate-900'}`}>
+              <h2 className={`font-lexa text-lg md:text-xl lg:text-2xl font-bold mb-2 ${isDark ? 'text-white' : 'text-slate-900'}`}>
                 OS Enthusiast
-              </h3>
+              </h2>
               <p className={`font-sans text-xs md:text-sm lg:text-base leading-relaxed mb-3 md:mb-4 font-normal ${isDark ? 'text-gray-300' : 'text-slate-700'}`}>
                 Exploring operating systems with EndeavourOS, learning Linux internals, and building my own OS
               </p>
@@ -199,9 +199,9 @@ const Homepage = () => {
 
             <LiquidGlassCard variant="cutcorner" animationDelay={0.3}>
               <FaRocket className={`text-3xl md:text-4xl lg:text-5xl mb-3 lg:mb-4 ${isDark ? 'text-rose-400' : 'text-rose-700'}`} />
-              <h3 className={`font-lexa text-lg md:text-xl lg:text-2xl font-bold mb-2 ${isDark ? 'text-white' : 'text-slate-900'}`}>
+              <h2 className={`font-lexa text-lg md:text-xl lg:text-2xl font-bold mb-2 ${isDark ? 'text-white' : 'text-slate-900'}`}>
                 Let's Connect
-              </h3>
+              </h2>
               <p className={`font-sans text-xs md:text-sm lg:text-base leading-relaxed mb-3 md:mb-4 font-normal ${isDark ? 'text-gray-300' : 'text-slate-700'}`}>
                 Interested in collaborating? Let's work together on exciting projects and innovative ideas
               </p>
