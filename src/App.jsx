@@ -11,6 +11,7 @@ import Layout from './components/layout/Layout';
 // Vite will only fetch a page's code when the user first navigates to it.
 const Homepage = lazy(() => import('./components/pages/Homepage'));
 const About    = lazy(() => import('./components/pages/About'));
+const Journey  = lazy(() => import('./components/pages/Journey'));
 const Projects = lazy(() => import('./components/pages/Projects'));
 const OSJourney = lazy(() => import('./components/pages/OSJourney'));
 const Contact  = lazy(() => import('./components/pages/Contact'));
@@ -47,6 +48,7 @@ const AppContent = () => {
               <Route path="/" element={<Layout />}>
                 <Route index element={<Homepage />} />
                 <Route path="about" element={<About />} />
+                <Route path="journey" element={<Journey />} />
                 <Route path="projects" element={<Projects />} />
                 <Route path="os-journey" element={<OSJourney />} />
                 <Route path="contact" element={<Contact />} />

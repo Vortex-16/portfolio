@@ -1,7 +1,7 @@
-﻿import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Home, User, Mail, Terminal, FolderGit2 } from 'lucide-react';
+import { Home, User, Mail, Terminal, FolderGit2, Compass } from 'lucide-react';
 import { FaLinux, FaWifi, FaVolumeUp, FaVolumeMute, FaBatteryFull, FaBatteryThreeQuarters, FaBatteryHalf, FaBatteryQuarter, FaBatteryEmpty } from 'react-icons/fa';
 import { MdWifiOff, MdSignalWifiStatusbarConnectedNoInternet } from 'react-icons/md';
 import { useTheme } from '../../hooks/useTheme';
@@ -215,6 +215,7 @@ const ResponsiveNavigation = () => {
   const navItems = [
     { path: '/', icon: Home, label: 'Home' },
     { path: '/about', icon: User, label: 'About' },
+    { path: '/journey', icon: Compass, label: 'Journey' },
     { path: '/projects', icon: FolderGit2, label: 'Projects' },
     { path: '/os-journey', icon: Terminal, label: 'OS Journey' },
     { path: '/contact', icon: Mail, label: 'Contact' },
