@@ -124,7 +124,7 @@ const LoadingScreen = ({ onComplete, onLoadingComplete }) => {
 
   // Preload assets in background
   useEffect(() => {
-    ['/PofileNew.jpeg', '/iitkgprp.png', '/alpha.png'].forEach(src => {
+    ['/PofileNew.webp', '/iitkgprp.webp', '/alpha.webp'].forEach(src => {
       const img = new Image(); img.src = src;
     });
   }, []);

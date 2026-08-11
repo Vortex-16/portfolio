@@ -167,7 +167,7 @@ const CoverFlow = ({ projects = [], onSelect }) => {
                                     alt={project.title}
                                     draggable={false}
                                     className="w-full h-full object-cover pointer-events-none"
-                                    onError={(e) => { e.target.src = '/project-fallback.png'; }}
+                                    onError={(e) => { e.target.src = '/project-fallback.webp'; }}
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
                                 <div className="absolute top-3 right-3 flex gap-2">

@@ -243,7 +243,7 @@ const Projects = () => {
                     src={topFeaturedProject.image}
                     alt={topFeaturedProject.title}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    onError={(e) => { e.target.src = '/project-fallback.png'; }}
+                    onError={(e) => { e.target.src = '/project-fallback.webp'; }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end p-4">
                     <div className="flex flex-wrap gap-2">
