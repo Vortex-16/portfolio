@@ -1,7 +1,7 @@
 # ⚡ Vikash Gupta — Production Engineering & Developer Portfolio
 
-[![React 19](https://img.shields.io/badge/React-19.0-61DAFB?logo=react&logoColor=black)](https://react.dev/)
-[![Vite 8](https://img.shields.io/badge/Vite-8.1-646CFF?logo=vite&logoColor=white)](https://vite.dev/)
+[![React 19](https://img.shields.io/badge/React-19.2-61DAFB?logo=react&logoColor=black)](https://react.dev/)
+[![Vite 7](https://img.shields.io/badge/Vite-7.3-646CFF?logo=vite&logoColor=white)](https://vite.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38BDF8?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 [![GSAP 3](https://img.shields.io/badge/GSAP-3.13-88CE02?logo=greensock&logoColor=white)](https://gsap.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-emerald.svg)](LICENSE)
@@ -48,23 +48,26 @@ A high-performance, responsive web platform built with **React 19**, **GSAP Scro
 
 ### 1. Aceternity UI Vortex Canvas Engine (`src/components/ui/vortex.jsx`)
 
-The background particle system replaces heavy 3D WebGL runtimes (like Three.js/Vanta, saving **~600KB** bundle overhead) with a custom 2D canvas procedural flow field:
+The background particle system replaces heavy 3D WebGL runtimes (saving **~600KB** bundle overhead) with a custom 2D canvas procedural flow field:
 
-- **Mathematical Engine**: Uses `simplex-noise` (`createNoise3D`) to map 3D noise coordinates $(x \cdot 0.0015, y \cdot 0.0015, \text{tick} \cdot 0.0015)$ to radial particle vector velocities:
-  $$\mathbf{v} = \begin{pmatrix} \cos(\text{noise} \cdot 2\pi) \cdot \text{speed} \\ \sin(\text{noise} \cdot 2\pi) \cdot \text{speed} \end{pmatrix}$$
+- **Mathematical Engine**: Uses `simplex-noise` (`createNoise3D`) to map 3D noise coordinates `(x * 0.0015, y * 0.0015, tick * 0.0015)` to radial particle vector velocities:
+  ```math
+  vx = cos(noise * 2π) * speed
+  vy = sin(noise * 2π) * speed
+  ```
 - **Particle Array Structure**: Uses high-performance typed arrays (`Float32Array`) storing contiguous 9-float strides `[x, y, vx, vy, life, ttl, speed, radius, hue]` for zero-garbage-collection loop iterations.
 - **Light Mode Canvas Fill Guard**: Dynamically toggles canvas frame fade opacity (`rgba(15, 15, 22, 0.2)` in Dark vs `rgba(236, 253, 245, 0.25)` in Light) to eliminate screen darkening bugs and preserve crisp typography.
 
 ### 2. GSAP Parallax & Physics Interaction (`src/components/pages/Projects.jsx`)
 
-- **Scroll-Scrubbed Accent**: Rotates an accent SVG element $720^\circ$ while translating it along the Y-axis (`55vh`) tied to the section's `ScrollTrigger` scrub pipeline (`scrub: 1.2`).
-- **Mouse Parallax Interactivity**: Uses `gsap.quickTo()` for hardware-accelerated cursor offset tracking ($X, Y \in [-40\text{px}, +40\text{px}]$) without triggering React re-renders.
+- **Scroll-Scrubbed Accent**: Rotates an accent SVG element `720°` while translating it along the Y-axis (`55vh`) tied to the section's `ScrollTrigger` scrub pipeline (`scrub: 1.2`).
+- **Mouse Parallax Interactivity**: Uses `gsap.quickTo()` for hardware-accelerated cursor offset tracking (`X, Y ∈ [-40px, +40px]`) without triggering React re-renders.
 - **Defensive Ref Null Guarding**: Protects all GSAP target contexts against unmounted DOM elements, eliminating target null warnings.
 
-### 3. Dynamic OneDrive Document Viewer (`src/components/pages/About.jsx`)
+### 3. Cross-Platform Resume & Document Viewer (`src/components/pages/About.jsx` & `src/utils/downloadResume.js`)
 
 - **Live Cloud Resume Embed**: Integrates Microsoft's Office Online Web Viewer via OneDrive share parameter (`?em=2`), enabling instant live resume synchronization whenever the source Word document is modified in OneDrive.
-- **Fallback Architecture**: Gracefully falls back to `/public/resume.pdf` if the cloud link is offline, providing dedicated **Download PDF** and **Full Screen** action triggers.
+- **Native Direct Resume Download**: Provides static native direct download triggers for `public/Resume.pdf` with Netlify and Vercel static route exemptions (`public/_redirects` & `vercel.json`).
 
 ---
 
@@ -82,8 +85,8 @@ The background particle system replaces heavy 3D WebGL runtimes (like Three.js/V
 ## 📁 Project Directory Structure
 
 ```
-d:\hdd\portfolio\
-├── public/                 # Optimized WebP assets & resume PDF
+portfolio/
+├── public/                 # Optimized WebP assets, _redirects & Resume.pdf
 ├── scripts/
 │   └── convert-to-webp.mjs # Automated Sharp image processing pipeline
 ├── src/
@@ -92,15 +95,17 @@ d:\hdd\portfolio\
 │   │   ├── pages/          # Lazy-loaded page routes (Homepage, About, Projects, OSJourney, Contact)
 │   │   └── ui/             # Core component library
 │   │       ├── vortex.jsx             # Aceternity UI Vortex Canvas engine
+│   │       ├── liquid-metal.jsx       # Liquid Metal fluid shader button component
 │   │       ├── LiquidGlassCard.jsx    # Glassmorphism cards with mouse tilt
 │   │       ├── ResponsiveNavigation.jsx# Waybar top bar & mobile tab bar
 │   │       └── ProjectDetailsModal.jsx# Accessible project view modal
 │   ├── constants/          # Application data (projects, OS timeline, nav)
 │   ├── hooks/              # Custom hooks (useTheme, useLenis, useGsapReveal)
-│   ├── utils/              # API wrappers (GitHub API, EmailJS)
+│   ├── utils/              # Helper utilities (downloadResume.js, GitHub API, EmailJS)
 │   ├── App.jsx             # App routing & suspense fallback
 │   ├── index.css           # Design tokens, typography & CSS utilities
 │   └── main.jsx            # DOM entry point
+├── vercel.json             # Vercel deployment headers & rewrite rules
 ├── vite.config.js          # Vite build config, Terser compression & manual chunks
 └── package.json            # Dependencies & scripts
 ```
@@ -114,9 +119,9 @@ d:\hdd\portfolio\
 | **Core Architecture** | React 19, JavaScript (ES6+), JSX |
 | **Styling & Design Tokens** | Tailwind CSS 3.4, Custom CSS Glassmorphism |
 | **Animation & Motion** | GSAP 3 (ScrollTrigger, Observer), Framer Motion 12, Anime.js |
-| **Background Engine** | Aceternity UI Vortex (HTML5 Canvas + Simplex Noise) |
+| **Background Engine** | Aceternity UI Vortex (HTML5 Canvas + Simplex Noise) & Liquid Metal Shader |
 | **Smooth Scroll** | Lenis |
-| **Build & Optimization** | Vite 8, Terser, Sharp (WebP conversion) |
+| **Build & Optimization** | Vite 7, Terser, Sharp (WebP conversion) |
 | **Tooling & Icons** | React Icons, Lucide React, ESLint 9 |
 
 ---
@@ -151,3 +156,4 @@ Then navigate to `http://localhost:5173`.
 ---
 
 Licensed under the [MIT License](LICENSE).
+
