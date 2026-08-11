@@ -14,8 +14,9 @@
       "destination": "/api/send-email.js"
     },
     {
-      "source": "/((?!.*\\.(?:pdf|png|jpg|jpeg|webp|svg|ico|css|js|woff|woff2|ttf|otf|mp3|mp4|webm)$).*)",
+      "source": "/(.*)",
       "destination": "/index.html"
     }
   ]
-}
+}
+
