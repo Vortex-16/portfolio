@@ -51,6 +51,8 @@ const ResumeModal = ({ isOpen, onClose }) => {
               <a
                 href="/Resume.pdf"
                 download="Vikash_Gupta_Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
                 className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl font-mono text-xs font-bold transition-all active:scale-95 shadow-md ${
                   isDark
                     ? 'bg-purple-600 hover:bg-purple-500 text-white shadow-purple-600/30'
