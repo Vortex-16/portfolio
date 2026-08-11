@@ -7,6 +7,7 @@ import { LiquidGlassGrid, LiquidGlassCard } from '../ui/LiquidGlassCard';
 import { FaCode, FaGraduationCap, FaLinux, FaRocket, FaUser, FaDownload } from 'react-icons/fa';
 import AnimeHeroBackground from '../ui/VantaGlobe';
 import LiquidMetalButton from '../ui/liquid-metal';
+import { handleResumeDownload } from '../../utils/downloadResume';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -113,22 +114,7 @@ const Homepage = () => {
                     repetition: 4,
                     distortion: 0.2,
                   }}
-                  onClick={async () => {
-                    try {
-                      const res = await fetch('/Resume.pdf');
-                      const blob = await res.blob();
-                      const url = window.URL.createObjectURL(blob);
-                      const link = document.createElement('a');
-                      link.href = url;
-                      link.download = 'Vikash_Gupta_Resume.pdf';
-                      document.body.appendChild(link);
-                      link.click();
-                      document.body.removeChild(link);
-                      window.URL.revokeObjectURL(url);
-                    } catch (e) {
-                      window.open('/Resume.pdf', '_blank');
-                    }
-                  }}
+                  onClick={handleResumeDownload}
                 >
                   Download Resume
                 </LiquidMetalButton>

@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FaFilePdf, FaDownload, FaExternalLinkAlt, FaTimes, FaExpand } from 'react-icons/fa';
 import { useTheme } from '../../hooks/useTheme';
 
+import { handleResumeDownload } from '../../utils/downloadResume';
+
 const ResumeModal = ({ isOpen, onClose }) => {
   const { isDark } = useTheme();
 
@@ -49,22 +51,7 @@ const ResumeModal = ({ isOpen, onClose }) => {
             {/* Action Buttons */}
             <div className="flex items-center gap-2">
               <button
-                onClick={async () => {
-                  try {
-                    const res = await fetch('/Resume.pdf');
-                    const blob = await res.blob();
-                    const url = window.URL.createObjectURL(blob);
-                    const link = document.createElement('a');
-                    link.href = url;
-                    link.download = 'Vikash_Gupta_Resume.pdf';
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                    window.URL.revokeObjectURL(url);
-                  } catch (e) {
-                    window.open('/Resume.pdf', '_blank');
-                  }
-                }}
+                onClick={handleResumeDownload}
                 className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl font-mono text-xs font-bold transition-all active:scale-95 shadow-md ${
                   isDark
                     ? 'bg-purple-600 hover:bg-purple-500 text-white shadow-purple-600/30'
