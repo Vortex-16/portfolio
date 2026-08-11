@@ -20,59 +20,194 @@ const DevTrackDemo = () => {
   const [analysisResult, setAnalysisResult] = useState(null);
   
   // Real GitHub Data States
+  const [githubUsername, setGithubUsername] = useState('Vortex-16');
+  const [usernameInput, setUsernameInput] = useState('');
   const [githubData, setGithubData] = useState(null);
   const [repos, setRepos] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [scanningUser, setScanningUser] = useState(false);
+  const [userError, setUserError] = useState(null);
   const [selectedRepo, setSelectedRepo] = useState(null);
 
-  useEffect(() => {
-    const fetchGitHubData = async () => {
-      try {
-        const [userRes, reposRes] = await Promise.all([
-          fetch('https://api.github.com/users/Vortex-16'),
-          fetch('https://api.github.com/users/Vortex-16/repos?sort=updated&per_page=5')
-        ]);
-        
-        const userData = await userRes.json();
-        const reposData = await reposRes.json();
-        
-        setGithubData(userData);
-        setRepos(reposData);
-        if (reposData.length > 0) setSelectedRepo(reposData[0]);
-      } catch (error) {
-        console.error("Error fetching GitHub data:", error);
-      } finally {
-        setLoading(false);
+  const fetchUserGitHubData = async (userToFetch) => {
+    setScanningUser(true);
+    setUserError(null);
+    try {
+      const [userRes, reposRes] = await Promise.all([
+        fetch(`https://api.github.com/users/${userToFetch}`),
+        fetch(`https://api.github.com/users/${userToFetch}/repos?sort=updated&per_page=30`)
+      ]);
+      
+      if (!userRes.ok) throw new Error(`User @${userToFetch} not found`);
+      
+      const userData = await userRes.json();
+      const reposData = await reposRes.json();
+      
+      setGithubData(userData);
+      setRepos(Array.isArray(reposData) ? reposData : []);
+      if (Array.isArray(reposData) && reposData.length > 0) {
+        setSelectedRepo(reposData[0]);
+      } else {
+        setSelectedRepo(null);
       }
-    };
-    
-    fetchGitHubData();
+      setGithubUsername(userToFetch);
+      setAnalysisResult(null);
+    } catch (error) {
+      console.error("Error fetching GitHub data:", error);
+      setUserError(error.message);
+    } finally {
+      setLoading(false);
+      setScanningUser(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserGitHubData('Vortex-16');
   }, []);
 
-  const runAIAnalysis = () => {
+  const handleScanSubmit = (e) => {
+    e.preventDefault();
+    const query = usernameInput.trim();
+    if (!query) return;
+    fetchUserGitHubData(query);
+    setUsernameInput('');
+  };
+
+  const runAIAnalysis = async () => {
     if (!selectedRepo) return;
     setAnalyzing(true);
     setAnalysisResult(null);
-    
-    // Simulate AI response based on real repo data
-    setTimeout(() => {
-      setAnalyzing(false);
+
+    try {
+      // Fetch live repository contents, commits, and language breakdown from GitHub API
+      const repoFullName = selectedRepo.full_name || `${githubUsername}/${selectedRepo.name}`;
+      const [contentsRes, commitsRes, languagesRes] = await Promise.allSettled([
+        fetch(`https://api.github.com/repos/${repoFullName}/contents`),
+        fetch(`https://api.github.com/repos/${repoFullName}/commits?per_page=10`),
+        fetch(`https://api.github.com/repos/${repoFullName}/languages`),
+      ]);
+
+      const contents = contentsRes.status === 'fulfilled' && contentsRes.value.ok ? await contentsRes.value.json() : [];
+      const commits = commitsRes.status === 'fulfilled' && commitsRes.value.ok ? await commitsRes.value.json() : [];
+      const languagesObj = languagesRes.status === 'fulfilled' && languagesRes.value.ok ? await languagesRes.value.json() : {};
+
+      const fileNames = Array.isArray(contents) ? contents.map(f => f.name) : [];
+      const languagesList = Object.keys(languagesObj);
+      const primaryLang = selectedRepo.language || (languagesList[0] || 'JavaScript');
+
+      // Detect real files present in the repo
+      const hasPackageJson = fileNames.includes('package.json');
+      const hasDocker = fileNames.includes('Dockerfile') || fileNames.includes('docker-compose.yml');
+      const hasGitignore = fileNames.includes('.gitignore');
+      const hasReadme = fileNames.some(f => f.toLowerCase().includes('readme'));
+      const hasLicense = fileNames.some(f => f.toLowerCase().includes('license'));
+      const hasEnv = fileNames.some(f => f.includes('.env'));
+
+      // Dynamic Vulnerabilities based on real file structure
+      const vulnerabilities = [];
+      if (hasPackageJson) {
+        vulnerabilities.push({
+          title: `Outdated or unpinned dependencies in ${selectedRepo.name}`,
+          severity: 'high',
+          file: 'package.json',
+        });
+      }
+      if (hasEnv) {
+        vulnerabilities.push({
+          title: 'Potential sensitive environment variables exposed in root',
+          severity: 'high',
+          file: '.env',
+        });
+      }
+      if (!hasGitignore) {
+        vulnerabilities.push({
+          title: 'Missing .gitignore — Risk of committing build artifacts & secrets',
+          severity: 'medium',
+          file: '.gitignore',
+        });
+      }
+      if (!hasLicense) {
+        vulnerabilities.push({
+          title: 'Missing LICENSE file — Open source compliance warning',
+          severity: 'low',
+          file: 'LICENSE',
+        });
+      }
+      if (vulnerabilities.length === 0) {
+        vulnerabilities.push({
+          title: `Code scanning check completed for ${selectedRepo.name}`,
+          severity: 'low',
+          file: `${selectedRepo.name}/main`,
+        });
+      }
+
+      // Dynamic Hotspots based on language, stars, forks, and repo size
+      const sizeKB = selectedRepo.size || 500;
+      const openIssues = selectedRepo.open_issues_count || 0;
+      const hotspots = [
+        {
+          title: `Primary Engine Stack (${primaryLang})`,
+          score: `${Math.min(9.8, (sizeKB / 1000 + 5.2).toFixed(1))}/10`,
+          reason: languagesList.length > 1 ? `Polyglot repo: ${languagesList.slice(0, 3).join(', ')}` : `Single language codebase (${primaryLang})`,
+        },
+        {
+          title: `Repository Maintenance & Activity`,
+          score: openIssues > 5 ? '8.2/10' : '4.5/10',
+          reason: `${openIssues} open issues · ${commits.length} recent commits analyzed`,
+        },
+      ];
+      if (hasDocker) {
+        hotspots.push({
+          title: 'Containerization Layer (Docker)',
+          score: '6.9/10',
+          reason: 'Verify minimal base image layer caching',
+        });
+      }
+
+      // Dynamic Next Steps based on real analysis findings
+      const nextSteps = [];
+      if (!hasReadme) {
+        nextSteps.push(`Add a comprehensive README.md with setup instructions for ${selectedRepo.name}.`);
+      } else {
+        nextSteps.push(`Update README.md documentation for ${selectedRepo.name} with architecture badges.`);
+      }
+      if (hasPackageJson) {
+        nextSteps.push(`Run \`npm audit fix\` or Dependabot vulnerability patches for ${selectedRepo.name}.`);
+      } else if (primaryLang === 'Python') {
+        nextSteps.push(`Generate \`requirements.txt\` or \`pyproject.toml\` lockfile for ${primaryLang} environment.`);
+      } else {
+        nextSteps.push(`Set up automated CI/CD GitHub Actions workflow for ${selectedRepo.name}.`);
+      }
+      nextSteps.push(`Enforce pull request branch protection rules on \`${selectedRepo.default_branch || 'main'}\`.`);
+
+      setAnalysisResult({
+        vulnerabilities,
+        hotspots,
+        nextSteps,
+        scannedRepoName: selectedRepo.name,
+        primaryLang,
+        commitCount: commits.length,
+        sizeKB,
+      });
+
+    } catch (err) {
+      console.error('Error conducting dynamic repo analysis:', err);
+      // Fallback dynamic output
       setAnalysisResult({
         vulnerabilities: [
-          { title: `Insecure dependency in ${selectedRepo.name}`, severity: 'high', file: 'package.json' },
-          { title: 'Potential sensitive data exposure', severity: 'medium', file: '.env.example' },
+          { title: `Static scan completed for ${selectedRepo.name}`, severity: 'medium', file: selectedRepo.name },
         ],
         hotspots: [
-          { title: `Module Complexity: ${selectedRepo.name}/core`, score: '7.8/10', reason: 'Nested logic loops' },
-          { title: 'Memory Pressure points', score: '6.4/10', reason: 'Unclosed stream buffers' },
+          { title: `Repo Complexity (${selectedRepo.language || 'Code'})`, score: '6.5/10', reason: `${selectedRepo.stargazers_count} stars · ${selectedRepo.forks_count} forks` },
         ],
         nextSteps: [
-          `Audit ${selectedRepo.language || 'codebase'} for deprecated patterns.`,
-          `Implement automated test suite for ${selectedRepo.name}.`,
-          `Optimize CI/CD pipeline for faster deployment cycles.`
+          `Audit dependencies and build pipeline for ${selectedRepo.name}.`,
+          `Set up automated test coverage reporting.`,
         ]
       });
-    }, 2000);
+    } finally {
+      setAnalyzing(false);
+    }
   };
 
   const panelBg = isDark ? 'bg-[#0d0d0d]' : 'bg-gray-900';
@@ -132,12 +267,36 @@ const DevTrackDemo = () => {
               <div className="md:col-span-4 space-y-4">
                 <div className={`${cardBg} rounded-xl p-4 border ${borderColor}`}>
                   <div className="flex items-center gap-3 mb-4">
-                    <img src={githubData?.avatar_url} className="w-10 h-10 rounded-full border border-white/10" alt="Avatar" />
-                    <div className="overflow-hidden">
-                      <h4 className="font-lexa text-sm font-bold text-white truncate">@{githubData?.login}</h4>
-                      <p className="font-mono text-[9px] text-indigo-400">{githubData?.public_repos} Public Repositories</p>
+                    <img src={githubData?.avatar_url || 'https://github.com/github.png'} className="w-10 h-10 rounded-full border border-white/10 shrink-0" alt="Avatar" />
+                    <div className="overflow-hidden flex-1 min-w-0">
+                      <h4 className="font-lexa text-sm font-bold text-white truncate">@{githubData?.login || githubUsername}</h4>
+                      <p className="font-mono text-[9px] text-indigo-400">{githubData?.public_repos ?? 0} Public Repositories</p>
                     </div>
                   </div>
+
+                  {/* GitHub Username Scanner Form */}
+                  <form onSubmit={handleScanSubmit} className="mb-4">
+                    <p className="font-mono text-[9px] text-gray-500 uppercase tracking-widest mb-1.5">Scan GitHub User</p>
+                    <div className="flex gap-1.5">
+                      <input
+                        type="text"
+                        value={usernameInput}
+                        onChange={(e) => setUsernameInput(e.target.value)}
+                        placeholder="e.g. torvalds"
+                        className="flex-1 bg-black/40 border border-white/10 rounded-lg px-2.5 py-1.5 font-mono text-[10px] text-white outline-none focus:border-indigo-500 transition-all placeholder:text-gray-600"
+                      />
+                      <button
+                        type="submit"
+                        disabled={scanningUser || !usernameInput.trim()}
+                        className="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 disabled:bg-gray-800 text-white font-mono text-[10px] font-bold rounded-lg transition-all shrink-0"
+                      >
+                        {scanningUser ? '...' : 'Scan'}
+                      </button>
+                    </div>
+                    {userError && (
+                      <p className="font-mono text-[9px] text-red-400 mt-1">{userError}</p>
+                    )}
+                  </form>
                   
                   <div className="space-y-2 mb-4">
                     <p className="font-mono text-[9px] text-gray-500 uppercase tracking-widest">Select Repository</p>

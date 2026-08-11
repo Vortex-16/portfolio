@@ -1,4 +1,4 @@
-﻿import { projects as localProjects } from '../constants/projects';
+import { projects as localProjects } from '../constants/projects';
 import { GITHUB_USERNAME } from '../constants/github';
 
 /**
@@ -6,9 +6,10 @@ import { GITHUB_USERNAME } from '../constants/github';
  * This allows for automatic updates when new repos are added on GitHub while
  * preserving rich metadata (descriptions, custom images) for highlighted projects.
  */
-export const fetchGitHubProjects = async () => {
+export const fetchGitHubProjects = async (customUsername = null) => {
+  const username = customUsername || GITHUB_USERNAME;
   try {
-    const response = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`, {
+    const response = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=100`, {
       headers: {
         Accept: 'application/vnd.github.mercy-preview+json', // Required for topics
       },
