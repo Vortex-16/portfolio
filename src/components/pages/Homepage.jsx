@@ -4,8 +4,9 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useTheme } from '../../hooks/useTheme';
 import { LiquidGlassGrid, LiquidGlassCard } from '../ui/LiquidGlassCard';
-import { FaCode, FaGraduationCap, FaLinux, FaRocket } from 'react-icons/fa';
+import { FaCode, FaGraduationCap, FaLinux, FaRocket, FaUser, FaDownload } from 'react-icons/fa';
 import AnimeHeroBackground from '../ui/VantaGlobe';
+import LiquidMetalButton from '../ui/liquid-metal';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -83,17 +84,35 @@ const Homepage = () => {
                 Currently learning with EndeavourOS to understand Linux internals and working towards creating my own OS.
               </p>
 
-              <div className="pt-2 flex justify-center gap-4">
-                <Link
-                  to="/about"
-                  className={`inline-block px-6 md:px-8 py-2.5 md:py-3 text-white font-lexa font-semibold rounded-full text-sm shadow-lg transition-all duration-300 ${isDark
-                    ? 'bg-purple-600 hover:bg-purple-500 shadow-purple-600/30'
-                    : 'bg-emerald-600 hover:bg-emerald-500 shadow-emerald-600/30'
-                    }`}
-                >
-                  About Me
+              <div className="pt-2 flex flex-wrap justify-center gap-4">
+                <Link to="/about">
+                  <LiquidMetalButton
+                    icon={<FaUser className="w-4 h-4" />}
+                    size="md"
+                    borderWidth={3}
+                    metalConfig={{
+                      colorBack: isDark ? '#7c3aed' : '#059669',
+                      colorTint: isDark ? '#c084fc' : '#6ee7b7',
+                      speed: 0.6,
+                      repetition: 4,
+                      distortion: 0.2,
+                    }}
+                  >
+                    About Me
+                  </LiquidMetalButton>
                 </Link>
-                <button
+
+                <LiquidMetalButton
+                  icon={<FaDownload className="w-4 h-4" />}
+                  size="md"
+                  borderWidth={3}
+                  metalConfig={{
+                    colorBack: isDark ? '#9333ea' : '#047857',
+                    colorTint: isDark ? '#e879f9' : '#a7f3d0',
+                    speed: 0.6,
+                    repetition: 4,
+                    distortion: 0.2,
+                  }}
                   onClick={async () => {
                     try {
                       const res = await fetch('/Resume.pdf');
@@ -110,13 +129,9 @@ const Homepage = () => {
                       window.open('/Resume.pdf', '_blank');
                     }
                   }}
-                  className={`inline-flex items-center justify-center px-6 md:px-8 py-2.5 md:py-3 font-lexa font-semibold rounded-full border-2 text-sm transition-all duration-300 ${isDark
-                    ? 'border-purple-500 text-purple-300 hover:bg-purple-600 hover:text-white'
-                    : 'border-emerald-600 text-emerald-900 hover:bg-emerald-600 hover:text-white'
-                    }`}
                 >
                   Download Resume
-                </button>
+                </LiquidMetalButton>
               </div>
 
               <div ref={subtitleRef} className="flex flex-wrap justify-center gap-2 md:gap-3 pt-2 md:pt-3">

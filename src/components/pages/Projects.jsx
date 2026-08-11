@@ -43,39 +43,39 @@ const Projects = () => {
     const ctx = gsap.context(() => {
       if (!starSvgRef.current || !sectionRef.current || !starContainerRef.current) return;
 
-      // 1. Scroll-driven movement: star travels down the screen (y: 60vh) while rotating 720deg
+      // 1. Scroll-driven movement: star travels down the viewport cleanly without breaking fixed bounds
       gsap.fromTo(
         starSvgRef.current,
         {
           rotateZ: 0,
-          y: -40,
+          y: -20,
           scale: 0.85,
-          opacity: 0.2,
+          opacity: 0.25,
         },
         {
           rotateZ: 720,
-          y: '55vh',
-          scale: 1.3,
-          opacity: 1,
+          y: '45vh',
+          scale: 1.15,
+          opacity: 0.85,
           ease: 'none',
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: 'top 70%',
-            end: 'bottom 20%',
-            scrub: 1.2,
+            start: 'top top',
+            end: 'bottom bottom',
+            scrub: 1,
+            invalidateOnRefresh: true,
           },
         }
       );
 
       // 2. Smooth Mouse Parallax tracking
-      const xTo = gsap.quickTo(starContainerRef.current, 'x', { duration: 0.7, ease: 'power3.out' });
-      const yTo = gsap.quickTo(starContainerRef.current, 'y', { duration: 0.7, ease: 'power3.out' });
+      const xTo = gsap.quickTo(starContainerRef.current, 'x', { duration: 0.8, ease: 'power2.out' });
+      const yTo = gsap.quickTo(starContainerRef.current, 'y', { duration: 0.8, ease: 'power2.out' });
 
       const handleMouseMove = (e) => {
         const { innerWidth, innerHeight } = window;
-        // Calculate normalized offset (-40px to +40px)
-        const offsetX = ((e.clientX / innerWidth) - 0.5) * 80;
-        const offsetY = ((e.clientY / innerHeight) - 0.5) * 80;
+        const offsetX = ((e.clientX / innerWidth) - 0.5) * 40;
+        const offsetY = ((e.clientY / innerHeight) - 0.5) * 40;
         xTo(offsetX);
         yTo(offsetY);
       };

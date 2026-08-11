@@ -13,6 +13,7 @@
     "@emailjs/browser": "^4.4.1",
     "@gsap/react": "^2.1.2",
     "@left4code/svg-renderer": "^1.0.4",
+    "@paper-design/shaders-react": "^0.0.80",
     "@tailwindcss/typography": "^0.5.16",
     "animejs": "^3.2.2",
     "class-variance-authority": "^0.7.1",
