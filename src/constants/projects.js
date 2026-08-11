@@ -1,5 +1,6 @@
-﻿export const filters = [
+export const filters = [
     "All",
+    "Featured",
     "Personal",
     "Group",
     "Hackathon",
@@ -322,6 +323,20 @@ export const projects = [
         problem: "Most developer portfolios are boring static pages that recruiters forget immediately.",
         solution: "Built a fully animated portfolio with a terminal boot sequence, VantaGlobe hero, interactive CodeBattle Arena demo, rule-based AI chat, and GSAP scroll reveals.",
         result: "This very site. Designed to wow at first glance and leave a memorable impression on every recruiter who visits.",
+    },
+    {
+        id: "personal-fairy",
+        title: "Fairy Environment Portfolio",
+        description: "An immersive, interactive environment-style portfolio built with GSAP and Framer Motion — featuring dynamic particle effects, fluid scroll physics, and detailed study & project milestones.",
+        image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=2070&auto=format&fit=crop",
+        category: "Personal",
+        techStack: ["React", "GSAP", "Framer Motion", "Tailwind CSS", "Canvas"],
+        demo: "https://vikash-fairy.netlify.app",
+        github: "https://github.com/Vortex-16/personal-portfolio",
+        featured: true,
+        problem: "Traditional 2D portfolios often lack atmosphere, fails to captivate visitors with a sense of place and physical interaction.",
+        solution: "Engineered an enchanted, environment-driven web space featuring GSAP particle physics, ambient lighting effects, and interactive study milestones.",
+        result: "Provides an unforgettable interactive experience that showcases creative frontend engineering & animation depth."
     },
     {
         id: "personal-2",

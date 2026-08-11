@@ -17,7 +17,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Projects = () => {
   const { projects, loading } = useGitHubProjects();
-  const [activeFilter, setActiveFilter] = useState("All");
+  const [activeFilter, setActiveFilter] = useState("Featured");
   const [selectedProject, setSelectedProject] = useState(null);
   const [showDevTrack, setShowDevTrack] = useState(false);
   const [heroTab, setHeroTab] = useState('overview'); // 'overview' | 'features' | 'tech'
@@ -90,13 +90,16 @@ const Projects = () => {
     return () => ctx.revert();
   }, []);
 
-  const filteredProjects = (activeFilter === "All"
-    ? projects
-    : projects.filter(project =>
-      project.category?.toLowerCase()
-        .split('/')
-        .some(cat => cat.trim() === activeFilter.toLowerCase())
-    )
+  const filteredProjects = (
+    activeFilter === "All"
+      ? projects
+      : activeFilter === "Featured"
+      ? projects.filter(project => project.featured)
+      : projects.filter(project =>
+          project.category?.toLowerCase()
+            .split('/')
+            .some(cat => cat.trim() === activeFilter.toLowerCase())
+        )
   ).filter((p) => !p.demoType); // Keep featured hero distinct from general grid
 
   return (
