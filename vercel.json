@@ -1,12 +1,21 @@
 {
+  "headers": [
+    {
+      "source": "/Resume.pdf",
+      "headers": [
+        { "key": "Content-Type", "value": "application/pdf" },
+        { "key": "Content-Disposition", "value": "attachment; filename=\"Vikash_Gupta_Resume.pdf\"" }
+      ]
+    }
+  ],
   "rewrites": [
     {
       "source": "/api/send-email",
       "destination": "/api/send-email.js"
     },
     {
-      "source": "/(.*)",
+      "source": "/((?!.*\\.(?:pdf|png|jpg|jpeg|webp|svg|ico|css|js|woff|woff2|ttf|otf|mp3|mp4|webm)$).*)",
       "destination": "/index.html"
     }
   ]
-}
+}
