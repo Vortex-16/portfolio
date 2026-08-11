@@ -50,8 +50,11 @@ const ResumeModal = ({ isOpen, onClose }) => {
 
             {/* Action Buttons */}
             <div className="flex items-center gap-2">
-              <button
-                onClick={handleResumeDownload}
+              <a
+                href="/Resume.pdf"
+                download="Vikash_Gupta_Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
                 className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl font-mono text-xs font-bold transition-all active:scale-95 shadow-md ${
                   isDark
                     ? 'bg-purple-600 hover:bg-purple-500 text-white shadow-purple-600/30'
@@ -60,7 +63,7 @@ const ResumeModal = ({ isOpen, onClose }) => {
               >
                 <FaDownload size={12} />
                 <span className="hidden sm:inline">Download</span>
-              </button>
+              </a>
 
               <a
                 href="https://docs.google.com/document/d/1Xn7RrHZKX-XE2g2e1c9Df8qMJktjsiaGlk6cQsd-psQ/edit?usp=sharing"

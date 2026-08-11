@@ -104,6 +104,8 @@ const Homepage = () => {
                 </Link>
 
                 <LiquidMetalButton
+                  href="/Resume.pdf"
+                  download="Vikash_Gupta_Resume.pdf"
                   icon={<FaDownload className="w-4 h-4" />}
                   size="md"
                   borderWidth={3}
@@ -114,7 +116,6 @@ const Homepage = () => {
                     repetition: 4,
                     distortion: 0.2,
                   }}
-                  onClick={handleResumeDownload}
                 >
                   Download Resume
                 </LiquidMetalButton>

@@ -46,6 +46,10 @@ export const LiquidMetalButton = forwardRef((
         size = "md",
         className,
         disabled,
+        href,
+        download,
+        target,
+        rel,
         ...props
     },
     ref
@@ -62,14 +66,19 @@ export const LiquidMetalButton = forwardRef((
         lg: "w-12 h-12",
     };
 
+    const Component = href ? "a" : "button";
+    const extraProps = href
+        ? { href, download, target: target || "_blank", rel: rel || "noopener noreferrer" }
+        : { disabled };
+
     return (
-        <button
+        <Component
             ref={ref}
-            disabled={disabled}
             className={cn(
-                "relative group cursor-pointer border-none bg-transparent p-0 outline-none transition-transform active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none",
+                "relative group cursor-pointer border-none bg-transparent p-0 outline-none transition-transform active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none inline-block no-underline",
                 className
             )}
+            {...extraProps}
             {...props}>
             <div
                 className="relative rounded-full overflow-hidden shadow-[0_20px_50px_-12px_rgba(0,0,0,0.25)]"
@@ -111,7 +120,7 @@ export const LiquidMetalButton = forwardRef((
                     </span>
                 </div>
             </div>
-        </button>
+        </Component>
     );
 });
 
