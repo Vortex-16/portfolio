@@ -140,9 +140,10 @@ export const JOURNEY_TIMELINE = [
       'KSHITIJ 2026 at IIT Kharagpur (Build With Gemini) & CodeFest\'26 at IIT(BHU) Varanasi participant.',
       'Diversion 2K26 (36-hr National Hackathon) with Team AlphaCoders & FrostHacks 502 participant.',
       'Aperture 3.0 Open-Source Mentee.',
+      'Selected for Web Developer position at DexMy Education.',
       'HERO MILESTONE: Google Solution Challenge 2026 (Build with AI) — Shortlisted among TOP 106 TEAMS GLOBALLY! (Official Certificate: July 22, 2026).',
     ],
-    highlights: ['GDGoC Full Stack Lead', 'Top 13 Impetus', 'IIT Kharagpur & BHU', 'Top 106 Google Solution Challenge'],
+    highlights: ['Web Developer @ DexMy Education', 'GDGoC Full Stack Lead', 'Top 13 Impetus', 'Top 106 Google Solution Challenge'],
   },
   {
     id: 'third-year-onwards',

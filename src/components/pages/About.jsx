@@ -193,7 +193,7 @@ const About = () => {
                     <p>
                       My work spans React, Next.js, TypeScript, and AI integrations (RAG, LLMs, TensorFlow.js).
                       I care deeply about performance, accessibility, and pixel-perfect UI that translates
-                      seamlessly across devices. Currently seeking frontend internship opportunities.
+                      seamlessly across devices. Currently selected for the <strong>Web Developer</strong> position at <strong>DexMy Education</strong>.
                     </p>
                   </div>
                 </motion.div>
@@ -242,10 +242,14 @@ const About = () => {
                     <div className="flex items-center gap-3 mb-4">
                       <FaRocket className="text-emerald-400 dark:text-purple-400 text-2xl" />
                       <h4 className={`text-xl font-semibold ${isDark ? 'text-white' : 'text-emerald-50'
-                        }`}>Current Focus</h4>
+                        }`}>Current Focus & Role</h4>
                     </div>
                     <ul className={`space-y-2.5 text-xs sm:text-sm ${isDark ? 'text-white/80' : 'text-emerald-100'
                       }`}>
+                      <li className="flex items-center gap-2.5">
+                        <span className="w-2 h-2 bg-emerald-400 dark:bg-purple-400 rounded-full shrink-0"></span>
+                        <span><strong>Web Developer</strong> @ DexMy Education</span>
+                      </li>
                       <li className="flex items-center gap-2.5">
                         <span className="w-2 h-2 bg-emerald-400 dark:bg-purple-400 rounded-full shrink-0"></span>
                         MERN-stack & NEXT JS

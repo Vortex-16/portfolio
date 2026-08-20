@@ -311,13 +311,27 @@ const JourneyBentoBoard = () => {
 
                   {selectedYear === '2026+' && (
                     <div>
-                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/20 text-rose-400 font-mono text-xs font-bold mb-3">
-                        Future Vision & 3rd Year
+                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 font-mono text-xs font-bold mb-3">
+                        🚀 Web Developer @ DexMy Education & 3rd Year Vision
                       </div>
-                      <h3 className="font-lexa text-2xl font-bold mb-3">Stepping into 3rd Year & Building Systems</h3>
-                      <p className="font-sans text-sm opacity-90 leading-relaxed">
-                        Focusing on High-Level & Low-Level System Design (HLD/LLD), Linux Internals, and building production-scale software applications.
+                      <h3 className="font-lexa text-2xl font-bold mb-3">Web Developer at DexMy Education & Scaling Systems</h3>
+                      <p className="font-sans text-sm opacity-90 leading-relaxed mb-4">
+                        Selected for the <strong>Web Developer</strong> position at <strong>DexMy Education</strong>. Focusing on production web engineering, High-Level & Low-Level System Design (HLD/LLD), Linux Internals, and building scalable software applications.
                       </p>
+                      <div className="space-y-2">
+                        <div className="flex items-start gap-2 text-xs opacity-80">
+                          <FaCheckCircle className="text-emerald-400 mt-0.5 shrink-0" />
+                          <span>Selected as Web Developer at DexMy Education</span>
+                        </div>
+                        <div className="flex items-start gap-2 text-xs opacity-80">
+                          <FaCheckCircle className="text-emerald-400 mt-0.5 shrink-0" />
+                          <span>Building modern frontend and full-stack web architectures</span>
+                        </div>
+                        <div className="flex items-start gap-2 text-xs opacity-80">
+                          <FaCheckCircle className="text-emerald-400 mt-0.5 shrink-0" />
+                          <span>Stepping into 3rd Year CSE at STCET</span>
+                        </div>
+                      </div>
                     </div>
                   )}
                 </div>

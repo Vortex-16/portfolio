@@ -34,7 +34,8 @@ export const EDUCATION = {
 };
 
 export const CAREER_DIRECTION = {
-  primaryTarget: "Frontend Development Internships & Opportunities",
+  currentRole: "Web Developer at DexMy Education",
+  primaryTarget: "Frontend & Full-Stack Development Roles",
   openTo: ["Backend Development", "Full-Stack Development", "AI Engineering"],
   longTermGoal: "Become a strong software engineer capable of designing, building, deploying, and maintaining complete products with product-quality UI/UX."
 };
@@ -179,8 +180,8 @@ export const AI_KB_ENTRIES = [
     answer: `Key achievements:\n1. Google Solution Challenge 2026 — Global Top 106 Team\n2. Smart India Hackathon (SIH) — Internal Hackathon Qualifier (Top 45 Teams)\n3. Summer Web Dev Program, Kshitij IIT Kharagpur (2025) — Top 8 Performer`
   },
   {
-    keys: ["career", "job", "internship", "hire", "available", "target"],
-    answer: `Vikash is primarily targeting Frontend Development Internships and is open to Backend / Full-Stack engineering roles. He aims to build complete end-to-end products with top-tier UI/UX.`
+    keys: ["career", "job", "internship", "hire", "available", "target", "dexmy", "dexmy education", "work"],
+    answer: `Vikash is currently selected for the Web Developer position at DexMy Education! He specializes in Frontend and Full-Stack Engineering, building responsive, high-performance web apps with React, Next.js, Node.js, and modern UI architectures.`
   },
   {
     keys: ["design", "ui", "ux", "style", "theme", "preference"],
