@@ -74,96 +74,98 @@ const About = () => {
             </motion.div>
 
             <div className="grid lg:grid-cols-12 gap-8 items-start">
-              {/* Left Column (4 cols) - Profile, Stats & Fun Facts */}
-              <motion.div className="lg:col-span-4 space-y-6" variants={itemVariants}>
-                {/* Profile Image */}
-                <div className="relative">
-                  <motion.div
-                    className="w-64 h-64 sm:w-72 sm:h-72 mx-auto rounded-3xl bg-gradient-to-br from-emerald-400 to-emerald-600 dark:from-purple-400 dark:to-purple-600 p-1 shadow-2xl"
-                    whileHover={{ scale: 1.03, rotate: 1.5 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <div className="w-full h-full rounded-3xl overflow-hidden">
-                      <img
-                        src="https://github.com/Vortex-16.png"
-                        alt="Vikash Gupta"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                  </motion.div>
-                </div>
-
-                {/* Stats Grid */}
-                <div className="grid grid-cols-2 gap-4">
-                  {stats.map((stat, index) => (
+              {/* Left Column (4 cols) - Profile, Stats & Fun Facts (Sticky on PC / lg screens) */}
+              <div className="lg:col-span-4 lg:sticky lg:top-24 lg:self-start">
+                <motion.div className="space-y-6" variants={itemVariants}>
+                  {/* Profile Image */}
+                  <div className="relative">
                     <motion.div
-                      key={index}
-                      className={`backdrop-blur-md border rounded-2xl p-4 text-center ${isDark
-                        ? 'bg-white/10 border-white/20'
-                        : 'bg-emerald-900/80 border-emerald-700/40'
-                        }`}
-                      variants={itemVariants}
-                      whileHover={{ scale: 1.03, y: -3 }}
-                      transition={{ duration: 0.2 }}
+                      className="w-64 h-64 sm:w-72 sm:h-72 mx-auto rounded-3xl bg-gradient-to-br from-emerald-400 to-emerald-600 dark:from-purple-400 dark:to-purple-600 p-1 shadow-2xl"
+                      whileHover={{ scale: 1.03, rotate: 1.5 }}
+                      transition={{ duration: 0.3 }}
                     >
-                      <stat.icon className="text-2xl text-emerald-400 dark:text-purple-400 mx-auto mb-2" />
-                      {stat.inline ? (
-                        <div className="flex flex-col items-center">
-                          <span className={`text-xl font-bold ${isDark ? 'text-white' : 'text-emerald-50'}`}>{stat.label}</span>
-                          <span className={`text-xs font-semibold ${isDark ? 'text-emerald-400' : 'text-emerald-200'}`}>{stat.value}</span>
-                        </div>
-                      ) : (
-                        <>
-                          <div className={`text-xl font-bold ${isDark ? 'text-white' : 'text-emerald-50'}`}>{stat.value}</div>
-                          <div className={`text-xs ${isDark ? 'text-white/70' : 'text-emerald-200'}`}>{stat.label}</div>
-                        </>
-                      )}
+                      <div className="w-full h-full rounded-3xl overflow-hidden">
+                        <img
+                          src="https://github.com/Vortex-16.png"
+                          alt="Vikash Gupta"
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
                     </motion.div>
-                  ))}
-                </div>
-
-                {/* Fun Facts */}
-                <motion.div
-                  className={`backdrop-blur-md border rounded-3xl p-6 ${isDark
-                    ? 'bg-white/10 border-white/20'
-                    : 'bg-emerald-900/80 border-emerald-700/40'
-                    }`}
-                  variants={itemVariants}
-                  whileHover={{ scale: 1.01 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="text-xl">✨</span>
-                    <h4 className={`text-lg font-semibold ${isDark ? 'text-white' : 'text-emerald-50'
-                      }`}>Fun Facts About Me</h4>
                   </div>
-                  <div className="space-y-2.5">
-                    {[
-                      { emoji: "☕", text: "Powered by coffee & curiosity" },
-                      { emoji: "🌄", text: "Daylight developer" },
-                      { emoji: "💻", text: "Code enthusiast" },
-                      { emoji: "🏏", text: "Cricket lover" },
-                      { emoji: "🎮", text: "Gamer in free time" },
-                      { emoji: "🌐", text: "Avid web explorer" },
-                    ].map((fact, index) => (
+
+                  {/* Stats Grid */}
+                  <div className="grid grid-cols-2 gap-4">
+                    {stats.map((stat, index) => (
                       <motion.div
                         key={index}
-                        className={`flex items-center gap-3 p-2.5 rounded-2xl ${isDark
-                          ? 'bg-white/5'
-                          : 'bg-emerald-800/30'
+                        className={`backdrop-blur-md border rounded-2xl p-4 text-center ${isDark
+                          ? 'bg-white/10 border-white/20'
+                          : 'bg-emerald-900/80 border-emerald-700/40'
                           }`}
                         variants={itemVariants}
-                        whileHover={{ scale: 1.02, x: 4 }}
+                        whileHover={{ scale: 1.03, y: -3 }}
                         transition={{ duration: 0.2 }}
                       >
-                        <div className="text-xl">{fact.emoji}</div>
-                        <p className={`text-xs sm:text-sm ${isDark ? 'text-white/80' : 'text-emerald-100'
-                          }`}>{fact.text}</p>
+                        <stat.icon className="text-2xl text-emerald-400 dark:text-purple-400 mx-auto mb-2" />
+                        {stat.inline ? (
+                          <div className="flex flex-col items-center">
+                            <span className={`text-xl font-bold ${isDark ? 'text-white' : 'text-emerald-50'}`}>{stat.label}</span>
+                            <span className={`text-xs font-semibold ${isDark ? 'text-emerald-400' : 'text-emerald-200'}`}>{stat.value}</span>
+                          </div>
+                        ) : (
+                          <>
+                            <div className={`text-xl font-bold ${isDark ? 'text-white' : 'text-emerald-50'}`}>{stat.value}</div>
+                            <div className={`text-xs ${isDark ? 'text-white/70' : 'text-emerald-200'}`}>{stat.label}</div>
+                          </>
+                        )}
                       </motion.div>
                     ))}
                   </div>
+
+                  {/* Fun Facts */}
+                  <motion.div
+                    className={`backdrop-blur-md border rounded-3xl p-6 ${isDark
+                      ? 'bg-white/10 border-white/20'
+                      : 'bg-emerald-900/80 border-emerald-700/40'
+                      }`}
+                    variants={itemVariants}
+                    whileHover={{ scale: 1.01 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <div className="flex items-center gap-3 mb-4">
+                      <span className="text-xl">✨</span>
+                      <h4 className={`text-lg font-semibold ${isDark ? 'text-white' : 'text-emerald-50'
+                        }`}>Fun Facts About Me</h4>
+                    </div>
+                    <div className="space-y-2.5">
+                      {[
+                        { emoji: "☕", text: "Powered by coffee & curiosity" },
+                        { emoji: "🌄", text: "Daylight developer" },
+                        { emoji: "💻", text: "Code enthusiast" },
+                        { emoji: "🏏", text: "Cricket lover" },
+                        { emoji: "🎮", text: "Gamer in free time" },
+                        { emoji: "🌐", text: "Avid web explorer" },
+                      ].map((fact, index) => (
+                        <motion.div
+                          key={index}
+                          className={`flex items-center gap-3 p-2.5 rounded-2xl ${isDark
+                            ? 'bg-white/5'
+                            : 'bg-emerald-800/30'
+                            }`}
+                          variants={itemVariants}
+                          whileHover={{ scale: 1.02, x: 4 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          <div className="text-xl">{fact.emoji}</div>
+                          <p className={`text-xs sm:text-sm ${isDark ? 'text-white/80' : 'text-emerald-100'
+                            }`}>{fact.text}</p>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </motion.div>
                 </motion.div>
-              </motion.div>
+              </div>
 
               {/* Right Column (8 cols) - Main Content, Education, Focus, Interests & Skills */}
               <motion.div className="lg:col-span-8 space-y-6" variants={itemVariants}>
