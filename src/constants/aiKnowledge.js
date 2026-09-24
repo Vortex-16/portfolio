@@ -10,8 +10,8 @@ export const CORE_IDENTITY = {
   githubUrl: "https://github.com/Vortex-16/",
   portfolioUrl: "https://vikash.is-a.dev/",
   leetcode: "Vortex16",
-  role: "Computer Science & Engineering Student, Developer, UI/UX Builder",
-  conciseBio: "A B.Tech CSE student building polished full-stack and AI-powered products, with a strong focus on frontend engineering, UI/UX, developer tools, and practical problem solving."
+  role: "Full-Stack & Frontend Developer, UI/UX Builder, CSE Student",
+  conciseBio: "A 3rd Year B.Tech CSE student and Full-Stack Developer with proven production internship experience at Dexmy, specializing in concurrency-hardened backend systems, modern UI/UX, and AI-powered products."
 };
 
 export const EDUCATION = {
@@ -33,28 +33,52 @@ export const EDUCATION = {
   ]
 };
 
+export const EXPERIENCE = [
+  {
+    company: "Dexmy",
+    role: "Full-Stack Web Development Intern",
+    period: "August 2026 – September 2026 (3rd Year)",
+    status: "Completed",
+    description: "Completed intensive 1-month full-stack internship delivering 4 production-grade modules covering frontend dashboards, database concurrency, cross-service microservices, and payment gateways.",
+    highlights: [
+      "Parent Dashboard: Architected responsive multi-child account linking, dynamic context switching, course discovery, and package balance display.",
+      "Booking Concurrency Hardening: Eliminated double-booking and race conditions using PostgreSQL EXCLUDE USING GIST range constraints and UUID idempotency keys.",
+      "Testing Microservice Integration: Integrated standalone Node.js/Express Testing service with Dexmy FastAPI backend using federated JWT authentication and RBAC (test_creator role).",
+      "Payment Architecture: Production-hardened Razorpay checkout flow with PostgreSQL SELECT FOR UPDATE row-level locks, migration unique constraints, and automated concurrency test suites."
+    ],
+    tech: ["Python", "FastAPI", "Node.js", "Express.js", "PostgreSQL", "React", "Razorpay", "JWT Auth", "Pytest"]
+  }
+];
+
 export const CAREER_DIRECTION = {
-  currentRole: "Web Developer at DexMy Education",
-  primaryTarget: "Frontend & Full-Stack Development Roles",
-  openTo: ["Backend Development", "Full-Stack Development", "AI Engineering"],
-  longTermGoal: "Become a strong software engineer capable of designing, building, deploying, and maintaining complete products with product-quality UI/UX."
+  recentRole: "Full-Stack Web Development Intern at Dexmy (Completed in 3rd Year, September 2026)",
+  primaryTarget: "Full-Stack & Frontend Engineering Roles",
+  openTo: ["Full-Stack Development", "Backend Development", "Frontend Development", "AI Engineering"],
+  longTermGoal: "Become a strong software engineer capable of designing, building, deploying, and maintaining complete products with production-grade reliability and polished UI/UX."
 };
 
 export const TECHNICAL_SKILLS = {
-  frontend: ["React", "Tailwind CSS", "Framer Motion", "GSAP", "ScrollTrigger", "Swiper", "Responsive Web Dev", "Interaction Design"],
-  backend: ["Node.js", "Express.js", "MongoDB", "MongoDB Atlas", "JWT Auth", "REST APIs", "Postman", "PostgreSQL", "Redis"],
-  aiCloudWeb3: ["Google Gemini AI", "Google OAuth", "Firebase", "IPFS", "Ethereum / Solidity", "Git & GitHub", "Vercel", "Render", "Railway", "Docker / Docker Compose"],
-  foundations: ["C", "Java", "DSA", "Operating Systems / Linux", "Computer Architecture", "Verilog / Digital Logic"],
+  frontend: ["React", "Next.js", "Tailwind CSS", "Framer Motion", "GSAP", "ScrollTrigger", "Swiper", "Responsive Web Dev", "Interaction Design"],
+  backend: ["Python", "FastAPI", "Node.js", "Express.js", "MongoDB", "PostgreSQL", "Redis", "JWT Auth", "Row-Level Locks (SELECT FOR UPDATE)", "PostgreSQL GIST Locks"],
+  aiCloudWeb3: ["Google Gemini AI", "Razorpay SDK & Webhooks", "Google OAuth", "Firebase", "IPFS", "Ethereum / Solidity", "Git & GitHub", "Vercel", "Render", "Railway", "Docker / Docker Compose"],
+  foundations: ["C", "Java", "DSA", "Operating Systems / Linux", "Computer Architecture", "Digital Logic & Verilog"],
   algorithms: ["Merge Sort", "Quick Sort", "Binary Search", "BFS", "DFS", "Dijkstra", "Bellman-Ford", "Floyd-Warshall", "Coin Change", "Fractional Knapsack", "Job Sequencing", "AVL Trees", "Stack", "Queue", "Linked Lists"]
 };
 
 export const MAJOR_PROJECTS = [
   {
+    id: "dexmy-platform",
+    name: "Dexmy EdTech Platform (Internship Deliverables)",
+    tagline: "Full-stack parent dashboard, concurrency-safe booking, microservice auth & Razorpay payments",
+    description: "Delivered 4 critical production modules for Dexmy: responsive Parent Dashboard, PostgreSQL GIST concurrency-safe booking engine, cross-service JWT authentication with Node.js/FastAPI, and production-hardened Razorpay student package checkout.",
+    tech: ["FastAPI", "Python", "PostgreSQL", "Node.js", "Express", "React", "Razorpay", "Pytest"]
+  },
+  {
     id: "arynox-llm",
     name: "Arynox LLM",
     tagline: "Socratic RAG-based AI tutoring platform",
-    description: "AI education tool that uses Retrieval-Augmented Generation to guide learners through course material using questions instead of simply giving answers.",
-    tech: ["React", "Node.js", "LangChain", "ChromaDB", "NVIDIA API / Gemini AI"]
+    description: "Guides learners through guided inquiry rather than giving answers directly. Designed for conceptual mastery using Retrieval-Augmented Generation.",
+    tech: ["React", "Node.js", "Gemini AI", "Vector Search", "Tailwind CSS"]
   },
   {
     id: "devtrack",
@@ -132,6 +156,7 @@ export const ACHIEVEMENTS = [
   "Google Solution Challenge 2026 — Global Top 106 Team",
   "Smart India Hackathon (SIH) — Internal Hackathon Qualifier (Top 45 Teams)",
   "Kshitij, IIT Kharagpur (2025) — Top 8 Performer in Summer Web Development Program",
+  "Dexmy Full-Stack Internship (2026) — Successfully delivered 4 major production modules",
   "Explored SIH Problem Statements: PS 25029 (TrustED), PS 25207 (Prashikshan/Trybe), PS 25032 (Eco & Cultural Tourism)"
 ];
 
@@ -153,7 +178,11 @@ export const LINUX_OS_CONTEXT = {
 export const AI_KB_ENTRIES = [
   {
     keys: ["who is", "identity", "bio", "about vikash", "vortex", "who"],
-    answer: `Vikash Kumar Gupta (handle: Vortex) is a B.Tech CSE student (2024–2028) at STCET Kolkata building polished full-stack and AI-powered products. He specializes in frontend engineering, modern UI/UX, developer tools, and hackathon problem solving.`
+    answer: `Vikash Kumar Gupta (handle: Vortex) is a 3rd-year B.Tech CSE student (2024–2028) at STCET Kolkata and a Full-Stack Web Developer who completed his 1-month production engineering internship at Dexmy in his 3rd year (Aug–Sep 2026). He specializes in full-stack web applications, concurrency-safe backend systems, modern UI/UX, and AI integrations.`
+  },
+  {
+    keys: ["dexmy", "internship", "dexmy internship", "dexmy education", "experience", "work experience"],
+    answer: `Vikash completed an intensive Full-Stack Web Development Internship at Dexmy in his 3rd year (Aug–Sep 2026). Key deliverables:\n• Parent Dashboard: Multi-child account linking, dynamic child switching, course discovery, and package balance display\n• Booking Engine: Concurrency-safe class booking using PostgreSQL EXCLUDE USING GIST range constraints & UUID idempotency\n• Microservice Integration: Shared JWT auth integrating Node/Express testing service with FastAPI backend\n• Payment Architecture: Razorpay package checkout flow with SELECT FOR UPDATE row locking and duplicate webhook defense.`
   },
   {
     keys: ["education", "college", "degree", "cgpa", "stcet", "study", "gpa"],
@@ -161,11 +190,11 @@ export const AI_KB_ENTRIES = [
   },
   {
     keys: ["stack", "tech", "skills", "frontend", "backend", "languages"],
-    answer: `Vikash's tech stack:\n• Frontend: React, Tailwind CSS, Framer Motion, GSAP / ScrollTrigger, Swiper\n• Backend: Node.js, Express, MongoDB, PostgreSQL, Redis, JWT\n• AI/Cloud: Gemini AI, Firebase, Docker Compose, Git/GitHub, Vercel\n• Core Languages: C, Java, JavaScript`
+    answer: `Vikash's tech stack:\n• Frontend: React, Next.js, Tailwind CSS, Framer Motion, GSAP / ScrollTrigger, Swiper\n• Backend: Python (FastAPI), Node.js, Express, PostgreSQL (Row Locks & GIST Constraints), MongoDB, Redis, JWT\n• Payment & Cloud: Razorpay SDK & Webhooks, Gemini AI, Docker Compose, Git/GitHub, Vercel\n• Core Languages: JavaScript, Python, C, Java`
   },
   {
     keys: ["projects", "built", "work", "portfolio", "devtrack", "arynox"],
-    answer: `Notable projects by Vikash:\n• Arynox LLM — Socratic RAG AI tutor\n• DevTrack V2 — AI developer platform with focus engine & Docker/Postgres\n• CodeBattle Arena — 1v1 competitive coding app\n• Punarchakra / E-BIN — AI e-waste classification\n• Rapid Crisis Response — Emergency app (Google Solution Challenge Top 106)\n• TrustED — SIH document validation (IPFS/Solidity)\n• VAni — Voice-first healthcare AI`
+    answer: `Notable projects by Vikash:\n• Dexmy EdTech Platform — Full-stack parent dashboard, booking concurrency, and Razorpay payment architecture\n• Arynox LLM — Socratic RAG AI tutor\n• DevTrack V2 — AI developer platform with focus engine & Docker/Postgres\n• CodeBattle Arena — 1v1 competitive coding app\n• Punarchakra / E-BIN — AI e-waste classification\n• Rapid Crisis Response — Emergency app (Google Solution Challenge Top 106)\n• TrustED — SIH document validation (IPFS/Solidity)\n• VAni — Voice-first healthcare AI`
   },
   {
     keys: ["devtrack", "dev track"],
@@ -177,11 +206,11 @@ export const AI_KB_ENTRIES = [
   },
   {
     keys: ["achievement", "hackathon", "google", "sih", "iit", "award"],
-    answer: `Key achievements:\n1. Google Solution Challenge 2026 — Global Top 106 Team\n2. Smart India Hackathon (SIH) — Internal Hackathon Qualifier (Top 45 Teams)\n3. Summer Web Dev Program, Kshitij IIT Kharagpur (2025) — Top 8 Performer`
+    answer: `Key achievements:\n1. Google Solution Challenge 2026 — Global Top 106 Team\n2. Smart India Hackathon (SIH) — Internal Hackathon Qualifier (Top 45 Teams)\n3. Summer Web Dev Program, Kshitij IIT Kharagpur (2025) — Top 8 Performer\n4. Dexmy Full-Stack Internship (2026) — Successfully delivered 4 major production modules`
   },
   {
-    keys: ["career", "job", "internship", "hire", "available", "target", "dexmy", "dexmy education", "work"],
-    answer: `Vikash is currently selected for the Web Developer position at DexMy Education! He specializes in Frontend and Full-Stack Engineering, building responsive, high-performance web apps with React, Next.js, Node.js, and modern UI architectures.`
+    keys: ["career", "job", "hire", "available", "target", "roles", "full time", "part time"],
+    answer: `Vikash is open to Full-Stack, Frontend, and Backend software engineering opportunities. Having recently completed his Full-Stack Web Development Internship at Dexmy (hardening payment architectures, booking concurrency, and microservice integrations), he brings proven hands-on production engineering experience.`
   },
   {
     keys: ["design", "ui", "ux", "style", "theme", "preference"],
@@ -193,6 +222,6 @@ export const AI_KB_ENTRIES = [
   },
   {
     keys: ["contact", "email", "github", "reach", "leetcode"],
-    answer: `Connect with Vikash:\n• GitHub: https://github.com/Vortex-16/\n• Portfolio: https://vikash.is-a.dev/\n• LeetCode: Vortex16`
+    answer: `Connect with Vikash:\n• GitHub: https://github.com/Vortex-16/\n• Portfolio: https://vikash.is-a.dev/\n• LeetCode: Vortex16\n• Email: vikash.kr.gupta.dev@gmail.com`
   }
 ];

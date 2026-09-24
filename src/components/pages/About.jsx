@@ -193,7 +193,7 @@ const About = () => {
                     <p>
                       My work spans React, Next.js, TypeScript, and AI integrations (RAG, LLMs, TensorFlow.js).
                       I care deeply about performance, accessibility, and pixel-perfect UI that translates
-                      seamlessly across devices. Currently selected for the <strong>Web Developer</strong> position at <strong>DexMy Education</strong>.
+                      seamlessly across devices. Recently completed a Full-Stack Engineering Internship at <strong>Dexmy</strong>, hardening payment architecture, booking concurrency, and microservice integrations.
                     </p>
                   </div>
                 </motion.div>
@@ -248,7 +248,7 @@ const About = () => {
                       }`}>
                       <li className="flex items-center gap-2.5">
                         <span className="w-2 h-2 bg-emerald-400 dark:bg-purple-400 rounded-full shrink-0"></span>
-                        <span><strong>Web Developer</strong> @ DexMy Education</span>
+                        <span><strong>Full-Stack Web Dev Intern</strong> @ Dexmy (Completed)</span>
                       </li>
                       <li className="flex items-center gap-2.5">
                         <span className="w-2 h-2 bg-emerald-400 dark:bg-purple-400 rounded-full shrink-0"></span>

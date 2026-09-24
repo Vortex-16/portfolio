@@ -9,10 +9,10 @@ import { AI_KB_ENTRIES } from '../../constants/aiKnowledge';
 /* ── Knowledge base matcher ── */
 const SUGGESTIONS = [
   'Who is Vikash?',
+  'Tell me about his Dexmy internship',
   'What is his tech stack?',
   'Tell me about DevTrack & Arynox',
   'What are his achievements?',
-  'Is he open for internships?',
 ];
 
 function findAnswer(query) {
