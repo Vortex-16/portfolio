@@ -1,13 +1,14 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Home, User, Mail, Terminal, FolderGit2, Compass } from 'lucide-react';
-import { FaLinux, FaWifi, FaVolumeUp, FaVolumeMute, FaBatteryFull, FaBatteryThreeQuarters, FaBatteryHalf, FaBatteryQuarter, FaBatteryEmpty } from 'react-icons/fa';
+import { Home, User, Mail, Terminal, FolderGit2, Compass, Sparkles } from 'lucide-react';
+import { FaLinux, FaWifi, FaVolumeUp, FaVolumeMute, FaBatteryFull, FaBatteryThreeQuarters, FaBatteryHalf, FaBatteryQuarter, FaBatteryEmpty, FaExternalLinkAlt } from 'react-icons/fa';
 import { MdWifiOff, MdSignalWifiStatusbarConnectedNoInternet } from 'react-icons/md';
 import { useTheme } from '../../hooks/useTheme';
 import ThemeToggle from './ThemeToggle';
 import { useMusicPlayer } from '../../hooks/useMusicPlayer';
 import ControlPanel from './ControlPanel';
+import { preloadRoute } from '../../utils/routePreloader';
 
 // Compact music button for the mobile top bar
 const MobileMusicButton = () => {
@@ -151,9 +152,20 @@ const DesktopMusicButton = () => {
 };
 
 const NavItem = ({ to, icon: Icon, label, isActive, isMobile = false, onClick }) => {
+  const handlePrefetch = () => {
+    preloadRoute(to);
+  };
+
   if (isMobile) {
     return (
-      <NavLink to={to} onClick={onClick} className="block w-full rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2">
+      <NavLink
+        to={to}
+        onClick={onClick}
+        onMouseEnter={handlePrefetch}
+        onTouchStart={handlePrefetch}
+        onFocus={handlePrefetch}
+        className="block w-full rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2"
+      >
         <div
           className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 ${isActive
             ? 'bg-gray-800/90 dark:bg-purple-500/20 text-white dark:text-purple-400 font-semibold shadow-md'
@@ -169,7 +181,13 @@ const NavItem = ({ to, icon: Icon, label, isActive, isMobile = false, onClick })
 
   // Hyprland Workspace Style (Desktop)
   return (
-    <NavLink to={to} className="rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 dark:focus-visible:ring-arch-blue focus-visible:ring-offset-2 dark:focus-visible:ring-offset-black transition-all">
+    <NavLink
+      to={to}
+      onMouseEnter={handlePrefetch}
+      onTouchStart={handlePrefetch}
+      onFocus={handlePrefetch}
+      className="rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 dark:focus-visible:ring-arch-blue focus-visible:ring-offset-2 dark:focus-visible:ring-offset-black transition-all"
+    >
       <div
         className={`relative flex items-center justify-center w-8 h-8 rounded-full transition-all duration-300 ${isActive
           ? 'bg-emerald-500 dark:bg-arch-blue w-12'
@@ -271,20 +289,31 @@ const ResponsiveNavigation = () => {
               </div>
             </div>
 
-            {/* Profile/Power */}
+            {/* 2nd Portfolio - Fairy Scroll Edition */}
             <motion.a
-              href="https://alphacoders-official.vercel.app/"
+              href="https://vikash-fairy.netlify.app/"
               target="_blank"
               rel="noopener noreferrer"
-              className={`flex items-center gap-2 px-3 py-1.5 rounded-full backdrop-blur-md border border-white/20 shadow-lg transition-colors ${isDark ? 'bg-arch-black/80 hover:bg-white/10 text-white' : 'bg-white/80 hover:bg-gray-100 text-gray-800'}`}
-              whileHover={{ scale: 1.05 }}
+              aria-label="Visit Vikash's 2nd Portfolio - Fairy Scroll Edition"
+              title="Vikash's 2nd Portfolio — Best Scroll Effect Portfolio"
+              className={`group flex items-center gap-2 px-3 py-1.5 rounded-full backdrop-blur-md border shadow-lg transition-all duration-300 ${
+                isDark
+                  ? 'bg-gradient-to-r from-purple-950/60 to-indigo-950/60 border-purple-500/30 hover:border-purple-400/60 text-purple-200 hover:text-white shadow-purple-950/30'
+                  : 'bg-gradient-to-r from-purple-50 to-indigo-50 border-purple-200 hover:border-purple-400 text-purple-700 hover:text-purple-900 shadow-purple-100'
+              }`}
+              whileHover={{ scale: 1.05, y: -1 }}
+              whileTap={{ scale: 0.95 }}
             >
-              <img
-                src="/alpha.webp"
-                alt="Alpha Coder"
-                className="h-5 w-5 rounded-full object-cover"
-              />
-              <span className="text-xs font-bold mr-1">ALPHA</span>
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-purple-500"></span>
+              </span>
+              <Sparkles className="w-3.5 h-3.5 text-purple-400 group-hover:rotate-12 transition-transform duration-300" />
+              <span className="text-xs font-bold tracking-wide">FAIRY</span>
+              <span className="text-[10px] uppercase font-semibold px-1.5 py-0.2 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30 hidden xl:inline-block">
+                v2
+              </span>
+              <FaExternalLinkAlt className="text-[9px] opacity-60 group-hover:opacity-100 transition-opacity" />
             </motion.a>
           </div>
         </div>
@@ -292,9 +321,27 @@ const ResponsiveNavigation = () => {
 
       {/* Mobile Navigation */}
       <div className="lg:hidden">
-        {/* Slim top bar - just logo + music btn + theme toggle */}
+        {/* Slim top bar - logo + Fairy link + music btn + theme toggle */}
         <div className={`fixed top-0 left-0 right-0 z-50 px-4 py-2.5 flex justify-between items-center backdrop-blur-md border-b ${isDark ? 'bg-black/85 border-white/10' : 'bg-white/85 border-gray-100'}`}>
-          <span className={`font-lexa font-bold tracking-widest text-sm ${isDark ? 'text-white' : 'text-gray-900'}`}>VIKASH</span>
+          <div className="flex items-center gap-2.5">
+            <span className={`font-lexa font-bold tracking-widest text-sm ${isDark ? 'text-white' : 'text-gray-900'}`}>VIKASH</span>
+            <a
+              href="https://vikash-fairy.netlify.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Vikash 2nd Portfolio - Fairy Scroll Edition"
+              title="Vikash's 2nd Portfolio — Best Scroll Effect Portfolio"
+              className={`flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold border backdrop-blur-md transition-colors ${
+                isDark
+                  ? 'bg-purple-950/60 border-purple-500/30 text-purple-300'
+                  : 'bg-purple-50 border-purple-200 text-purple-700'
+              }`}
+            >
+              <Sparkles className="w-2.5 h-2.5 text-purple-400" />
+              <span>Fairy</span>
+              <FaExternalLinkAlt className="text-[8px] opacity-70" />
+            </a>
+          </div>
           <div
             ref={mobileTrayRef}
             className="flex items-center gap-2"

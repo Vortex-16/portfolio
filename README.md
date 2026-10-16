@@ -38,9 +38,11 @@ A high-performance, responsive web platform built with **React 19**, **GSAP Scro
 
 ### 2. Architectural Highlights
 
-- **Single Page Application (SPA) with Dynamic Chunk Splitting**: Lazy loads routes via `React.lazy()` and Vite `manualChunks` configuration, decoupling heavy vendor modules (`vendor-framer`, `vendor-gsap`, `vendor-router`) into isolated browser-cached bundles.
+- **Single Page Application (SPA) with Dynamic Chunk Splitting & Intent Preloading**: Lazy loads routes via `React.lazy()` and Vite `manualChunks` configuration, decoupling heavy vendor modules (`vendor-framer`, `vendor-gsap`, `vendor-router`). Features proactive idle prefetching and hover/touch intent preloading via `src/utils/routePreloader.js` for instant, lag-free first-time page switches.
+- **Persistent Canvas Optimization**: Prevents canvas teardown and geometry recomputation across route changes, keeping 1,500+ dot physics alive and paused in the background to ensure smooth 60fps transitions.
 - **Unified Scroll Engine**: Synchronizes Lenis smooth-scrolling with GSAP's global ticker (`gsap.ticker.add(raf)`), preventing frame jitter and keeping ScrollTrigger elements locked to hardware refresh rates.
 - **Theme-Adaptive Rendering**: Context-driven theme system supporting real-time canvas particle recoloring (Purple/Cyan for Dark Mode vs Deep Emerald/Teal for Light Mode) with high-contrast text typography.
+- **Interactive Multi-Portfolio Ecosystem**: Seamlessly bridges this flagship portfolio with Vikash's 2nd scroll-effect showcase ([Fairy Environment Portfolio](https://vikash-fairy.netlify.app/)) and production engineering milestones.
 
 ---
 
@@ -150,8 +152,10 @@ Then navigate to `http://localhost:5173`.
 ## 👤 Author
 
 **Vikash Gupta** — Computer Science & Engineering Undergrad (2024–2028)
-- **Portfolio**: [vikash.is-a.dev](https://vikash.is-a.dev)
+- **Flagship Portfolio**: [vikash.is-a.dev](https://vikash.is-a.dev)
+- **2nd Portfolio (Scroll Edition)**: [vikash-fairy.netlify.app](https://vikash-fairy.netlify.app/)
 - **GitHub**: [@Vortex-16](https://github.com/Vortex-16)
+- **Production Experience**: Web Developer Intern @ Dexmy Education (1-Month Intensive)
 
 ---
 
