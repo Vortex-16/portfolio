@@ -39,14 +39,14 @@ export const EXPERIENCE = [
     role: "Full-Stack Web Development Intern",
     period: "August 2026 – September 2026 (3rd Year)",
     status: "Completed",
-    description: "Completed intensive 1-month full-stack internship delivering 4 production-grade modules covering frontend dashboards, database concurrency, cross-service microservices, and payment gateways.",
+    description: "Worked as a Web Developer at DEXMY Education, contributing to the development and hardening of an EdTech platform across frontend, backend integration, scheduling, testing, and payment workflows.",
     highlights: [
       "Parent Dashboard: Architected responsive multi-child account linking, dynamic context switching, course discovery, and package balance display.",
       "Booking Concurrency Hardening: Eliminated double-booking and race conditions using PostgreSQL EXCLUDE USING GIST range constraints and UUID idempotency keys.",
       "Testing Microservice Integration: Integrated standalone Node.js/Express Testing service with Dexmy FastAPI backend using federated JWT authentication and RBAC (test_creator role).",
       "Payment Architecture: Production-hardened Razorpay checkout flow with PostgreSQL SELECT FOR UPDATE row-level locks, migration unique constraints, and automated concurrency test suites."
     ],
-    tech: ["Python", "FastAPI", "Node.js", "Express.js", "PostgreSQL", "React", "Razorpay", "JWT Auth", "Pytest"]
+    tech: ["React", "FastAPI", "Node.js", "Express.js", "PostgreSQL", "REST APIs", "Authentication & Authorization", "RBAC", "Payment Systems", "Webhooks", "Concurrency Handling", "Database Transactions", "Testing", "Production Hardening"]
   }
 ];
 
@@ -114,6 +114,13 @@ export const MAJOR_PROJECTS = [
     tagline: "AI-powered travel & tourism discovery platform",
     description: "Helps travelers discover personalized itineraries and explore cultural tourism destinations.",
     tech: ["React", "Tailwind CSS", "Framer Motion", "Node.js"]
+  },
+  {
+    id: "personal-fairy",
+    name: "Fairy Environment Portfolio (2nd Portfolio)",
+    tagline: "Immersive 2D scroll-effect environment portfolio",
+    description: "Vikash's standout scroll-effect portfolio at https://vikash-fairy.netlify.app/ with dynamic particle physics, ambient lighting, and fluid milestone interactions.",
+    tech: ["React", "GSAP", "Framer Motion", "Canvas", "Tailwind CSS"]
   },
   {
     id: "trusted-sih",
@@ -221,7 +228,11 @@ export const AI_KB_ENTRIES = [
     answer: `Vikash daily-drives Linux (EndeavourOS / Arch / Ubuntu) with Hyprland, Waybar, Kitty, Rofi, Starship, zsh, btop, and fastfetch. He studies OS internals, bootloaders (GRUB/UEFI), and computer architecture.`
   },
   {
+    keys: ["fairy", "2nd portfolio", "second portfolio", "scroll portfolio", "scroll effect", "vikash fairy"],
+    answer: `Vikash's 2nd portfolio is the Fairy Environment Portfolio (live at https://vikash-fairy.netlify.app/). It is widely praised for its incredible 3D scroll effects, GSAP-powered canvas physics, ambient particle lighting, and fluid milestone animations.`
+  },
+  {
     keys: ["contact", "email", "github", "reach", "leetcode"],
-    answer: `Connect with Vikash:\n• GitHub: https://github.com/Vortex-16/\n• Portfolio: https://vikash.is-a.dev/\n• LeetCode: Vortex16\n• Email: vikash.kr.gupta.dev@gmail.com`
+    answer: `Connect with Vikash:\n• GitHub: https://github.com/Vortex-16/\n• Portfolio: https://vikash.is-a.dev/\n• 2nd Portfolio (Fairy): https://vikash-fairy.netlify.app/\n• LeetCode: Vortex16\n• Email: vikash.kr.gupta.dev@gmail.com`
   }
 ];
