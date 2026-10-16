@@ -1,5 +1,5 @@
 import { motion, useInView } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { FaGraduationCap, FaCode, FaRocket, FaHeart } from 'react-icons/fa';
 import { useTheme } from '../../hooks/useTheme';
 
@@ -7,7 +7,7 @@ import { useTheme } from '../../hooks/useTheme';
 
 const About = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "0px" });
   const { isDark } = useTheme();
 
   const containerVariants = {
@@ -15,19 +15,19 @@ const About = () => {
     visible: {
       opacity: 1,
       transition: {
-        duration: 0.6,
-        staggerChildren: 0.2,
+        duration: 0.35,
+        staggerChildren: 0.08,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 50 },
+    hidden: { opacity: 0, y: 25 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.6,
+        duration: 0.35,
         ease: "easeOut",
       },
     },
@@ -248,7 +248,7 @@ const About = () => {
                       }`}>
                       <li className="flex items-center gap-2.5">
                         <span className="w-2 h-2 bg-emerald-400 dark:bg-purple-400 rounded-full shrink-0"></span>
-                        <span><strong>Full-Stack Web Dev Intern</strong> @ Dexmy (Completed)</span>
+                        <span><strong>Web Dev Intern</strong> @ DEXMY Education (Completed)</span>
                       </li>
                       <li className="flex items-center gap-2.5">
                         <span className="w-2 h-2 bg-emerald-400 dark:bg-purple-400 rounded-full shrink-0"></span>
@@ -291,7 +291,7 @@ const About = () => {
                           }`}
                         initial={{ opacity: 0, scale: 0 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.8 + index * 0.05, duration: 0.3 }}
+                        transition={{ delay: 0.15 + index * 0.02, duration: 0.25 }}
                         whileHover={{ scale: 1.08, y: -2 }}
                       >
                         {interest}
@@ -338,7 +338,7 @@ const About = () => {
                           }`}
                         initial={{ opacity: 0, x: -15 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.8 + index * 0.05, duration: 0.4 }}
+                        transition={{ delay: 0.15 + index * 0.02, duration: 0.3 }}
                         whileHover={{ scale: 1.03, y: -2 }}
                       >
                         <div className="flex items-center justify-between mb-2">
@@ -353,7 +353,7 @@ const About = () => {
                             className="bg-gradient-to-r from-emerald-400 to-emerald-600 dark:from-purple-400 dark:to-purple-600 h-2.5 rounded-full"
                             initial={{ width: 0 }}
                             animate={{ width: `${skill.level}%` }}
-                            transition={{ delay: 1 + index * 0.05, duration: 0.8, ease: "easeOut" }}
+                            transition={{ delay: 0.2 + index * 0.02, duration: 0.5, ease: "easeOut" }}
                           />
                         </div>
                       </motion.div>

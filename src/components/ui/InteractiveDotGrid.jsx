@@ -1,7 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { useTheme } from "../../hooks/useTheme";
 
 export default function InteractiveDotGrid({
+    isPaused = false,
     dotSize = 3,
     dotSpacing = 36,
     dotColorLight = "rgba(0, 0, 0, 0.4)",
@@ -14,13 +15,25 @@ export default function InteractiveDotGrid({
 }) {
     const canvasRef = useRef(null);
     const mousePos = useRef({ x: -1000, y: -1000 });
-    const animationFrameId = useRef();
+    const animationFrameId = useRef(null);
+    const animateRef = useRef(null);
     const needsUpdateRef = useRef(true);
+    const isPausedRef = useRef(isPaused);
     const dotsRef = useRef([]);
     const { isDark } = useTheme();
 
     const dotColor = isDark ? dotColorDark : dotColorLight;
     const backgroundColor = isDark ? backgroundColorDark : backgroundColorLight;
+
+    useEffect(() => {
+        isPausedRef.current = isPaused;
+        if (!isPaused) {
+            needsUpdateRef.current = true;
+            if (animateRef.current && !animationFrameId.current) {
+                animationFrameId.current = requestAnimationFrame(animateRef.current);
+            }
+        }
+    }, [isPaused]);
 
     // Initialize dots based on canvas size
     const initializeDots = (width, height) => {
@@ -70,6 +83,11 @@ export default function InteractiveDotGrid({
         resizeObserver.observe(canvas.parentElement);
 
         const animate = () => {
+            if (isPausedRef.current) {
+                animationFrameId.current = null;
+                return;
+            }
+
             // Only clear and redraw if something changed
             if (needsUpdateRef.current) {
                 // Clear the canvas
@@ -161,9 +179,13 @@ export default function InteractiveDotGrid({
             animationFrameId.current = requestAnimationFrame(animate);
         };
 
-        animate();
+        animateRef.current = animate;
+        if (!isPausedRef.current) {
+            animate();
+        }
 
         const handleMouseMoveGlobal = (e) => {
+            if (isPausedRef.current) return;
             const canvas = canvasRef.current;
             if (!canvas) return;
             const rect = canvas.getBoundingClientRect();
@@ -172,9 +194,13 @@ export default function InteractiveDotGrid({
                 y: e.clientY - rect.top
             };
             needsUpdateRef.current = true;
+            if (!animationFrameId.current) {
+                animationFrameId.current = requestAnimationFrame(animate);
+            }
         };
 
         const handleMouseLeaveGlobal = () => {
+            if (isPausedRef.current) return;
             mousePos.current = { x: -1000, y: -1000 };
             needsUpdateRef.current = true;
         };

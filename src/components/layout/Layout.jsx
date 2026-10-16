@@ -44,12 +44,14 @@ const Layout = () => {
         : 'bg-gradient-to-br from-emerald-50 via-emerald-100 to-emerald-200'
         }`} />
 
-      {/* Interactive Dot Grid Background - Only for non-home pages */}
-      {location.pathname !== '/' && (
-        <div className="fixed inset-0 z-0 pointer-events-none">
-          <InteractiveDotGrid />
-        </div>
-      )}
+      {/* Interactive Dot Grid Background - kept mounted with cached canvas to eliminate route switch latency */}
+      <div
+        className={`fixed inset-0 z-0 pointer-events-none transition-opacity duration-300 ${
+          location.pathname !== '/' ? 'opacity-100' : 'opacity-0'
+        }`}
+      >
+        <InteractiveDotGrid isPaused={location.pathname === '/'} />
+      </div>
 
 
       <ResponsiveNavigation />

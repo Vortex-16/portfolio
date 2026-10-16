@@ -1,25 +1,26 @@
-import { lazy, Suspense, useState } from 'react';
+import { lazy, Suspense, useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from './hooks/useTheme';
 import { MusicProvider } from './hooks/useMusicPlayer';
+import { routeImporters, preloadAllRoutesIdle } from './utils/routePreloader';
 
 // Static imports for always-needed shell components
 import LoadingScreen from './components/ui/LoadingScreen';
 import Layout from './components/layout/Layout';
 
-// Lazy-loaded page routes — each page ships as its own JS chunk.
-// Vite will only fetch a page's code when the user first navigates to it.
-const Homepage = lazy(() => import('./components/pages/Homepage'));
-const About    = lazy(() => import('./components/pages/About'));
-const Journey  = lazy(() => import('./components/pages/Journey'));
-const Projects = lazy(() => import('./components/pages/Projects'));
-const OSJourney = lazy(() => import('./components/pages/OSJourney'));
-const Contact  = lazy(() => import('./components/pages/Contact'));
+// Lazy-loaded page routes using shared importers so preloaded promises are reused
+const Homepage = lazy(routeImporters['/']);
+const About    = lazy(routeImporters['/about']);
+const Journey  = lazy(routeImporters['/journey']);
+const Projects = lazy(routeImporters['/projects']);
+const OSJourney = lazy(routeImporters['/os-journey']);
+const Contact  = lazy(routeImporters['/contact']);
 
-// Minimal suspense fallback — just keeps the layout from flashing.
-// The LoadingScreen handles the real first-load experience.
+// Top progress indicator for smooth non-blocking transitions
 const PageFallback = () => (
-  <div className="min-h-screen" aria-hidden="true" />
+  <div className="fixed top-0 left-0 right-0 z-[9999] h-[3px] overflow-hidden bg-transparent pointer-events-none" aria-hidden="true">
+    <div className="h-full w-full bg-gradient-to-r from-emerald-400 via-teal-300 to-purple-500 animate-pulse duration-500" />
+  </div>
 );
 
 const AppContent = () => {
@@ -27,6 +28,11 @@ const AppContent = () => {
   const [isLoading, setIsLoading] = useState(
     () => !localStorage.getItem('vk_visited')
   );
+
+  // Preload all remaining route chunks in background idle time
+  useEffect(() => {
+    preloadAllRoutesIdle();
+  }, []);
 
   const handleLoadingComplete = () => {
     localStorage.setItem('vk_visited', '1');
