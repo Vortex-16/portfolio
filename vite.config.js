@@ -28,10 +28,6 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks(id) {
-          // Three.js + Vanta — large async bundle, keep together
-          if (id.includes('node_modules/three') || id.includes('node_modules/vanta')) {
-            return 'vendor-three';
-          }
           // Framer Motion — used across pages
           if (id.includes('node_modules/framer-motion')) {
             return 'vendor-framer';
