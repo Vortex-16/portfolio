@@ -4,7 +4,14 @@
       "source": "/(Resume|resume).pdf",
       "headers": [
         { "key": "Content-Type", "value": "application/pdf" },
-        { "key": "Content-Disposition", "value": "attachment; filename=\"Vikash_Gupta_Resume.pdf\"" }
+        { "key": "Content-Disposition", "value": "attachment; filename=\"Vikash_Kr_Gupta_Software_Dev.pdf\"" }
+      ]
+    },
+    {
+      "source": "/(Vikash.*Dev).pdf",
+      "headers": [
+        { "key": "Content-Type", "value": "application/pdf" },
+        { "key": "Content-Disposition", "value": "attachment; filename=\"Vikash_Kr_Gupta_Software_Dev.pdf\"" }
       ]
     },
     {

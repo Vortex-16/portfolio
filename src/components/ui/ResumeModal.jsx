@@ -1,9 +1,6 @@
-import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaFilePdf, FaDownload, FaExternalLinkAlt, FaTimes, FaExpand } from 'react-icons/fa';
+import { FaFilePdf, FaDownload, FaExternalLinkAlt, FaTimes } from 'react-icons/fa';
 import { useTheme } from '../../hooks/useTheme';
-
-import { handleResumeDownload } from '../../utils/downloadResume';
 
 const ResumeModal = ({ isOpen, onClose }) => {
   const { isDark } = useTheme();
@@ -51,8 +48,8 @@ const ResumeModal = ({ isOpen, onClose }) => {
             {/* Action Buttons */}
             <div className="flex items-center gap-2">
               <a
-                href="/Resume.pdf"
-                download="Vikash_Gupta_Resume.pdf"
+                href="/Vikash%20Kr%20Gupta-%20Software%20Dev.pdf"
+                download="Vikash_Kr_Gupta_Software_Dev.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl font-mono text-xs font-bold transition-all active:scale-95 shadow-md ${

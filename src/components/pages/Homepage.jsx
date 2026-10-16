@@ -7,7 +7,7 @@ import { LiquidGlassGrid, LiquidGlassCard } from '../ui/LiquidGlassCard';
 import { FaCode, FaGraduationCap, FaLinux, FaRocket, FaUser, FaDownload } from 'react-icons/fa';
 import AnimeHeroBackground from '../ui/VantaGlobe';
 import LiquidMetalButton from '../ui/liquid-metal';
-import { handleResumeDownload } from '../../utils/downloadResume';
+import { preloadRoute } from '../../utils/routePreloader';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -86,7 +86,12 @@ const Homepage = () => {
               </p>
 
               <div className="pt-2 flex flex-wrap justify-center gap-4">
-                <Link to="/about">
+                <Link
+                  to="/about"
+                  onMouseEnter={() => preloadRoute('/about')}
+                  onTouchStart={() => preloadRoute('/about')}
+                  onFocus={() => preloadRoute('/about')}
+                >
                   <LiquidMetalButton
                     icon={<FaUser className="w-4 h-4" />}
                     size="md"
@@ -104,8 +109,8 @@ const Homepage = () => {
                 </Link>
 
                 <LiquidMetalButton
-                  href="/Resume.pdf"
-                  download="Vikash_Gupta_Resume.pdf"
+                  href="/Vikash%20Kr%20Gupta-%20Software%20Dev.pdf"
+                  download="Vikash_Kr_Gupta_Software_Dev.pdf"
                   icon={<FaDownload className="w-4 h-4" />}
                   size="md"
                   borderWidth={3}
