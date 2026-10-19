@@ -291,16 +291,15 @@ const ResponsiveNavigation = () => {
 
             {/* 2nd Portfolio - Fairy Scroll Edition */}
             <motion.a
-              href="https://vikash-fairy.netlify.app/"
+              href="https://vortex.runs-on.dev/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Visit Vikash's 2nd Portfolio - Fairy Scroll Edition"
               title="Vikash's 2nd Portfolio — Best Scroll Effect Portfolio"
-              className={`group flex items-center gap-2 px-3 py-1.5 rounded-full backdrop-blur-md border shadow-lg transition-all duration-300 ${
-                isDark
+              className={`group flex items-center gap-2 px-3 py-1.5 rounded-full backdrop-blur-md border shadow-lg transition-all duration-300 ${isDark
                   ? 'bg-gradient-to-r from-purple-950/60 to-indigo-950/60 border-purple-500/30 hover:border-purple-400/60 text-purple-200 hover:text-white shadow-purple-950/30'
                   : 'bg-gradient-to-r from-purple-50 to-indigo-50 border-purple-200 hover:border-purple-400 text-purple-700 hover:text-purple-900 shadow-purple-100'
-              }`}
+                }`}
               whileHover={{ scale: 1.05, y: -1 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -326,16 +325,15 @@ const ResponsiveNavigation = () => {
           <div className="flex items-center gap-2.5">
             <span className={`font-lexa font-bold tracking-widest text-sm ${isDark ? 'text-white' : 'text-gray-900'}`}>VIKASH</span>
             <a
-              href="https://vikash-fairy.netlify.app/"
+              href="https://vortex.runs-on.dev/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Vikash 2nd Portfolio - Fairy Scroll Edition"
               title="Vikash's 2nd Portfolio — Best Scroll Effect Portfolio"
-              className={`flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold border backdrop-blur-md transition-colors ${
-                isDark
+              className={`flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold border backdrop-blur-md transition-colors ${isDark
                   ? 'bg-purple-950/60 border-purple-500/30 text-purple-300'
                   : 'bg-purple-50 border-purple-200 text-purple-700'
-              }`}
+                }`}
             >
               <Sparkles className="w-2.5 h-2.5 text-purple-400" />
               <span>Fairy</span>

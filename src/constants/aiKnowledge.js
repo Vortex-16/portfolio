@@ -119,7 +119,7 @@ export const MAJOR_PROJECTS = [
     id: "personal-fairy",
     name: "Fairy Environment Portfolio (2nd Portfolio)",
     tagline: "Immersive 2D scroll-effect environment portfolio",
-    description: "Vikash's standout scroll-effect portfolio at https://vikash-fairy.netlify.app/ with dynamic particle physics, ambient lighting, and fluid milestone interactions.",
+    description: "Vikash's standout scroll-effect portfolio at https://vortex.runs-on.dev/ with dynamic particle physics, ambient lighting, and fluid milestone interactions.",
     tech: ["React", "GSAP", "Framer Motion", "Canvas", "Tailwind CSS"]
   },
   {
@@ -229,10 +229,10 @@ export const AI_KB_ENTRIES = [
   },
   {
     keys: ["fairy", "2nd portfolio", "second portfolio", "scroll portfolio", "scroll effect", "vikash fairy"],
-    answer: `Vikash's 2nd portfolio is the Fairy Environment Portfolio (live at https://vikash-fairy.netlify.app/). It is widely praised for its incredible 3D scroll effects, GSAP-powered canvas physics, ambient particle lighting, and fluid milestone animations.`
+    answer: `Vikash's 2nd portfolio is the Fairy Environment Portfolio (live at https://vortex.runs-on.dev/). It is widely praised for its incredible 3D scroll effects, GSAP-powered canvas physics, ambient particle lighting, and fluid milestone animations.`
   },
   {
     keys: ["contact", "email", "github", "reach", "leetcode"],
-    answer: `Connect with Vikash:\n• GitHub: https://github.com/Vortex-16/\n• Portfolio: https://vikash.is-a.dev/\n• 2nd Portfolio (Fairy): https://vikash-fairy.netlify.app/\n• LeetCode: Vortex16\n• Email: vikash.kr.gupta.dev@gmail.com`
+    answer: `Connect with Vikash:\n• GitHub: https://github.com/Vortex-16/\n• Portfolio: https://vikash.is-a.dev/\n• 2nd Portfolio (Fairy): https://vortex.runs-on.dev/\n• LeetCode: Vortex16\n• Email: vikash.kr.gupta.dev@gmail.com`
   }
 ];
