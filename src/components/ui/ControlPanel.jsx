@@ -1,4 +1,4 @@
-﻿import { useEffect, useRef, useState, memo } from 'react';
+import { useEffect, useRef, useState, memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../../hooks/useTheme';
 import { useMusicPlayer } from '../../hooks/useMusicPlayer';
@@ -17,12 +17,13 @@ const ControlButton = ({ icon: Icon, label, isActive, isDark, onClick, colorClas
     <button
         type="button"
         onClick={(e) => { e.stopPropagation(); onClick?.(); }}
+        aria-label={label}
         className={`flex flex-col items-center justify-center gap-2 p-3 rounded-2xl transition-all duration-300 relative overflow-hidden active:scale-95 ${isActive
             ? (isDark ? 'bg-arch-blue text-white' : 'bg-emerald-600 text-white')
             : (isDark ? 'bg-white/5 text-gray-400 hover:bg-white/10' : 'bg-black/5 text-gray-600 hover:bg-black/10')
             } ${colorClass}`}
     >
-        <div className="text-xl relative z-10">
+        <div className="text-xl relative z-10" aria-hidden="true">
             <Icon />
         </div>
         <span className="text-[10px] font-bold uppercase tracking-wider relative z-10">{label}</span>
@@ -31,7 +32,7 @@ const ControlButton = ({ icon: Icon, label, isActive, isDark, onClick, colorClas
 
 const SliderField = ({ icon: Icon, value, onChange, label, isDark, min = 0, max = 100 }) => (
     <div className={`flex items-center gap-4 p-3 rounded-2xl ${isDark ? 'bg-white/5' : 'bg-black/5'}`}>
-        <Icon className={isDark ? 'text-arch-blue' : 'text-emerald-600'} />
+        <Icon className={isDark ? 'text-arch-blue' : 'text-emerald-600'} aria-hidden="true" />
         <div className="flex-1 flex flex-col gap-1">
             <div className="flex justify-between text-[10px] font-bold uppercase tracking-tight opacity-50">
                 <span>{label}</span>
@@ -39,6 +40,7 @@ const SliderField = ({ icon: Icon, value, onChange, label, isDark, min = 0, max 
             </div>
             <input
                 type="range"
+                aria-label={label}
                 min={min}
                 max={max}
                 value={value}
@@ -165,19 +167,21 @@ const ControlPanel = ({ isOpen, onClose, anchorRef }) => {
                                     type="button"
                                     onClick={(e) => { e.stopPropagation(); toggleFullscreen(); }}
                                     title={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
+                                    aria-label={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
                                     className={`p-2 rounded-full transition-colors ${isFullscreen
                                         ? (isDark ? 'bg-arch-blue/20 text-arch-blue' : 'bg-emerald-100 text-emerald-600')
                                         : (isDark ? 'hover:bg-white/10 text-gray-400' : 'hover:bg-black/5 text-gray-600')}`}
                                 >
-                                    <MdSettings size={20} />
+                                    <MdSettings size={20} aria-hidden="true" />
                                 </button>
                                 <button
                                     type="button"
                                     onClick={(e) => { e.stopPropagation(); handlePowerOff(); }}
                                     title="Power off"
+                                    aria-label="Power off"
                                     className={`p-2 rounded-full transition-colors ${isDark ? 'hover:bg-red-500/20 text-red-400' : 'hover:bg-red-100 text-red-600'}`}
                                 >
-                                    <FaPowerOff size={18} />
+                                    <FaPowerOff size={18} aria-hidden="true" />
                                 </button>
                             </div>
                         </div>
@@ -237,7 +241,7 @@ const ControlPanel = ({ isOpen, onClose, anchorRef }) => {
                         <div className={`flex items-center justify-between p-4 rounded-2xl ${isDark ? 'bg-white/5' : 'bg-black/5'
                             }`}>
                             <div className="flex items-center gap-3">
-                                <FaBatteryFull className="text-emerald-500" />
+                                <FaBatteryFull className="text-emerald-500" aria-hidden="true" />
                                 <span className={`text-xs font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>Battery</span>
                             </div>
                             <span className={`text-xs font-mono font-bold ${isDark ? 'text-emerald-400' : 'text-emerald-600'}`}>100%</span>

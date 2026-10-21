@@ -73,9 +73,11 @@ body {
   background: transparent;
 }
 
-/* Smooth scrolling */
+/* Smooth scrolling & accessibility offset for sticky header */
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 70px;
+  scroll-margin-top: 70px;
 }
 
 /* Performance optimizations for animations */

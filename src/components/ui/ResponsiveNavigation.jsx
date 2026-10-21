@@ -27,11 +27,11 @@ const MobileMusicButton = () => {
         <span className={`absolute inset-0 rounded-full animate-ping opacity-20 ${isDark ? 'bg-arch-blue' : 'bg-emerald-500'}`} />
       )}
       {isPlaying ? (
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" />
         </svg>
       ) : (
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <path d="M8 5v14l11-7z" />
         </svg>
       )}
@@ -58,11 +58,12 @@ const WifiButton = () => {
   return (
     <span
       title={isOnline ? 'Connected' : 'No Connection'}
+      aria-label={isOnline ? 'WiFi Connected' : 'WiFi Disconnected'}
       className={`flex items-center ${isOnline ? 'text-current' : 'text-red-400'}`}
     >
       {isOnline
-        ? <FaWifi size={14} />
-        : <MdWifiOff size={15} />}
+        ? <FaWifi size={14} aria-hidden="true" />
+        : <MdWifiOff size={15} aria-hidden="true" />}
     </span>
   );
 };
@@ -74,10 +75,11 @@ const VolumeButton = () => {
     <motion.button
       onClick={toggleMute}
       whileTap={{ scale: 0.85 }}
+      aria-label={isMuted ? 'Unmute music' : 'Mute music'}
       title={isMuted ? 'Unmute' : 'Mute music'}
       className="flex items-center hover:opacity-70 transition-opacity"
     >
-      {isMuted ? <FaVolumeMute size={14} /> : <FaVolumeUp size={14} />}
+      {isMuted ? <FaVolumeMute size={14} aria-hidden="true" /> : <FaVolumeUp size={14} aria-hidden="true" />}
     </motion.button>
   );
 };
@@ -118,8 +120,8 @@ const BatteryButton = () => {
           'inherit';
 
   return (
-    <span title={`${pct}%${battery.charging ? ' (Charging)' : ''}`} className={`flex items-center ${color}`}>
-      <Icon size={14} />
+    <span title={`${pct}%${battery.charging ? ' (Charging)' : ''}`} aria-label={`Battery: ${pct}%${battery.charging ? ', Charging' : ''}`} className={`flex items-center ${color}`}>
+      <Icon size={14} aria-hidden="true" />
     </span>
   );
 };
@@ -136,14 +138,14 @@ const DesktopMusicButton = () => {
       className="relative flex items-center justify-center w-4 h-4 hover:opacity-70 transition-opacity"
     >
       {isPlaying && (
-        <span className="absolute inset-0 rounded-full animate-ping opacity-20 bg-current" />
+        <span className="absolute inset-0 rounded-full animate-ping opacity-20 bg-current" aria-hidden="true" />
       )}
       {isPlaying ? (
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" />
         </svg>
       ) : (
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <path d="M8 5v14l11-7z" />
         </svg>
       )}
@@ -164,6 +166,7 @@ const NavItem = ({ to, icon: Icon, label, isActive, isMobile = false, onClick })
         onMouseEnter={handlePrefetch}
         onTouchStart={handlePrefetch}
         onFocus={handlePrefetch}
+        aria-label={label}
         className="block w-full rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2"
       >
         <div
@@ -172,7 +175,7 @@ const NavItem = ({ to, icon: Icon, label, isActive, isMobile = false, onClick })
             : 'text-gray-900 dark:text-gray-200 hover:text-white hover:bg-gray-700/80 dark:hover:text-white dark:hover:bg-white/10'
             }`}
         >
-          <Icon size={20} className="flex-shrink-0" />
+          <Icon size={20} className="flex-shrink-0" aria-hidden="true" />
           <span className="font-medium">{label}</span>
         </div>
       </NavLink>
@@ -186,6 +189,7 @@ const NavItem = ({ to, icon: Icon, label, isActive, isMobile = false, onClick })
       onMouseEnter={handlePrefetch}
       onTouchStart={handlePrefetch}
       onFocus={handlePrefetch}
+      aria-label={label}
       className="rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 dark:focus-visible:ring-arch-blue focus-visible:ring-offset-2 dark:focus-visible:ring-offset-black transition-all"
     >
       <div
@@ -196,7 +200,7 @@ const NavItem = ({ to, icon: Icon, label, isActive, isMobile = false, onClick })
         title={label}
       >
         <span className={`flex items-center justify-center transition-all duration-300 ${isActive ? 'text-white' : 'text-gray-600 dark:text-gray-400'}`}>
-          <Icon size={isActive ? 18 : 15} strokeWidth={2.5} />
+          <Icon size={isActive ? 18 : 15} strokeWidth={2.5} aria-hidden="true" />
         </span>
       </div>
     </NavLink>
@@ -294,7 +298,6 @@ const ResponsiveNavigation = () => {
               href="https://vortex.runs-on.dev/"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Visit Vikash's 2nd Portfolio - Fairy Scroll Edition"
               title="Vikash's 2nd Portfolio — Best Scroll Effect Portfolio"
               className={`group flex items-center gap-2 px-3 py-1.5 rounded-full backdrop-blur-md border shadow-lg transition-all duration-300 ${isDark
                   ? 'bg-gradient-to-r from-purple-950/60 to-indigo-950/60 border-purple-500/30 hover:border-purple-400/60 text-purple-200 hover:text-white shadow-purple-950/30'
@@ -303,16 +306,16 @@ const ResponsiveNavigation = () => {
               whileHover={{ scale: 1.05, y: -1 }}
               whileTap={{ scale: 0.95 }}
             >
-              <span className="relative flex h-2 w-2">
+              <span className="relative flex h-2 w-2" aria-hidden="true">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-purple-500"></span>
               </span>
-              <Sparkles className="w-3.5 h-3.5 text-purple-400 group-hover:rotate-12 transition-transform duration-300" />
+              <Sparkles className="w-3.5 h-3.5 text-purple-400 group-hover:rotate-12 transition-transform duration-300" aria-hidden="true" />
               <span className="text-xs font-bold tracking-wide">FAIRY</span>
               <span className="text-[10px] uppercase font-semibold px-1.5 py-0.2 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30 hidden xl:inline-block">
                 v2
               </span>
-              <FaExternalLinkAlt className="text-[9px] opacity-60 group-hover:opacity-100 transition-opacity" />
+              <FaExternalLinkAlt className="text-[9px] opacity-60 group-hover:opacity-100 transition-opacity" aria-hidden="true" />
             </motion.a>
           </div>
         </div>
@@ -328,16 +331,15 @@ const ResponsiveNavigation = () => {
               href="https://vortex.runs-on.dev/"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Vikash 2nd Portfolio - Fairy Scroll Edition"
               title="Vikash's 2nd Portfolio — Best Scroll Effect Portfolio"
               className={`flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold border backdrop-blur-md transition-colors ${isDark
                   ? 'bg-purple-950/60 border-purple-500/30 text-purple-300'
                   : 'bg-purple-50 border-purple-200 text-purple-700'
                 }`}
             >
-              <Sparkles className="w-2.5 h-2.5 text-purple-400" />
+              <Sparkles className="w-2.5 h-2.5 text-purple-400" aria-hidden="true" />
               <span>Fairy</span>
-              <FaExternalLinkAlt className="text-[8px] opacity-70" />
+              <FaExternalLinkAlt className="text-[8px] opacity-70" aria-hidden="true" />
             </a>
           </div>
           <div
@@ -364,7 +366,7 @@ const ResponsiveNavigation = () => {
               const isActive = location.pathname === item.path;
               const Icon = item.icon;
               return (
-                <NavLink key={item.path} to={item.path} className="relative">
+                <NavLink key={item.path} to={item.path} aria-label={item.label} className="relative">
                   <motion.div
                     whileTap={{ scale: 0.88 }}
                     className="relative flex flex-col items-center justify-center px-2.5 sm:px-3.5 py-1.5 rounded-xl transition-colors duration-200"
@@ -383,6 +385,7 @@ const ResponsiveNavigation = () => {
                     {/* Icon */}
                     <Icon
                       size={20}
+                      aria-hidden="true"
                       className={`relative z-10 transition-colors duration-200 ${isActive
                         ? isDark ? 'text-arch-blue' : 'text-emerald-600'
                         : isDark ? 'text-gray-500' : 'text-gray-400'

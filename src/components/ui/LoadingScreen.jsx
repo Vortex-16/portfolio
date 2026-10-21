@@ -5,9 +5,9 @@ import { useTheme } from '../../hooks/useTheme';
 const bootSequence = [
   { text: "Arch Linux 6.8.9-arch1-1 (tty1)", color: "text-white", delay: 40 },
   { text: " ", color: "", delay: 20 },
-  { text: "[    0.000000] Booting Linux on physical CPU 0x0", color: "text-gray-500", delay: 30 },
-  { text: "[    0.000000] ACPI: Core revision 20230628", color: "text-gray-500", delay: 20 },
-  { text: "[    0.419201] pci 0000:00:00.0: [8086:29c0] type 00 class 0x060000", color: "text-gray-500", delay: 20 },
+  { text: "[    0.000000] Booting Linux on physical CPU 0x0", color: "text-gray-400", delay: 30 },
+  { text: "[    0.000000] ACPI: Core revision 20230628", color: "text-gray-400", delay: 20 },
+  { text: "[    0.419201] pci 0000:00:00.0: [8086:29c0] type 00 class 0x060000", color: "text-gray-400", delay: 20 },
   { text: "[  OK  ] Started Kernel Audit Daemon.", color: "text-green-400", delay: 30 },
   { text: "[  OK  ] Started D-Bus System Message Bus.", color: "text-green-400", delay: 30 },
   { text: "[  OK  ] Started Network Manager.", color: "text-green-400", delay: 30 },
@@ -143,9 +143,9 @@ const LoadingScreen = ({ onComplete, onLoadingComplete }) => {
     if (isOk) {
       return (
         <div key={i} className="flex items-start gap-0">
-          <span className="text-gray-700">[</span>
+          <span className="text-gray-400">[</span>
           <span className="text-green-400 font-bold">{"  OK  "}</span>
-          <span className="text-gray-700">]</span>
+          <span className="text-gray-400">]</span>
           <span className="text-gray-300 ml-1">{text.slice(8)}</span>
         </div>
       );
@@ -153,9 +153,9 @@ const LoadingScreen = ({ onComplete, onLoadingComplete }) => {
     if (isErr) {
       return (
         <div key={i} className="flex items-start gap-0">
-          <span className="text-gray-700">[</span>
+          <span className="text-gray-400">[</span>
           <span className="text-red-400 font-bold">{"FAILED"}</span>
-          <span className="text-gray-700">]</span>
+          <span className="text-gray-400">]</span>
           <span className="text-gray-300 ml-1">{text.slice(8)}</span>
         </div>
       );
@@ -176,9 +176,9 @@ const LoadingScreen = ({ onComplete, onLoadingComplete }) => {
         /* ── Desktop: Arch Linux terminal boot ── */
         <div className="absolute inset-0 bg-[#0a0a0a] font-mono flex flex-col">
           {/* Top status bar */}
-          <div className="flex items-center justify-between px-6 py-2 border-b border-white/5 text-[11px] text-gray-600">
+          <div className="flex items-center justify-between px-6 py-2 border-b border-white/5 text-[11px] text-gray-400">
             <span>vikash@archlinux</span>
-            <span className="text-gray-700">Linux 6.8.9-arch1-1 x86_64</span>
+            <span className="text-gray-400">Linux 6.8.9-arch1-1 x86_64</span>
             <span>{new Date().toLocaleTimeString()}</span>
           </div>
 
@@ -199,9 +199,9 @@ const LoadingScreen = ({ onComplete, onLoadingComplete }) => {
           </div>
 
           {/* Bottom info bar */}
-          <div className="flex items-center justify-between px-6 py-2 border-t border-white/5 text-[10px] text-gray-700">
+          <div className="flex items-center justify-between px-6 py-2 border-t border-white/5 text-[10px] text-gray-400">
             <span>/dev/sda1: clean, 38,491/983,040 files</span>
-            <span className="text-green-600">● systemd 255 (255-1-arch)</span>
+            <span className="text-green-400">● systemd 255 (255-1-arch)</span>
             <span>Arch Linux 6.8.9</span>
           </div>
         </div>
@@ -210,13 +210,13 @@ const LoadingScreen = ({ onComplete, onLoadingComplete }) => {
         <div className={`w-full h-full flex flex-col items-center justify-center gap-8 ${isDark ? 'bg-[#0a0a0a]' : 'bg-[#f0fdf4]'}`}>
           {/* Name reveal */}
           <div className="text-center">
-            <div className={`font-mono text-[10px] tracking-[0.4em] mb-4 uppercase ${isDark ? 'text-gray-600' : 'text-gray-400'}`}>
+            <div className={`font-mono text-[10px] tracking-[0.4em] mb-4 uppercase ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
               Arch Linux
             </div>
             <h1 className={`font-lexa text-6xl font-bold tracking-tight ${isDark ? 'text-white' : 'text-gray-900'}`}>
               VIKASH
             </h1>
-            <p className={`font-mono text-[10px] mt-3 tracking-[0.25em] ${isDark ? 'text-gray-600' : 'text-gray-400'}`}>
+            <p className={`font-mono text-[10px] mt-3 tracking-[0.25em] ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
               DEVELOPER • CREATOR • EXPLORER
             </p>
           </div>
@@ -229,7 +229,7 @@ const LoadingScreen = ({ onComplete, onLoadingComplete }) => {
             />
           </div>
 
-          <div className={`font-mono text-[10px] tracking-widest ${isDark ? 'text-gray-700' : 'text-gray-400'}`}>
+          <div className={`font-mono text-[10px] tracking-widest ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
             BOOTING...
           </div>
         </div>

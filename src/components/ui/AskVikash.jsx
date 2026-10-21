@@ -67,6 +67,7 @@ const AskVikash = () => {
       <button
         id="ask-vikash-btn"
         onClick={() => setOpen((o) => !o)}
+        aria-label="Ask about Vikash"
         title="Ask about Vikash"
         className={`fixed bottom-24 right-5 z-[900] w-12 h-12 rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 active:scale-90 backdrop-blur-xl border ${
           open
@@ -75,7 +76,7 @@ const AskVikash = () => {
         }`}
         style={open ? {} : { boxShadow: isDark ? '0 0 20px rgba(255,255,255,0.1)' : '0 0 20px rgba(5,150,105,0.15)' }}
       >
-        {open ? <FaTimes size={16} /> : <FaComments size={16} />}
+        {open ? <FaTimes size={16} aria-hidden="true" /> : <FaComments size={16} aria-hidden="true" />}
       </button>
 
       {/* ── Chat Panel ── */}
@@ -87,7 +88,7 @@ const AskVikash = () => {
           {/* Header */}
           <div className={`${headerBg} px-4 py-3 flex items-center gap-3 shrink-0`}>
             <div className={`w-8 h-8 rounded-full flex items-center justify-center ${isDark ? 'bg-purple-500/30' : 'bg-indigo-100'}`}>
-              <FaRobot size={14} className={isDark ? 'text-purple-400' : 'text-indigo-600'} />
+              <FaRobot size={14} aria-hidden="true" className={isDark ? 'text-purple-400' : 'text-indigo-600'} />
             </div>
             <div>
               <div className={`font-mono text-sm font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>Ask about Vikash</div>
@@ -162,11 +163,13 @@ const AskVikash = () => {
               <button
                 onClick={() => send()}
                 disabled={!input.trim()}
+                aria-label="Send message"
+                title="Send message"
                 className={`w-9 h-9 rounded-xl flex items-center justify-center transition-all active:scale-90 disabled:opacity-30 ${
                   isDark ? 'bg-purple-600 hover:bg-purple-500 text-white shadow-md shadow-purple-900/30' : 'bg-indigo-600 hover:bg-indigo-500 text-white'
                 }`}
               >
-                <FaPaperPlane size={12} />
+                <FaPaperPlane size={12} aria-hidden="true" />
               </button>
             </div>
           </div>

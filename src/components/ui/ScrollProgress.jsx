@@ -28,7 +28,7 @@ const ScrollProgress = () => {
   }, []);
 
   return (
-    <div className="fixed right-4 top-1/2 -translate-y-1/2 z-50 pointer-events-none flex flex-col items-center gap-1">
+    <div className="fixed right-4 top-1/2 -translate-y-1/2 z-50 pointer-events-none flex flex-col items-center gap-1" aria-hidden="true">
       {Array.from({ length: totalChevrons }).map((_, index) => {
         // Calculate at what scroll percentage this chevron should be fully revealed
         const threshold = (index + 1) / totalChevrons;
@@ -52,6 +52,7 @@ const ScrollProgress = () => {
             className={`flex items-center justify-center ${isDark ? 'text-white' : 'text-gray-900'}`}
           >
             <svg
+              aria-hidden="true"
               width="100%"
               height="100%"
               viewBox="0 0 24 24"
