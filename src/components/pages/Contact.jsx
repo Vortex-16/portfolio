@@ -130,7 +130,7 @@ const Contact = () => {
       icon: FaEnvelope,
       label: 'Email',
       value: 'Vortex-16@gmail.com',
-      href: 'mailto:vikash9c35@gmail.com'
+      href: 'mailto:vikash.kr.gupta.dev@gmail.com'
     },
     {
       icon: FaPhone,
